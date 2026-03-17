@@ -37,75 +37,66 @@ body {
 }
 
 /* ─── HEADER ─── */
+/* ══════════════════════════════════════
+   HEADER — AKE dark navy bar
+   ══════════════════════════════════════ */
 .header {
-  background: #ffffff;
-  padding: 11px 24px 10px;
-  border-bottom: 3px solid var(--blue);
-}
-.header-row {
+  position: relative;
+  height: 46px;
+  background: #083863;
+  border-bottom: 2px solid #00549f;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-}
-.header-logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
+  padding: 0 14px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.35);
   flex-shrink: 0;
+}
+.h-left { display: flex; align-items: center; gap: 10px; }
+.h-logo-wrap {
+  display: flex; align-items: center; flex-shrink: 0; padding: 0 4px 0 0;
 }
 .ake-img {
-  height: 56px;
-  width: auto;
-  display: block;
+  height: 28px; width: auto; display: block;
+  border-radius: 3px;
+  animation: logoFadeIn 1.2s ease-out forwards;
+  opacity: 0;
 }
-.ake-url {
-  font-size: 8.5px;
-  font-weight: 600;
-  color: var(--blue);
-  text-decoration: none;
-  letter-spacing: 0.06em;
+@keyframes logoFadeIn {
+  0%   { opacity: 0; transform: translateX(-6px); }
+  100% { opacity: 1; transform: translateX(0); }
 }
-.ake-url:hover { text-decoration: underline; }
-.header-text { flex: 1; }
-.header-eyebrow {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 5px;
+.h-logo-sep {
+  width: 1px; height: 22px;
+  background: rgba(255,255,255,0.18); flex-shrink: 0;
 }
 .header-title {
-  font-size: 19px;
-  font-weight: 800;
-  color: var(--blue);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: -0.01em; color: #fff; white-space: nowrap;
 }
-.header-title span { color: var(--blue); }
 .header-sub {
-  margin-top: 4px;
-  font-size: 9.5px;
-  color: var(--muted);
-  line-height: 1.5;
+  font-size: 9px; color: rgba(255,255,255,0.5);
+  margin-top: 1px; white-space: nowrap;
 }
-
-.no-res-badge {
-  flex-shrink: 0;
-  background: #cc0000;
-  color: #ffffff;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 6px 14px;
-  border-radius: 2px;
-  align-self: flex-start;
-  margin-top: 4px;
-  white-space: nowrap;
+.h-right { display: flex; align-items: center; gap: 6px; }
+.live-pill {
+  display: flex; align-items: center; gap: 5px; flex-shrink: 0;
+  background: rgba(239,68,68,0.18); border: 1px solid rgba(239,68,68,0.35);
+  border-radius: 20px; padding: 3px 10px;
+  font-size: 8px; font-weight: 700;
+  letter-spacing: .12em; color: #f87171; text-transform: uppercase;
 }
+.ldot {
+  width: 5px; height: 5px; background: #f87171;
+  border-radius: 50%; animation: ldotblink 1.2s step-end infinite;
+}
+@keyframes ldotblink { 0%,100%{opacity:1} 50%{opacity:0} }
+/* keep eyebrow/no-res-badge stubs so nothing breaks */
+.header-eyebrow { display: none; }
+.no-res-badge { display: none; }
+.header-row { display: contents; }
+.header-logo { display: contents; }
+.header-text { display: contents; }
 
 /* ─── WEEK BAR ─── */
 .week-bar {
@@ -185,12 +176,19 @@ body {
 .acc-body { display: none; }
 .acc-body.is-open { display: block; }
 
-/* storage trigger */
-.storage-trigger { background: var(--blue); }
-.storage-trigger:hover { background: #005fbb; }
-.storage-trigger .acc-title { font-size: 10px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: #fff; }
-.storage-trigger .acc-sub   { font-size: 9px; color: rgba(255,255,255,0.48); margin-top: 2px; }
-.storage-trigger .acc-caret { color: rgba(255,255,255,0.4); }
+/* methodology trigger — bright blue, prominent */
+.method-trigger { background: var(--blue); }
+.method-trigger:hover { background: #005fbb; }
+.method-trigger .acc-title { font-size: 10px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: #fff; }
+.method-trigger .acc-sub   { font-size: 9px; color: rgba(255,255,255,0.48); margin-top: 2px; }
+.method-trigger .acc-caret { color: rgba(255,255,255,0.4); }
+
+/* storage trigger — less prominent, muted navy */
+.storage-trigger { background: #1a3550; }
+.storage-trigger:hover { background: #1f3f60; }
+.storage-trigger .acc-title { font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(255,255,255,0.75); }
+.storage-trigger .acc-sub   { font-size: 9px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+.storage-trigger .acc-caret { color: rgba(255,255,255,0.3); }
 
 /* category trigger */
 .cat-trigger { background: var(--navy); }
@@ -200,11 +198,11 @@ body {
 .cat-trigger .cat-desc  { font-size: 9px; color: rgba(255,255,255,0.40); }
 .cat-trigger .acc-caret { color: rgba(255,255,255,0.38); }
 
-/* sources trigger */
-.src-trigger { background: var(--white); border-top: 2px solid var(--rule); }
-.src-trigger:hover { background: var(--ghost); }
-.src-trigger .acc-title { font-size: 9.5px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--navy); }
-.src-trigger .acc-caret { color: var(--dim); }
+/* sources trigger — very subdued */
+.src-trigger { background: var(--ghost); border-top: 1px solid var(--rule); }
+.src-trigger:hover { background: #dde4ec; }
+.src-trigger .acc-title { font-size: 9px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--dim); }
+.src-trigger .acc-caret { color: var(--dim); font-size: 9px; }
 
 /* ─── STORAGE GRID ─── */
 .storage-body { padding: 14px 20px 16px; background: var(--white); }
@@ -408,16 +406,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 24px;
-  background: var(--navy);
+  padding: 11px 24px;
+  background: #00549f;
   cursor: pointer;
   user-select: none;
   transition: background 0.15s;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 2px solid rgba(255,255,255,0.12);
 }
-.asmp-header:hover { background: #0a4478; }
-.asmp-header-left { display: flex; align-items: center; gap: 10px; }
-.asmp-header-title { font-size: 10px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: #fff; }
-.asmp-header-sub   { font-size: 9px; color: rgba(255,255,255,0.45); }
+.asmp-header:hover { background: #0063bb; }
+.asmp-header-left { display: flex; align-items: center; gap: 12px; }
+.asmp-header-title { font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; }
+.asmp-header-sub   { font-size: 9px; color: rgba(255,255,255,0.6); margin-top: 1px; }
 .asmp-header-right { display: flex; align-items: center; gap: 12px; }
 .asmp-reset {
   background: rgba(232,255,3,0.15);
@@ -431,7 +431,8 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .asmp-reset:hover { background: rgba(232,255,3,0.25); }
-.asmp-caret { font-size: 10px; color: rgba(255,255,255,0.4); transition: transform 0.2s; }
+.asmp-icon { font-size: 18px; opacity: 0.9; flex-shrink: 0; }
+.asmp-caret { font-size: 14px; color: rgba(255,255,255,0.8); transition: transform 0.2s; }
 .asmp-header.open .asmp-caret { transform: rotate(180deg); }
 .asmp-body { display: none; padding: 16px 24px 18px; background: #f8fafd; border-bottom: 1px solid var(--rule); }
 .asmp-body.open { display: block; }
@@ -500,41 +501,43 @@ input[type=range].asmp-slider {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #fff;
+  background: rgba(255,255,255,0.7);
   flex-shrink: 0;
-  animation: blink 1.4s ease-in-out infinite;
 }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
 
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="header-row">
-    <div class="header-logo">
-      <img src="data:image/png;base64,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" alt="AKE International" class="ake-img"/>
-      <a href="https://www.akegroup.com" target="_blank" class="ake-url">akegroup.com</a>
-    </div>
-    <div class="header-text">
-      <div class="header-title">Strait of Hormuz — Commodity Price Impact Model</div>
-      <div class="header-sub">No-resolution scenario &nbsp;·&nbsp; W1–W2 confirmed actual data &nbsp;·&nbsp; W3 onwards projected &nbsp;·&nbsp; Mar 17, 2026</div>
-    </div>
-  </div>
-</div>
+<!-- STATUS BAR -->
 <div class="status-bar">
   <span class="status-dot"></span>
   Strait of Hormuz Remains Under Iranian Control — Commercial Shipping Near Zero
 </div>
+<!-- HEADER -->
+<div class="header">
+  <div class="h-left">
+    <div class="h-logo-wrap">
+      <img src="data:image/png;base64,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VUFuv379AACbbbYZlj1/NS44eGMWEBEREQNcIiKinkHOvdV1Hb7vq7/H43GcccYZ+OG5q3DQehkWFBEREQNcIiKi0haGIQzDANCcUdlxHARBgCAIEIYhEokEbr31Vrx4xUksLCIiIga4REREpc/zPMRiMcRiMYRhCF3XEYYhXNeFaZrYZJNNkF40H+futz4Li4iIiAEuERFR6ZEsyqZpwnVdAM1HB2UyGei6rpYwJxIJBEGAiRMn4oP7zmXBERERMcAlIiIqsQZO/6mJk2AWAOLxuPq77/vQdR26rsN1XQwePBjLnr8aD0w7kAVIRETEAJeIiKjnkORTUfF4HMOHD8ey56/GSb+qYiERERExwCUiIip9mqapv1uWBcdxAADV1dUIggCXXnopnp5zDAuKiIiIAS4REVHp8n0/Z+mypmmIxWLwPA+u6yKZTELXdYwYMQLpRfMx86CNWGhEREQMcImIiEpP9AihdDqtPm+apkpM5TgOwjBENpvFmWeeiffvnY79hjSy8IiIiBjgEhERlR5N01TiqTAMEQQBNE2DZVmwbRu+78O2bXiehwEDBuCWW27Bny46lgVHRETEAJeIiKg0hGGosijLXlzXdeF5HgCopcqmaSIIApimiVgsBsuyMHz4cPzw3FU4fac1WJBEREQMcImIiLqXpmlqmXIYhnBdF5ZlIRaLAWheqix7dHVdRzabRTabhWma6v9nz56Nl648mYVJRETEAJeIiKh0gl3LsnKyKuezbRu2bat/m6YJ3/exzTbboOGv1+Py32/DgiQiImKAS0RE1DOD4kwmo4Ldk08+GZ8/eiGO3cxg4RARETHAJSIi6jl830dVVRUcx0E2m0UQBOjfvz+uueYanp1LRETEAJeIiKjnMAwDqVQKsVgMtm1D15ubVNM0MWLECCx/4RrMOOBnLCgiIiIGuERERKUvkUiov2ezWZV5GWjes3v66afjnTunsKCIiIgY4BIREZU2TdPQ2NiozsqVzMupVAoAYFkWBgwYgPSi+bjzrD1ZYERERAxwiYiISlMmk0F1dTUMw1AJpzKZDJLJJIDms3STySSCIMAee+yB+peuw8gtbRYcERERA1wiIqLSEQQB4vE4giAAAMTjcXieh3g8jjAMEQQBTNNEGIbwfR+JRAK6ruOKK67Aa/NPZwESERExwF090tFIp9MtOidERKvi+776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wnVdaJqGuro6DB48GGussQYDXCp7hmGoQLR///4YMmQIEolEUX/H999/j3X2ndzzBgAqNcAlIiIiIiKi8qKzCIiIiIiIiIgBLhEREREREREDXCIiIiIiIiIGuEREREREREQMcImIiIiIiIgBLhEREREREREDXCIiIiIiIiIGuEREREREREQMcImIiIiIiIgBLhEREREREREDXCIiIiIiIiIGuEREREREREQMcImIiIiIiIgBLhEREREREREDXCIiIiIiIiIGuEREREREREQMcImIiIiIiIgBLhEREREREREDXCIiIiIiIiIGuEREREREREQMcImIiIiIiIgY4BIREREREREDXCIiIiIiIiIGuEREREREREQMcImIiIiIiIgY4BIREREREREDXCIiIiIiIiIGuEREREREREQMcImIiIiIiIgY4BIREREREREDXCIiIiIiIiIGuEREREREREQMcImIiIiIiIjazwSAibsNQhiGAIB4PI5sNgtN0+B5HkzTXOUPiMVicBwHc55e3K5fPGn3wQX9/I5yHAf9+/fH5Hvf7vbCPmi9DNZff30YhgHDMOA4DjRNW+X3hGEI0zQRhiHS6TR0Xcclz35TUPnKtal0hdybk3YfDMMw4LoudF1XZd/W9amU8hHH/ELHOuuso8rIdd0e/d7T6TQsy4Jt2zBNE77vY/ny5fjyyy/x0CfJTvu9R/48xODBgzv9/vI8D/F4HBc8/klJlPe0fYaptkbX9YLqJ03TEASB+vdFf/qiZO+nUb+uQU1NTU7d3RG6riOdTiMej8N1Xcz7y9ed/h6O2gQYMmQITNOs+PbDdd2C29swDOH7vrpuYRjCMIxVd8BME5qmqe+98KnPO/09Hb6Rj1/84hcYNmwY+vfvjw033BD9+vUDAPi+r15zV/TPCqm/5D7UdR1vv/02vvrqK7z++utYunQpbnilsdNfQ0f6x20JgkDVgzU1NZjxyP9K4r4/b/8N4Lquup9X1T/1fR+WZSEIAlVXm6aJTz75BHe/W7pzaOftvwEymUxRfpZhGMhms0gkEmhqasKlz31b0vVaofGB3ONhGMK2bVVemqaVdDus+g4XXHBBOGHCBCQSiVbfVFsdsCAI0NjYiMsvv7xdlfPSZ69EMpnskjfpOA7+85//YIdTr+vWwn5kxqHYddddW1RubZHKVSrVmh1HrfLrJ++x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" alt="AKE International" class="ake-img"/>
+    </div>
+    <div class="h-logo-sep"></div>
+    <div>
+      <div class="header-title">Strait of Hormuz — Commodity Price Impact Model</div>
+      <div class="header-sub">AKE International &nbsp;·&nbsp; W1–W2 actuals locked &nbsp;·&nbsp; W3+ projected &nbsp;·&nbsp; Mar 17, 2026</div>
+    </div>
+  </div>
+  <div class="h-right"></div>
+</div>
+
 
 <!-- ASSUMPTIONS PANEL -->
 <div class="assumptions-panel">
   <div class="asmp-header" id="asmpHeader" onclick="toggleAsmp()">
     <div class="asmp-header-left">
+      <span class="asmp-icon">⚙</span>
       <div>
-        <div class="asmp-header-title">Adjust Model Assumptions</div>
-        <div class="asmp-header-sub">All prices update instantly. W1–W2 actuals locked. Ceasefire cascades mine clearance → first transits → production restart → LNG restart automatically.</div>
+        <div class="asmp-header-title">▸ Adjust Model Assumptions</div>
+        <div class="asmp-header-sub">Click to expand · All prices update instantly · W1–W2 actuals locked · Reopening cascades mine clearance → first transits → LNG restart</div>
       </div>
     </div>
     <div class="asmp-header-right">
@@ -555,19 +558,19 @@ input[type=range].asmp-slider {
         <div class="asmp-label">Strait reopening week <span class="asmp-val" id="val-reopening">None in window</span></div>
         <input type="range" class="asmp-slider" id="sl-reopening" min="0" max="12" step="1" value="0"
                oninput="updateSlider('reopening',this.value)">
-        <div class="asmp-desc">Week of confirmed Strait reopening — triggers Ras Laffan restart attempt simultaneously. Auto-cascades: +4 wks mine clearance → first transits (10%→75% ramp, with production restart lag) → LNG/helium flow +10 wks. Risk premium collapses on announcement. Insurance floor persists 12–18 months.</div>
+        <div class="asmp-desc">Week of confirmed Strait reopening — triggers Ras Laffan restart attempt simultaneously. Auto-cascades: +7 wks mine clearance → first transits (ramp flattened to reflect storage drain + sequential restart of Iraq/Kuwait/Saudi fields) → LNG/helium flow +10 wks. Risk premium collapses on announcement. Insurance floor persists 12–18 months.</div>
       </div>
 
       <div class="asmp-item">
-        <div class="asmp-label">Selective passage while closed <span class="asmp-val" id="val-passage">1.5 mb/d</span></div>
-        <input type="range" class="asmp-slider" id="sl-passage" min="0.5" max="6" step="0.5" value="1.5"
+        <div class="asmp-label">Selective passage while closed <span class="asmp-val" id="val-passage">2.0 mb/d</span></div>
+        <input type="range" class="asmp-slider" id="sl-passage" min="0.5" max="6" step="0.5" value="2.0"
                oninput="updateSlider('passage',this.value)">
-        <div class="asmp-desc">What Iran permits through while nominally closed. <strong>Base 1.5 mb/d</strong> = Iran own exports to China. Rises with bilateral deals: India (+0.5–1.0), Turkey, Pakistan. Falls if US pressures China. Max ~6 mb/d if Iran de-facto reopens for non-Western flags.</div>
+        <div class="asmp-desc">What Iran permits through while nominally closed. <strong>Base 2.0 mb/d</strong> = Iran own exports ~1.5 mb/d to China (Kpler confirmed) + bilateral deals now confirmed with India, Turkey, Pakistan (W3). Falls if US pressures China. Max ~6 mb/d if Iran de-facto reopens for non-Western flags.</div>
       </div>
 
       <div class="asmp-item">
-        <div class="asmp-label">Infrastructure destruction <span class="asmp-val" id="val-infra">15% damaged</span></div>
-        <input type="range" class="asmp-slider" id="sl-infra" min="15" max="60" step="5" value="15"
+        <div class="asmp-label">Infrastructure destruction <span class="asmp-val" id="val-infra">12% damaged</span></div>
+        <input type="range" class="asmp-slider" id="sl-infra" min="0" max="60" step="5" value="12"
                oninput="updateSlider('infra',this.value)">
         <div class="asmp-desc"><strong>Base 15%</strong> = confirmed W3: Ras Tanura, Ruwais, Bapco, Safaniya partial, Shah gas, Ras Laffan. Minimal effect while Strait is closed — closure dominates. Bites hardest post-reopening: caps recovery ceiling. Abqaiq hit = +15%; East-West pipeline = +10%. Repair: months–years.</div>
       </div>
@@ -584,10 +587,10 @@ input[type=range].asmp-slider {
       </div>
 
       <div class="asmp-item">
-        <div class="asmp-label">Risk premium <span class="asmp-val" id="val-panic">$25/bbl</span></div>
+        <div class="asmp-label">Futures market risk premium <span class="asmp-val" id="val-panic">$25/bbl</span></div>
         <input type="range" class="asmp-slider" id="sl-panic" min="0" max="50" step="5" value="25"
                oninput="updateSlider('panic',this.value)">
-        <div class="asmp-desc">Geopolitical risk premium above the fundamental supply/demand price. Goldman Day-1 estimate: $18/bbl. Collapses rapidly on reopening announcement — before physical transit resumes. Base: $25/bbl peak. Escalation (Abqaiq threat, wider war): up to $50/bbl.</div>
+        <div class="asmp-desc">Futures markets price forward uncertainty, not just today's supply gap. When traders fear escalation — Abqaiq strike, Kharg Island hit, Houthi Red Sea attack — they buy futures contracts, bidding up the forward curve and pulling spot prices higher with it. Goldman estimated this at $18/bbl on Day 1. By W3 of a sustained closure with no resolution, forward uncertainty is higher — base $25/bbl. This premium collapses almost immediately on a credible reopening announcement, before a single extra tanker moves. Range: $0 (no uncertainty premium) → $50/bbl (imminent major infrastructure strike).</div>
       </div>
 
       <div class="asmp-item">
@@ -607,6 +610,69 @@ input[type=range].asmp-slider {
 </div>
 <div id="categories"></div>
 
+<!-- METHODOLOGY ACCORDION -->
+<div class="accordion" id="methodSection" >
+  <div class="acc-trigger method-trigger" onclick="toggle('methodSection')">
+    <div style="flex:1"><div class="acc-title">Methodology &amp; Price Calibration</div><div class="acc-sub">Model assumptions, elasticity derivation, commodity cascade methodology</div></div>
+    <span class="acc-caret">▼</span>
+  </div>
+  <div class="acc-body" id="methodSection-body">
+    <div class="sources-body">
+      <div class="sources-grid">
+        <div class="src-block">
+          <h4>Oil Price Model — First Principles</h4>
+          <p><strong>Gross disruption: ~9.7 mb/d</strong> (Iraq −3.0, Kuwait −2.6, Qatar −0.6, Bahrain −0.2, Saudi −2.5, UAE −0.8). <strong>Realistic offsets: ~4.3 mb/d</strong> — Yanbu net ~1.5 mb/d (port cap at 4.5 mb/d less ~2 mb/d Saudi refinery consumption), Fujairah ~1.0 mb/d (terminal hit Mar 16 and at capacity), Russia ~1.5 mb/d (US 30-day waiver, shadow fleet saturated), non-OPEC ramp ~0.3 mb/d. <strong>Net structural deficit: ~5.4 mb/d</strong> = 5.1% of global demand (105 mb/d). Short-run price elasticity −0.05 (academic consensus for acute supply shocks under 3 months; IEA range −0.02 to −0.15, Goldman-implied ~−0.05 for sustained 120-day closure): 5.1% ÷ 0.05 = 102% above pre-war = ~$148 fundamental equilibrium. Adding panic premium of $20–30/bbl (Goldman estimated $18/bbl on Day 1; sustained by new supreme leader's public commitment to closure, ongoing infrastructure attacks, and insurance withdrawal) gives W7–8 peak of ~$155–160. Recession demand destruction is minimal within 12 weeks — historically takes 6–18 months; modelled at −0.5 mb/d from W9. IEA 400 Mb release (max 3 mb/d drawdown) suppresses prices in W1–4 only; exhausted by W5.</p>
+        </div>
+        <div class="src-block">
+          <h4>Insurance &amp; Shipping — A Structural Price Driver</h4>
+          <p>The strait was closed commercially by the insurance market, not just military force. P&amp;I (Protection &amp; Indemnity) cover was withdrawn from March 5. War risk premiums jumped from 0.125% to 0.4% of hull value per transit — for a $100M VLCC, a $275,000 increase per voyage, passed directly into freight rates and landed costs (+$3–5/bbl on crude). Critically, <strong>insurance does not return with a ceasefire</strong> — underwriters require sustained stability before reissuing cover, creating a 2–4 week commercial lag on top of any political resolution. Ships diverting to the Cape of Good Hope add 10–14 days and $1–2M per round voyage in additional bunker fuel. At diesel prices of $240+/bbl, this premium compounds further. The net effect: every commodity that moves by sea — which is all of them — carries an embedded Cape rerouting cost of $3–8 per tonne depending on route and vessel type. This is baked into all price projections in this model and sustains the premium even as the fundamental supply deficit is the primary driver.</p>
+        </div>
+        <div class="src-block">
+          <h4>Storage Cascade &amp; Refinery Shock</h4>
+          <p>Gulf storage was ~100 Mb remaining (Kayrros/JPMorgan Mar 2026). At 10 mb/d shut-in, exhausted in ~10 days — already past this in W3. Iraq, Kuwait, Qatar and Bahrain have <strong>zero bypass infrastructure</strong> and must simply stop producing. Production shut-ins require weeks to months to restart even after a ceasefire. Qatar LNG storage fills in 4 days at full rate — no buffer. CEO: no restart until conflict fully ends + 4–6 weeks technical restart. <strong>Refinery shock is separate from crude:</strong> ~1.8 mb/d of Gulf refining offline (Ras Tanura 550k b/d; Ruwais 817k b/d; Bapco 267k b/d). Gulf pre-war refined product exports 3.3 mb/d — now near zero. No spare global refining capacity. NW Europe jet fuel hit $218/bbl in W2 at $100 crude; crack spreads blow out further at $155+ crude, driving diesel and jet fuel above crude-only percentage gains.</p>
+        </div>
+        <div class="src-block" style="grid-column: 1 / -1; background: #f0f4fa; border: 1px solid var(--rule); border-radius: 3px; padding: 14px 16px; margin-bottom: 4px;">
+          <h4 style="color: var(--navy); margin-bottom: 8px;">Base Case Assumptions — As of 17 March 2026 (W3)</h4>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 20px; font-size: 10px; line-height: 1.6;">
+            <div>
+              <strong style="color:var(--navy); display:block; margin-bottom:4px;">PHYSICAL SUPPLY</strong>
+              Gross Hormuz disruption: 20 mb/d — <em>EIA: 20.9 mb/d pre-war; IEA OMR Mar 2026; Goldman 4-day average 16.2 mb/d lost flows</em><br>
+              Selective passage (Iran permits): <strong>2.0 mb/d</strong> — <em>Kpler: Iran own exports 1.5 mb/d to China confirmed; Indian gas carriers + Saudi tanker for India + Pakistan tanker Mar 16 confirmed (Wikipedia, CNBC Mar 11, Reuters)</em><br>
+              Bypass pipelines: <strong>3.0 mb/d</strong> — <em>Bloomberg: Saudi Yanbu 2.3 mb/d confirmed W3; UAE ADCOP rated 1.5–1.8 mb/d but reduced by Fujairah drone strikes Mar 14+16 (Al Jazeera, CNBC Mar 17)</em><br>
+              IEA emergency release: <strong>3.0 mb/d effective</strong> W1, → zero W6 — <em>IEA OMR Mar 2026: 400 Mb coordinated release; Goldman: 254 Mb actual release modelled; SPR max drawdown 4.4 mb/d but 13-day delivery lag (EIA)</em><br>
+              Non-Gulf supply offset: <strong>Base schedule</strong> — <em>Vortexa Mar 2026: Russia/Iran +1 mb/d + non-Gulf record +2 mb/d; Wood Mac: US shale +600 kb/d by month 6 only; IEA: demand -1 mb/d Mar/Apr</em><br>
+              Net structural deficit at W7 (base): <strong>~3.5 mb/d</strong>
+            </div>
+            <div>
+              <strong style="color:var(--navy); display:block; margin-bottom:4px;">PRICE MODEL</strong>
+              Pre-war Brent baseline: <strong>$73/bbl</strong> — <em>Brent closing price Feb 27 2026 (EIA); pre-war forecast $69–74/bbl (EIA STEO Dec 2025)</em><br>
+              Short-run price elasticity: <strong>−0.05</strong> — <em>IEA range −0.02 to −0.15; academic short-run consensus −0.03 to −0.06 for acute shocks; Goldman 120-day sustained closure implies ~−0.05 (Goldman Sachs Mar 2026 note)</em><br>
+              Futures market risk premium: <strong>$25/bbl peak</strong> — <em>Goldman Day-1 estimate $18/bbl (Goldman Mar 1); Al Jazeera cites analyst: "$40/bbl geopolitical premium at peak"; $25/bbl is mid-range for W3 sustained closure</em><br>
+              IEA seam correction: W4–W6 blended from W3 actual ($100) — <em>Brent W3 actual $100 confirmed (AAA, EIA); IEA buffer suppresses ~$17 below model fundamental; blend prevents artificial cliff at handoff</em><br>
+              Infrastructure damage base: <strong>12%</strong> — <em>Confirmed W3: Ras Tanura 550 kb/d (Al Jazeera Mar 4), Ruwais 817–922 kb/d (Wikipedia), Bapco 267 kb/d (NPR Mar 6), Safaniya ~500 kb/d partial (Bloomberg), Shah gas (CNBC Mar 17), Ras Laffan 77 Mtpa (QatarEnergy force majeure Mar 4)</em><br>
+              Insurance floor post-reopening: <strong>$16/bbl embedded</strong> — <em>Red Sea precedent: premiums elevated 12–18 months post-Houthi (House of Saud analysis); Jeff Currie (Goldman/Carlyle): "premiums elevated long after last missile fired"; Substack insurance analysis Mar 2026: $16–20/bbl estimated</em>
+            </div>
+            <div>
+              <strong style="color:var(--navy); display:block; margin-bottom:4px;">REOPENING CASCADE</strong>
+              Mine clearance lag: <strong>+7 weeks</strong> best-case — <em>US decommissioned 4 purpose-built minesweepers Jan 2026 (The National Mar 15); 1991 Kuwait: 2+ months with 12+ allied MCM vessels in permissive conditions (House of Saud Mar 13); US Energy Sec Wright: "simply not ready" Mar 12</em><br>
+              First transit → ~67% volume recovery: <strong>+8 weeks</strong> — <em>Three compounding lags: (1) Insurance/confidence lag 2–4 wks (Red Sea precedent); (2) Sequential production restart — storage-forced shutdowns need 2–8 wks depending on facility (wells 1–2 wks, offshore platforms 2–4 wks, refineries 2–3 wks, LNG trains 3–5 wks); Iraq alone has 3 fields requiring sequential restart by same teams. (3) Tanker repositioning: 150+ vessels anchored need repositioning globally. Restart ramp is deliberately flat in first 4 weeks. IEA OMR Mar 2026; industry engineering norms</em><br>
+              Maximum Strait recovery: <strong>75%</strong> of pre-war — <em>Lloyd's List: "10% realistic with naval escorts initially"; insurance premium and Iran's demonstrated willingness to attack vessels permanently cap full normalisation (Columbia CGEP Mar 2026)</em><br>
+              Ras Laffan restart lag: <strong>+10 weeks</strong> — <em>QatarEnergy CEO Saad al-Kaabi: no restart "until conflict fully ends + 4–6 week technical restart" (QatarEnergy force majeure statement Mar 4); adds mine clearance + physical inspection to CEO's floor</em><br>
+              Helium restart lag: <strong>+12 weeks</strong> — <em>Co-produced at Ras Laffan; additional 2-week lag vs LNG for helium-specific train restart (Kornbluth Associates helium market analysis)</em><br>
+              LNG trajectory: <strong>independent of oil</strong> — <em>Qatar offline from physical drone strike (not export restriction); no Hormuz bypass for LNG tankers; even at $50 Brent, JKM stays at crisis levels until Ras Laffan physically restarts</em>
+            </div>
+          </div>
+          <div style="margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--rule); font-size: 10px; line-height: 1.6;">
+            <strong style="color:var(--navy);">SLIDER SCENARIO ASSUMPTIONS (vs base)</strong><br>
+            <strong>Selective passage above 2.0 mb/d:</strong> Expanded deals beyond confirmed W3 levels; or Iran de-facto reopening to all non-Western flags<br>
+            <strong>Infra damage above 12%:</strong> Abqaiq hit = +15 pp (~$30–50/bbl independent price spike, 6–12 month repair); East-West pipeline = +10 pp (eliminates Yanbu bypass)<br>
+            <strong>Pessimistic supply offset:</strong> E&amp;Ps maintain capital discipline (Wood Mac: "not committing to increased activity"); demand holds up; total offset only ~1.0 mb/d by W12<br>
+            <strong>Optimistic supply offset:</strong> Fast shale response + Venezuela uplift + 1.5 mb/d demand destruction; total ~2.8 mb/d by W12<br>
+            <strong>Risk premium $0:</strong> Pure supply/demand price — no forward uncertainty embedded<br>
+            <strong>Risk premium $50/bbl:</strong> Imminent major infrastructure strike scenario (Abqaiq threat credible, wider regional escalation)
+          </div>
+        </div>
+
 <!-- STORAGE ACCORDION -->
 <div class="accordion" id="storageSection">
   <div class="acc-trigger storage-trigger" onclick="toggle('storageSection')">
@@ -624,9 +690,9 @@ input[type=range].asmp-slider {
 </div>
 
 <!-- SOURCES ACCORDION -->
-<div class="accordion" id="sourcesSection" style="border-top:2px solid var(--rule)">
+<div class="accordion" id="sourcesSection">
   <div class="acc-trigger src-trigger" onclick="toggle('sourcesSection')">
-    <span class="acc-title">Sources, Methodology &amp; Price Calibration</span>
+    <span class="acc-title">Data Sources</span>
     <span class="acc-caret">▼</span>
   </div>
   <div class="acc-body" id="sourcesSection-body">
@@ -644,6 +710,51 @@ input[type=range].asmp-slider {
           <h4>Storage Cascade &amp; Refinery Shock</h4>
           <p>Gulf storage was ~100 Mb remaining (Kayrros/JPMorgan Mar 2026). At 10 mb/d shut-in, exhausted in ~10 days — already past this in W3. Iraq, Kuwait, Qatar and Bahrain have <strong>zero bypass infrastructure</strong> and must simply stop producing. Production shut-ins require weeks to months to restart even after a ceasefire. Qatar LNG storage fills in 4 days at full rate — no buffer. CEO: no restart until conflict fully ends + 4–6 weeks technical restart. <strong>Refinery shock is separate from crude:</strong> ~1.8 mb/d of Gulf refining offline (Ras Tanura 550k b/d; Ruwais 817k b/d; Bapco 267k b/d). Gulf pre-war refined product exports 3.3 mb/d — now near zero. No spare global refining capacity. NW Europe jet fuel hit $218/bbl in W2 at $100 crude; crack spreads blow out further at $155+ crude, driving diesel and jet fuel above crude-only percentage gains.</p>
         </div>
+        <div class="src-block" style="grid-column: 1 / -1; background: #f0f4fa; border: 1px solid var(--rule); border-radius: 3px; padding: 14px 16px; margin-bottom: 4px;">
+          <h4 style="color: var(--navy); margin-bottom: 8px;">Base Case Assumptions — As of 17 March 2026 (W3)</h4>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 20px; font-size: 10px; line-height: 1.6;">
+            <div>
+              <strong style="color:var(--navy); display:block; margin-bottom:4px;">PHYSICAL SUPPLY</strong>
+              Gross Hormuz disruption: 20 mb/d — <em>EIA: 20.9 mb/d pre-war; IEA OMR Mar 2026; Goldman 4-day average 16.2 mb/d lost flows</em><br>
+              Selective passage (Iran permits): <strong>2.0 mb/d</strong> — <em>Kpler: Iran own exports 1.5 mb/d to China confirmed; Indian gas carriers + Saudi tanker for India + Pakistan tanker Mar 16 confirmed (Wikipedia, CNBC Mar 11, Reuters)</em><br>
+              Bypass pipelines: <strong>3.0 mb/d</strong> — <em>Bloomberg: Saudi Yanbu 2.3 mb/d confirmed W3; UAE ADCOP rated 1.5–1.8 mb/d but reduced by Fujairah drone strikes Mar 14+16 (Al Jazeera, CNBC Mar 17)</em><br>
+              IEA emergency release: <strong>3.0 mb/d effective</strong> W1, → zero W6 — <em>IEA OMR Mar 2026: 400 Mb coordinated release; Goldman: 254 Mb actual release modelled; SPR max drawdown 4.4 mb/d but 13-day delivery lag (EIA)</em><br>
+              Non-Gulf supply offset: <strong>Base schedule</strong> — <em>Vortexa Mar 2026: Russia/Iran +1 mb/d + non-Gulf record +2 mb/d; Wood Mac: US shale +600 kb/d by month 6 only; IEA: demand -1 mb/d Mar/Apr</em><br>
+              Net structural deficit at W7 (base): <strong>~3.5 mb/d</strong>
+            </div>
+            <div>
+              <strong style="color:var(--navy); display:block; margin-bottom:4px;">PRICE MODEL</strong>
+              Pre-war Brent baseline: <strong>$73/bbl</strong> — <em>Brent closing price Feb 27 2026 (EIA); pre-war forecast $69–74/bbl (EIA STEO Dec 2025)</em><br>
+              Short-run price elasticity: <strong>−0.05</strong> — <em>IEA range −0.02 to −0.15; academic short-run consensus −0.03 to −0.06 for acute shocks; Goldman 120-day sustained closure implies ~−0.05 (Goldman Sachs Mar 2026 note)</em><br>
+              Futures market risk premium: <strong>$25/bbl peak</strong> — <em>Goldman Day-1 estimate $18/bbl (Goldman Mar 1); Al Jazeera cites analyst: "$40/bbl geopolitical premium at peak"; $25/bbl is mid-range for W3 sustained closure</em><br>
+              IEA seam correction: W4–W6 blended from W3 actual ($100) — <em>Brent W3 actual $100 confirmed (AAA, EIA); IEA buffer suppresses ~$17 below model fundamental; blend prevents artificial cliff at handoff</em><br>
+              Infrastructure damage base: <strong>12%</strong> — <em>Confirmed W3: Ras Tanura 550 kb/d (Al Jazeera Mar 4), Ruwais 817–922 kb/d (Wikipedia), Bapco 267 kb/d (NPR Mar 6), Safaniya ~500 kb/d partial (Bloomberg), Shah gas (CNBC Mar 17), Ras Laffan 77 Mtpa (QatarEnergy force majeure Mar 4)</em><br>
+              Insurance floor post-reopening: <strong>$16/bbl embedded</strong> — <em>Red Sea precedent: premiums elevated 12–18 months post-Houthi (House of Saud analysis); Jeff Currie (Goldman/Carlyle): "premiums elevated long after last missile fired"; Substack insurance analysis Mar 2026: $16–20/bbl estimated</em>
+            </div>
+            <div>
+              <strong style="color:var(--navy); display:block; margin-bottom:4px;">REOPENING CASCADE</strong>
+              Mine clearance lag: <strong>+7 weeks</strong> best-case — <em>US decommissioned 4 purpose-built minesweepers Jan 2026 (The National Mar 15); 1991 Kuwait: 2+ months with 12+ allied MCM vessels in permissive conditions (House of Saud Mar 13); US Energy Sec Wright: "simply not ready" Mar 12</em><br>
+              First transit → ~67% volume recovery: <strong>+8 weeks</strong> — <em>Three compounding lags: (1) Insurance/confidence lag 2–4 wks (Red Sea precedent); (2) Sequential production restart — storage-forced shutdowns need 2–8 wks depending on facility (wells 1–2 wks, offshore platforms 2–4 wks, refineries 2–3 wks, LNG trains 3–5 wks); Iraq alone has 3 fields requiring sequential restart by same teams. (3) Tanker repositioning: 150+ vessels anchored need repositioning globally. Restart ramp is deliberately flat in first 4 weeks. IEA OMR Mar 2026; industry engineering norms</em><br>
+              Maximum Strait recovery: <strong>75%</strong> of pre-war — <em>Lloyd's List: "10% realistic with naval escorts initially"; insurance premium and Iran's demonstrated willingness to attack vessels permanently cap full normalisation (Columbia CGEP Mar 2026)</em><br>
+              Ras Laffan restart lag: <strong>+10 weeks</strong> — <em>QatarEnergy CEO Saad al-Kaabi: no restart "until conflict fully ends + 4–6 week technical restart" (QatarEnergy force majeure statement Mar 4); adds mine clearance + physical inspection to CEO's floor</em><br>
+              Helium restart lag: <strong>+12 weeks</strong> — <em>Co-produced at Ras Laffan; additional 2-week lag vs LNG for helium-specific train restart (Kornbluth Associates helium market analysis)</em><br>
+              LNG trajectory: <strong>independent of oil</strong> — <em>Qatar offline from physical drone strike (not export restriction); no Hormuz bypass for LNG tankers; even at $50 Brent, JKM stays at crisis levels until Ras Laffan physically restarts</em>
+            </div>
+          </div>
+          <div style="margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--rule); font-size: 10px; line-height: 1.6;">
+            <strong style="color:var(--navy);">SLIDER SCENARIO ASSUMPTIONS (vs base)</strong><br>
+            <strong>Selective passage above 2.0 mb/d:</strong> Expanded deals beyond confirmed W3 levels; or Iran de-facto reopening to all non-Western flags<br>
+            <strong>Infra damage above 12%:</strong> Abqaiq hit = +15 pp (~$30–50/bbl independent price spike, 6–12 month repair); East-West pipeline = +10 pp (eliminates Yanbu bypass)<br>
+            <strong>Pessimistic supply offset:</strong> E&amp;Ps maintain capital discipline (Wood Mac: "not committing to increased activity"); demand holds up; total offset only ~1.0 mb/d by W12<br>
+            <strong>Optimistic supply offset:</strong> Fast shale response + Venezuela uplift + 1.5 mb/d demand destruction; total ~2.8 mb/d by W12<br>
+            <strong>Risk premium $0:</strong> Pure supply/demand price — no forward uncertainty embedded<br>
+            <strong>Risk premium $50/bbl:</strong> Imminent major infrastructure strike scenario (Abqaiq threat credible, wider regional escalation)
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
         <div class="src-block">
           <h4>Cascade Methodology &amp; Food Lag</h4>
           <p>All non-energy commodities are recascaded from the revised oil trajectory. At $155+ oil, global gas prices rise, raising production costs for alternative fertiliser producers who were supposed to moderate prices — the replacement supply is itself now expensive. Naphtha and ethane (PE feedstocks) track crude directly. Diesel costs at $240+/bbl feed into every tonne of food and goods transported globally. <strong>Food lag:</strong> 60-day input-cost-to-consumer-price lag (RSM US). Spring planting in W3 — reduced fertiliser application locks in harvest shortfall regardless of when the crisis ends. W8–W12 food prices reflect both elevated input costs AND lower harvest volumes simultaneously. Urea calibrated against 2022 Ukraine spike (~$900/t); current disruption is deeper. Goldman: US CPI peaks 4.5%. Oxford Economics: eurozone/UK/Japan contraction at $140 average oil — this model's peak weeks are above that threshold.</p>
@@ -722,11 +833,31 @@ const CATEGORIES = [
           'Structural new level reflects permanent risk premium',
         ],
       },
+      {
+        name: 'WTI Crude',
+        key: 'wti', unit: '$/bbl', baseline: 69.5, fmt: '$',
+        actuals: [81, 96, 96.2, null, null, null, null, null, null, null, null, null],
+        pcts: null, // derived dynamically from Brent via calcWtiPcts()
+        notes: [
+          'WTI surges with Brent; spread $6/bbl (normal pre-war differential)',
+          'WTI follows Brent; spread holds at $6 — US export demand building',
+          'WTI $96.21 confirmed (CNBC Mar 17); spread compressed to $3.8 as US exports surge',
+          'Spread widens modestly as Brent reflects global seaborne scarcity premium',
+          'US export terminals near capacity; spread stabilises $5/bbl',
+          'Brent seaborne premium peaks; WTI insulated by Cushing domestic supply',
+          'Peak spread ~$5.8 — well below initial estimates; US export surge limits divergence',
+          'Spread compressing as Atlantic basin buyers increasingly tap US crude',
+          'US export constraint becoming binding; spread narrows steadily',
+          'Medium-run: WTI/Brent converging as US crude fills Atlantic basin gap',
+          'Structural compression continues; spread heading toward $4',
+          'Sustained narrow spread ~$3.8 — US export role permanently elevated',
+        ],
+      },
     ],
   },
   {
-    id: 'gas', icon: '', name: 'Natural Gas + LNG', open: true,
-    desc: 'Qatar offline at source — no bypass possible for LNG',
+    id: 'gas', icon: '', name: 'LNG', open: true,
+    desc: 'Qatar offline at source — no bypass possible for LNG tankers',
     rows: [
       {
         name: 'LNG Asia — JKM Spot',
@@ -734,18 +865,18 @@ const CATEGORIES = [
         actuals: [20, 28, 32, null, null, null, null, null, null, null, null, null],
         pcts:    [43, 100, 129, 171, 207, 243, 307, 321, 307, 286, 271, 257],
         notes: [
-          'Qatar force majeure Day 1; JKM spikes on open',
-          'Ras Laffan fully offline; no alternative at scale',
-          'No replacement LNG supply reachable',
-          'Industrial rationing begins across Asia',
-          'Asian power cuts; coal switching accelerates',
-          'Energy emergency declared in multiple countries',
-          'Force majeure cascades to downstream buyers',
-          'Peak — buyers paying any price for spot cargo',
-          'Demand destruction from fuel switching',
-          'High plateau — no Qatar supply in sight',
-          'Structural shortage; no restart timeline',
-          'New LNG baseline until Ras Laffan restarts',
+          'Qatar force majeure Day 1; JKM +39% on open — confirmed',
+          'Ras Laffan fully offline; spot prices double within days',
+          'No replacement LNG supply reachable at scale — confirmed +129%',
+          'Industrial rationing begins in Asia; coal switching accelerates',
+          'Asian power cuts; Australian/US LNG fully contracted, limited spot',
+          'Emergency measures activated; LNG-to-power substitution maxed out',
+          'Force majeure cascades to downstream buyers in Asia',
+          'Peak — buyers paying any price for spot cargo; coal the only escape',
+          'Demand destruction from fuel switching limits further rises',
+          'Plateau — Qatar offline until Ras Laffan restarts; no quick fix',
+          'Structural shortage; Australia/US at full capacity, no spot relief',
+          'New LNG baseline until Ras Laffan physically restarts',
         ],
       },
       {
@@ -754,24 +885,24 @@ const CATEGORIES = [
         actuals: [55, 65, 72, null, null, null, null, null, null, null, null, null],
         pcts:    [45, 71, 89, 118, 145, 168, 189, 197, 189, 176, 166, 158],
         notes: [
-          'TTF surges on Qatar news; pipeline alternatives limited',
-          'Goldman warns of doubling risk; storage concerns',
-          'Near pre-war double; industrial buyers cutting',
-          'Industrial rationing spreading across EU',
-          'Emergency measures activated; coal/nuclear restart',
-          'Storage draw-down rate accelerates',
-          'Major industry curtailed; demand destruction',
-          'Peak — heating season amplifies shortage',
-          'Demand slightly reduced; efficiency mandates',
-          'Plateau — structural shortage until LNG returns',
-          'Sustained high; EU scrambles for alternatives',
-          'New European energy cost baseline',
+          'TTF surges on Qatar news; pipeline alternatives limit Europe vs Asia',
+          'Goldman warns doubling risk; Europe 12-14% Qatar-exposed (Wikipedia)',
+          'Near pre-war double; Norway/Algeria pipeline gas continues',
+          'Industrial rationing spreading; EU gets less Qatar LNG than Asia',
+          'Emergency measures activated; coal/nuclear restart underway',
+          'Storage draw-down rate accelerates; pipeline gas partly offsets',
+          'Major industrial curtailment; Europe more insulated than Asia',
+          'Peak — heating season amplifies; pipeline alternatives cap ceiling',
+          'Demand slightly reduced; efficiency mandates take effect',
+          'Plateau — structural Qatar shortage but pipeline alternatives help',
+          'Sustained high; EU exposed less than Asia but still significantly',
+          'New European energy cost baseline; recovery tied to Qatar restart',
         ],
       },
     ],
   },
   {
-    id: 'industrial', icon: '', name: 'Industrial Gases + Metals', open: true,
+    id: 'industrial', icon: '', name: 'Industrial Gases + Metals', open: false,
     desc: 'Helium offline at source; aluminium smelting under energy pressure',
     rows: [
       {
@@ -780,18 +911,18 @@ const CATEGORIES = [
         actuals: [680, 760, 800, null, null, null, null, null, null, null, null, null],
         pcts:    [70, 90, 100, 138, 175, 213, 250, 288, 313, 325, 330, 333],
         notes: [
-          'Kornbluth: +70–100% W1; Qatar is 30% of global supply',
-          'Ras Laffan offline — helium co-produced with LNG',
-          'Chip fab and MRI supply chains at risk',
-          'Semiconductor fabs drawing down stockpiles',
-          'MRI equipment delays emerging',
-          'Semiconductor supply chain in crisis',
-          'Force majeure cascades to tech sector',
-          'Critical industries on allocation only',
-          'Spot market effectively seized',
-          'Allocation-only; US production absorbs some demand',
-          'Deep structural shortage; recycling increases',
-          'Structural deficit until Ras Laffan restarts',
+          'Kornbluth (30-yr veteran): "+70-100% in a week" — confirmed',
+          'Spot "roughly doubled"; Ras Laffan co-produces helium with LNG',
+          'Confirmed ~+100%; "Helium Shortage 5.0" declared — Gasworld Mar 2026',
+          'Qatar = 30-33% global supply; US 42% independent — partially buffers',
+          'Semiconductor fabs and MRI supply chains drawing down stockpiles',
+          'Container bottleneck critical; ~1/3 of cryogenic ISO containers stranded',
+          'US/Russia production absorbing some demand; recycling increases',
+          'Peak — S. Korea gets 65% from Qatar; chip fabs on allocation',
+          'Recycling efficiency improving; Exiger: repositioning takes 3 months',
+          'US ramp accelerating; recovery slow due to container logistics',
+          'Structural shortage persists; new Canadian/Rockies projects years away',
+          'New price floor — structural tightness even after Qatar restarts',
         ],
       },
       {
@@ -800,24 +931,24 @@ const CATEGORIES = [
         actuals: [2650, 2860, 2950, null, null, null, null, null, null, null, null, null],
         pcts:    [10, 19, 23, 36, 50, 62, 72, 80, 82, 80, 77, 74],
         notes: [
-          'UAE Ruwais smelter hit; Gulf production disrupted',
-          'Energy cost shock hitting smelters globally',
-          'Smelter energy costs surge with oil/gas prices',
-          'Building materials and packaging chains hit',
-          'European smelters curtailing on energy costs',
-          'Smelter closures spreading; auto sector hit',
-          'Aerospace and automotive shortfall widens',
-          'High energy input costs compound raw material shortage',
-          'Demand destruction as manufacturers cut output',
-          'Plateau — structural energy cost embedded',
-          'Sustained gap; recycled aluminium ramps up',
-          'New structural level reflecting energy reality',
+          'LME hits 4-yr high; Alba Bahrain, Qatalum cutting output — confirmed',
+          'LME ~$3,385 (+23% confirmed); Alba declares force majeure (Bloomberg)',
+          'Qatalum at 60% capacity (Fastmarkets); confirmed W3 +23%',
+          'Goldman base: $3,150/t H1; ING bull: $4,000/t — bracketing our projection',
+          'Raw material (alumina) imports also blocked; dual-supply shock',
+          'Julius Baer: "$3,700 if prolonged"; China/India production unaffected',
+          'Logistical disruption dominates; 8-9% global production from Gulf (IAI)',
+          'Peak — between Goldman base and ING bull case; premiums surge',
+          'Demand destruction as manufacturers cut output at these prices',
+          'Recovery faster than oil on reopening — mainly logistical disruption',
+          'China/India production continuing; structural gap narrows',
+          'New level — reflects permanent logistics risk premium for Gulf metal',
         ],
       },
     ],
   },
   {
-    id: 'fert', icon: '', name: 'Fertilisers', open: true,
+    id: 'fert', icon: '', name: 'Fertilisers', open: false,
     desc: 'LNG feedstock also blocked; spring planting decisions being made NOW',
     rows: [
       {
@@ -826,18 +957,18 @@ const CATEGORIES = [
         actuals: [505, 556, 591, null, null, null, null, null, null, null, null, null],
         pcts:    [6, 17, 24, 46, 64, 80, 96, 105, 105, 103, 100, 97],
         notes: [
-          'Early move; traders pricing in Hormuz risk',
-          'Qatar urea/ammonia production halted',
-          'Gulf urea plants offline or export-blocked',
-          'Spring planting window — worst possible timing',
-          'Feedstock (natural gas) and transit both blocked',
-          'Alternative producers also facing high gas costs',
-          'Harvest shortfall locked in regardless of resolution',
-          'Record territory — 2022 Ukraine peak approached',
-          'Harvest outcome baked in; prices plateau',
-          'Sustained — no cheap gas or transit anywhere',
-          'Structural gap until Gulf production resumes',
-          'New price reality for global agriculture',
+          'CSIS: $516→$683 (+32%) in one week W1 — early and sharp',
+          'The National/Fitch: $591 (+25%) confirmed; "most important rise" — W2',
+          'Confirmed $591 (+25%) W3; Oxford Economics: +20% Q2 forecast',
+          'Spring planting window — worst timing; Gulf = 43-49% global exports (AFBF)',
+          'Egypt/Trinidad/Canada/Russia partially substitute — caps ceiling vs oil',
+          'Alt producers also face high gas costs; US 75% domestic (Carnegie) helps',
+          'Harvest shortfall locked in regardless of resolution; application rates cut',
+          'Near peak — trade blockade not production destruction; substitution occurring',
+          'Harvest outcome baked in; US insulation limits global price ceiling',
+          'Sustained — alt supply still expensive; Brazil (90%+ import-dependent) exposed',
+          'Structural gap until Gulf trade normalises; not a production collapse',
+          'New price reality — reflects embedded risk premium for Gulf fertiliser trade',
         ],
       },
       {
@@ -846,18 +977,18 @@ const CATEGORIES = [
         actuals: [367, 392, 420, null, null, null, null, null, null, null, null, null],
         pcts:    [5, 12, 20, 38, 55, 70, 84, 98, 100, 98, 94, 91],
         notes: [
-          'Lagging urea; India and Bangladesh most exposed',
-          'Qatar ammonia plants offline',
-          'Bangladesh and Pakistan fertiliser emergency',
-          'Plant shutdowns widening globally',
-          'Gulf feedstock (LNG/gas) fully cut off',
-          'Global gas prices elevated; alt production costly',
-          'Agricultural season locked in at high cost',
-          'Near peak — alternative production at capacity',
-          'Food shock consequences now baked in',
-          'Plateau; demand adjusts to new reality',
-          'Sustained; structural gap in global supply',
-          'New level until Gulf capacity restored',
+          'Lagging urea; India and Bangladesh most exposed — Fitch Mar 2026',
+          'Fitch: "not to same extent as urea"; US ~94% domestic (Carnegie)',
+          'Bangladesh/Pakistan fertiliser emergency; W3 $420 confirmed',
+          'Gulf = 30% global ammonia exports (AFBF); US domestic insulates',
+          'Gulf gas feedstock (LNG/natural gas) fully cut off for local producers',
+          'Global gas prices elevated; alternative production at full capacity',
+          'Agricultural season locked in at high cost; ammonia < urea exposure',
+          'Near peak — US domestic production limits global price ceiling',
+          'Food shock consequences now baked in; US/Trinidad/Algeria partially offset',
+          'Plateau; demand adjusts; US production ramping further',
+          'Structural gap narrows as non-Gulf production at record levels',
+          'New level until Gulf gas feedstock availability normalises',
         ],
       },
       {
@@ -866,18 +997,18 @@ const CATEGORIES = [
         actuals: [605, 636, 660, null, null, null, null, null, null, null, null, null],
         pcts:    [4, 10, 14, 27, 40, 54, 65, 76, 82, 81, 78, 75],
         notes: [
-          'Saudi phosphate exports blocked by Hormuz',
-          'Saudi + China export curbs compound shortage',
-          'Both key supply sources severely disrupted',
-          'Sulfur cascade adds additional cost pressure',
-          'Structural gap — no quick replacement source',
-          'Record prices; application rates cut by farmers',
-          'Harvest locked in at reduced input levels',
-          'Near 2022 record — multiple supply chains broken',
-          'Peak disruption; demand destruction emerging',
-          'Plateau as market adjusts to new supply reality',
-          'Demand adjusts; some substitution occurring',
-          'New baseline until Gulf phosphate trade resumes',
+          'Saudi phosphate exports blocked; China export curbs pre-existing',
+          'Saudi + China compound: two key suppliers simultaneously disrupted',
+          'Both key supply sources hit; W3 $645-660 confirmed (UkrAgroConsult Mar 12)',
+          'Sulfur cascade adds pressure independently — 44% seaborne sulfur from Gulf',
+          'Structural gap — 2022 Ukraine precedent: ~$1,000/t peak from $300 base',
+          'Record territory; application rates cut globally; China curbs continue',
+          'Harvest locked in at reduced input levels — yield impacts baked in',
+          'Near 2022 record — sulfur + phosphate + trade blockade triple impact',
+          'Peak disruption; some demand destruction as farmers skip application',
+          'Plateau as market adjusts; Morocco/Jordan phosphate partially substitute',
+          'Demand adjusts; China export curb reversal (slider) would cap ceiling',
+          'New baseline until Gulf phosphate trade and sulfur supply normalises',
         ],
       },
       {
@@ -886,24 +1017,24 @@ const CATEGORIES = [
         actuals: [130, 143, 155, null, null, null, null, null, null, null, null, null],
         pcts:    [8, 19, 29, 54, 75, 95, 112, 124, 130, 128, 124, 120],
         notes: [
-          'Roughly half of global sulfur comes from Gulf refining byproduct',
-          'NDSU warns of "sulfur cascade" through fertilisers',
-          'Refinery shutdowns cutting sulfur byproduct supply',
-          'Phosphate production chain severely hit',
-          'Global fertiliser cascade accelerating',
-          'Critical shortage for phosphate producers',
-          'Agricultural emergency — multiple nutrients affected',
-          'Peak shortage; harvest consequences compound',
-          'Structural gap in global sulfur supply',
-          'Plateau — demand adjusting down',
-          'Demand adjusts; some recovery in non-Gulf supply',
-          'New level reflecting structural Gulf supply gap',
+          'Gulf = 44% seaborne sulfur supply (FinancialContent Mar 17) — confirmed',
+          'NDSU warns "sulfur cascade" through fertilisers — refinery shutdowns hit supply',
+          'Refinery shutdowns cutting sulfur byproduct; W3 $155 confirmed (+29%)',
+          'Phosphate production chain hit; non-Gulf refineries running harder offsets some',
+          'Global phosphate production cascade; demand destruction cap from sector',
+          'Non-Gulf refiners running at record rates increase byproduct sulfur supply',
+          'Agricultural emergency — phosphate sector cutting production, reducing demand',
+          'Peak — supply disruption partially offset by non-Gulf refinery byproduct',
+          'Structural gap narrows as non-Gulf refineries maximise sulfur recovery',
+          'Plateau — demand adjusted down from phosphate production cuts',
+          'Recovery in non-Gulf supply; Gulf refinery restart adds supply',
+          'New level reflecting structural Gulf supply gap and logistics premium',
         ],
       },
     ],
   },
   {
-    id: 'petrochem', icon: '', name: 'Petrochemicals + Refined Products', open: true,
+    id: 'petrochem', icon: '', name: 'Petrochemicals + Refined Products', open: false,
     desc: '85% of ME polyethylene via Hormuz; jet fuel distillate crisis confirmed',
     rows: [
       {
@@ -912,18 +1043,18 @@ const CATEGORIES = [
         actuals: [62, 66, 70, null, null, null, null, null, null, null, null, null],
         pcts:    [7, 14, 21, 36, 53, 68, 82, 95, 103, 101, 97, 93],
         notes: [
-          '85% of Middle East polymer exports transit Hormuz',
-          'Gulf polymer plants cutting runs',
-          'Naphtha and ethane feedstock disrupted',
-          'Packaging and consumer goods chains hit',
-          'Naphtha crack spread widening further',
-          'Saudi and UAE petrochemical hubs stranded',
-          'Consumer goods inflation accelerating',
-          'Refinery + petrochemical shortage compound',
-          'Allocation only; downstream rationing',
-          'Structural plateau — no Gulf polymer supply',
-          'Demand substitution emerging; prices plateau',
-          'New supply level until Gulf capacity resumes',
+          '84% of ME polymer exports transit Hormuz (IEA OMR Mar 2026) — confirmed',
+          'Gulf polymer plants cutting runs; naphtha/ethane feedstock disrupted',
+          'W3 confirmed; US/China producing on domestic feedstocks — partially buffers',
+          'Packaging and consumer goods chains hit; ME = ~15% global PE production',
+          'Naphtha crack spread widens; US shale gas ethane unaffected',
+          'Saudi and UAE petrochemical hubs stranded; Chinese PE output at record',
+          'Consumer goods inflation accelerating; ME export gap partly filled by US/Asia',
+          'Peak — 2022 energy crisis precedent was +30-40%; this is worse but has more substitution',
+          'Allocation from Gulf; US/China at full capacity for their domestic customers',
+          'Structural gap plateauing; non-Gulf capacity limits further rises',
+          'Demand substitution emerging as prices cap; Gulf restart would sharply reduce prices',
+          'New supply level reflecting permanent ME logistics risk premium',
         ],
       },
       {
@@ -980,24 +1111,24 @@ const CATEGORIES = [
         actuals: [3.38, 3.65, 3.79, null, null, null, null, null, null, null, null, null],
         pcts:    [6, 15, 19, 33, 47, 62, 74, 83, 85, 82, 79, 76],
         notes: [
-          'AAA confirmed — War Day 1 spike',
-          'AAA: highest since late 2022',
-          'AAA: highest since October 2023',
-          'Refinery margin adds to crude price rise',
-          'IEA buffer thinning; full crude price passing through',
-          'Full deficit price in retail fuel',
-          'Peak retail — demand destruction begins',
-          'Plateau; drivers cutting discretionary travel',
-          'Mild demand fall as consumers adjust',
-          'Sustained high — no supply relief',
-          'Structural new level at pump',
-          'New baseline reflects permanent supply risk',
+          'AAA confirmed — War Day 1 spike; $3.38 W1 — retail lags crude (0.33× pass-through)',
+          'AAA: $3.65 — highest since late 2022; confirmed W2 — retail still catching up',
+          'AAA: $3.79 confirmed W3 — pass-through building to 0.52×; winter blend still in effect',
+          'Full pass-through reached + summer blend switchover begins (+$0.08/gal regional ramp)',
+          'Summer blend transition near peak (+$0.13/gal); double headwind with crude surge (GasBuddy Mar 16)',
+          'Full summer blend premium (+$0.15/gal) fully embedded; peak combined pressure',
+          'Peak retail — summer blend + full crude pass-through; ~$5.20/gal national average',
+          'Sustained peak; summer blend still in effect; rockets-and-feathers slows decline',
+          'Summer blend still embedded; crude softening not yet fully passed to retail',
+          'Summer blend premium fades; retail begins lagging crude downward (rockets-and-feathers)',
+          'Structural new level; US shale ramp modest offset at pump',
+          'New baseline reflects permanent supply risk premium in futures curve',
         ],
       },
     ],
   },
   {
-    id: 'food', icon: '', name: 'Food + Agriculture', open: true,
+    id: 'food', icon: '', name: 'Food + Agriculture', open: false,
     desc: '60-day lag from input cost to consumer price',
     rows: [
       {
@@ -1059,7 +1190,7 @@ const CATEGORIES = [
      adds restart lag on reopening)
    - Ceasefire ≠ open strait. Cascade:
        Ceasefire → +3-4 wks mine clearance/naval escort
-       → first transits (10% of normal)
+       → first transits (10% of available; production restart lag slows ramp)
        → +4-6 wks production restart ramp to 50%
        → +4-6 wks further ramp to ~75%
        → insurance premium stays elevated 12-18 months regardless
@@ -1084,24 +1215,32 @@ const CATEGORIES = [
 //   Russia/Iran: 1.0mb/d, non-Gulf to 2.5mb/d, shale +0.6mb/d by W6, demand dest 1.5mb/d
 const OFFSET_SCHEDULES = {
   // Net reduction in effective deficit (mb/d) after passage+bypass+IEA already applied.
-  // Pessimistic: capital discipline, shale cautious, demand holds. Peak offset ~1.0 mb/d.
-  pessimistic: [0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0],
-  // Base (Wood Mac/Vortexa/IEA): Russia+Iran sanctioned ~1mb/d, non-Gulf record ~2mb/d by W4,
-  // US shale +0.3mb/d by W8, demand destruction 0.5–1mb/d. Peak offset ~1.8 mb/d.
-  base:        [0.3, 0.5, 0.7, 0.9, 1.1, 1.3, 1.5, 1.6, 1.7, 1.8, 1.8, 1.8],
-  // Optimistic: faster shale, Venezuela uplift, larger demand destruction. Peak ~2.8 mb/d.
-  optimistic:  [0.3, 0.6, 0.9, 1.3, 1.6, 1.9, 2.2, 2.5, 2.6, 2.7, 2.8, 2.8],
+  // W1-W9: supply-side offsets only (short-run elasticity −0.05 applies throughout).
+  // W10-W12: small additional increment for early medium-run demand response —
+  //   behavioural changes (airline route cuts, EM rationing, industrial fuel switching)
+  //   that begin to materialise at 10+ weeks of $130-150 crude. Kept conservative
+  //   because full medium-run elasticity (−0.3 to −0.8) takes 6-18 months; this
+  //   captures only the leading edge. Will grow significantly in longer-horizon models.
+  //   Source: IEA demand elasticity review; Hamilton (2009); Kilian & Murphy (2014).
+  //
+  // Pessimistic: capital discipline, shale cautious, demand holds.
+  pessimistic: [0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.0, 1.1, 1.2, 1.3],
+  // Base (Wood Mac/Vortexa/IEA): Russia+Iran ~1mb/d, non-Gulf record ~2mb/d by W4,
+  // US shale +0.3mb/d by W8, supply-side demand destruction ~0.5mb/d.
+  base:        [0.3, 0.5, 0.7, 0.9, 1.1, 1.3, 1.5, 1.6, 1.7, 2.0, 2.1, 2.2],
+  // Optimistic: faster shale, Venezuela uplift, larger demand destruction.
+  optimistic:  [0.3, 0.6, 0.9, 1.3, 1.6, 1.9, 2.2, 2.5, 2.6, 2.9, 3.1, 3.2],
 };
 
 const BASE_ASMP = {
   offsetScenario: 'base', // 'pessimistic' | 'base' | 'optimistic'
-  passage:  1.5,   // mb/d Iran lets through while Strait nominally closed
+  passage:  2.0,   // mb/d Iran lets through while Strait nominally closed
                    // Base: ~1.5 mb/d confirmed (Iran own exports ~1.5 mb/d to China
                    // via selective passage; Indian/Turkish ships case-by-case).
                    // Could rise with bilateral deals (India, China, Turkey, Pakistan).
                    // Range 1–6 mb/d.
   reopening: 0,    // week of confirmed Strait reopening (0 = none in window)
-  infra:    15,    // % of Gulf production capacity with confirmed damage
+  infra:    12,    // % of Gulf capacity with confirmed PHYSICAL DAMAGE requiring repair
                    // Base 15% = W3 confirmed: Ras Tanura, Ruwais, Bapco,
                    // Safaniya partial, Shah gas, Ras Laffan.
                    // Range 15–60%. Abqaiq hit alone = +15 pp.
@@ -1112,12 +1251,17 @@ let ASMP = { ...BASE_ASMP };
 
 // ── FIXED STRUCTURAL CONSTANTS (not sliders — based on hard data) ──
 const GROSS_DISRUPTION = 20;   // mb/d — total Hormuz normal flow
-const BYPASS_CAPACITY  = 3.5;  // mb/d — Yanbu + Fujairah at base (degraded by infra)
-                                // Saudi East-West pipeline ~2.5 mb/d net + UAE ADCOP ~1.0 mb/d
-const INSURANCE_FLOOR  = 12;   // $/bbl embedded war-risk premium post-reopening
+const BYPASS_CAPACITY  = 3.0;  // mb/d — Yanbu ~2.3 mb/d (Bloomberg confirmed W3) + UAE ADCOP ~0.7 mb/d
+                                // (Fujairah petroleum zone hit Mar 14+16 reduces ADCOP effective capacity)
+                                const INSURANCE_FLOOR  = 16;   // $/bbl embedded war-risk premium post-reopening
+                                // Iran demonstrated active vessel attacks (not just Houthi rockets);
+                                // post-Hormuz normalisation will be slower than Red Sea precedent;
+                                // Jeff Currie (Goldman/Carlyle): premiums 'elevated long after last missile'
                                 // Persists 12-18 months (Red Sea precedent)
-const MINE_CLEAR_WEEKS = 4;    // weeks ceasefire → first transits
-const PROD_RAMP_WEEKS  = 8;    // weeks first transit → ~75% volume recovery
+const MINE_CLEAR_WEEKS = 7;    // weeks reopening → first transits (best-case: US decommissioned minesweepers Jan 2026; 1991 Gulf War took 2+ months in permissive conditions)
+const PROD_RAMP_WEEKS  = 8;    // weeks first transit → ~67% volume recovery
+                                // (storage-forced: 2-8wks sequential restart per facility;
+                                //  physically damaged: months, handled by infra slider)
 const LNG_RESTART_LAG  = 10;   // weeks ceasefire → any Ras Laffan flow
 
 // IEA emergency release: 400 Mb over 120 days = ~3.3 mb/d
@@ -1150,9 +1294,51 @@ function straitFlowFraction(weekIdx, ceasefire) {
   const wksOpen = wk - firstTransitWk;
   // Ramp: each week of opening restores more, but at diminishing rate
   // Insurance lag caps full recovery
-  const rampCurve = [0.10, 0.22, 0.35, 0.46, 0.55, 0.62, 0.68, 0.73];
+  // Flatter early weeks: storage must drain before production restarts;
+  // sequential restart of Iraq fields, Kuwait, Saudi offshore adds time.
+  // Source: IEA OMR Mar 2026 (weeks-months for production restart);
+  //   Iraq Rumaila/WQ/Maysan = 3 fields × 2-3 wks each + sequential constraint.
+  const rampCurve = [0.10, 0.17, 0.25, 0.34, 0.44, 0.53, 0.60, 0.67];
   const frac = wksOpen < rampCurve.length ? rampCurve[wksOpen] : 0.75;
   return frac;
+}
+
+// ── WTI PRICE CALCULATION ──
+// WTI trades at a discount to Brent. In normal markets ~$3-4/bbl.
+// During Hormuz crisis the spread widens as:
+//   (a) Brent reflects global seaborne scarcity more acutely
+//   (b) US producers hedge by selling back end of WTI curve (Kpler Mar 2026)
+//   (c) Global refiners bid up Brent to hedge refinery exposure
+// Spread compresses on reopening (US crude becomes relatively more attractive).
+// Actuals: W1 $81 (spread $6.0), W2 $96 (spread $6.0), W3 $96.21 (spread $3.8)
+// Sources: Capital.com Mar 5; CNBC Mar 12; CNBC Mar 17 2026; Kpler Mar 2026
+const // WTI-Brent spread recalibrated Mar 17 2026:
+// Live data (Reuters/CNN Mar 13) shows WTI has OUTPERFORMED Brent in early weeks
+// (+39% vs +36%), compressing the spread to ~$3.8 at W3 (confirmed).
+// WTI outperformance driven by: US export surge to Atlantic basin buyers;
+// Cushing draws as Gulf Coast refiners substitute domestic crude.
+// Peak spread therefore much narrower than initial estimate — $5-6 not $9.
+// Sources: Reuters Mar 13 2026; CNN Mar 13 2026; Goldman Sachs Mar 11 2026.
+WTI_SPREADS = [6.0, 6.0, 3.8, 4.5, 5.0, 5.5, 5.8, 5.5, 5.0, 4.5, 4.0, 3.8];
+//   W1-W2: $6 pre-crisis normal spread (confirmed actuals imply this)
+//   W3: $3.8 confirmed — WTI caught up on US export demand surge
+//   W4-W7: modest re-widening as Brent reflects global seaborne scarcity premium
+//   W7 peak: $5.8 — materially below original $9 estimate
+//   W8-W12: gradual compression as US export infrastructure becomes binding constraint
+//   W10-12 modest compression as demand destruction hits global Brent harder.
+
+function calcWtiPcts(brentPcts) {
+  const WTI_BASELINE = 69.5; // pre-war WTI baseline (Brent $73 - $3.5 normal spread)
+  return brentPcts.map((bPct, i) => {
+    // W1-W3: lock to actuals
+    if (i === 0) return Math.round((81   / WTI_BASELINE - 1) * 100);
+    if (i === 1) return Math.round((96   / WTI_BASELINE - 1) * 100);
+    if (i === 2) return Math.round((96.2 / WTI_BASELINE - 1) * 100);
+    // W4+: derive from Brent minus dynamic spread
+    const brentPrice  = 73 * (1 + bPct / 100);
+    const wtiPrice    = Math.max(brentPrice - WTI_SPREADS[i], brentPrice * 0.88);
+    return Math.round((wtiPrice / WTI_BASELINE - 1) * 100);
+  });
 }
 
 // ── STORAGE EXHAUSTION CASCADE ──
@@ -1169,10 +1355,15 @@ function restartDebtPenalty(weekIdx, ceasefire) {
   const wk = weekIdx + 1;
   if (wk < firstTransitWk) return 0;
   const wksOpen = wk - firstTransitWk;
-  // Production restart lag: wells were shut-in, storage must drain first.
-  // Peak penalty 12% (less than strait fraction at first transit so never cancels flow).
-  // Decays over 5 weeks as fields restart.
-  if (wksOpen < 5) return 0.12 * (1 - wksOpen / 5);
+  // Production restart lag reflects TWO constraints:
+  // 1. Storage must drain before wells can restart (takes 1-2 weeks per facility)
+  // 2. Sequential restart: Iraq has 3 main fields, Kuwait onshore+offshore, Saudi offshore.
+  //    Same engineering teams needed for each. Can't all restart in parallel.
+  //    Realistic: 50% of storage-forced capacity back in 4 weeks, 90% in 8 weeks.
+  // Clean-shutdown restart times: wells 1-2wks, offshore platforms 2-4wks,
+  //    refineries 2-3wks, LNG trains 3-5wks (handled separately by LNG_RESTART_LAG).
+  // Peak penalty 25%, decays over 7 weeks (was 12%/5wks — too optimistic).
+  if (wksOpen < 7) return 0.25 * (1 - wksOpen / 7);
   return 0;
 }
 
@@ -1229,14 +1420,47 @@ function calcOilPcts() {
     const fundamentalPct = (effectiveDef / 105) / 0.05 * 100; // -0.05 short-run elasticity (academic consensus for acute <3-month shocks; IEA range -0.02 to -0.15, Goldman-implied ~-0.05 for 120-day sustained closure)
 
     // Panic premium — collapses on reopening announcement
+    // ── FUTURES MARKET RESPONSE TO REOPENING ──
+    // Three-phase model. IMPORTANT: applies a resolution discount to the TOTAL
+    // price elevation, not just panic. Futures markets reprice the entire forward
+    // curve on announcement — discounting expected recovery back to spot.
+    //
+    // Historical calibration:
+    //   1991 Gulf War: Brent -37% on ground operation day (full credibility)
+    //   2025 Israel-Iran: WTI -12% to pre-conflict levels on ceasefire
+    //   Ukraine 2022: -22% from peak within 8 weeks (no ceasefire, just market reassessment)
+    //
+    // Phase 1 — Announcement (wksSince=0):
+    //   Forward-expectations repricing: -28% total elevation discount
+    //   + panic collapses to 0.10× (residual uncertainty only)
+    //   Result: $139 → ~$105-110 (fragile ceasefire, not 1991-scale capitulation)
+    //
+    // Phase 2 — Doubt/fragility (wksSince=1-2):
+    //   Resolution discount eases to -18%/-15% as markets ask: will it hold?
+    //   Panic bounces to 0.22/0.28× — Iran rhetoric, insurance still withdrawn
+    //   Partial price recovery (dip → bounce pattern)
+    //
+    // Phase 3 — Peace holding (wksSince=3+):
+    //   Discount gradually increases as confidence builds and mine clearance progresses
+    //   Prices decline toward fundamental + insurance floor
+    //
+    // Sources: ECB Bulletin 2024; Dallas Fed 2025; 1991 Gulf War; Goldman Mar 2026
     let panicFactor = PANIC_CURVE[i];
+    let resolutionDiscount = 0;
     if (ASMP.reopening > 0 && i >= ASMP.reopening - 1) {
       const wksSince = i - (ASMP.reopening - 1);
-      panicFactor    = wksSince === 0 ? 0.20 : Math.max(0.03, 0.20 - wksSince * 0.06);
+      // Panic factors post-announcement (dips then bounces then decays)
+      const panicFactors       = [0.10, 0.22, 0.28, 0.22, 0.16, 0.11, 0.07, 0.04];
+      // Resolution discount on total elevation (larger = more price drop)
+      const resolutionDiscounts = [0.28, 0.18, 0.15, 0.22, 0.27, 0.31, 0.34, 0.36];
+      panicFactor       = wksSince < panicFactors.length       ? panicFactors[wksSince]       : 0.03;
+      resolutionDiscount = wksSince < resolutionDiscounts.length ? resolutionDiscounts[wksSince] : 0.38;
     }
     const panicPct = (ASMP.panic * panicFactor / 73) * 100;
 
-    const raw = Math.round(fundamentalPct + panicPct);
+    // Apply forward-expectations discount to total elevation
+    const rawUndiscounted = fundamentalPct + panicPct;
+    const raw = Math.round(rawUndiscounted * (1 - resolutionDiscount));
 
     // Insurance floor: even post-reopening, prices can't fall below ~+25% above pre-war.
     // War-risk premiums stay elevated 12-18 months. Applied as a price floor, not an
@@ -1263,7 +1487,11 @@ function calcOilPcts() {
 // ── LNG / JKM TRAJECTORY ──
 // Qatar LNG is Hormuz-dependent — even post-ceasefire needs LNG_RESTART_LAG.
 // Driven by physical Qatar outage, not oil price.
-const BASE_LNG_PCTS = [43, 100, 129, 171, 207, 243, 307, 321, 307, 286, 271, 257];
+const // Corrected from +321% peak to +214% peak (W8):
+// Qatar = 30-33% global LNG (not 40%). Australia/US partially substitute.
+// Coal switching caps demand faster than oil. 2022 Russia crisis (+250% from lower base)
+// is the reference; Qatar loss smaller share. Source: IEA OMR Mar 2026; Oxford Economics
+BASE_LNG_PCTS = [43, 100, 129, 158, 178, 196, 208, 214, 211, 207, 203, 200];
 
 function calcLngPcts() {
   return Array.from({length: 12}, (_, i) => {
@@ -1301,49 +1529,166 @@ function scaleOil(oilPcts, factor, fixedW123, floor) {
 }
 
 // ── ALL COMMODITY PERCENTAGES ──
+// Assumptions for each commodity's response to the oil/LNG crisis:
+//
+// HELIUM:  Qatar byproduct (30-33% global supply). NOT oil-linked.
+//          US = 42% of global supply, independent. Peak capped by recycling ramp.
+//          Kornbluth (30yr veteran): +70-100% W1 confirmed. Spot "doubled" W1-3.
+//          Peak ~+170% (warnings of $2000+/mcf only if >2 weeks AND no substitution).
+//          Source: Kornbluth/Gasworld Mar 2026; Reason.com Mar 16; MEForum Mar 17
+//
+// LNG JKM: Qatar = 30-33% global LNG (not 40%). Australia/US partially substitute.
+//          Coal switching caps demand ceiling faster than oil. Peak ~+210% (not 321%).
+//          Source: IEA OMR Mar 2026; QatarEnergy force majeure; Time Mar 2026
+//
+// TTF:     Europe gets 12-14% LNG from Qatar; pipeline alternatives limit exposure.
+//          0.72× JKM factor maintained; underlying JKM corrected.
+//
+// ALUMINIUM: Gulf = 8-9% global production (IAI). Disruption mainly logistical.
+//          China/India production unaffected (coal/hydro power). Alba cut 19% (Bloomberg).
+//          Goldman base: $3,150/t. ING bull: $4,000/t. Julius Baer "prolonged": $3,700/t.
+//          Scale: 0.45× oil (was 0.72×). Source: IAI; Fastmarkets; The National Mar 10
+//
+// UREA:    Gulf = 43-49% global urea exports (AFBF). But Egypt/Trinidad/Canada/Russia
+//          substitute. US 75% domestic (Carnegie). Trade blockade ≠ production destroyed.
+//          Fitch: +20% Q2 forecast. CSIS: $683 W1. W3 confirmed $591 (+25%).
+//          Peak ~+55% (cap). Source: The National/Fitch Mar 12; Carnegie; AFBF
+//
+// AMMONIA: Gulf = 30% global exports (AFBF). US ~94% domestic (Carnegie).
+//          "Not to same extent as urea" (Fitch). Peak ~+48%.
+//
+// DAP:     Sulfur cascade + China curbs compound. 2022 peak ~$1,000/t precedent.
+//          Peak ~+68%. Source: UkrAgroConsult Mar 12; NDSU; DTN
+//
+// SULFUR:  Gulf = 44% seaborne supply (FinancialContent). BUT: byproduct of refining
+//          globally — non-Gulf refiners running harder increases sulfur output.
+//          Demand destruction cap from phosphate sector. Scale: 0.65× oil (was 1.12×).
+//
+// PE:      ME = ~15% global production. US/China on domestic feedstocks = unaffected.
+//          Naphtha feedstock cost rises with oil. Scale: 0.52× oil (was 0.90×).
+//          Source: IEA OMR (84% ME exports); ICIS; 2022 PE precedent (+30-40%)
+//
+// JET/DIESEL: Refinery capacity offline (4mb/d) independently constrains crack spread.
+//          W2 confirmed NW Europe jet $218/bbl at $100 crude. Scale factors maintained.
+//
+// WHEAT/CORN: Input cost lag 60 days. W3 confirmed (+7%, +8%). Wolfe Research: food
+//          at home +2pp. Carnegie: crop switching risk. Peak ~+35-45%. Broadly OK.
+
 function calcAllPcts() {
   const oil = calcOilPcts();
+  const wti = calcWtiPcts(oil);
   const lng = calcLngPcts();
   const ttf = calcTtfPcts();
-  const fm  = ASMP.china ? 0.78 : 1.0; // China fertiliser factor
+  const fm  = ASMP.china ? 0.78 : 1.0;
 
-  // Helium: Qatar-driven (same restart lag as LNG), not oil-linked
-  // At base: +333% peak. With ceasefire: trails LNG restart by 2 wks
-  const helBase = [70, 90, 100, 138, 175, 213, 250, 288, 313, 325, 330, 333];
-  const helium  = helBase.map((p, i) => {
+  // ── HELIUM ──
+  // Fixed trajectory tied to Qatar/Ras Laffan — NOT oil-linked.
+  // W1-W3: confirmed actuals. Peak W8-W10 at +170%.
+  // Reopening: Ras Laffan restart lag +12 weeks from ASMP.reopening.
+  // Even with reopening, container repositioning takes ~3 months (Exiger Mar 2026).
+  // Recovery capped at 50% within model window even after restart.
+  const helBase = [70, 90, 100, 120, 145, 160, 165, 170, 168, 165, 162, 160];
+  const helium = helBase.map((p, i) => {
     if (i < 3) return p;
     if (ASMP.reopening === 0) return p;
-    const helRestartWk = ASMP.reopening + LNG_RESTART_LAG + 2;
+    const helRestartWk = ASMP.reopening + LNG_RESTART_LAG + 2; // +12 weeks from reopening
     const wk = i + 1;
     if (wk < helRestartWk) return p;
     const wksAfter = wk - helRestartWk;
-    const ramp = [0.05, 0.12, 0.22, 0.35, 0.48];
-    const frac = wksAfter < ramp.length ? ramp[wksAfter] : 0.55;
+    // Slow recovery: container repositioning takes months; recycling increases
+    const ramp = [0.05, 0.10, 0.18, 0.28, 0.38];
+    const frac = wksAfter < ramp.length ? ramp[wksAfter] : 0.45;
     return Math.round(p * (1 - frac));
   });
 
+  // ── ALUMINIUM ──
+  // 0.45× oil: Gulf = 8-9% global production. Mainly logistical disruption.
+  // China/India (75% of global Al) unaffected. Responds faster to reopening than oil.
+  // W3 confirmed +23% ($2,950). ING bull $4,000 = +67%; Goldman base $3,150 = +31%.
+  // Our 0.45× gives +45% peak — between Goldman and ING, appropriate base case.
+  const alum = scaleOil(oil, 0.45, [10, 19, 23], 10);
+
+  // ── FERTILISERS ──
+  // Urea: capped at +55% max. Egypt/Trinidad/Canada/Russia partially substitute.
+  // Ammonia: capped at +48% max. US ~94% domestic.
+  // DAP: capped at +68%. Sulfur cascade + China curbs compound.
+  // Sources: The National/Fitch Mar 12; AFBF; Carnegie; DTN; UkrAgroConsult
+  const urea    = [6, 17, 24, ...oil.slice(3).map(p => Math.round(Math.min(p * 0.58, 55) * fm))];
+  const ammonia = [5, 12, 20, ...oil.slice(3).map(p => Math.round(Math.min(p * 0.52, 48) * fm))];
+  const dap     = [4, 10, 14, ...oil.slice(3).map(p => Math.round(Math.min(p * 0.70, 68) * fm))];
+
+  // ── SULFUR ──
+  // 0.65× oil: Gulf = 44% seaborne supply but non-Gulf refineries running harder
+  // increases global sulfur output as byproduct. Demand cap from phosphate sector.
+  // Source: FinancialContent Mar 17 (44% seaborne); NDSU cascade warning
+  const sulfur = [8, 19, 29, ...oil.slice(3).map(p => Math.round(Math.min(p * 0.65, 72)))];
+
+  // ── POLYETHYLENE ──
+  // 0.52× oil: ME = ~15% global PE production. US/China on domestic feedstocks.
+  // Naphtha feedstock rises with oil but substitution available.
+  // Source: IEA OMR Mar 2026; ICIS; 2022 precedent (+30-40% peak)
+  const pe = scaleOil(oil, 0.52, [7, 14, 21], 7);
+
+  // ── JET / DIESEL ──
+  // Refinery crack spread amplifies oil price. NW Europe jet confirmed $218/bbl
+  // at $100 crude (W2). Scale factors 1.38/1.30 maintained from confirmed data.
+  const jet    = scaleOil(oil, 1.38, [14, 31, 39], 14);
+  const diesel = scaleOil(oil, 1.30, [15, 32, 40], 15);
+
+  // ── US PUMP ──
+  // Pass-through calibrated from EIA/St Louis Fed "25-cent rule":
+  //   $10/bbl crude rise → $0.25/gal pump rise (long-run, sustained shock).
+  //   At baseline Brent $73/bbl and pump $3.18/gal:
+  //   scaling = (73 * 0.025) / 3.18 = 0.574× of Brent % change.
+  //
+  // Benchmark: national pump tracks BRENT not WTI (St Louis Fed; EIA).
+  //   WTI is the futures benchmark but national retail is priced off Brent
+  //   because US refinery inputs and product imports are globally priced.
+  //
+  // Actuals confirm gradual pass-through build:
+  //   W1: 0.33× (retail lags crude on day-1 spike)
+  //   W2: 0.37× (still lagging — locked to actual $3.65)
+  //   W3: 0.52× (catching up after 3 weeks — locked to actual $3.79)
+  //   W4+: 0.574× (25-cent rule; full pass-through reached ~W4)
+  //
+  // W10-12: very slight flattening to 0.55× — demand inelasticity means retail
+  //   prices lag crude coming DOWN as well as going up ("rockets and feathers").
+  //   US gasoline demand elasticity −0.2 since 2016 (Kilian & Zhou 2024, Dallas Fed).
+  //   Ukraine 2022: US consumption declined only 3.5% cumulatively (Kilian & Zhou).
+  //   This is a modest correction — US pump is one of the stickiest prices globally.
+  // Summer blend uplift: US refineries transition to summer-blend gasoline
+  // March-April, costing $0.10-0.20/gal more to produce (stricter Reid Vapor
+  // Pressure standards). GasBuddy (Mar 16 2026): "seasonal forces intensifying
+  // as regions complete transition to summer blend — double headwind on prices."
+  // EIA: summer-blend switchover adds $0.10-0.20/gal independent of crude.
+  // Applied W4-W8 only: W1-W3 locked actuals (winter blend), W9+ summer blend
+  // already embedded in sustained prices (no additional increment).
+  // Using $0.15/gal midpoint → pct uplift = 0.15/3.18*100 = 4.7pp.
+  // Ramps in over W4-W5 as switchover progresses regionally, peaks W6-W8.
+  const SUMMER_BLEND_PP = [0, 0, 0, 2.5, 4.0, 4.7, 4.7, 4.7, 4.7, 0, 0, 0];
+
+  const pump = [6, 15, 19, ...oil.slice(3).map((p, i) => {
+    const scale = (i >= 6) ? 0.55 : 0.574; // i=6,7,8 = W10,11,12
+    const blend = SUMMER_BLEND_PP[i + 3] || 0;
+    return Math.round(p * scale + blend);
+  })];
+
+  // ── WHEAT / CORN ──
+  // Input-cost lag 60 days. Wolfe Research: food-at-home +2pp.
+  // Carnegie: crop switching risk (corn→soy). Both broadly calibrated.
+  const wheat = [1, 4, 7,  ...oil.slice(3).map((p, i) => Math.round(p * (0.35 + i * 0.025)))];
+  const corn  = [1, 4, 8,  ...oil.slice(3).map((p, i) => Math.round(p * (0.33 + i * 0.025)))];
+
   return {
-    brent:   oil,
-    jkm:     lng,
-    ttf:     ttf,
-    helium:  helium,
-    alum:    scaleOil(oil, 0.72, [10, 19, 23], 10),
-    urea:    [6,17,24, ...oil.slice(3).map(p => Math.round(Math.min(p*0.95,110)*fm))],
-    ammonia: [5,12,20, ...oil.slice(3).map(p => Math.round(Math.min(p*0.90,105)*fm))],
-    dap:     [4,10,14, ...oil.slice(3).map(p => Math.round(Math.min(p*0.77, 90)*fm))],
-    sulfur:  [8,19,29, ...oil.slice(3).map(p => Math.round(Math.min(p*1.12,140)))],
-    pe:      scaleOil(oil, 0.90, [7, 14, 21], 7),
-    jet:     scaleOil(oil, 1.38, [14, 31, 39], 14),
-    diesel:  scaleOil(oil, 1.30, [15, 32, 40], 15),
-    pump:    [6,15,19, ...oil.slice(3).map(p => Math.round(p * 0.73))],
-    wheat:   [1,4,7,  ...oil.slice(3).map((p,i) => Math.round(p*(0.35+i*0.025)))],
-    corn:    [1,4,8,  ...oil.slice(3).map((p,i) => Math.round(p*(0.33+i*0.025)))],
+    brent: oil, wti, jkm: lng, ttf, helium, alum,
+    urea, ammonia, dap, sulfur, pe,
+    jet, diesel, pump, wheat, corn,
   };
 }
 
 // ── KEY LOOKUP ──
 function getPctKey(catId, rowName) {
-  if (catId === 'energy') return 'brent';
+  if (catId === 'energy') return rowName.includes('WTI') ? 'wti' : 'brent';
   if (rowName.includes('JKM'))         return 'jkm';
   if (rowName.includes('TTF'))         return 'ttf';
   if (rowName.includes('Helium'))      return 'helium';
@@ -1483,10 +1828,10 @@ function resetAssumptions(e) {
 
   ASMP.offsetScenario = 'base';
   document.getElementById('val-offset').textContent    = 'Base case';
-  document.getElementById('val-passage').textContent   = '1.5 mb/d';
+  document.getElementById('val-passage').textContent   = '2.0 mb/d';
   document.getElementById('val-panic').textContent     = '$25/bbl';
   document.getElementById('val-reopening').textContent = 'None in window';
-  document.getElementById('val-infra').textContent     = '15% damaged';
+  document.getElementById('val-infra').textContent     = '12% damaged';
   document.getElementById('sl-infra').value            = BASE_ASMP.infra;
   document.getElementById('val-china').textContent     = 'Blocked';
   document.getElementById('china-label').textContent   = 'China export curbs remain';
@@ -1532,13 +1877,13 @@ function sevClasses(pct) {
 /* ── STORAGE CARDS ── */
 
 const STORAGE_DATA = [
-  {c:'Iraq',f:'Basra terminals · Rumaila, West Qurna, Zubair',st:'st-halt',sl:'Production Cut 70%',pre:'4.3 mb/d',cur:'~1.3 mb/d',fill:70,note:'97% of Iraqi exports transit Hormuz — no bypass. Storage had <3 days headroom on Mar 1 (Kpler). Iraq was first to cut, with Rumaila/West Qurna shut-ins confirmed Mar 3. Approaches zero by W5 under no-resolution.'},
-  {c:'Qatar LNG',f:'Ras Laffan · 14 trains · 77 Mtpa',st:'st-halt',sl:'Fully Offline Since Mar 2',pre:'77 Mtpa',cur:'0 — offline',fill:100,note:'Storage fills in 4 days at full production. Offline since Iranian drone strike. Restart requires ceasefire + mine clearance + physical inspection + 4–6 wk technical restart. Helium (30% global supply) co-located at Ras Laffan, also offline.'},
-  {c:'Kuwait',f:'KPC · Ahmadi fields · Mina al-Ahmadi terminal',st:'st-halt',sl:'Force Majeure Mar 7',pre:'2.6 mb/d',cur:'Cutting',fill:80,note:'100% Hormuz-dependent, no bypass route. KPC declared force majeure Mar 7. JPMorgan: storage exhaustion forces production cuts within 2-3 weeks of closure for producers with no bypass.'},
-  {c:'Saudi Arabia',f:'Abqaiq · Ras Tanura (hit) · Safaniya (shut Mar 13)',st:'st-cut',sl:'Cutting — Partial Bypass',pre:'10.4 mb/d',cur:'Cut ~2.5 mb/d',fill:52,note:'Yanbu Red Sea exports surged to ~2.3 mb/d (Bloomberg) — far below the 6 mb/d exported via Persian Gulf. Ras Tanura refinery hit. Safaniya offshore field (20% capacity) shut Mar 13. Houthis threaten Red Sea bypass route.'},
-  {c:'UAE',f:'Ruwais refinery shut Mar 11 · Fujairah hit Mar 16',st:'st-cut',sl:'Cutting — Partial Bypass',pre:'4.2 mb/d',cur:'Cut ~800k b/d',fill:44,note:'ADCOP pipeline carries ~1.5-1.8 mb/d to Fujairah — UAE\'s only bypass. Ruwais 817k b/d refinery shut after drone strike Mar 11. Fujairah petroleum zone hit Mar 16. Even Fujairah now inside insurers\' war-risk zone.'},
-  {c:'Gulf Refineries',f:'Ras Tanura 550kb/d · Ruwais 817kb/d · Bapco 267kb/d',st:'st-halt',sl:'>4 mb/d Refining at Risk',pre:'3.3 mb/d exports',cur:'Near zero',fill:95,note:'IEA March OMR: more than 4 mb/d of Gulf refining capacity at risk. All major export refineries offline or severely curtailed. Diesel and jet fuel crack spreads blow out independently of crude — no spare global capacity to replace Gulf refined products.'},
-  {c:'Iran (trickle)',f:'Kharg Island · Jask terminal · Shadow fleet',st:'st-cut',sl:'Exporting ~1.5 mb/d',pre:'2.1 mb/d',cur:'~1.5 mb/d to China',fill:25,note:'Iran paradoxically keeps exporting while blocking others. ~1.22-1.5 mb/d confirmed to China (Kpler). Jask terminal loaded 2 Mb in first week. Selective passage for Chinese, Indian, Turkish vessels. US "fine with" some Iranian/Indian/Chinese ships transiting (Treasury Sec Bessent Mar 11).'},
+  {c:'Iraq',f:'Basra terminals · Rumaila, West Qurna, Zubair',st:'st-halt',sl:'Production Cut 70%',pre:'4.3 mb/d',cur:'~1.3 mb/d',fill:70,note:'97% of Iraqi exports transit Hormuz — no bypass. Storage had <3 days headroom on Mar 1 (Kpler). Iraq cut first. Important: storage-forced shutdown ≠ physical damage — wells are intact. BUT restart is not instant: Iraq has 3 main fields (Rumaila, West Qurna, Maysan), each needs 2–3 weeks sequential restart with same engineering teams. Full production recovery ~6–8 weeks post-Strait opening.'},
+  {c:'Qatar LNG',f:'Ras Laffan · 14 trains · 77 Mtpa',st:'st-halt',sl:'Fully Offline Since Mar 2',pre:'77 Mtpa',cur:'0 — offline',fill:100,note:'Storage fills in 4 days at full production. Offline since Iranian drone strike on Ras Laffan facility. This is PHYSICAL DAMAGE — not a storage-forced shutdown. Even if Strait opened tomorrow, Ras Laffan cannot restart until: (1) physical inspection and repair, (2) safety recertification, (3) 4–6 week technical LNG train restart sequence. CEO Saad al-Kaabi confirmed this publicly Mar 4. Helium co-produced — also offline.'},
+  {c:'Kuwait',f:'KPC · Ahmadi fields · Mina al-Ahmadi terminal',st:'st-halt',sl:'Force Majeure Mar 7',pre:'2.6 mb/d',cur:'Cutting',fill:80,note:'100% Hormuz-dependent, no bypass route. KPC declared force majeure Mar 7. No reported physical damage — this is a storage-forced shutdown. Restart once Strait opens: offshore + onshore facilities need 3–5 weeks safety checks and recommissioning. Cannot restart while storage is full — must drain first.'},
+  {c:'Saudi Arabia',f:'Abqaiq · Ras Tanura (hit) · Safaniya (shut Mar 13)',st:'st-cut',sl:'Cutting — Partial Bypass',pre:'10.4 mb/d',cur:'Cut ~2.5 mb/d',fill:52,note:'Yanbu Red Sea exports ~2.3 mb/d confirmed (Bloomberg) — far below 6 mb/d normal Persian Gulf exports. Ras Tanura: debris fire Mar 2 — operational status unclear, may need 4–8 weeks repair. Safaniya offshore shut Mar 13 as operational precaution, NOT reported as damaged — restart 2–4 weeks post-Strait opening. Houthis threatening Red Sea bypass adds further risk.'},
+  {c:'UAE',f:'Ruwais refinery shut Mar 11 · Fujairah hit Mar 16',st:'st-cut',sl:'Cutting — Partial Bypass',pre:'4.2 mb/d',cur:'Cut ~800k b/d',fill:44,note:'ADCOP pipeline ~0.7 mb/d effective (Fujairah zone hit Mar 14+16 reduces capacity). Ruwais 817–922 kb/d: direct drone strike Mar 9–11 — physical damage, months to repair, NOT a storage-forced shutdown. Shah gas field: drone strike Mar 14, 3–6 weeks repair. These are genuinely damaged, not just export-blocked.'},
+  {c:'Gulf Refineries',f:'Ras Tanura 550kb/d · Ruwais 817kb/d · Bapco 267kb/d',st:'st-halt',sl:'>4 mb/d Refining at Risk',pre:'3.3 mb/d exports',cur:'Near zero',fill:95,note:'IEA March OMR: >4 mb/d refining capacity at risk. Critical distinction: Ruwais (817kb/d, direct drone strike) and Ras Tanura (550kb/d, debris fire) need physical repair — months. Bapco (267kb/d) is partly export-blocked and partly damaged — 2–4 weeks. Refineries that were cleanly shutdown due to full storage tanks restart in 2–3 weeks. Gulf exported 3.3 mb/d refined products pre-war — now near zero, with no spare global refining capacity to substitute.'},
+  {c:'Iran (trickle)',f:'Kharg Island · Jask terminal · Shadow fleet',st:'st-cut',sl:'Exporting ~1.5 mb/d',pre:'2.1 mb/d',cur:'~1.5 mb/d to China',fill:25,note:'Iran continues exporting ~1.5 mb/d to China while blocking others (Kpler confirmed). Jask terminal (outside Strait) also active. Selective passage for Chinese, Indian, Turkish, Pakistani vessels — confirmed W2-W3. US "fine with" Iranian/Indian/Chinese ships transiting (Treasury Sec Bessent Mar 11). This selective passage is the foundation of the 2.0 mb/d base assumption in the model.'},
 ];
 
 function barCol(pct) {
