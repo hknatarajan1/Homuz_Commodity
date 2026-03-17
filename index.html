@@ -558,7 +558,7 @@ input[type=range].asmp-slider {
         <div class="asmp-label">Strait reopening week <span class="asmp-val" id="val-reopening">None in window</span></div>
         <input type="range" class="asmp-slider" id="sl-reopening" min="0" max="12" step="1" value="0"
                oninput="updateSlider('reopening',this.value)">
-        <div class="asmp-desc">Week of confirmed Strait reopening — triggers Ras Laffan restart attempt simultaneously. Auto-cascades: +7 wks mine clearance → first transits (ramp flattened to reflect storage drain + sequential restart of Iraq/Kuwait/Saudi fields) → LNG/helium flow +10 wks. Risk premium collapses on announcement. Insurance floor persists 12–18 months.</div>
+        <div class="asmp-desc">Week of confirmed Strait reopening — triggers Ras Laffan restart attempt simultaneously. Auto-cascades: +9 wks mine clearance (raised from 7 — Iran confirmed mine-laying from W2, Mar 10) → first transits → LNG/helium flow +10 wks. Risk premium collapses on announcement. Insurance floor persists 12–18 months.</div>
       </div>
 
       <div class="asmp-item">
@@ -591,6 +591,13 @@ input[type=range].asmp-slider {
         <input type="range" class="asmp-slider" id="sl-panic" min="0" max="50" step="5" value="25"
                oninput="updateSlider('panic',this.value)">
         <div class="asmp-desc">Futures markets price forward uncertainty, not just today's supply gap. When traders fear escalation — Abqaiq strike, Kharg Island hit, Houthi Red Sea attack — they buy futures contracts, bidding up the forward curve and pulling spot prices higher with it. Goldman estimated this at $18/bbl on Day 1. By W3 of a sustained closure with no resolution, forward uncertainty is higher — base $25/bbl. This premium collapses almost immediately on a credible reopening announcement, before a single extra tanker moves. Range: $0 (no uncertainty premium) → $50/bbl (imminent major infrastructure strike).</div>
+      </div>
+
+      <div class="asmp-item">
+        <div class="asmp-label">Houthi Red Sea disruption onset <span class="asmp-val" id="val-houthi">Inactive</span></div>
+        <input type="range" class="asmp-slider" id="sl-houthi" min="0" max="12" step="1" value="0"
+               oninput="updateHouthi(this.value)">
+        <div class="asmp-desc">Week Houthis resume Red Sea attacks — <strong>base case: inactive</strong> (statement of intent only as of W3, no confirmed resumption). When active, models ~60% Suez throughput reduction based on 2023-24 precedent (IMF/BIMCO: 57–65% actual; container ships 75–90%; crude tankers 32–45%): Western/Israeli-linked vessels targeted; Chinese/Asian shipping largely unaffected. TTF +€5–7/MWh (Atlantic LNG freight premium — primary impact); JKM minimal impact (Asia-Pacific pricing independent of Red Sea routing). DAP/PE/aluminium +1.5–2% freight premium. <em>Auto-zeroes on ceasefire — Iran resolution assumed to end Houthi campaign simultaneously.</em></div>
       </div>
 
       <div class="asmp-item">
@@ -638,7 +645,7 @@ input[type=range].asmp-slider {
               <strong style="color:var(--navy); display:block; margin-bottom:4px;">PHYSICAL SUPPLY</strong>
               Gross Hormuz disruption: 20 mb/d — <em>EIA: 20.9 mb/d pre-war; IEA OMR Mar 2026; Goldman 4-day average 16.2 mb/d lost flows</em><br>
               Selective passage (Iran permits): <strong>2.0 mb/d</strong> — <em>Kpler: Iran own exports 1.5 mb/d to China confirmed; Indian gas carriers + Saudi tanker for India + Pakistan tanker Mar 16 confirmed (Wikipedia, CNBC Mar 11, Reuters)</em><br>
-              Bypass pipelines: <strong>3.0 mb/d</strong> — <em>Bloomberg: Saudi Yanbu 2.3 mb/d confirmed W3; UAE ADCOP rated 1.5–1.8 mb/d but reduced by Fujairah drone strikes Mar 14+16 (Al Jazeera, CNBC Mar 17)</em><br>
+              Bypass pipelines: <strong>3.0 mb/d W1-W3 → 2.6 mb/d W4+</strong> (Omani alternative ports Duqm/Salalah attacked, Sohar in war-risk zone — Wikipedia Mar 10-11) — <em>Bloomberg: Saudi Yanbu 2.3 mb/d confirmed W3; UAE ADCOP rated 1.5–1.8 mb/d but reduced by Fujairah drone strikes Mar 14+16 (Al Jazeera, CNBC Mar 17)</em><br>
               IEA emergency release: <strong>3.0 mb/d effective</strong> W1, → zero W6 — <em>IEA OMR Mar 2026: 400 Mb coordinated release; Goldman: 254 Mb actual release modelled; SPR max drawdown 4.4 mb/d but 13-day delivery lag (EIA)</em><br>
               Non-Gulf supply offset: <strong>Base schedule</strong> — <em>Vortexa Mar 2026: Russia/Iran +1 mb/d + non-Gulf record +2 mb/d; Wood Mac: US shale +600 kb/d by month 6 only; IEA: demand -1 mb/d Mar/Apr</em><br>
               Net structural deficit at W7 (base): <strong>~3.5 mb/d</strong>
@@ -654,7 +661,7 @@ input[type=range].asmp-slider {
             </div>
             <div>
               <strong style="color:var(--navy); display:block; margin-bottom:4px;">REOPENING CASCADE</strong>
-              Mine clearance lag: <strong>+7 weeks</strong> best-case — <em>US decommissioned 4 purpose-built minesweepers Jan 2026 (The National Mar 15); 1991 Kuwait: 2+ months with 12+ allied MCM vessels in permissive conditions (House of Saud Mar 13); US Energy Sec Wright: "simply not ready" Mar 12</em><br>
+              Mine clearance lag: <strong>+9 weeks</strong> (raised from 7 — Iran confirmed active mine-laying from W2, Mar 10) — <em>US decommissioned 4 purpose-built minesweepers Jan 2026 (The National Mar 15); 1991 Kuwait: 2+ months with 12+ allied MCM vessels in permissive conditions (House of Saud Mar 13); US Energy Sec Wright: "simply not ready" Mar 12</em><br>
               First transit → ~67% volume recovery: <strong>+8 weeks</strong> — <em>Three compounding lags: (1) Insurance/confidence lag 2–4 wks (Red Sea precedent); (2) Sequential production restart — storage-forced shutdowns need 2–8 wks depending on facility (wells 1–2 wks, offshore platforms 2–4 wks, refineries 2–3 wks, LNG trains 3–5 wks); Iraq alone has 3 fields requiring sequential restart by same teams. (3) Tanker repositioning: 150+ vessels anchored need repositioning globally. Restart ramp is deliberately flat in first 4 weeks. IEA OMR Mar 2026; industry engineering norms</em><br>
               Maximum Strait recovery: <strong>75%</strong> of pre-war — <em>Lloyd's List: "10% realistic with naval escorts initially"; insurance premium and Iran's demonstrated willingness to attack vessels permanently cap full normalisation (Columbia CGEP Mar 2026)</em><br>
               Ras Laffan restart lag: <strong>+10 weeks</strong> — <em>QatarEnergy CEO Saad al-Kaabi: no restart "until conflict fully ends + 4–6 week technical restart" (QatarEnergy force majeure statement Mar 4); adds mine clearance + physical inspection to CEO's floor</em><br>
@@ -670,6 +677,120 @@ input[type=range].asmp-slider {
             <strong>Optimistic supply offset:</strong> Fast shale response + Venezuela uplift + 1.5 mb/d demand destruction; total ~2.8 mb/d by W12<br>
             <strong>Risk premium $0:</strong> Pure supply/demand price — no forward uncertainty embedded<br>
             <strong>Risk premium $50/bbl:</strong> Imminent major infrastructure strike scenario (Abqaiq threat credible, wider regional escalation)
+          </div>
+        </div>
+
+        <div class="src-block" style="grid-column: 1 / -1; border-top: 2px solid var(--rule); padding-top: 14px; margin-top: 4px;">
+          <h4 style="color:var(--navy); margin-bottom:10px;">Commodity-by-Commodity Assumptions, Scenario Sensitivity &amp; Ceasefire Recovery</h4>
+          <div style="display:grid; grid-template-columns: repeat(2,1fr); gap:12px 20px; font-size:9.5px; line-height:1.75; color:var(--dim);">
+
+            <div>
+              <strong style="color:var(--ink); display:block; margin-bottom:3px;">BRENT CRUDE</strong>
+              <em>Driver:</em> Supply/demand elasticity (−0.05 short-run) applied to net structural deficit. IEA buffer suppresses W1–W5; deficit fully exposed W6+. Futures risk premium ($25/bbl base) adds forward uncertainty above the fundamental.<br>
+              <em>Sliders:</em> Passage ↑ reduces deficit directly (each 1 mb/d ≈ −5pp). Infra ↑ caps post-reopening recovery ceiling. Supply offset ↑ reduces effective deficit. Panic ↑ adds linearly to price. Reopening triggers three-phase futures repricing (announcement dip → doubt bounce → gradual decay).<br>
+              <em>Ceasefire:</em> Announcement drops price $25–40 immediately (forward repricing). Physical recovery takes 7–15 weeks. Insurance floor keeps Brent $16–20 above pre-war for 12–18 months regardless. Physically damaged capacity (base 12%) constrains recovery ceiling.
+            </div>
+
+            <div>
+              <strong style="color:var(--ink); display:block; margin-bottom:3px;">WTI CRUDE</strong>
+              <em>Driver:</em> Derived from Brent minus a dynamic spread. Spread compresses at W3 (US export surge to Atlantic basin) then partially re-widens as Brent seaborne scarcity premium asserts. Peak spread ~$5.8 (W7) vs pre-war ~$3.5. National pump tracks WTI via 25-cent rule.<br>
+              <em>Sliders:</em> All Brent sliders flow through. Spread independently affected by US export terminal bottleneck — at extreme Brent levels, US crude becomes globally competitive, tightening spread further.<br>
+              <em>Ceasefire:</em> WTI recovers faster than Brent on reopening announcement (less exposed to Hormuz seaborne insurance premium). Spread narrows toward pre-war levels as Gulf tankers resume.
+            </div>
+
+            <div>
+              <strong style="color:var(--ink); display:block; margin-bottom:3px;">LNG (JKM — ASIA SPOT)</strong>
+              <em>Driver:</em> Qatar (30–33% global supply) physically offline — drone strike on Ras Laffan, not an export restriction. JKM independent of oil price. Supply constraint is absolute: no LNG bypass exists. Australian/US LNG fully contracted; only marginal spot available. Coal switching (~$45–50/MMBtu) provides ceiling. Summer heat demand (Japan/Korea A/C, W9–W12) adds second demand wave.<br>
+              <em>Sliders:</em> Reopening triggers Ras Laffan restart only after ceasefire + mine clearance + physical inspection + 4–6 week technical restart (+10 weeks total). Houthi Red Sea disruption: minimal direct JKM impact (LNG carriers already rerouting; Atlantic LNG rarely reached JKM market). JKM remains elevated through model window regardless of oil price trajectory.<br>
+              <em>Ceasefire:</em> JKM does NOT fall on ceasefire announcement — Ras Laffan physical restart takes 10+ weeks after any ceasefire. No other source can substitute at scale. JKM only begins declining when Qatari trains physically restart (outside 12-week window for late ceasefires).
+            </div>
+
+            <div>
+              <strong style="color:var(--ink); display:block; margin-bottom:3px;">EU GAS (TTF)</strong>
+              <em>Driver:</em> 0.72× of JKM (pipeline alternatives from Norway, Algeria, US Atlantic LNG dampen amplitude). Storage injection premium W4–W8: EU at 36% capacity must refill to 90% by Nov 1 — must bid competitively against Asia for scarce cargoes during injection season. European gas demand softens in spring/summer, but injection imperative offsets this.<br>
+              <em>Sliders:</em> Houthi Red Sea disruption adds +€5–7/MWh via Atlantic LNG freight premium (US/Nigerian LNG to Europe must reroute Cape — adds 10+ days, $1.5/MMBtu cost). This is the primary commodity where Houthi disruption bites: Europe depends on Atlantic LNG substitution, which becomes more expensive. Reopening restores Qatar LNG after 10-week lag.<br>
+              <em>Ceasefire:</em> TTF falls moderately on announcement (pipeline supply continues, partial relief from reduced panic). Full recovery requires Qatar restart. Storage injection deficit from summer 2026 persists into winter — prices remain structurally elevated even after Ras Laffan restarts.
+            </div>
+
+            <div>
+              <strong style="color:var(--ink); display:block; margin-bottom:3px;">HELIUM</strong>
+              <em>Driver:</em> Co-produced exclusively at Ras Laffan (Qatar = 30–33% global supply). US supplies 42% independently (BLM Federal Helium Reserve, private). No bypass or substitution possible for the Qatar portion. Kornbluth: "+70–100% in week 1" confirmed. Helium Shortage 5.0 declared (Gasworld Mar 2026).<br>
+              <em>Sliders:</em> Reopening triggers helium restart +12 weeks (2-week additional lag vs LNG for helium-specific train restart). Infrastructure damage: if Ras Laffan trains are physically destroyed, helium supply may not return within the model window. Houthi: no additional impact (helium not seaborne in bulk).<br>
+              <em>Ceasefire:</em> No immediate price relief — physical restart lag is the binding constraint. Prices remain elevated until Ras Laffan helium trains restart (+12 weeks post-ceasefire minimum). Medical/semiconductor/MRI sectors face extended supply disruption regardless of political resolution.
+            </div>
+
+            <div>
+              <strong style="color:var(--ink); display:block; margin-bottom:3px;">ALUMINIUM (LME)</strong>
+              <em>Driver:</em> 0.45× of oil pct. Gulf smelters (UAE, Bahrain, Saudi Arabia) = 8–9% of global capacity. Energy cost channel dominant: aluminium is energy-intensive; at $140+ crude, smelter economics deteriorate globally. China and India smelters (largely domestic coal-powered) are insulated and provide partial offset. IAI data confirms Gulf exposure.<br>
+              <em>Sliders:</em> Infrastructure damage: Ruwais refinery offline reduces UAE smelter energy supply. Houthi: +0.8–1.2pp (Gulf aluminium exports to Europe reroute via Cape). Supply offset (pessimistic/optimistic): minimal aluminium-specific effect — this is energy cost driven, not supply disruption directly.<br>
+              <em>Ceasefire:</em> Partially oil-linked recovery. Energy costs fall as Brent declines. Gulf smelter restart conditional on power supply restoration (Ruwais damage relevant). LME price normalises over 4–8 weeks post-ceasefire as energy cost channel unwinds.
+            </div>
+
+            <div>
+              <strong style="color:var(--ink); display:block; margin-bottom:3px;">UREA (NOLA)</strong>
+              <em>Driver:</em> 0.58× of oil pct, capped at <strong>+65%</strong> (raised from +55%). Gulf = 43-49% of globally traded urea exports. NOLA tracks global market even though US is 75% self-sufficient for consumption — US producers benefit from shortage (CF Industries +15% in 10 days). No strategic fertiliser reserve (unlike oil's IEA 400 Mb — G7 hold none). Farmers order in March for April/May application — no seasonal buffer.<br>
+              <em>Offset supply collapse (key change):</em> Unlike 2022 when Russian fertilisers were rerouted, "limited alternative routes" with closed Strait (NDSU Mar 2026). Russia has export quotas; China export ban until Aug 2026; Egypt lost Israeli gas; Europe running at 75% capacity (NDSU); Poland's Grupa Azoty stopped orders; Slovakia's Duslo at minimum.<br>
+              <em>Sliders:</em> China toggle caps ceiling by ~22%. Non-Gulf offset (optimistic): minimal direct urea effect. Houthi: low exposure (US domestic, Trinidad, Baltic).<br>
+              <em>Ceasefire:</em> Gulf producers restart within 2–5 weeks. Prices decline toward pre-war within 4–6 weeks as Middle Eastern production resumes. But planting season damage is already locked in if W4-W8 prices stay elevated.
+            </div>
+
+            <div>
+              <strong style="color:var(--ink); display:block; margin-bottom:3px;">AMMONIA</strong>
+              <em>Driver:</em> 0.52× of oil pct, capped at +48%. US ~94% domestically produced — largely insulated from direct Hormuz disruption. Price impact primarily from natural gas feedstock cost (LNG/TTF transmission) and Gulf production offline (Fitch: ammonia "not to same extent as urea"). Trinidad, Algeria, Russia substitute.<br>
+              <em>Sliders:</em> Panic premium: minimal direct transmission. Infrastructure damage: some Gulf ammonia export terminals affected. Houthi: minimal (US domestic dominance; non-Gulf routes unaffected).<br>
+              <em>Ceasefire:</em> Fastest recovery of all fertilisers — US domestic production dominant. Gulf ammonia facilities restart within weeks. Price normalises within 3–5 weeks of ceasefire.
+            </div>
+
+            <div>
+              <strong style="color:var(--ink); display:block; margin-bottom:3px;">DAP PHOSPHATE</strong>
+              <em>Driver:</em> Two independent shocks compound: (1) 0.70× of oil pct — energy cost + Gulf DAP production blocked; (2) <strong>Sulfur cascade: +8pp additive</strong> from W4 — Gulf = 44% seaborne sulfur, which is essential feedstock for ALL phosphate fertiliser production globally (DAP, MAP, TSP, phosphoric acid). Phosphate producers in Morocco, China, Indonesia face their own supply crunch regardless of oil prices. Cap raised to <strong>+78%</strong> (was +68%) — approaching 2022 record (~$1,200/t). Mosaic: analysts estimate $250M EBITDA hit from sulfur shortage alone (FinancialContent Mar 17). India = 28.7% global DAP imports; Saudi Arabia 24% + Morocco 22% both constrained.<br>
+              <em>Sliders:</em> China fertiliser toggle: critical — Chinese export curbs already in baseline. Houthi: most affected fertiliser (+1.5-2pp), Saudi DAP to Brazil/India via Red Sea. Infrastructure damage: Saudi phosphate export terminals exposed.<br>
+              <em>Ceasefire:</em> Multi-week recovery lag — sulfur supply chain normalisation required. Saudi export resumption 2–4 weeks. China toggle independent of Hormuz ceasefire. Prices remain above pre-war 6–8 weeks post-ceasefire.
+            </div>
+
+            <div>
+              <strong style="color:var(--ink); display:block; margin-bottom:3px;">SULFUR</strong>
+              <em>Driver:</em> 0.65× of oil pct. Gulf = 44% of seaborne sulfur supply (byproduct of oil refining). However, non-Gulf refineries running harder produce more sulfur as byproduct, partially offsetting. Demand constrained by phosphate sector slowdown. Complex two-sided market.<br>
+              <em>Sliders:</em> Infrastructure damage: Ras Tanura offline reduces Saudi sulfur byproduct. Non-Gulf supply offset (optimistic): more non-Gulf refinery throughput = more sulfur byproduct offsetting Gulf loss. Houthi: moderate (Red Sea sulfur shipments affected).<br>
+              <em>Ceasefire:</em> Gulf refinery restarts (2–8 weeks depending on damage) restore sulfur byproduct supply. Faster recovery than primary commodities. Price normalises 3–6 weeks post-ceasefire.
+            </div>
+
+            <div>
+              <strong style="color:var(--ink); display:block; margin-bottom:3px;">POLYETHYLENE (PE)</strong>
+              <em>Driver:</em> 0.52× of oil pct. Middle East = 15% of global PE production — significant but not dominant. US (shale ethane-based) and China (coal-to-chemicals) produce majority domestically, insulated from Hormuz. Feedstock cost channel (naphtha/ethane) drives price rather than direct supply disruption.<br>
+              <em>Sliders:</em> Houthi Red Sea disruption: +0.9pp (Gulf PE exports to Europe reroute via Cape, +$15–25/tonne freight). Infrastructure damage: UAE/Saudi petrochemical plants partially affected. Non-Gulf supply offset: limited direct transmission to PE.<br>
+              <em>Ceasefire:</em> Oil-linked recovery — PE prices decline broadly in line with crude within 2–4 weeks. Gulf PE production restarts conditional on feedstock availability (natural gas from Shah field etc.). Full normalisation 4–6 weeks post-ceasefire.
+            </div>
+
+            <div>
+              <strong style="color:var(--ink); display:block; margin-bottom:3px;">JET FUEL &amp; DIESEL</strong>
+              <em>Driver:</em> 1.38× / 1.30× of oil pct respectively. Crack spread amplification: ~4 mb/d Gulf refining offline means product shortage independent of crude. NW Europe jet fuel confirmed $218/bbl at $100 crude (W2) — crack spreads blow out further at $140+ crude. No spare global refining capacity to substitute Gulf refined products. Diesel gains faster than gasoline due to industrial/freight exposure.<br>
+              <em>Sliders:</em> Infrastructure damage directly relevant — Ruwais (817 kb/d) and Ras Tanura (550 kb/d) offline are physical refinery damage (not storage-forced). Panic premium flows through fully. Non-Gulf supply offset has limited direct effect on crack spreads (crude availability ≠ refinery throughput).<br>
+              <em>Ceasefire:</em> Crack spreads normalise within 3–5 weeks as Gulf refineries restart. Physical damage at Ruwais/Ras Tanura constrains full recovery (months to repair). Jet and diesel prices trail crude downward by 1–2 weeks due to refinery lag.
+            </div>
+
+            <div>
+              <strong style="color:var(--ink); display:block; margin-bottom:3px;">US PUMP PRICE</strong>
+              <em>Driver:</em> 0.574× of Brent pct (EIA/St Louis Fed 25-cent rule: $10/bbl crude = +$0.25/gal pump). Tracks Brent not WTI at national average level (Gulf Coast refiners pay Brent-linked prices — UT Austin/CBS News confirmed). Summer blend switchover adds $0.10–0.20/gal flat premium W4–W8 independent of crude (GasBuddy Mar 16 2026). W10–12 flattened to 0.55× — rockets-and-feathers asymmetry (retail prices sticky coming down).<br>
+              <em>Sliders:</em> All oil sliders flow through at 0.574× factor. Reopening: pump prices lag crude on announcement (no immediate retail response); follow crude down over 2–3 weeks. Houthi: no direct impact (US domestic supply insulated; Atlantic basin).<br>
+              <em>Ceasefire:</em> US pump prices are the slowest commodity to normalise. Retail lags crude decline by 1–2 weeks (rockets and feathers). Summer blend premium persists through W8–W9 regardless of crude trajectory. Full normalisation 4–6 weeks after crude stabilises.
+            </div>
+
+            <div>
+              <strong style="color:var(--ink); display:block; margin-bottom:3px;">WHEAT &amp; CORN (CBOT)</strong>
+              <em>Driver:</em> 60-day input cost lag — energy costs (diesel, fertiliser, natural gas) pass through to grain production costs with a delay. Wolfe Research: food-at-home inflation +2pp. Crop switching risk (corn→soy as fertiliser costs spike). Ethanol demand surge as gasoline prices rise. Wheat: Middle East/North Africa food security concerns add geopolitical premium.<br>
+              <em>Sliders:</em> Fertiliser (DAP/urea) impact flows through at 60-day lag. Non-Gulf supply offset (pessimistic): less demand destruction means grain demand holds higher. China toggle: Chinese fertiliser exports matter for global crop production costs, feeding back to CBOT prices 8–12 weeks later. Houthi: moderate (Black Sea/Atlantic grain routes less affected; Red Sea grain from MENA).<br>
+              <em>Ceasefire:</em> Slowest normalisation of all commodities — input cost lag means grain prices reflect energy/fertiliser costs from 8 weeks prior. Full normalisation 10–12 weeks post-ceasefire as fertiliser and energy costs unwind through the agricultural supply chain.
+            </div>
+
+            <div>
+              <strong style="color:var(--ink); display:block; margin-bottom:3px;">HOUTHI RED SEA DISRUPTION — CORRECTED ASSUMPTIONS</strong>
+              <em>Historical calibration (2023-24):</em> IMF/BIMCO data shows 57–65% overall Suez throughput reduction (not 40% as previously stated). Container shipping fell 75–90%. Crude tankers: 32–45% lower. Product tankers: 19% lower (operators took more risk for higher premiums). LNG carriers: not primarily Red Sea users (Qatar LNG goes east; Atlantic LNG rarely uses Suez at scale).<br>
+              <em>Current model (partial = 2023-24 precedent):</em> ~60% overall Suez reduction. Primary impact on TTF (+€5–7/MWh) via Atlantic LNG freight premium to Europe. JKM impact minimal — Asia-Pacific LNG priced on Pacific supply/demand, not Atlantic routing. DAP/PE/aluminium +1.5–2pp from Gulf export rerouting. Container goods and bulk carriers (wheat, corn) bear larger freight impact but these are not in this model.<br>
+              <em>Stickiness:</em> Operators are extremely slow to return even after attacks cease. BIMCO Jan 2026: Suez still 60% below 2023 levels 100 days after last Houthi attack. Red Sea disruption effects likely persist 4–8 weeks after any stand-down.<br>
+              <em>Ceasefire linkage:</em> Iran ceasefire → Houthi stand-down assumed (Houthis act as Iranian proxy; primary conflict resolution removes their operational justification and Iranian material support). Auto-zeroed in model on reopening. Note: even after stand-down, shipping companies require 4–6 weeks of confirmed calm before resuming Red Sea transits.
+            </div>
+
           </div>
         </div>
 
@@ -717,7 +838,7 @@ input[type=range].asmp-slider {
               <strong style="color:var(--navy); display:block; margin-bottom:4px;">PHYSICAL SUPPLY</strong>
               Gross Hormuz disruption: 20 mb/d — <em>EIA: 20.9 mb/d pre-war; IEA OMR Mar 2026; Goldman 4-day average 16.2 mb/d lost flows</em><br>
               Selective passage (Iran permits): <strong>2.0 mb/d</strong> — <em>Kpler: Iran own exports 1.5 mb/d to China confirmed; Indian gas carriers + Saudi tanker for India + Pakistan tanker Mar 16 confirmed (Wikipedia, CNBC Mar 11, Reuters)</em><br>
-              Bypass pipelines: <strong>3.0 mb/d</strong> — <em>Bloomberg: Saudi Yanbu 2.3 mb/d confirmed W3; UAE ADCOP rated 1.5–1.8 mb/d but reduced by Fujairah drone strikes Mar 14+16 (Al Jazeera, CNBC Mar 17)</em><br>
+              Bypass pipelines: <strong>3.0 mb/d W1-W3 → 2.6 mb/d W4+</strong> (Omani alternative ports Duqm/Salalah attacked, Sohar in war-risk zone — Wikipedia Mar 10-11) — <em>Bloomberg: Saudi Yanbu 2.3 mb/d confirmed W3; UAE ADCOP rated 1.5–1.8 mb/d but reduced by Fujairah drone strikes Mar 14+16 (Al Jazeera, CNBC Mar 17)</em><br>
               IEA emergency release: <strong>3.0 mb/d effective</strong> W1, → zero W6 — <em>IEA OMR Mar 2026: 400 Mb coordinated release; Goldman: 254 Mb actual release modelled; SPR max drawdown 4.4 mb/d but 13-day delivery lag (EIA)</em><br>
               Non-Gulf supply offset: <strong>Base schedule</strong> — <em>Vortexa Mar 2026: Russia/Iran +1 mb/d + non-Gulf record +2 mb/d; Wood Mac: US shale +600 kb/d by month 6 only; IEA: demand -1 mb/d Mar/Apr</em><br>
               Net structural deficit at W7 (base): <strong>~3.5 mb/d</strong>
@@ -733,7 +854,7 @@ input[type=range].asmp-slider {
             </div>
             <div>
               <strong style="color:var(--navy); display:block; margin-bottom:4px;">REOPENING CASCADE</strong>
-              Mine clearance lag: <strong>+7 weeks</strong> best-case — <em>US decommissioned 4 purpose-built minesweepers Jan 2026 (The National Mar 15); 1991 Kuwait: 2+ months with 12+ allied MCM vessels in permissive conditions (House of Saud Mar 13); US Energy Sec Wright: "simply not ready" Mar 12</em><br>
+              Mine clearance lag: <strong>+9 weeks</strong> (raised from 7 — Iran confirmed active mine-laying from W2, Mar 10) — <em>US decommissioned 4 purpose-built minesweepers Jan 2026 (The National Mar 15); 1991 Kuwait: 2+ months with 12+ allied MCM vessels in permissive conditions (House of Saud Mar 13); US Energy Sec Wright: "simply not ready" Mar 12</em><br>
               First transit → ~67% volume recovery: <strong>+8 weeks</strong> — <em>Three compounding lags: (1) Insurance/confidence lag 2–4 wks (Red Sea precedent); (2) Sequential production restart — storage-forced shutdowns need 2–8 wks depending on facility (wells 1–2 wks, offshore platforms 2–4 wks, refineries 2–3 wks, LNG trains 3–5 wks); Iraq alone has 3 fields requiring sequential restart by same teams. (3) Tanker repositioning: 150+ vessels anchored need repositioning globally. Restart ramp is deliberately flat in first 4 weeks. IEA OMR Mar 2026; industry engineering norms</em><br>
               Maximum Strait recovery: <strong>75%</strong> of pre-war — <em>Lloyd's List: "10% realistic with naval escorts initially"; insurance premium and Iran's demonstrated willingness to attack vessels permanently cap full normalisation (Columbia CGEP Mar 2026)</em><br>
               Ras Laffan restart lag: <strong>+10 weeks</strong> — <em>QatarEnergy CEO Saad al-Kaabi: no restart "until conflict fully ends + 4–6 week technical restart" (QatarEnergy force majeure statement Mar 4); adds mine clearance + physical inspection to CEO's floor</em><br>
@@ -855,6 +976,7 @@ const CATEGORIES = [
       },
     ],
   },
+
   {
     id: 'gas', icon: '', name: 'LNG', open: true,
     desc: 'Qatar offline at source — no bypass possible for LNG tankers',
@@ -871,168 +993,37 @@ const CATEGORIES = [
           'Industrial rationing begins in Asia; coal switching accelerates',
           'Asian power cuts; Australian/US LNG fully contracted, limited spot',
           'Emergency measures activated; LNG-to-power substitution maxed out',
-          'Force majeure cascades to downstream buyers in Asia',
-          'Peak — buyers paying any price for spot cargo; coal the only escape',
-          'Demand destruction from fuel switching limits further rises',
-          'Plateau — Qatar offline until Ras Laffan restarts; no quick fix',
-          'Structural shortage; Australia/US at full capacity, no spot relief',
-          'New LNG baseline until Ras Laffan physically restarts',
+          'Force majeure cascades to downstream buyers in Asia; coal ceiling forming',
+          'Peak supply shock — coal switching price (~$45-50/MMBtu) caps further upside',
+          'Asian summer heat demand adds second wave — Japan/Korea A/C surge (June)',
+          'Peak summer demand overlap with supply shortage — JKM stays elevated (July)',
+          'Summer heat demand beginning to ease; structural supply gap remains',
+          'Post-summer softening but still structurally elevated; Ras Laffan offline',
         ],
       },
       {
         name: 'EU Gas — TTF',
         key: 'ttf', unit: '€/MWh', baseline: 38, fmt: '€',
-        actuals: [55, 65, 72, null, null, null, null, null, null, null, null, null],
+        actuals: [60, 65, 72, null, null, null, null, null, null, null, null, null],
         pcts:    [45, 71, 89, 118, 145, 168, 189, 197, 189, 176, 166, 158],
         notes: [
           'TTF surges on Qatar news; pipeline alternatives limit Europe vs Asia',
           'Goldman warns doubling risk; Europe 12-14% Qatar-exposed (Wikipedia)',
-          'Near pre-war double; Norway/Algeria pipeline gas continues',
-          'Industrial rationing spreading; EU gets less Qatar LNG than Asia',
-          'Emergency measures activated; coal/nuclear restart underway',
-          'Storage draw-down rate accelerates; pipeline gas partly offsets',
-          'Major industrial curtailment; Europe more insulated than Asia',
-          'Peak — heating season amplifies; pipeline alternatives cap ceiling',
-          'Demand slightly reduced; efficiency mandates take effect',
-          'Plateau — structural Qatar shortage but pipeline alternatives help',
-          'Sustained high; EU exposed less than Asia but still significantly',
-          'New European energy cost baseline; recovery tied to Qatar restart',
+          'Near pre-war double; Norway/Algeria pipeline gas continues — confirmed €72',
+          'Storage injection season begins — EU at 36% full, needs 90% by Nov 1 (Kpler)',
+          'Injection premium peaks — Europe bidding hard against Asia for scarce cargoes',
+          'EU paying maximum injection premium; Qatar offline precisely during fill season',
+          'Injection season at full intensity; pipeline gas cannot bridge the Qatar gap',
+          'Injection premium easing as summer injection season passes peak',
+          'Injection season winding down; demand softens but structural deficit remains',
+          'Post-injection season; pipeline alternatives partly offset Qatar exposure',
+          'Sustained elevated; EU exposed less than Asia but Qatar gap is structural',
+          'New European energy cost baseline; storage injection deficit carries into winter',
         ],
       },
     ],
   },
-  {
-    id: 'industrial', icon: '', name: 'Industrial Gases + Metals', open: false,
-    desc: 'Helium offline at source; aluminium smelting under energy pressure',
-    rows: [
-      {
-        name: 'Helium Spot',
-        key: 'helium', unit: '$/Mcf', baseline: 400, fmt: '$',
-        actuals: [680, 760, 800, null, null, null, null, null, null, null, null, null],
-        pcts:    [70, 90, 100, 138, 175, 213, 250, 288, 313, 325, 330, 333],
-        notes: [
-          'Kornbluth (30-yr veteran): "+70-100% in a week" — confirmed',
-          'Spot "roughly doubled"; Ras Laffan co-produces helium with LNG',
-          'Confirmed ~+100%; "Helium Shortage 5.0" declared — Gasworld Mar 2026',
-          'Qatar = 30-33% global supply; US 42% independent — partially buffers',
-          'Semiconductor fabs and MRI supply chains drawing down stockpiles',
-          'Container bottleneck critical; ~1/3 of cryogenic ISO containers stranded',
-          'US/Russia production absorbing some demand; recycling increases',
-          'Peak — S. Korea gets 65% from Qatar; chip fabs on allocation',
-          'Recycling efficiency improving; Exiger: repositioning takes 3 months',
-          'US ramp accelerating; recovery slow due to container logistics',
-          'Structural shortage persists; new Canadian/Rockies projects years away',
-          'New price floor — structural tightness even after Qatar restarts',
-        ],
-      },
-      {
-        name: 'Aluminium',
-        key: 'alum', unit: '$/tonne', baseline: 2400, fmt: '$k',
-        actuals: [2650, 2860, 2950, null, null, null, null, null, null, null, null, null],
-        pcts:    [10, 19, 23, 36, 50, 62, 72, 80, 82, 80, 77, 74],
-        notes: [
-          'LME hits 4-yr high; Alba Bahrain, Qatalum cutting output — confirmed',
-          'LME ~$3,385 (+23% confirmed); Alba declares force majeure (Bloomberg)',
-          'Qatalum at 60% capacity (Fastmarkets); confirmed W3 +23%',
-          'Goldman base: $3,150/t H1; ING bull: $4,000/t — bracketing our projection',
-          'Raw material (alumina) imports also blocked; dual-supply shock',
-          'Julius Baer: "$3,700 if prolonged"; China/India production unaffected',
-          'Logistical disruption dominates; 8-9% global production from Gulf (IAI)',
-          'Peak — between Goldman base and ING bull case; premiums surge',
-          'Demand destruction as manufacturers cut output at these prices',
-          'Recovery faster than oil on reopening — mainly logistical disruption',
-          'China/India production continuing; structural gap narrows',
-          'New level — reflects permanent logistics risk premium for Gulf metal',
-        ],
-      },
-    ],
-  },
-  {
-    id: 'fert', icon: '', name: 'Fertilisers', open: false,
-    desc: 'LNG feedstock also blocked; spring planting decisions being made NOW',
-    rows: [
-      {
-        name: 'Urea (NOLA)',
-        key: 'urea', unit: '$/tonne', baseline: 475, fmt: '$',
-        actuals: [505, 556, 591, null, null, null, null, null, null, null, null, null],
-        pcts:    [6, 17, 24, 46, 64, 80, 96, 105, 105, 103, 100, 97],
-        notes: [
-          'CSIS: $516→$683 (+32%) in one week W1 — early and sharp',
-          'The National/Fitch: $591 (+25%) confirmed; "most important rise" — W2',
-          'Confirmed $591 (+25%) W3; Oxford Economics: +20% Q2 forecast',
-          'Spring planting window — worst timing; Gulf = 43-49% global exports (AFBF)',
-          'Egypt/Trinidad/Canada/Russia partially substitute — caps ceiling vs oil',
-          'Alt producers also face high gas costs; US 75% domestic (Carnegie) helps',
-          'Harvest shortfall locked in regardless of resolution; application rates cut',
-          'Near peak — trade blockade not production destruction; substitution occurring',
-          'Harvest outcome baked in; US insulation limits global price ceiling',
-          'Sustained — alt supply still expensive; Brazil (90%+ import-dependent) exposed',
-          'Structural gap until Gulf trade normalises; not a production collapse',
-          'New price reality — reflects embedded risk premium for Gulf fertiliser trade',
-        ],
-      },
-      {
-        name: 'Ammonia',
-        key: 'ammonia', unit: '$/tonne', baseline: 350, fmt: '$',
-        actuals: [367, 392, 420, null, null, null, null, null, null, null, null, null],
-        pcts:    [5, 12, 20, 38, 55, 70, 84, 98, 100, 98, 94, 91],
-        notes: [
-          'Lagging urea; India and Bangladesh most exposed — Fitch Mar 2026',
-          'Fitch: "not to same extent as urea"; US ~94% domestic (Carnegie)',
-          'Bangladesh/Pakistan fertiliser emergency; W3 $420 confirmed',
-          'Gulf = 30% global ammonia exports (AFBF); US domestic insulates',
-          'Gulf gas feedstock (LNG/natural gas) fully cut off for local producers',
-          'Global gas prices elevated; alternative production at full capacity',
-          'Agricultural season locked in at high cost; ammonia < urea exposure',
-          'Near peak — US domestic production limits global price ceiling',
-          'Food shock consequences now baked in; US/Trinidad/Algeria partially offset',
-          'Plateau; demand adjusts; US production ramping further',
-          'Structural gap narrows as non-Gulf production at record levels',
-          'New level until Gulf gas feedstock availability normalises',
-        ],
-      },
-      {
-        name: 'DAP Phosphate',
-        key: 'dap', unit: '$/tonne', baseline: 580, fmt: '$',
-        actuals: [605, 636, 660, null, null, null, null, null, null, null, null, null],
-        pcts:    [4, 10, 14, 27, 40, 54, 65, 76, 82, 81, 78, 75],
-        notes: [
-          'Saudi phosphate exports blocked; China export curbs pre-existing',
-          'Saudi + China compound: two key suppliers simultaneously disrupted',
-          'Both key supply sources hit; W3 $645-660 confirmed (UkrAgroConsult Mar 12)',
-          'Sulfur cascade adds pressure independently — 44% seaborne sulfur from Gulf',
-          'Structural gap — 2022 Ukraine precedent: ~$1,000/t peak from $300 base',
-          'Record territory; application rates cut globally; China curbs continue',
-          'Harvest locked in at reduced input levels — yield impacts baked in',
-          'Near 2022 record — sulfur + phosphate + trade blockade triple impact',
-          'Peak disruption; some demand destruction as farmers skip application',
-          'Plateau as market adjusts; Morocco/Jordan phosphate partially substitute',
-          'Demand adjusts; China export curb reversal (slider) would cap ceiling',
-          'New baseline until Gulf phosphate trade and sulfur supply normalises',
-        ],
-      },
-      {
-        name: 'Sulfur',
-        key: 'sulfur', unit: '$/tonne', baseline: 120, fmt: '$',
-        actuals: [130, 143, 155, null, null, null, null, null, null, null, null, null],
-        pcts:    [8, 19, 29, 54, 75, 95, 112, 124, 130, 128, 124, 120],
-        notes: [
-          'Gulf = 44% seaborne sulfur supply (FinancialContent Mar 17) — confirmed',
-          'NDSU warns "sulfur cascade" through fertilisers — refinery shutdowns hit supply',
-          'Refinery shutdowns cutting sulfur byproduct; W3 $155 confirmed (+29%)',
-          'Phosphate production chain hit; non-Gulf refineries running harder offsets some',
-          'Global phosphate production cascade; demand destruction cap from sector',
-          'Non-Gulf refiners running at record rates increase byproduct sulfur supply',
-          'Agricultural emergency — phosphate sector cutting production, reducing demand',
-          'Peak — supply disruption partially offset by non-Gulf refinery byproduct',
-          'Structural gap narrows as non-Gulf refineries maximise sulfur recovery',
-          'Plateau — demand adjusted down from phosphate production cuts',
-          'Recovery in non-Gulf supply; Gulf refinery restart adds supply',
-          'New level reflecting structural Gulf supply gap and logistics premium',
-        ],
-      },
-    ],
-  },
+
   {
     id: 'petrochem', icon: '', name: 'Petrochemicals + Refined Products', open: false,
     desc: '85% of ME polyethylene via Hormuz; jet fuel distillate crisis confirmed',
@@ -1055,6 +1046,26 @@ const CATEGORIES = [
           'Structural gap plateauing; non-Gulf capacity limits further rises',
           'Demand substitution emerging as prices cap; Gulf restart would sharply reduce prices',
           'New supply level reflecting permanent ME logistics risk premium',
+        ],
+      },
+      {
+        name: 'LPG / Propane',
+        key: 'lpg', unit: '$/tonne', baseline: 540, fmt: '$',
+        actuals: [583, 637, 691, null, null, null, null, null, null, null, null, null],
+        pcts:    [8, 18, 28, 52, 68, 80, 80, 80, 78, 74, 70, 66],
+        notes: [
+          'Gulf LPG exports ~1.5 mb/d disrupted from Day 1 (IEA OMR Mar 2026)',
+          'India cooking fuel crisis acute — LPG essential for hundreds of millions (CBS News)',
+          'W3 confirmed ~+28%; SE Asia (Philippines, Thailand, Malaysia) 60-95% import-dependent',
+          'US shale NGL production (propane) only partial substitute — mainly domestic market',
+          'India: "acute crisis" (McNally, CBS News) — LPG for cooking with no short-term alternative',
+          'Cap at +80%: US domestic shale NGL provides ceiling; LPG tankers more available than LNG',
+          'SE Asia emergency measures — schools closed, work-from-home in Vietnam, Indonesia',
+          'Peak — Gulf LPG to Asia is irreplaceable at scale within 12 weeks',
+          'Some EM demand destruction as unaffordable; shifts to firewood/coal in rural areas',
+          'Structural shortage in import-dependent EM markets; US exports constrained by terminal capacity',
+          'Recovery requires Gulf shipping resumption; US cannot fill the gap at this scale',
+          'New price floor — EM cooking fuel inflation persists; accelerates LPG infrastructure diversification',
         ],
       },
       {
@@ -1101,6 +1112,7 @@ const CATEGORIES = [
       },
     ],
   },
+
   {
     id: 'pump', icon: '', name: 'Consumer Fuel Prices', open: true,
     desc: 'Retail pump prices — reflecting crude, refinery crack spreads, insurance and Cape rerouting costs',
@@ -1127,6 +1139,141 @@ const CATEGORIES = [
       },
     ],
   },
+
+  {
+    id: 'industrial', icon: '', name: 'Industrial Gases + Metals', open: false,
+    desc: 'Helium offline at source; aluminium smelting under energy pressure',
+    rows: [
+      {
+        name: 'Helium Spot',
+        key: 'helium', unit: '$/Mcf', baseline: 400, fmt: '$',
+        actuals: [680, 760, 800, null, null, null, null, null, null, null, null, null],
+        pcts:    [70, 90, 100, 138, 175, 213, 250, 288, 313, 325, 330, 333],
+        notes: [
+          'Kornbluth (30-yr veteran): "+70-100% in a week" — confirmed (Gasworld Mar 4)',
+          'Spot roughly doubled; Ras Laffan co-produces helium with LNG — both offline',
+          'Confirmed ~+100%; "Helium Shortage 5.0" declared — Gasworld Mar 2026',
+          'Qatar = ~40% of TRADED helium supply (German Mineral Resources Agency); inventory buffers still cushioning',
+          'Semiconductor fabs drawing down stockpiles; South Korea 65% Qatar-dependent (Tom\'s Hardware)',
+          'ISO container bottleneck critical: 1/3 of global cryogenic containers stranded or en route to Qatar',
+          'US/Russia absorbing some demand; recycling ramps; Kornbluth: "+2 months logistics on top of restart"',
+          'Peak — S. Korea/Taiwan chip fabs on allocation; MRI supply chains under pressure',
+          'Warnings of $2,000+/Mcf if facilities physically damaged (C&EN; Middle East Forum)',
+          'Container repositioning (3+ months) is binding constraint even after ceasefire',
+          'US Rockies/Canada new projects accelerating but 2+ years to meaningful output',
+          'Structural shortage persists; new helium baseline even after Ras Laffan restarts',
+        ],
+      },
+      {
+        name: 'Aluminium',
+        key: 'alum', unit: '$/tonne', baseline: 2400, fmt: '$k',
+        actuals: [2650, 2860, 2950, null, null, null, null, null, null, null, null, null],
+        pcts:    [10, 19, 23, 36, 50, 62, 72, 80, 82, 80, 77, 74],
+        notes: [
+          'LME hits 4-yr high; Alba Bahrain and Qatalum cutting output — confirmed',
+          'LME $3,269-$3,377 range (Argus/Balaji Mar 12-16); Alba force majeure confirmed',
+          'Qatalum at 60% capacity due to gas cuts (Fastmarkets Mar 11); confirmed W3 +23%',
+          'Alumina import clock ticking: ~3-4 weeks raw material on site (Julius Baer/The National)',
+          'DUAL CONSTRAINT bites: export blocked AND alumina imports cut — production curtailments begin',
+          'Julius Baer: "$3,700 if prolonged"; Argus: $4,000 bull case — model within range',
+          'Gulf = 23% of non-China supply (Fastmarkets); physical premiums blow out (+40% MJP)',
+          'Peak — Goldman base $3,150, bull $3,700-$4,000; our 0.50× oil gives $3,630',
+          'Demand destruction as manufacturers cut runs at these levels',
+          'Ceasefire: aluminium recovers faster than oil (mainly logistical); China/India unaffected',
+          'Gulf smelter restart: 2-4 weeks recommissioning; alumina imports resume',
+          'New logistics risk premium embedded permanently; Gulf smelters diversify feedstock',
+        ],
+      },
+    ],
+  },
+
+  {
+    id: 'fert', icon: '', name: 'Fertilisers', open: false,
+    desc: 'LNG feedstock also blocked; spring planting decisions being made NOW',
+    rows: [
+      {
+        name: 'Urea (NOLA)',
+        key: 'urea', unit: '$/tonne', baseline: 475, fmt: '$',
+        actuals: [505, 556, 591, null, null, null, null, null, null, null, null, null],
+        pcts:    [6, 17, 24, 46, 64, 80, 96, 105, 105, 103, 100, 97],
+        notes: [
+          'CSIS: $516→$683 (+32%) in one week W1 — early and sharp move',
+          'The National/Fitch: $591 (+25%) confirmed; "most important rise" — W2',
+          'Confirmed $591 (+25%) W3; Oxford Economics: +20% Q2, upside risks',
+          'Spring planting window — farmers order NOW for Apr/May; NO strategic reserve',
+          'Offset supply weak: Russia has export quotas; China ban to Aug 2026; Egypt gas-constrained',
+          'European N producers at 75% capacity (NDSU); Grupa Azoty stopped orders',
+          'Cap: +65% (raised from +55%) — offset supply materially weaker than 2022 (CRU/NDSU)',
+          'Physical shortage materialising in import-dependent markets (Brazil, India, SE Asia)',
+          'US domestic production (CF Industries +15%) partially shields NOLA from worst',
+          'Urea:corn price ratio approaching record — demand destruction begins',
+          'Russian urea partially flowing but quotas limit scale; Trinidad/Canada minor relief',
+          'New elevated baseline — no quick return; gas feedstock costs structurally higher',
+        ],
+      },
+      {
+        name: 'Ammonia',
+        key: 'ammonia', unit: '$/tonne', baseline: 350, fmt: '$',
+        actuals: [367, 392, 420, null, null, null, null, null, null, null, null, null],
+        pcts:    [5, 12, 20, 38, 55, 70, 84, 98, 100, 98, 94, 91],
+        notes: [
+          'Lagging urea; India and Bangladesh most exposed — Fitch Mar 2026',
+          'Fitch: "not to same extent as urea"; US ~94% domestic consumption (Carnegie)',
+          'Bangladesh/Pakistan fertiliser emergency; W3 $420 confirmed',
+          'Gulf = 30% globally TRADED ammonia (AFBF); NOLA tracks global scarcity',
+          'India/Bangladesh/Pakistan plants shutting — Qatar gas supply cut (Carnegie)',
+          'Cap raised to +58% (was +48%): Russia quotas, EU at 75% capacity (NDSU)',
+          'Global production constrained; no strategic reserve to buffer shortage',
+          'Near peak — US domestic (CF Industries) limits ceiling vs pure import markets',
+          'Demand destruction in price-sensitive emerging markets; application rates cut',
+          'Plateau; US/Trinidad partially offset but cannot fill Gulf gap',
+          'Non-Gulf production at full capacity; structural gap remains',
+          'New level until Gulf gas feedstock availability normalises post-reopening',
+        ],
+      },
+      {
+        name: 'DAP Phosphate',
+        key: 'dap', unit: '$/tonne', baseline: 580, fmt: '$',
+        actuals: [605, 636, 660, null, null, null, null, null, null, null, null, null],
+        pcts:    [4, 10, 14, 27, 40, 54, 65, 76, 82, 81, 78, 75],
+        notes: [
+          'Saudi phosphate exports blocked; China export curbs pre-existing — W1',
+          'Saudi + China compound: two key suppliers simultaneously disrupted — W2',
+          'Both key supply sources hit; W3 $645-660 confirmed (UkrAgroConsult Mar 12)',
+          'SULFUR CASCADE activated: +8pp independent additive — Gulf = 44% seaborne sulfur',
+          'Sulfur shortage hits Morocco/China/Indonesia phosphate producers independently of oil',
+          'Mosaic faces $250M EBITDA hit from sulfur alone (FinancialContent Mar 17)',
+          'Cap raised to +78% (was +68%): offset supply collapse + sulfur cascade compound',
+          'Approaching 2022 record (~$1,200/t) — triple pressure: blockade + China curbs + sulfur',
+          'India = 28.7% of global DAP imports; Saudi (24%) + Morocco (22%) both constrained',
+          'Harvest yields locked in at reduced inputs; demand destruction limited — no substitute',
+          'No strategic DAP reserve (unlike oil); physical shortage in importing markets',
+          'Recovery requires: Gulf shipping + sulfur feedstock supply + Saudi production restart',
+        ],
+      },
+      {
+        name: 'Sulfur',
+        key: 'sulfur', unit: '$/tonne', baseline: 120, fmt: '$',
+        actuals: [130, 143, 155, null, null, null, null, null, null, null, null, null],
+        pcts:    [8, 19, 29, 54, 75, 95, 112, 124, 130, 128, 124, 120],
+        notes: [
+          'Gulf = 44% seaborne sulfur supply (FinancialContent Mar 17) — confirmed',
+          'NDSU warns "sulfur cascade" through fertilisers — refinery shutdowns hit supply',
+          'Refinery shutdowns cutting sulfur byproduct; W3 $155 confirmed (+29%)',
+          'Phosphate production chain hit; non-Gulf refineries running harder offsets some',
+          'Global phosphate production cascade; demand destruction cap from sector',
+          'Non-Gulf refiners running at record rates increase byproduct sulfur supply',
+          'Agricultural emergency — phosphate sector cutting production, reducing demand',
+          'Peak — supply disruption partially offset by non-Gulf refinery byproduct',
+          'Structural gap narrows as non-Gulf refineries maximise sulfur recovery',
+          'Plateau — demand adjusted down from phosphate production cuts',
+          'Recovery in non-Gulf supply; Gulf refinery restart adds supply',
+          'New level reflecting structural Gulf supply gap and logistics premium',
+        ],
+      },
+    ],
+  },
+
   {
     id: 'food', icon: '', name: 'Food + Agriculture', open: false,
     desc: '60-day lag from input cost to consumer price',
@@ -1173,6 +1320,7 @@ const CATEGORIES = [
       },
     ],
   },
+
 ];
 
 
@@ -1189,7 +1337,7 @@ const CATEGORIES = [
      2-3 weeks. Forces production shut-ins (self-correcting, but
      adds restart lag on reopening)
    - Ceasefire ≠ open strait. Cascade:
-       Ceasefire → +3-4 wks mine clearance/naval escort
+       Ceasefire → +9 wks mine clearance (Iran confirmed mine-laying W2; US decommissioned minesweepers Jan 2026)
        → first transits (10% of available; production restart lag slows ramp)
        → +4-6 wks production restart ramp to 50%
        → +4-6 wks further ramp to ~75%
@@ -1246,6 +1394,12 @@ const BASE_ASMP = {
                    // Range 15–60%. Abqaiq hit alone = +15 pp.
   panic:    25,    // $/bbl geopolitical risk premium above fundamental price
                    // Goldman Day-1 estimate $18/bbl. Base: $25/bbl peak.
+  houthi:   0,     // Week Houthis resume Red Sea disruption (0 = inactive)
+                   // Base: 0 — no confirmed resumption as of W3 Mar 2026.
+                   // When active: ~40% Suez reduction (2023-24 precedent).
+                   //   Western/Israeli-linked vessels targeted; Chinese/Asian unaffected.
+                   //   Atlantic LNG to Europe +$1.5/MMBtu; DAP/PE/aluminium +1.5-2%.
+                   // Auto-zeros when reopening > 0 (ceasefire ends Houthi campaign).
 };
 let ASMP = { ...BASE_ASMP };
 
@@ -1258,7 +1412,15 @@ const BYPASS_CAPACITY  = 3.0;  // mb/d — Yanbu ~2.3 mb/d (Bloomberg confirmed 
                                 // post-Hormuz normalisation will be slower than Red Sea precedent;
                                 // Jeff Currie (Goldman/Carlyle): premiums 'elevated long after last missile'
                                 // Persists 12-18 months (Red Sea precedent)
-const MINE_CLEAR_WEEKS = 7;    // weeks reopening → first transits (best-case: US decommissioned minesweepers Jan 2026; 1991 Gulf War took 2+ months in permissive conditions)
+const MINE_CLEAR_WEEKS = 9;    // weeks reopening → first transits
+                                // RAISED from 7: Iran confirmed mine-laying from W2 (Mar 10
+                                // US intel; US military destroyed 16 Iranian minelayers).
+                                // Active mine-laying extends clearance beyond initial estimate.
+                                // 1991 Gulf War took 2+ months with 12+ MCM vessels in
+                                // permissive conditions. US decommissioned minesweepers Jan 2026.
+                                // 7 weeks was best-case assuming no active mining; 9 weeks
+                                // reflects confirmed mine warfare from W2 onwards.
+                                // Source: Wikipedia 2026 Hormuz crisis (Mar 10 entry); The National Mar 15.
 const PROD_RAMP_WEEKS  = 8;    // weeks first transit → ~67% volume recovery
                                 // (storage-forced: 2-8wks sequential restart per facility;
                                 //  physically damaged: months, handled by infra slider)
@@ -1385,10 +1547,18 @@ function calcOilPcts() {
     const restartDebt = restartDebtPenalty(i, ASMP.reopening);
     const isOpen      = straitFrac > 0;
 
-    // Bypass capacity degrades with infra damage above base 15%
-    // Ras Tanura hit cuts Yanbu; Ruwais hit cuts Fujairah
+    // Bypass capacity: Yanbu ~2.3 mb/d + UAE ADCOP ~0.7 mb/d = 3.0 mb/d base
+    // TIME-VARYING DEGRADATION: Omani alternative ports (Duqm, Salalah, Sohar)
+    // which could theoretically allow tankers to bypass via UAE/Omani territorial
+    // waters are now under attack or in war-risk zones (Wikipedia Mar 10-11).
+    // Duqm struck with fuel storage tank damaged; Sohar in war-risk area.
+    // This progressively removes the Omani bypass option that supplemented Yanbu.
+    // W1-W3: 3.0 mb/d (Yanbu + ADCOP — Omani option partially available)
+    // W4+: degrades to 2.6 mb/d as Omani ports become non-viable
+    // Infra damage above base 15% degrades further (existing logic).
     const infraAboveBase = Math.max(0, ASMP.infra - 15) / 100;
-    const bypassNow      = BYPASS_CAPACITY * Math.max(0.3, 1 - infraAboveBase * 1.5);
+    const bypassBase     = i >= 3 ? 2.6 : BYPASS_CAPACITY; // Omani degradation W4+
+    const bypassNow      = bypassBase * Math.max(0.3, 1 - infraAboveBase * 1.5);
 
     // Recovery cap when Strait opens: destroyed infra can't flow back
     const recoveryCap    = Math.max(0.30, 1 - (ASMP.infra / 100) * 1.15);
@@ -1491,12 +1661,20 @@ const // Corrected from +321% peak to +214% peak (W8):
 // Qatar = 30-33% global LNG (not 40%). Australia/US partially substitute.
 // Coal switching caps demand faster than oil. 2022 Russia crisis (+250% from lower base)
 // is the reference; Qatar loss smaller share. Source: IEA OMR Mar 2026; Oxford Economics
-BASE_LNG_PCTS = [43, 100, 129, 158, 178, 196, 208, 214, 211, 207, 203, 200];
+// W9-W12 uplift reflects Asian summer heat demand (June-August):
+// Japan/Korea air conditioning surge drives gas-to-power demand spike.
+// S&P Global: "Asian summer spot demand picks up as heat waves sweep Northeast Asia"
+// Argus: "record-high gas generation in August at peak of heatwave" (Japan 2025).
+// W9-W12 increments: +6, +9, +7, +4 pp — flattens the post-peak decline.
+// Coal switching ceiling ~$45-50/MMBtu caps the upside (Japan already 44% above
+// coal-to-gas switching price pre-uplift; Chinese/Korean generators switch to coal).
+// Source: S&P Global Jul 2025; IEA Q3-2025 Gas Market Report; Argus Media Aug 2025.
+BASE_LNG_PCTS = [43, 100, 129, 158, 178, 196, 208, 214, 217, 216, 210, 204];
 
 function calcLngPcts() {
   return Array.from({length: 12}, (_, i) => {
-    const basePct = BASE_LNG_PCTS[i];
-    if (i < 3) return basePct; // actuals locked
+    const basePct = BASE_LNG_PCTS[i] + houthiLngPP(i);
+    if (i < 3) return BASE_LNG_PCTS[i]; // actuals locked
 
     if (ASMP.reopening === 0) return basePct;
 
@@ -1512,11 +1690,50 @@ function calcLngPcts() {
   });
 }
 
-// TTF tracks LNG but ~28% lower amplitude (pipeline alternatives)
+// TTF tracks LNG but with lower amplitude (pipeline alternatives from Norway/Algeria).
+// Base ratio: 0.72× of JKM pcts.
+//
+// STORAGE INJECTION PREMIUM W4-W8:
+// EU storage ended winter 2025-26 at ~36% full (Kpler Dec 2025) — far below the
+// EU-mandated 90% target by Nov 1. With Qatar offline precisely during the summer
+// injection season, Europe must pay a structural premium to attract LNG cargoes
+// away from Asia. This keeps TTF elevated even as direct heating demand softens.
+// ENTSOG Summer Outlook 2025: EU needed demand response of ~12 bcm to reach 90%.
+// Timera Energy Aug 2025: EU LNG imports up 21% y/y just to support storage injection.
+// Injection premium: +8pp W4 → +10pp W5-W6 → +8pp W7 → +5pp W8, fading to zero W9+
+// as the injection season completes and summer heat demand shifts buying to Asia.
+// Sources: Kpler Dec 2025; ENTSOG Summer Outlook 2025; Timera Energy Aug 2025;
+//          IEA Q3-2025 Gas Market Report.
+const TTF_INJECTION_PP = [0, 0, 0, 8, 10, 10, 8, 5, 0, 0, 0, 0];
+
+// ── HOUTHI RED SEA DISRUPTION ──
+// Not in base case (no confirmed resumption W3 Mar 2026).
+// When active: ~40% Suez reduction (2023-24 precedent).
+//   Western/Israeli-linked vessels targeted; Chinese/Asian largely unaffected.
+//   Atlantic LNG to Europe adds ~10 days freight via Cape → +$1.5/MMBtu.
+//   Freight-sensitive commodities (DAP, PE, aluminium exports) +1.5-2%.
+// Auto-zeros when reopening > 0 (Iran ceasefire assumed to end Houthi campaign).
+// Sources: Houthi 2023-24 campaign data (Kpler, Lloyd's List);
+//   UNCTAD Red Sea shipping impact (Jan 2024).
+function houthiActive(weekIdx) {
+  // weekIdx is 0-based (0=W1). houthi is the onset week (1-12, 0=inactive).
+  if (ASMP.houthi === 0) return false;
+  if (ASMP.reopening > 0) return false; // ceasefire ends it
+  return (weekIdx + 1) >= ASMP.houthi;  // active from onset week onwards
+}
+function houthiLngPP(weekIdx) {
+  if (!houthiActive(weekIdx)) return 0;
+  return 11; // +$1.5/MMBtu on $14 baseline = 11pp
+}
+function houthiFreightPct(weekIdx) {
+  if (!houthiActive(weekIdx)) return 0;
+  return 1.5; // pp uplift on freight-sensitive commodities
+}
+
 function calcTtfPcts() {
   return calcLngPcts().map((p, i) => {
     if (i < 3) return [45, 71, 89][i];
-    return Math.round(p * 0.72);
+    return Math.round(p * 0.72) + TTF_INJECTION_PP[i] + houthiLngPP(i);
   });
 }
 
@@ -1583,11 +1800,23 @@ function calcAllPcts() {
 
   // ── HELIUM ──
   // Fixed trajectory tied to Qatar/Ras Laffan — NOT oil-linked.
-  // W1-W3: confirmed actuals. Peak W8-W10 at +170%.
-  // Reopening: Ras Laffan restart lag +12 weeks from ASMP.reopening.
-  // Even with reopening, container repositioning takes ~3 months (Exiger Mar 2026).
-  // Recovery capped at 50% within model window even after restart.
-  const helBase = [70, 90, 100, 120, 145, 160, 165, 170, 168, 165, 162, 160];
+  // Qatar = 30-33% of global helium PRODUCTION but ~40% of globally TRADED supply
+  //   (US 42% is largely consumed domestically; Germany Mineral Resources Agency).
+  // W1-W3: confirmed actuals. Kornbluth (Gasworld Mar 4): "+70-100% in week 1" confirmed.
+  // Trajectory: inventory buffers cushion first 2-3 weeks (3 weeks from Qatar to customer).
+  //   Then physical shortages emerge as pipeline empties.
+  // Logistics amplifier: Kornbluth Mar 7: "however long shutdown lasts, add at least
+  //   2 months to sort out logistics and truly get back to normal" — ISO container
+  //   repositioning is the binding constraint, not production restart alone.
+  // If facilities physically damaged: year+ to restore (Kornbluth: "hard to imagine
+  //   clean outcome with no negative surprises" given missile/drone density).
+  // Price warnings: $2,000+/Mcf cited if disruptions extend beyond 2 weeks
+  //   (C&EN Mar 2026; Middle East Forum Mar 2026). Current model peaks at $1,060
+  //   (+165%) — conservative given warnings, appropriate for base (no facility damage).
+  // Recovery: +12 weeks from reopening PLUS 2-month logistics normalisation.
+  //   Even after Ras Laffan restarts, container repositioning and supply chain
+  //   reorientation takes months. Recovery capped at 50% within model window.
+  const helBase = [70, 90, 100, 125, 152, 168, 175, 178, 175, 172, 168, 164];
   const helium = helBase.map((p, i) => {
     if (i < 3) return p;
     if (ASMP.reopening === 0) return p;
@@ -1602,20 +1831,71 @@ function calcAllPcts() {
   });
 
   // ── ALUMINIUM ──
-  // 0.45× oil: Gulf = 8-9% global production. Mainly logistical disruption.
-  // China/India (75% of global Al) unaffected. Responds faster to reopening than oil.
-  // W3 confirmed +23% ($2,950). ING bull $4,000 = +67%; Goldman base $3,150 = +31%.
-  // Our 0.45× gives +45% peak — between Goldman and ING, appropriate base case.
-  const alum = scaleOil(oil, 0.45, [10, 19, 23], 10);
+  // Gulf = ~9% of global production but ~23% of supply OUTSIDE China (Fastmarkets).
+  // DUAL CONSTRAINT — unique to this crisis:
+  //   (1) Export blocked: Gulf metal cannot reach Europe/Asia/US
+  //   (2) Feedstock import blocked: Gulf smelters import alumina/bauxite by sea through
+  //       Hormuz. With ~3-4 weeks of raw material on site (Julius Baer; The National
+  //       Mar 10), production cuts begin W4-W5 as alumina inventories exhaust.
+  //   This tightens the market MORE than energy-cost modelling alone implies.
+  // Qatalum already at 60% capacity (gas supply cuts); Alba force majeure declared.
+  // LME actual W3: $3,269-$3,377 range confirmed (Balaji, Argus Mar 12-16).
+  // Goldman base: $3,150 H1 2026 (+28%). Analyst bull range: $3,700-$4,000 (+52-67%).
+  // Model 0.50× oil (raised from 0.45×): captures dual constraint + feedstock depletion.
+  //   W3 at 0.50×: +18.5pp from oil (+37%) = 18pp → $2,950 ✓
+  //   W7 at 0.50×: +73pp from oil (+147%) × 0.50 = +73pp → $3,630 (within $3,700 bull)
+  // China/India (75% of global Al, primarily domestic coal-powered) unaffected.
+  // Sources: Fastmarkets Mar 11 2026; The National Mar 10; Julius Baer; Goldman Mar 3;
+  //   IAI global production data; Argus Mar 12.
+  const hfp = houthiFreightPct(0); // representative value for static commodity calcs
+  // Alumina depletion cliff: Gulf smelters have ~3-4 weeks raw material on site
+  // (Julius Baer; The National Mar 10). From W5, alumina shortage forces production
+  // cuts beyond what energy cost alone implies — adds +8pp to W5, +12pp to W6-W7,
+  // then tapers as some overland rerouting establishes (Saudi via Jeddah/Sohar).
+  const ALUMINA_CLIFF = [0, 0, 0, 0, 8, 12, 12, 8, 4, 0, 0, 0]; // W1-W12
+  const alum = scaleOil(oil, 0.50, [10, 19, 23], 10).map((p, i) =>
+    i >= 3 ? Math.round(p + ALUMINA_CLIFF[i] + houthiFreightPct(i) * 0.8) : p
+  );
 
   // ── FERTILISERS ──
-  // Urea: capped at +55% max. Egypt/Trinidad/Canada/Russia partially substitute.
-  // Ammonia: capped at +48% max. US ~94% domestic.
-  // DAP: capped at +68%. Sulfur cascade + China curbs compound.
-  // Sources: The National/Fitch Mar 12; AFBF; Carnegie; DTN; UkrAgroConsult
-  const urea    = [6, 17, 24, ...oil.slice(3).map(p => Math.round(Math.min(p * 0.58, 55) * fm))];
-  const ammonia = [5, 12, 20, ...oil.slice(3).map(p => Math.round(Math.min(p * 0.52, 48) * fm))];
-  const dap     = [4, 10, 14, ...oil.slice(3).map(p => Math.round(Math.min(p * 0.70, 68) * fm))];
+  // Urea: Gulf = 43-49% of globally TRADED urea exports (AFBF; NDSU Agricultural
+  //   Trade Monitor). US ~75% domestically produced for consumption, but NOLA price
+  //   tracks global market — US producers benefit from supply shock (CF Industries
+  //   stock +15% in first 10 days). CAP RAISED to +65% (was +55%):
+  //   Offset supply is materially weaker than 2022: Russia has export quotas (CRU);
+  //   China export ban until Aug 2026 (NDSU); Egypt lost Israeli gas supply and
+  //   constrained; European N producers at 75% capacity since 2022 energy crisis
+  //   (NDSU); Poland's Grupa Azoty stopped orders; Slovakia's Duslo at minimum.
+  //   Unlike 2022 when Russian fertilisers were rerouted, "limited alternative routes"
+  //   with closed Strait (NDSU Mar 2026). Oxford Economics: +20% Q2, upside risks.
+  //   Carnegie: benchmark urea +30% in one month; W3 $591 confirmed.
+  //   CRITICAL TIMING: farmers order March for April/May application — no buffer.
+  //   NO strategic fertiliser reserve (unlike oil's IEA 400 Mb) — G7 have none.
+  // Ammonia: Gulf = ~30% of globally TRADED ammonia. CAP RAISED to +58% (was +48%):
+  //   Same offset constraints as urea. India/Bangladesh/Pakistan plants shutting
+  //   (gas supply cut). Global NOLA price pulled up by traded market scarcity.
+  // DAP: SULFUR CASCADE ADDITIVE (+8pp from W4 onwards):
+  //   Gulf = 44% of seaborne sulfur (NDSU/AFBF). Sulfur is essential feedstock
+  //   for ALL phosphate fertiliser production (DAP, MAP, TSP, phosphoric acid).
+  //   This is a SECOND INDEPENDENT SHOCK on top of energy costs — phosphate
+  //   producers in Morocco, China, Indonesia who import Gulf sulfur face their own
+  //   supply constraint regardless of oil prices or Gulf DAP production directly.
+  //   Mosaic: analysts estimate $250M EBITDA hit H1 2026 from sulfur shortage alone.
+  //   Cap raised to +78% (was +68%) — approaching 2022 record (~$1,200/t at +82%).
+  //   China toggle still applies (export ban to Aug 2026 already in baseline).
+  // Houthi: DAP most exposed (Saudi DAP to Brazil/India via Red Sea).
+  //   Urea/ammonia less exposed (US domestic, Trinidad, Baltic routes).
+  // Sources: AFBF Market Intel Mar 2026; Carnegie Mar 2026; NDSU Ag Trade Monitor;
+  //   CRU Group; The National/Fitch Mar 12; Oxford Economics; Breakwave Advisors;
+  //   FinancialContent Mar 17; DTN; UkrAgroConsult; Kpler Jun 2025
+  const SULFUR_CASCADE_PP = 8; // independent DAP additive from W4 (Gulf sulfur blocked)
+  const urea    = [6, 17, 24, ...oil.slice(3).map(p => Math.round(Math.min(p * 0.58, 65) * fm))];
+  const ammonia = [5, 12, 20, ...oil.slice(3).map(p => Math.round(Math.min(p * 0.52, 58) * fm))];
+  const dap     = [4, 10, 14, ...oil.slice(3).map((p, i) => {
+    const sc = SULFUR_CASCADE_PP; // active from W4 onwards (i=0 here = W4)
+    const hfp_w = houthiFreightPct(i + 3);
+    return Math.round(Math.min(p * 0.70 + sc + hfp_w * 1.2, 78 + hfp_w * 1.2) * fm);
+  })];
 
   // ── SULFUR ──
   // 0.65× oil: Gulf = 44% seaborne supply but non-Gulf refineries running harder
@@ -1627,13 +1907,48 @@ function calcAllPcts() {
   // 0.52× oil: ME = ~15% global PE production. US/China on domestic feedstocks.
   // Naphtha feedstock rises with oil but substitution available.
   // Source: IEA OMR Mar 2026; ICIS; 2022 precedent (+30-40% peak)
-  const pe = scaleOil(oil, 0.52, [7, 14, 21], 7);
+  const pe = scaleOil(oil, 0.52, [7, 14, 21], 7).map((p, i) => i >= 3 ? Math.round(p + houthiFreightPct(i) * 0.6) : p);;
 
-  // ── JET / DIESEL ──
+  // ── LPG (PROPANE/BUTANE) ──
+  // Gulf = ~1.5 mb/d LPG exports (IEA OMR Mar 2026 — explicitly flagged as disrupted).
+  // Critical for: (1) heating/cooking in Asia (India, SE Asia rely heavily — CBS News Mar 15);
+  //   (2) petrochemical feedstock (PDH propane dehydrogenation for propylene);
+  //   (3) rural/EM cooking fuel with no substitute for hundreds of millions.
+  // Scale: 0.85× of oil pct — tracks crude closely as refinery byproduct,
+  //   but amplified by direct Gulf export disruption (higher % of seaborne trade
+  //   than crude). W3 spot propane (Mont Belvieu): ~+28% confirmed (EIA STEO).
+  // Cap at +80%: US domestic production (NGL from shale) provides partial offset;
+  //   no equivalent to LNG tanker/LPG tanker shortage because LPG tankers more
+  //   readily available than LNG cryogenic carriers.
+  // Sources: IEA OMR Mar 2026; CBS News Mar 15 (India cooking fuel); EIA NGL data.
+  const lpg = [8, 18, 28, ...oil.slice(3).map(p => Math.min(Math.round(p * 0.85), 80))];
   // Refinery crack spread amplifies oil price. NW Europe jet confirmed $218/bbl
   // at $100 crude (W2). Scale factors 1.38/1.30 maintained from confirmed data.
-  const jet    = scaleOil(oil, 1.38, [14, 31, 39], 14);
-  const diesel = scaleOil(oil, 1.30, [15, 32, 40], 15);
+  // ── JET / DIESEL ──
+  // Refinery crack spread amplification — Gulf refining offline.
+  // Goldman Sachs (Bloomberg Mar 17): "prices rallied much more for many refined
+  //   products than for crude" — medium-heavy crude shortage means Asian
+  //   refineries configured for Gulf barrels cannot easily switch feedstocks.
+  // IEA OMR Mar 2026: diesel and jet "particularly vulnerable to extended loss
+  //   of Middle East production and exports".
+  // Crack spread data (OilPrice/Aerotime): jet crack peaked 4.9× $20/bbl norm
+  //   = $98/bbl spread at W1-2; settled at 3.7× = $74/bbl spread by W2-3.
+  // Europe jet crack: $65-68/bbl sustained (OilPrice Mar 11).
+  // Scale factors raised W5+ (i>=4) to 1.42/1.35× (from 1.38/1.30×) to
+  //   reflect medium-heavy crude substitution constraint becoming binding.
+  // NB: aviation demand destruction partially offsets — Gulf airport suspensions
+  //   have reduced jet fuel demand (IEA OMR Mar 2026), providing some ceiling.
+  // W1-W2-W3: locked to confirmed actuals (jet $14/31/39pp, diesel $15/32/40pp).
+  const jet    = oil.map((p, i) => {
+    if (i < 3) return [14, 31, 39][i];
+    const scale = i >= 4 ? 1.42 : 1.38; // steepen W5+ for medium-heavy shortage
+    return Math.max(14, Math.round(p * scale));
+  });
+  const diesel = oil.map((p, i) => {
+    if (i < 3) return [15, 32, 40][i];
+    const scale = i >= 4 ? 1.35 : 1.30;
+    return Math.max(15, Math.round(p * scale));
+  });
 
   // ── US PUMP ──
   // Pass-through calibrated from EIA/St Louis Fed "25-cent rule":
@@ -1681,7 +1996,7 @@ function calcAllPcts() {
 
   return {
     brent: oil, wti, jkm: lng, ttf, helium, alum,
-    urea, ammonia, dap, sulfur, pe,
+    urea, ammonia, dap, sulfur, pe, lpg,
     jet, diesel, pump, wheat, corn,
   };
 }
@@ -1698,6 +2013,7 @@ function getPctKey(catId, rowName) {
   if (rowName.includes('DAP'))         return 'dap';
   if (rowName.includes('Sulfur'))      return 'sulfur';
   if (rowName.includes('Polyethylene'))return 'pe';
+  if (rowName.includes('LPG') || rowName.includes('Propane')) return 'lpg';
   if (rowName.includes('Jet'))         return 'jet';
   if (rowName.includes('Diesel'))      return 'diesel';
   if (rowName.includes('Pump'))        return 'pump';
@@ -1795,6 +2111,13 @@ function updateSlider(key, val) {
     if (v === 0) {
       info.style.display = 'none';
     } else {
+      // Auto-zero Houthi on ceasefire — Iran resolution assumed to end campaign
+      if (ASMP.houthi > 0) {
+        ASMP.houthi = 0;
+        document.getElementById('sl-houthi').value = '0';
+        document.getElementById('val-houthi').textContent = 'Inactive';
+        document.getElementById('val-houthi').className = 'asmp-val';
+      }
       const ft  = v + MINE_CLEAR_WEEKS;
       const lng = v + LNG_RESTART_LAG;
       info.style.display = 'block';
@@ -1817,6 +2140,15 @@ function updateToggle(key, val) {
   refreshPrices();
 }
 
+function updateHouthi(v) {
+  const week = parseInt(v);
+  ASMP.houthi = week;
+  const el = document.getElementById('val-houthi');
+  el.textContent = week === 0 ? 'Inactive' : 'Active W' + week + '+';
+  el.className = week !== BASE_ASMP.houthi ? 'asmp-val asmp-changed' : 'asmp-val';
+  refreshPrices();
+}
+
 function resetAssumptions(e) {
   e && e.stopPropagation();
   ASMP = { ...BASE_ASMP };
@@ -1825,6 +2157,7 @@ function resetAssumptions(e) {
   document.getElementById('sl-panic').value     = BASE_ASMP.panic;
   document.getElementById('sl-reopening').value = BASE_ASMP.reopening;
   document.getElementById('sl-china').checked   = BASE_ASMP.china;
+  document.getElementById('sl-houthi').value    = BASE_ASMP.houthi;
 
   ASMP.offsetScenario = 'base';
   document.getElementById('val-offset').textContent    = 'Base case';
@@ -1835,6 +2168,8 @@ function resetAssumptions(e) {
   document.getElementById('sl-infra').value            = BASE_ASMP.infra;
   document.getElementById('val-china').textContent     = 'Blocked';
   document.getElementById('china-label').textContent   = 'China export curbs remain';
+  document.getElementById('val-houthi').textContent    = 'Inactive';
+  document.getElementById('val-houthi').className      = 'asmp-val';
   document.getElementById('cf-cascade').style.display  = 'none';
 
   ['deficit','panic','reopening','china','shale'].forEach(k => {
