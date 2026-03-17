@@ -343,10 +343,147 @@ body {
 .src-block h4 { font-size: 9.5px; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
 .src-block p  { font-size: 9.5px; color: var(--dim); line-height: 1.75; }
 .src-block p strong { color: var(--ink); }
+.assumptions-bar {
+  background: #f8fafd;
+  border-bottom: 2px solid var(--rule);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.abar-title {
+  font-size: 9px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--navy); flex-shrink: 0;
+}
+.abar-sep { width: 1px; height: 28px; background: var(--rule); flex-shrink: 0; }
+.assumption {
+  display: flex; align-items: center; gap: 8px;
+}
+.assumption label {
+  font-size: 9px; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.assumption select {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10px; font-weight: 600; color: var(--navy);
+  background: var(--white); border: 1px solid var(--rule);
+  border-radius: 3px; padding: 4px 8px; cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7a96'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 7px center;
+  padding-right: 22px;
+}
+.assumption select:focus { outline: 2px solid var(--blue); }
+.assumption input[type=range] {
+  width: 100px; accent-color: var(--blue); cursor: pointer;
+}
+.assumption .aval {
+  font-size: 10px; font-weight: 800; color: var(--blue);
+  min-width: 36px; text-align: right;
+}
+.reset-btn {
+  margin-left: auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 9px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--blue); background: var(--white);
+  border: 1px solid var(--blue); border-radius: 3px;
+  padding: 5px 12px; cursor: pointer;
+  flex-shrink: 0;
+}
+.reset-btn:hover { background: var(--blue); color: var(--white); }
 .sources-list {
   font-size: 9px; color: var(--dim); line-height: 2;
   border-top: 1px solid var(--rule); padding-top: 10px;
 }
+.assumptions-panel {
+  background: #ffffff;
+  border-bottom: 2px solid var(--rule);
+  padding: 0;
+}
+.asmp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  background: var(--navy);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+.asmp-header:hover { background: #0a4478; }
+.asmp-header-left { display: flex; align-items: center; gap: 10px; }
+.asmp-header-title { font-size: 10px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: #fff; }
+.asmp-header-sub   { font-size: 9px; color: rgba(255,255,255,0.45); }
+.asmp-header-right { display: flex; align-items: center; gap: 12px; }
+.asmp-reset {
+  background: rgba(232,255,3,0.15);
+  border: 1px solid rgba(232,255,3,0.4);
+  color: var(--yellow);
+  font-size: 9px; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.asmp-reset:hover { background: rgba(232,255,3,0.25); }
+.asmp-caret { font-size: 10px; color: rgba(255,255,255,0.4); transition: transform 0.2s; }
+.asmp-header.open .asmp-caret { transform: rotate(180deg); }
+.asmp-body { display: none; padding: 16px 24px 18px; background: #f8fafd; border-bottom: 1px solid var(--rule); }
+.asmp-body.open { display: block; }
+.asmp-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px 20px;
+}
+.asmp-item {}
+.asmp-label {
+  font-size: 9.5px; font-weight: 700; color: var(--navy);
+  text-transform: uppercase; letter-spacing: 0.07em;
+  margin-bottom: 4px; display: flex; justify-content: space-between; align-items: baseline;
+}
+.asmp-val {
+  font-size: 13px; font-weight: 800; color: var(--blue);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.asmp-desc { font-size: 8px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+input[type=range].asmp-slider {
+  width: 100%;
+  margin: 6px 0 0;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+.asmp-toggle-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.asmp-toggle {
+  position: relative;
+  width: 34px; height: 18px;
+  flex-shrink: 0;
+}
+.asmp-toggle input { opacity: 0; width: 0; height: 0; }
+.asmp-toggle-track {
+  position: absolute; inset: 0;
+  background: var(--rule);
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.asmp-toggle input:checked + .asmp-toggle-track { background: var(--blue); }
+.asmp-toggle-track::after {
+  content: '';
+  position: absolute;
+  left: 2px; top: 2px;
+  width: 14px; height: 14px;
+  background: white;
+  border-radius: 50%;
+  transition: left 0.2s;
+}
+.asmp-toggle input:checked + .asmp-toggle-track::after { left: 18px; }
+.asmp-toggle-label { font-size: 9px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.asmp-changed { color: #b05c00; }
 .status-bar {
   background: #b80000;
   color: #fff;
@@ -390,6 +527,84 @@ body {
   <span class="status-dot"></span>
   Strait of Hormuz Remains Under Iranian Control — Commercial Shipping Near Zero
 </div>
+
+<!-- ASSUMPTIONS PANEL -->
+<div class="assumptions-panel">
+  <div class="asmp-header" id="asmpHeader" onclick="toggleAsmp()">
+    <div class="asmp-header-left">
+      <div>
+        <div class="asmp-header-title">Adjust Model Assumptions</div>
+        <div class="asmp-header-sub">All prices update instantly. W1–W2 actuals locked. Ceasefire cascades mine clearance → first transits → production restart → LNG restart automatically.</div>
+      </div>
+    </div>
+    <div class="asmp-header-right">
+      <button class="asmp-reset" onclick="resetAssumptions(event)">↺ Reset to Base Case</button>
+      <span class="asmp-caret">▼</span>
+    </div>
+  </div>
+  <div class="asmp-body" id="asmpBody">
+
+    <!-- Ceasefire cascade info bar -->
+    <div id="cf-cascade" style="display:none;background:#eef4ff;border:1px solid #b8d0f0;
+      border-radius:3px;padding:7px 14px;margin-bottom:14px;font-size:9px;
+      font-weight:600;color:#083863;letter-spacing:0.04em;line-height:1.6;"></div>
+
+    <div class="asmp-grid">
+
+      <div class="asmp-item">
+        <div class="asmp-label">Strait reopening week <span class="asmp-val" id="val-reopening">None in window</span></div>
+        <input type="range" class="asmp-slider" id="sl-reopening" min="0" max="12" step="1" value="0"
+               oninput="updateSlider('reopening',this.value)">
+        <div class="asmp-desc">Week of confirmed Strait reopening — triggers Ras Laffan restart attempt simultaneously. Auto-cascades: +4 wks mine clearance → first transits (10%→75% ramp, with production restart lag) → LNG/helium flow +10 wks. Risk premium collapses on announcement. Insurance floor persists 12–18 months.</div>
+      </div>
+
+      <div class="asmp-item">
+        <div class="asmp-label">Selective passage while closed <span class="asmp-val" id="val-passage">1.5 mb/d</span></div>
+        <input type="range" class="asmp-slider" id="sl-passage" min="0.5" max="6" step="0.5" value="1.5"
+               oninput="updateSlider('passage',this.value)">
+        <div class="asmp-desc">What Iran permits through while nominally closed. <strong>Base 1.5 mb/d</strong> = Iran own exports to China. Rises with bilateral deals: India (+0.5–1.0), Turkey, Pakistan. Falls if US pressures China. Max ~6 mb/d if Iran de-facto reopens for non-Western flags.</div>
+      </div>
+
+      <div class="asmp-item">
+        <div class="asmp-label">Infrastructure destruction <span class="asmp-val" id="val-infra">15% damaged</span></div>
+        <input type="range" class="asmp-slider" id="sl-infra" min="15" max="60" step="5" value="15"
+               oninput="updateSlider('infra',this.value)">
+        <div class="asmp-desc"><strong>Base 15%</strong> = confirmed W3: Ras Tanura, Ruwais, Bapco, Safaniya partial, Shah gas, Ras Laffan. Minimal effect while Strait is closed — closure dominates. Bites hardest post-reopening: caps recovery ceiling. Abqaiq hit = +15%; East-West pipeline = +10%. Repair: months–years.</div>
+      </div>
+
+      <div class="asmp-item">
+        <div class="asmp-label">Non-Gulf supply response <span class="asmp-val" id="val-offset">Base case</span></div>
+        <input type="range" class="asmp-slider" id="sl-offset" min="0" max="2" step="1" value="1"
+               oninput="updateOffsetScenario(this.value)">
+        <div class="asmp-desc">
+          <strong>Pessimistic:</strong> Capital discipline; shale cautious; demand holds. Russia/Iran ~0.8 mb/d, non-Gulf ramps slowly to 1.5 mb/d, US shale near-zero, demand destruction ~0.3 mb/d. Total W12: ~2.5 mb/d.<br>
+          <strong>Base (Wood Mac/Vortexa):</strong> Russia/Iran 1.0 mb/d W1+, non-Gulf at record to 2.0 mb/d by W4, US shale +0.3 mb/d by W8, demand destruction 0.5–1.0 mb/d. Total W12: ~5.0 mb/d.<br>
+          <strong>Optimistic:</strong> Fast shale response, Venezuela uplift, larger demand destruction. Non-Gulf to 2.5 mb/d, shale +0.6 mb/d by W6, demand destruction 1.5 mb/d. Total W12: ~7.0 mb/d.
+        </div>
+      </div>
+
+      <div class="asmp-item">
+        <div class="asmp-label">Risk premium <span class="asmp-val" id="val-panic">$25/bbl</span></div>
+        <input type="range" class="asmp-slider" id="sl-panic" min="0" max="50" step="5" value="25"
+               oninput="updateSlider('panic',this.value)">
+        <div class="asmp-desc">Geopolitical risk premium above the fundamental supply/demand price. Goldman Day-1 estimate: $18/bbl. Collapses rapidly on reopening announcement — before physical transit resumes. Base: $25/bbl peak. Escalation (Abqaiq threat, wider war): up to $50/bbl.</div>
+      </div>
+
+      <div class="asmp-item">
+        <div class="asmp-label">China fertiliser exports <span class="asmp-val" id="val-china">Blocked</span></div>
+        <div class="asmp-toggle-row">
+          <label class="asmp-toggle">
+            <input type="checkbox" id="sl-china" onchange="updateToggle('china',this.checked)">
+            <span class="asmp-toggle-track"></span>
+          </label>
+          <span class="asmp-toggle-label" id="china-label">China export curbs remain</span>
+        </div>
+        <div class="asmp-desc">If China reverses current restrictions, caps urea/DAP/ammonia ceiling by ~22%. Currently restricted through Aug 2026.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
 <div id="categories"></div>
 
 <!-- STORAGE ACCORDION -->
@@ -419,7 +634,7 @@ body {
       <div class="sources-grid">
         <div class="src-block">
           <h4>Oil Price Model — First Principles</h4>
-          <p><strong>Gross disruption: ~9.7 mb/d</strong> (Iraq −3.0, Kuwait −2.6, Qatar −0.6, Bahrain −0.2, Saudi −2.5, UAE −0.8). <strong>Realistic offsets: ~4.3 mb/d</strong> — Yanbu net ~1.5 mb/d (port cap at 4.5 mb/d less ~2 mb/d Saudi refinery consumption), Fujairah ~1.0 mb/d (terminal hit Mar 16 and at capacity), Russia ~1.5 mb/d (US 30-day waiver, shadow fleet saturated), non-OPEC ramp ~0.3 mb/d. <strong>Net structural deficit: ~5.4 mb/d</strong> = 5.1% of global demand (105 mb/d). Short-run price elasticity −0.07 (IEA midpoint): 5.1% ÷ 0.07 = 73% above pre-war = ~$126 fundamental equilibrium. Adding panic premium of $20–30/bbl (Goldman estimated $18/bbl on Day 1; sustained by new supreme leader's public commitment to closure, ongoing infrastructure attacks, and insurance withdrawal) gives W7–8 peak of ~$155–160. Recession demand destruction is minimal within 12 weeks — historically takes 6–18 months; modelled at −0.5 mb/d from W9. IEA 400 Mb release (max 3 mb/d drawdown) suppresses prices in W1–4 only; exhausted by W5.</p>
+          <p><strong>Gross disruption: ~9.7 mb/d</strong> (Iraq −3.0, Kuwait −2.6, Qatar −0.6, Bahrain −0.2, Saudi −2.5, UAE −0.8). <strong>Realistic offsets: ~4.3 mb/d</strong> — Yanbu net ~1.5 mb/d (port cap at 4.5 mb/d less ~2 mb/d Saudi refinery consumption), Fujairah ~1.0 mb/d (terminal hit Mar 16 and at capacity), Russia ~1.5 mb/d (US 30-day waiver, shadow fleet saturated), non-OPEC ramp ~0.3 mb/d. <strong>Net structural deficit: ~5.4 mb/d</strong> = 5.1% of global demand (105 mb/d). Short-run price elasticity −0.05 (academic consensus for acute supply shocks under 3 months; IEA range −0.02 to −0.15, Goldman-implied ~−0.05 for sustained 120-day closure): 5.1% ÷ 0.05 = 102% above pre-war = ~$148 fundamental equilibrium. Adding panic premium of $20–30/bbl (Goldman estimated $18/bbl on Day 1; sustained by new supreme leader's public commitment to closure, ongoing infrastructure attacks, and insurance withdrawal) gives W7–8 peak of ~$155–160. Recession demand destruction is minimal within 12 weeks — historically takes 6–18 months; modelled at −0.5 mb/d from W9. IEA 400 Mb release (max 3 mb/d drawdown) suppresses prices in W1–4 only; exhausted by W5.</p>
         </div>
         <div class="src-block">
           <h4>Insurance &amp; Shipping — A Structural Price Driver</h4>
@@ -459,8 +674,7 @@ body {
 </div>
 
 <script>
-
-/* ── DATA ── */
+/* ── STATIC DATA ── */
 
 const DATES = [
   'Mar 2–8','Mar 9–15','Mar 16–22','Mar 23–29',
@@ -469,70 +683,18 @@ const DATES = [
 ];
 
 const PHASES = [
-  { label: 'Shock',      css: 'ph-shock'    },
-  { label: 'Surge',      css: 'ph-surge'    },
-  { label: 'Spreading',  css: 'ph-spread'   },
-  { label: 'Contraction',css: 'ph-contract' },
-  { label: 'Shortages',  css: 'ph-short'    },
-  { label: 'Crisis',     css: 'ph-crisis'   },
-  { label: 'Recession',  css: 'ph-recess'   },
-  { label: 'Deep Crisis',css: 'ph-recess'   },
-  { label: 'Breakdown',  css: 'ph-recess'   },
-  { label: 'Plateau',    css: 'ph-contract' },
-  { label: 'Sustained',  css: 'ph-contract' },
-  { label: 'New Reality',css: 'ph-short'    },
-];
-
-const STORAGE_DATA = [
-  {
-    country: 'Iraq',
-    facility: 'Basra terminals · Rumaila, West Qurna, Zubair',
-    status: 'st-halt', statusLabel: 'Production Cut 70%',
-    preStat: '4.3 mb/d', curStat: '~1.3 mb/d', fillPct: 70,
-    note: '97% of Iraqi exports transit Hormuz — no bypass exists. IEA confirmed 70% cut by W1. Storage exhausted. Approaches zero by W5 under no-resolution.'
-  },
-  {
-    country: 'Qatar LNG',
-    facility: 'Ras Laffan · 14 trains · 77 Mtpa',
-    status: 'st-halt', statusLabel: 'Fully Offline Since Mar 2',
-    preStat: '77 Mtpa', curStat: '0 — offline', fillPct: 100,
-    note: 'Storage fills in just 4 days at full production. Offline since Iranian drone strike. CEO: no restart until conflict ends + 4–6 wk restart. Helium (30% global supply) also offline.'
-  },
-  {
-    country: 'Kuwait',
-    facility: 'KPC · Ahmadi fields · Mina al-Ahmadi terminal',
-    status: 'st-halt', statusLabel: 'Force Majeure Mar 7',
-    preStat: '2.6 mb/d', curStat: 'Cutting', fillPct: 80,
-    note: '100% of exports via Hormuz — no alternative route. JPMorgan: some Gulf producers exhaust storage in ~3 weeks. Further cuts inevitable by W4–5.'
-  },
-  {
-    country: 'Saudi Arabia',
-    facility: 'Abqaiq · Ras Tanura (hit) · Safaniya (shut Mar 13)',
-    status: 'st-cut', statusLabel: 'Cutting — Partial Bypass',
-    preStat: '10.4 mb/d', curStat: 'Cut 2–2.5 mb/d', fillPct: 52,
-    note: 'Yanbu net export capacity ~2.5 mb/d after Saudi refinery consumption. Ras Tanura refinery hit by drones. Safaniya field (20% of capacity) shut Mar 13. Houthis threaten Red Sea bypass.'
-  },
-  {
-    country: 'UAE',
-    facility: 'Ruwais refinery shut Mar 11 · Fujairah hit Mar 16',
-    status: 'st-cut', statusLabel: 'Cutting — Partial Bypass',
-    preStat: '4.2 mb/d', curStat: 'Cut ~800k b/d', fillPct: 44,
-    note: 'ADCOP handles ~1.6 mb/d — only 40% of UAE exports. Ruwais shut after drone strike. Fujairah petroleum zone hit Mar 16. Refined products have no bypass at all.'
-  },
-  {
-    country: 'Bahrain + Rest',
-    facility: 'Bapco · All 100% Hormuz-dependent',
-    status: 'st-halt', statusLabel: 'All Force Majeure',
-    preStat: '~100 Mb left', curStat: '~10-day buffer', fillPct: 87,
-    note: 'Combined Gulf storage ~100 Mb remaining (Kayrros). At 10 mb/d shut-in rate, exhausted in ~10 days — already past this in W3. Production cascade accelerates W4–6.'
-  },
-  {
-    country: 'Gulf Refineries',
-    facility: 'Ras Tanura 550kb/d · Ruwais 817kb/d · Bapco 267kb/d · Basra 140kb/d',
-    status: 'st-halt', statusLabel: '~1.8 mb/d Offline',
-    preStat: '3.3 mb/d exports', curStat: 'Near zero', fillPct: 95,
-    note: 'Gulf exported 3.3 mb/d of refined products pre-war. Ras Tanura (hit by drones), Ruwais (drone strike Mar 11), Bapco (force majeure) all offline. No spare global refining capacity to replace. Crack spreads explode independently of crude price — NW Europe jet fuel already $218/bbl in W2. Diesel and jet 30–50% worse than crude price alone implies.'
-  },
+  {label:'Shock',      css:'ph-shock'},
+  {label:'Surge',      css:'ph-surge'},
+  {label:'Spreading',  css:'ph-spread'},
+  {label:'Contraction',css:'ph-contract'},
+  {label:'Shortages',  css:'ph-short'},
+  {label:'Crisis',     css:'ph-crisis'},
+  {label:'Recession',  css:'ph-recess'},
+  {label:'Deep Crisis',css:'ph-recess'},
+  {label:'Breakdown',  css:'ph-recess'},
+  {label:'Plateau',    css:'ph-contract'},
+  {label:'Sustained',  css:'ph-contract'},
+  {label:'New Reality',css:'ph-short'}
 ];
 
 const CATEGORIES = [
@@ -541,14 +703,23 @@ const CATEGORIES = [
     desc: 'Brent crude — the primary supply shock driver',
     rows: [
       {
-        name: 'Brent Crude', unit: '$/bbl', baseline: 73, fmt: '$',
+        name: 'Brent Crude',
+        key: 'brent', unit: '$/bbl', baseline: 73, fmt: '$',
         actuals: [87, 102, 100, null, null, null, null, null, null, null, null, null],
         pcts:    [19, 40, 37, 58, 78, 96, 112, 117, 115, 110, 106, 102],
         notes: [
-          'Peaked $126 intraday W2', '$100+ confirmed — 1st since 2022', '$100 IEA buffer holds',
-          'IEA thinning; ~$115', 'IEA exhausting; ~$143', 'Deficit exposed + insurance premium',
-          'Panic peak ~$182; Cape rerouting adds $4/bbl', 'Plateau; recession not yet biting', 'Demand −0.5mb/d offset',
-          'Structural plateau ~$153', 'Sustained — no supply return', '~$148 structural new level',
+          'Intraday spike on Day 1; IEA pre-commits reserves',
+          'IEA 400Mb release announced; buffer holds',
+          'IEA buffer active — suppressing fundamental price',
+          'IEA thinning; structural deficit asserting',
+          'IEA buffer near exhausted; deficit fully exposed',
+          'Full deficit + insurance premium in price',
+          'Peak panic — Cape rerouting adds significant freight premium',
+          'Plateau; recession demand destruction not yet biting',
+          'Mild demand erosion begins offsetting deficit',
+          'Structural plateau — no supply return in sight',
+          'Sustained elevated; new energy security pricing',
+          'Structural new level reflects permanent risk premium',
         ],
       },
     ],
@@ -558,25 +729,43 @@ const CATEGORIES = [
     desc: 'Qatar offline at source — no bypass possible for LNG',
     rows: [
       {
-        name: 'LNG Asia — JKM Spot', unit: '$/MMBtu', baseline: 14, fmt: '$',
+        name: 'LNG Asia — JKM Spot',
+        key: 'jkm', unit: '$/MMBtu', baseline: 14, fmt: '$',
         actuals: [20, 28, 32, null, null, null, null, null, null, null, null, null],
         pcts:    [43, 100, 129, 171, 207, 243, 307, 321, 307, 286, 271, 257],
         notes: [
-          'Qatar FM; JKM +39% on Day 1', 'Qatar fully offline', 'No alt supply at scale',
-          'Industrial rationing begins', 'Asia power cuts; ~$41', 'Energy equiv. to $137 oil',
-          'Force majeure cascades; ~$54', 'Peak — Asia pays anything', 'Slight demand fall',
-          'High plateau ~$50', 'No LNG restart in sight', 'Structural new level',
+          'Qatar force majeure Day 1; JKM spikes on open',
+          'Ras Laffan fully offline; no alternative at scale',
+          'No replacement LNG supply reachable',
+          'Industrial rationing begins across Asia',
+          'Asian power cuts; coal switching accelerates',
+          'Energy emergency declared in multiple countries',
+          'Force majeure cascades to downstream buyers',
+          'Peak — buyers paying any price for spot cargo',
+          'Demand destruction from fuel switching',
+          'High plateau — no Qatar supply in sight',
+          'Structural shortage; no restart timeline',
+          'New LNG baseline until Ras Laffan restarts',
         ],
       },
       {
-        name: 'EU Gas — TTF', unit: '€/MWh', baseline: 38, fmt: '€',
+        name: 'EU Gas — TTF',
+        key: 'ttf', unit: '€/MWh', baseline: 38, fmt: '€',
         actuals: [55, 65, 72, null, null, null, null, null, null, null, null, null],
         pcts:    [45, 71, 89, 118, 145, 168, 189, 197, 189, 176, 166, 158],
         notes: [
-          'TTF +50% on Mar 2 alone', 'Goldman: doubling risk', '€72 — near pre-war double',
-          'Industrial rationing', 'Emergency measures; ~€88', 'Storage emergency',
-          'Industry curtailed; ~€103', 'Peak ~€105; $150 oil amplifies', 'Demand slightly down',
-          'Plateau ~€98', 'Sustained high', 'New energy baseline €93',
+          'TTF surges on Qatar news; pipeline alternatives limited',
+          'Goldman warns of doubling risk; storage concerns',
+          'Near pre-war double; industrial buyers cutting',
+          'Industrial rationing spreading across EU',
+          'Emergency measures activated; coal/nuclear restart',
+          'Storage draw-down rate accelerates',
+          'Major industry curtailed; demand destruction',
+          'Peak — heating season amplifies shortage',
+          'Demand slightly reduced; efficiency mandates',
+          'Plateau — structural shortage until LNG returns',
+          'Sustained high; EU scrambles for alternatives',
+          'New European energy cost baseline',
         ],
       },
     ],
@@ -586,25 +775,43 @@ const CATEGORIES = [
     desc: 'Helium offline at source; aluminium smelting under energy pressure',
     rows: [
       {
-        name: 'Helium Spot', unit: '$/Mcf', baseline: 400, fmt: '$',
+        name: 'Helium Spot',
+        key: 'helium', unit: '$/Mcf', baseline: 400, fmt: '$',
         actuals: [680, 760, 800, null, null, null, null, null, null, null, null, null],
         pcts:    [70, 90, 100, 138, 175, 213, 250, 288, 313, 325, 330, 333],
         notes: [
-          'Kornbluth: +70–100% W1', 'Qatar offline at source', 'Contracts at risk',
-          'Chip fab rationing begins', 'MRI equipment delays', 'Semiconductor crisis',
-          'Force majeure cascade', 'Critical industries only', 'Spot market seizes',
-          'Allocation-only market', 'Deep structural shortage', 'Structural deficit',
+          'Kornbluth: +70–100% W1; Qatar is 30% of global supply',
+          'Ras Laffan offline — helium co-produced with LNG',
+          'Chip fab and MRI supply chains at risk',
+          'Semiconductor fabs drawing down stockpiles',
+          'MRI equipment delays emerging',
+          'Semiconductor supply chain in crisis',
+          'Force majeure cascades to tech sector',
+          'Critical industries on allocation only',
+          'Spot market effectively seized',
+          'Allocation-only; US production absorbs some demand',
+          'Deep structural shortage; recycling increases',
+          'Structural deficit until Ras Laffan restarts',
         ],
       },
       {
-        name: 'Aluminium', unit: '$/tonne', baseline: 2400, fmt: '$k',
+        name: 'Aluminium',
+        key: 'alum', unit: '$/tonne', baseline: 2400, fmt: '$k',
         actuals: [2650, 2860, 2950, null, null, null, null, null, null, null, null, null],
         pcts:    [10, 19, 23, 36, 50, 62, 72, 80, 82, 80, 77, 74],
         notes: [
-          'CNN: 4-year high confirmed', 'UAE Ruwais drone hit', '$2,950 confirmed',
-          'Building materials surge', 'Smelting energy costs surge', 'EU smelters curtailing',
-          'Auto/aerospace shortfall', '$150 oil doubles energy input', 'Demand falling',
-          'Plateau ~$4,320', 'Sustained structural gap', 'New structural level',
+          'UAE Ruwais smelter hit; Gulf production disrupted',
+          'Energy cost shock hitting smelters globally',
+          'Smelter energy costs surge with oil/gas prices',
+          'Building materials and packaging chains hit',
+          'European smelters curtailing on energy costs',
+          'Smelter closures spreading; auto sector hit',
+          'Aerospace and automotive shortfall widens',
+          'High energy input costs compound raw material shortage',
+          'Demand destruction as manufacturers cut output',
+          'Plateau — structural energy cost embedded',
+          'Sustained gap; recycled aluminium ramps up',
+          'New structural level reflecting energy reality',
         ],
       },
     ],
@@ -614,47 +821,83 @@ const CATEGORIES = [
     desc: 'LNG feedstock also blocked; spring planting decisions being made NOW',
     rows: [
       {
-        name: 'Urea (NOLA)', unit: '$/tonne', baseline: 475, fmt: '$',
+        name: 'Urea (NOLA)',
+        key: 'urea', unit: '$/tonne', baseline: 475, fmt: '$',
         actuals: [505, 556, 591, null, null, null, null, null, null, null, null, null],
         pcts:    [6, 17, 24, 46, 64, 80, 96, 105, 105, 103, 100, 97],
         notes: [
-          'W1 +6%', 'W2 +17% confirmed', '$591 confirmed +25%',
-          'Spring planting NOW', 'Feedstock + transit blocked', 'Alt producers also costly',
-          'Harvest shortfall locked in', 'Near $975 — 2022 record broken', 'Harvest baked in',
-          'Plateau ~$965', 'Sustained — no cheap gas anywhere', 'New price reality',
+          'Early move; traders pricing in Hormuz risk',
+          'Qatar urea/ammonia production halted',
+          'Gulf urea plants offline or export-blocked',
+          'Spring planting window — worst possible timing',
+          'Feedstock (natural gas) and transit both blocked',
+          'Alternative producers also facing high gas costs',
+          'Harvest shortfall locked in regardless of resolution',
+          'Record territory — 2022 Ukraine peak approached',
+          'Harvest outcome baked in; prices plateau',
+          'Sustained — no cheap gas or transit anywhere',
+          'Structural gap until Gulf production resumes',
+          'New price reality for global agriculture',
         ],
       },
       {
-        name: 'Ammonia', unit: '$/tonne', baseline: 350, fmt: '$',
+        name: 'Ammonia',
+        key: 'ammonia', unit: '$/tonne', baseline: 350, fmt: '$',
         actuals: [367, 392, 420, null, null, null, null, null, null, null, null, null],
         pcts:    [5, 12, 20, 38, 55, 70, 84, 98, 100, 98, 94, 91],
         notes: [
-          'Lagging urea', 'India/Bangladesh stressed', '$420 confirmed',
-          'Plant shutdowns widen', 'Qatar LNG feedstock gone', 'Global gas prices elevated',
-          'Harvest locked in', 'Near $700 — alt production costly', 'Food shock baked',
-          'Plateau ~$686', 'Sustained', 'New level',
+          'Lagging urea; India and Bangladesh most exposed',
+          'Qatar ammonia plants offline',
+          'Bangladesh and Pakistan fertiliser emergency',
+          'Plant shutdowns widening globally',
+          'Gulf feedstock (LNG/gas) fully cut off',
+          'Global gas prices elevated; alt production costly',
+          'Agricultural season locked in at high cost',
+          'Near peak — alternative production at capacity',
+          'Food shock consequences now baked in',
+          'Plateau; demand adjusts to new reality',
+          'Sustained; structural gap in global supply',
+          'New level until Gulf capacity restored',
         ],
       },
       {
-        name: 'DAP Phosphate', unit: '$/tonne', baseline: 580, fmt: '$',
+        name: 'DAP Phosphate',
+        key: 'dap', unit: '$/tonne', baseline: 580, fmt: '$',
         actuals: [605, 636, 660, null, null, null, null, null, null, null, null, null],
         pcts:    [4, 10, 14, 27, 40, 54, 65, 76, 82, 81, 78, 75],
         notes: [
-          'Saudi blocked', 'Saudi + China export curbs', '$660 confirmed',
-          'Sulfur cascade adds', 'Structural gap (NDSU)', 'Record prices',
-          'Harvest locked in', 'Near $1,050 — 2022 record broken', 'Peak disruption',
-          'Plateau ~$1,050', 'Demand adjusts', 'New baseline',
+          'Saudi phosphate exports blocked by Hormuz',
+          'Saudi + China export curbs compound shortage',
+          'Both key supply sources severely disrupted',
+          'Sulfur cascade adds additional cost pressure',
+          'Structural gap — no quick replacement source',
+          'Record prices; application rates cut by farmers',
+          'Harvest locked in at reduced input levels',
+          'Near 2022 record — multiple supply chains broken',
+          'Peak disruption; demand destruction emerging',
+          'Plateau as market adjusts to new supply reality',
+          'Demand adjusts; some substitution occurring',
+          'New baseline until Gulf phosphate trade resumes',
         ],
       },
       {
-        name: 'Sulfur', unit: '$/tonne', baseline: 120, fmt: '$',
+        name: 'Sulfur',
+        key: 'sulfur', unit: '$/tonne', baseline: 120, fmt: '$',
         actuals: [130, 143, 155, null, null, null, null, null, null, null, null, null],
         pcts:    [8, 19, 29, 54, 75, 95, 112, 124, 130, 128, 124, 120],
         notes: [
-          '~50% global supply from Gulf', 'NDSU "sulfur cascade"', '$155 confirmed',
-          'Phosphate chain hit', 'Global fertiliser cascade', 'Critical shortage',
-          'Agricultural emergency; ~$254', 'Harvest consequence; ~$269', 'Structural gap',
-          'Plateau ~$274', 'Demand adjusts', 'New level',
+          'Roughly half of global sulfur comes from Gulf refining byproduct',
+          'NDSU warns of "sulfur cascade" through fertilisers',
+          'Refinery shutdowns cutting sulfur byproduct supply',
+          'Phosphate production chain severely hit',
+          'Global fertiliser cascade accelerating',
+          'Critical shortage for phosphate producers',
+          'Agricultural emergency — multiple nutrients affected',
+          'Peak shortage; harvest consequences compound',
+          'Structural gap in global sulfur supply',
+          'Plateau — demand adjusting down',
+          'Demand adjusts; some recovery in non-Gulf supply',
+          'New level reflecting structural Gulf supply gap',
         ],
       },
     ],
@@ -664,25 +907,43 @@ const CATEGORIES = [
     desc: '85% of ME polyethylene via Hormuz; jet fuel distillate crisis confirmed',
     rows: [
       {
-        name: 'Polyethylene (PE)', unit: '¢/lb', baseline: 58, fmt: '¢',
+        name: 'Polyethylene (PE)',
+        key: 'pe', unit: '¢/lb', baseline: 58, fmt: '¢',
         actuals: [62, 66, 70, null, null, null, null, null, null, null, null, null],
         pcts:    [7, 14, 21, 36, 53, 68, 82, 95, 103, 101, 97, 93],
         notes: [
-          '85% ME exports via Hormuz', 'Polymer plants cutting', '70¢ confirmed',
-          'Packaging chains hit', 'Naphtha crack spread widens', 'Saudi hubs stranded',
-          'Consumer goods surge; ~105¢', 'Near 115¢ — refinery + shortage', 'Allocation-only',
-          'Plateau ~117¢', 'Structural gap', 'New supply level',
+          '85% of Middle East polymer exports transit Hormuz',
+          'Gulf polymer plants cutting runs',
+          'Naphtha and ethane feedstock disrupted',
+          'Packaging and consumer goods chains hit',
+          'Naphtha crack spread widening further',
+          'Saudi and UAE petrochemical hubs stranded',
+          'Consumer goods inflation accelerating',
+          'Refinery + petrochemical shortage compound',
+          'Allocation only; downstream rationing',
+          'Structural plateau — no Gulf polymer supply',
+          'Demand substitution emerging; prices plateau',
+          'New supply level until Gulf capacity resumes',
         ],
       },
       {
-        name: 'Jet Fuel / Kerosene', unit: '$/bbl', baseline: 90, fmt: '$',
+        name: 'Jet Fuel / Kerosene',
+        key: 'jet', unit: '$/bbl', baseline: 90, fmt: '$',
         actuals: [103, 118, 125, null, null, null, null, null, null, null, null, null],
         pcts:    [14, 31, 39, 65, 82, 102, 128, 148, 152, 148, 142, 136],
         notes: [
-          'Crack spread blows out', '$118 W2 confirmed', '$125 confirmed',
-          'Refinery capacity offline adds', 'Airline hedges expire; ~$165', 'Distillate crisis; ~$182',
-          'Crack spread $130+; ~$230', '$150 crude + refinery gap; ~$263', 'Demand falls; cancellations',
-          'Plateau ~$263', 'Structural refinery gap', 'New aviation reality',
+          'Crack spread blows out; refinery capacity offline',
+          'Major Middle East refinery shutdowns confirmed',
+          'Gulf refinery offline capacity now at critical levels',
+          'Refinery capacity loss adds independent pressure',
+          'Airline hedges expiring; spot prices hit',
+          'Distillate crisis — no spare global refining capacity',
+          'Crack spread at extreme levels; airlines grounding routes',
+          'Peak — crude price plus refinery gap compound',
+          'Demand falls; airlines cancelling routes',
+          'Plateau — structural refinery gap persists',
+          'Some demand recovery offset by structural gap',
+          'New aviation fuel reality; refinery gap persists',
         ],
       },
       {
@@ -693,10 +954,18 @@ const CATEGORIES = [
         actuals: [115, 132, 140, null, null, null, null, null, null, null, null, null],
         pcts:    [15, 32, 40, 62, 78, 98, 122, 142, 148, 144, 138, 131],
         notes: [
-          'Crack spread widens', '$132 W2 confirmed', '$140 confirmed',
-          'Refinery capacity offline; ~$162', '30% EU diesel from ME; ~$178', 'Distillate crisis',
-          'Refinery gap + $150 crude; ~$222', 'Peak ~$242; farming/trucking hit', 'Transport costs cascade',
-          'Plateau ~$244; every good affected', 'Structural supply gap', 'New transport reality',
+          'Crack spread widens; Gulf refinery disruption',
+          'Middle East refinery shutdowns confirmed',
+          'Gulf refinery capacity near-fully offline',
+          'Refinery offline capacity compounds crude price',
+          '30% of EU diesel historically sourced from Middle East',
+          'Distillate crisis; trucking and farming hit',
+          'Refinery gap plus high crude — double pressure',
+          'Peak — every tonne of goods more expensive to move',
+          'Transport cost cascade through all supply chains',
+          'Plateau — every product in economy affected',
+          'Structural supply gap; demand slowly adjusting',
+          'New transport and logistics cost reality',
         ],
       },
     ],
@@ -706,14 +975,23 @@ const CATEGORIES = [
     desc: 'Retail pump prices — reflecting crude, refinery crack spreads, insurance and Cape rerouting costs',
     rows: [
       {
-        name: 'US Pump Price (National Avg)', unit: '$/gal', baseline: 3.18, fmt: 'gal',
+        name: 'US Pump Price (National Avg)',
+        key: 'pump', unit: '$/gal', baseline: 3.18, fmt: 'gal',
         actuals: [3.38, 3.65, 3.79, null, null, null, null, null, null, null, null, null],
         pcts:    [6, 15, 19, 33, 47, 62, 74, 83, 85, 82, 79, 76],
         notes: [
-          'AAA confirmed Mar 8', 'AAA $3.65 confirmed', 'AAA $3.79 highest since Oct \'23',
-          'Airlines & trucking surge; ~$4.23', 'Near 2022 record; ~$4.67', 'Record broken; ~$5.35',
-          'Rationing; ~$5.93', 'Deep pain; ~$6.14', 'Demand eases slightly',
-          'Plateau ~$5.79', 'Sustained high', '~$5.60 structural new level',
+          'AAA confirmed — War Day 1 spike',
+          'AAA: highest since late 2022',
+          'AAA: highest since October 2023',
+          'Refinery margin adds to crude price rise',
+          'IEA buffer thinning; full crude price passing through',
+          'Full deficit price in retail fuel',
+          'Peak retail — demand destruction begins',
+          'Plateau; drivers cutting discretionary travel',
+          'Mild demand fall as consumers adjust',
+          'Sustained high — no supply relief',
+          'Structural new level at pump',
+          'New baseline reflects permanent supply risk',
         ],
       },
     ],
@@ -723,30 +1001,510 @@ const CATEGORIES = [
     desc: '60-day lag from input cost to consumer price',
     rows: [
       {
-        name: 'Wheat — CBOT', unit: '$/bu', baseline: 5.40, fmt: 'dec',
+        name: 'Wheat — CBOT',
+        key: 'wheat', unit: '$/bu', baseline: 5.40, fmt: 'dec',
         actuals: [5.46, 5.61, 5.80, null, null, null, null, null, null, null, null, null],
         pcts:    [1, 4, 7, 14, 23, 33, 43, 56, 67, 73, 77, 80],
         notes: [
-          'Slow — 60-day lag', 'Fertiliser costs rising', '$5.80 confirmed',
-          'Input double-whammy', 'Diesel + urea amplified by $150 oil', 'Farm margin collapse',
-          'Harvest shortfall visible', 'Food CPI emergency', 'Shortfall + cost compound',
-          'Near $9.50 — 2022 highs approached', 'Global food insecurity', 'Structural food shock',
+          '60-day input cost lag — early move only',
+          'Fertiliser and diesel costs rising for next harvest',
+          'Input cost rise confirmed; spring planting at risk',
+          'Double whammy: fertiliser shortage + diesel cost',
+          'Diesel cost at this level feeds all transport/storage',
+          'Farm margin collapse; planted area being reduced',
+          'Harvest shortfall visible; food security alerts',
+          'Food CPI emergency in import-dependent nations',
+          'Shortfall and input cost compound simultaneously',
+          'Near 2022 food crisis levels — importers in distress',
+          'Global food insecurity; World Food Programme warning',
+          'Structural food shock; harvest locked in',
         ],
       },
       {
-        name: 'Corn — CBOT', unit: '$/bu', baseline: 4.40, fmt: 'dec',
+        name: 'Corn — CBOT',
+        key: 'corn', unit: '$/bu', baseline: 4.40, fmt: 'dec',
         actuals: [4.45, 4.58, 4.75, null, null, null, null, null, null, null, null, null],
         pcts:    [1, 4, 8, 14, 22, 32, 43, 57, 70, 77, 81, 83],
         notes: [
-          'Slow start — 60-day lag', 'Brazil urea crisis', '$4.75 confirmed',
-          'Feed cost surge', 'Ethanol demand surges at $150 oil', 'Livestock impact',
-          'Harvest shortfall baked in', 'CPI food emergency', 'Livestock culling begins',
-          'Near $7.57 — $150 oil amplifies', 'Global food shock', 'Structural food crisis',
+          '60-day lag — early move as traders price forward',
+          'Brazil urea crisis amplifies US corn outlook',
+          'Input cost rise baked in for next season',
+          'Feed cost surge hitting livestock producers',
+          'Ethanol demand surges as expensive oil alternative',
+          'Livestock sector under severe margin pressure',
+          'Harvest shortfall locked in; livestock culling begins',
+          'Food CPI emergency; feedlot closures',
+          'Livestock culling reducing future meat supply',
+          'Near multi-year highs; ethanol and food competing',
+          'Global food shock compound with wheat shortage',
+          'Structural food crisis; caloric security at risk',
         ],
       },
     ],
   },
 ];
+
+
+/* ══════════════════════════════════════════════════════════════
+   ASSUMPTION ENGINE  —  rebuilt Mar 2026
+   
+   Key facts baked in from research:
+   - Base case: ~2-3 mb/d trickle already flowing (Iran→China,
+     selective passage for India/Turkey/Pakistan)
+   - Gross Hormuz disruption: ~20 mb/d. Net deficit after trickle
+     + bypass (Yanbu ~2.5 mb/d, Fujairah ~1.0 mb/d) = ~5.0 mb/d
+   - Storage exhaustion: Gulf producers had ~100 Mb headroom Mar 1.
+     At net build ~2,900 kb/d → Iraq fills in 3 days, others in
+     2-3 weeks. Forces production shut-ins (self-correcting, but
+     adds restart lag on reopening)
+   - Ceasefire ≠ open strait. Cascade:
+       Ceasefire → +3-4 wks mine clearance/naval escort
+       → first transits (10% of normal)
+       → +4-6 wks production restart ramp to 50%
+       → +4-6 wks further ramp to ~75%
+       → insurance premium stays elevated 12-18 months regardless
+   - Ras Laffan restart: ceasefire + 8-10 weeks minimum
+     (mine clearance + physical inspection + technical restart)
+   - Even "fully open" strait retains embedded insurance premium
+     of ~$8-12/bbl for 12-18 months post-ceasefire (Red Sea precedent)
+   ══════════════════════════════════════════════════════════════ */
+
+// ── BASE ASSUMPTIONS (editable via UI) ──
+// Four independent variables — net deficit is DERIVED from these, not set manually.
+// ── SUPPLY OFFSET SCHEDULES (W1-W12) ──
+// Based on: Vortexa (Russia/Iran sanctioned ~1mb/d W1+, non-Gulf record ~2mb/d W4+),
+// Wood Mac (US shale +600kb/d by month 6, ~0 before W5), EIA STEO Mar 2026,
+// IEA demand destruction (-0.5→-1mb/d from W2 onward from flight cuts/LPG/industrial)
+//
+// Pessimistic: capital discipline prevails, shale cautious, demand holds up
+//   Russia/Iran: 0.8mb/d, non-Gulf ramps to 1.5mb/d, shale near-zero, demand dest 0.3mb/d
+// Base: Vortexa/Wood Mac consensus
+//   Russia/Iran: 1.0mb/d, non-Gulf to 2.0mb/d, shale +0.3mb/d by W8, demand dest 0.5-1mb/d
+// Optimistic: shale responds faster, demand destruction larger, Venezuela uplift
+//   Russia/Iran: 1.0mb/d, non-Gulf to 2.5mb/d, shale +0.6mb/d by W6, demand dest 1.5mb/d
+const OFFSET_SCHEDULES = {
+  // Net reduction in effective deficit (mb/d) after passage+bypass+IEA already applied.
+  // Pessimistic: capital discipline, shale cautious, demand holds. Peak offset ~1.0 mb/d.
+  pessimistic: [0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0],
+  // Base (Wood Mac/Vortexa/IEA): Russia+Iran sanctioned ~1mb/d, non-Gulf record ~2mb/d by W4,
+  // US shale +0.3mb/d by W8, demand destruction 0.5–1mb/d. Peak offset ~1.8 mb/d.
+  base:        [0.3, 0.5, 0.7, 0.9, 1.1, 1.3, 1.5, 1.6, 1.7, 1.8, 1.8, 1.8],
+  // Optimistic: faster shale, Venezuela uplift, larger demand destruction. Peak ~2.8 mb/d.
+  optimistic:  [0.3, 0.6, 0.9, 1.3, 1.6, 1.9, 2.2, 2.5, 2.6, 2.7, 2.8, 2.8],
+};
+
+const BASE_ASMP = {
+  offsetScenario: 'base', // 'pessimistic' | 'base' | 'optimistic'
+  passage:  1.5,   // mb/d Iran lets through while Strait nominally closed
+                   // Base: ~1.5 mb/d confirmed (Iran own exports ~1.5 mb/d to China
+                   // via selective passage; Indian/Turkish ships case-by-case).
+                   // Could rise with bilateral deals (India, China, Turkey, Pakistan).
+                   // Range 1–6 mb/d.
+  reopening: 0,    // week of confirmed Strait reopening (0 = none in window)
+  infra:    15,    // % of Gulf production capacity with confirmed damage
+                   // Base 15% = W3 confirmed: Ras Tanura, Ruwais, Bapco,
+                   // Safaniya partial, Shah gas, Ras Laffan.
+                   // Range 15–60%. Abqaiq hit alone = +15 pp.
+  panic:    25,    // $/bbl geopolitical risk premium above fundamental price
+                   // Goldman Day-1 estimate $18/bbl. Base: $25/bbl peak.
+};
+let ASMP = { ...BASE_ASMP };
+
+// ── FIXED STRUCTURAL CONSTANTS (not sliders — based on hard data) ──
+const GROSS_DISRUPTION = 20;   // mb/d — total Hormuz normal flow
+const BYPASS_CAPACITY  = 3.5;  // mb/d — Yanbu + Fujairah at base (degraded by infra)
+                                // Saudi East-West pipeline ~2.5 mb/d net + UAE ADCOP ~1.0 mb/d
+const INSURANCE_FLOOR  = 12;   // $/bbl embedded war-risk premium post-reopening
+                                // Persists 12-18 months (Red Sea precedent)
+const MINE_CLEAR_WEEKS = 4;    // weeks ceasefire → first transits
+const PROD_RAMP_WEEKS  = 8;    // weeks first transit → ~75% volume recovery
+const LNG_RESTART_LAG  = 10;   // weeks ceasefire → any Ras Laffan flow
+
+// IEA emergency release: 400 Mb over 120 days = ~3.3 mb/d
+// But logistics constrain delivery — modelled as effective buffer:
+const IEA_BUFFER = [3.0, 2.8, 2.5, 1.8, 0.8, 0.2, 0, 0, 0, 0, 0, 0];
+
+// US shale response by week (additional mb/d supply)
+const SHALE_RAMP = [
+  [0, 0, 0, 0,   0,   0.1, 0.2, 0.3, 0.3, 0.3, 0.3, 0.3],
+  [0, 0, 0, 0,   0.1, 0.3, 0.5, 0.7, 0.7, 0.7, 0.7, 0.7],
+  [0, 0, 0, 0.2, 0.5, 0.9, 1.1, 1.2, 1.2, 1.2, 1.2, 1.2],
+];
+
+// Panic premium trajectory: builds to peak W6-8, decays slowly
+const PANIC_CURVE = [0.55, 0.85, 0.75, 0.85, 0.92, 1.0, 1.0, 0.95, 0.88, 0.80, 0.72, 0.65];
+
+// ── STRAIT REOPENING EFFECT BY WEEK ──
+// Given a ceasefire at week C (1-indexed), returns fraction of
+// normal Hormuz flow restored by each week.
+// Mechanics:
+//   - Weeks < C+MINE_CLEAR_WEEKS: 0% restored
+//   - Then ramps: 10% → 30% → 50% → 65% → 75% over PROD_RAMP_WEEKS
+//   - Insurance premium never goes below INSURANCE_FLOOR equivalent
+//   - Max realistic restoration within 12 weeks: ~75%
+function straitFlowFraction(weekIdx, ceasefire) {
+  if (ceasefire === 0) return 0;
+  const wk = weekIdx + 1; // 1-indexed
+  const firstTransitWk = ceasefire + MINE_CLEAR_WEEKS;
+  if (wk < firstTransitWk) return 0;
+  const wksOpen = wk - firstTransitWk;
+  // Ramp: each week of opening restores more, but at diminishing rate
+  // Insurance lag caps full recovery
+  const rampCurve = [0.10, 0.22, 0.35, 0.46, 0.55, 0.62, 0.68, 0.73];
+  const frac = wksOpen < rampCurve.length ? rampCurve[wksOpen] : 0.75;
+  return frac;
+}
+
+// ── STORAGE EXHAUSTION CASCADE ──
+// From W4 onward (storage limits hit by W2-3 for Iraq, W3-4 for others),
+// production cuts self-limit the effective shortage — but create restart lag.
+// We model this as: effective deficit doesn't keep growing linearly after W4,
+// it plateaus then has a "restart debt" on reopening.
+// The restart debt: when strait opens, production can't immediately recover
+// because wells were shut in and storage must drain first.
+// We model this as a -20% penalty on strait flow restoration for first 4 weeks.
+function restartDebtPenalty(weekIdx, ceasefire) {
+  if (ceasefire === 0) return 0;
+  const firstTransitWk = ceasefire + MINE_CLEAR_WEEKS;
+  const wk = weekIdx + 1;
+  if (wk < firstTransitWk) return 0;
+  const wksOpen = wk - firstTransitWk;
+  // Production restart lag: wells were shut-in, storage must drain first.
+  // Peak penalty 12% (less than strait fraction at first transit so never cancels flow).
+  // Decays over 5 weeks as fields restart.
+  if (wksOpen < 5) return 0.12 * (1 - wksOpen / 5);
+  return 0;
+}
+
+// ── OIL PRICE PERCENTAGE TRAJECTORY ──
+function calcOilPcts() {
+  return Array.from({length: 12}, (_, i) => {
+    if (i < 3) return [19, 40, 37][i];
+
+    // ── DERIVED NET DEFICIT ──
+    // Gross disruption = 20 mb/d (full Hormuz flow)
+    // Offsets while closed:
+    //   1. Selective passage (what Iran permits) — ASMP.passage
+    //   2. Bypass pipelines (Yanbu + Fujairah) — degraded by infra damage
+    //   3. IEA emergency release — time-limited buffer
+    // When reopening: strait flow fraction replaces selective passage
+    //   but is capped by infra damage recovery ceiling
+
+    const straitFrac  = straitFlowFraction(i, ASMP.reopening);
+    const restartDebt = restartDebtPenalty(i, ASMP.reopening);
+    const isOpen      = straitFrac > 0;
+
+    // Bypass capacity degrades with infra damage above base 15%
+    // Ras Tanura hit cuts Yanbu; Ruwais hit cuts Fujairah
+    const infraAboveBase = Math.max(0, ASMP.infra - 15) / 100;
+    const bypassNow      = BYPASS_CAPACITY * Math.max(0.3, 1 - infraAboveBase * 1.5);
+
+    // Recovery cap when Strait opens: destroyed infra can't flow back
+    const recoveryCap    = Math.max(0.30, 1 - (ASMP.infra / 100) * 1.15);
+
+    // ── NET DEFICIT ──
+    // BASE_RESIDUAL (10.0 mb/d) = the structural gap BEFORE passage + bypass offsets.
+    // At base assumptions (passage 1.5 + bypass 3.5) this yields 5.0 mb/d net deficit.
+    // Passage slider directly reduces deficit (more Iran-permitted flow = less gap).
+    // Bypass degrades with infra damage above base 15%.
+    // IEA buffer is time-limited.
+    const BASE_RESIDUAL = 10.0; // mb/d — derived from confirmed W3 structural deficit
+    // Supply calculation — key principle:
+    // Selective passage ALWAYS flows (Iran keeps permitting its own + deal traffic).
+    // When Strait opens, additional commercial flow ramps on top of passage.
+    // This prevents the spike where switching from "closed with passage" to
+    // "open with near-zero transit" drops effective supply.
+    const additionalStraitFlow = isOpen
+      ? Math.max(0, straitFrac - restartDebt) * BASE_RESIDUAL * recoveryCap
+      : 0;
+    // Supply offset from non-Gulf sources (Russia/Iran sanctioned, non-Gulf record, US shale,
+    // demand destruction). Schedule is research-derived, week-specific.
+    const offsetSched = OFFSET_SCHEDULES[ASMP.offsetScenario] || OFFSET_SCHEDULES.base;
+    const supplyOffset = offsetSched[i] || 0;
+    const effectiveDef = Math.max(0,
+      BASE_RESIDUAL - ASMP.passage - additionalStraitFlow - bypassNow - IEA_BUFFER[i] - supplyOffset
+    );
+
+    // Fundamental price from supply/demand elasticity
+    const fundamentalPct = (effectiveDef / 105) / 0.05 * 100; // -0.05 short-run elasticity (academic consensus for acute <3-month shocks; IEA range -0.02 to -0.15, Goldman-implied ~-0.05 for 120-day sustained closure)
+
+    // Panic premium — collapses on reopening announcement
+    let panicFactor = PANIC_CURVE[i];
+    if (ASMP.reopening > 0 && i >= ASMP.reopening - 1) {
+      const wksSince = i - (ASMP.reopening - 1);
+      panicFactor    = wksSince === 0 ? 0.20 : Math.max(0.03, 0.20 - wksSince * 0.06);
+    }
+    const panicPct = (ASMP.panic * panicFactor / 73) * 100;
+
+    const raw = Math.round(fundamentalPct + panicPct);
+
+    // Insurance floor: even post-reopening, prices can't fall below ~+25% above pre-war.
+    // War-risk premiums stay elevated 12-18 months. Applied as a price floor, not an
+    // additive — avoids artificial bumps at first transit week.
+    const RECOVERY_FLOOR_PCT = 25; // ~$91 Brent — minimum plausible post-reopening price
+    const effectiveFloor = isOpen ? RECOVERY_FLOOR_PCT : 37;
+    const floored = Math.max(effectiveFloor, raw);
+
+    // Seam-smoothing: W3 actual ($100, +37%) is IEA-suppressed ~$17 below
+    // model projection. Blend toward model over W4-W6 to avoid cliff.
+    // Only apply when Strait is still closed (no reopening yet active).
+    const W3_ACTUAL_PCT = 37;
+    const blendWeights  = [0.40, 0.65, 0.85]; // W4, W5, W6
+    const rw = ASMP.reopening;
+    const noReopeningYet = (rw === 0 || (i + 1) < rw);
+    if (noReopeningYet && i >= 3 && i <= 5) {
+      const w = blendWeights[i - 3];
+      return Math.round(floored * w + W3_ACTUAL_PCT * (1 - w));
+    }
+    return floored;
+  });
+}
+
+// ── LNG / JKM TRAJECTORY ──
+// Qatar LNG is Hormuz-dependent — even post-ceasefire needs LNG_RESTART_LAG.
+// Driven by physical Qatar outage, not oil price.
+const BASE_LNG_PCTS = [43, 100, 129, 171, 207, 243, 307, 321, 307, 286, 271, 257];
+
+function calcLngPcts() {
+  return Array.from({length: 12}, (_, i) => {
+    const basePct = BASE_LNG_PCTS[i];
+    if (i < 3) return basePct; // actuals locked
+
+    if (ASMP.reopening === 0) return basePct;
+
+    const lngRestartWk = ASMP.reopening + LNG_RESTART_LAG;
+    const wk = i + 1;
+    if (wk < lngRestartWk) return basePct; // no LNG relief yet
+
+    // After Ras Laffan restarts: gradual ramp, slower than oil
+    const wksAfter = wk - lngRestartWk;
+    const lngRamp  = [0.08, 0.18, 0.30, 0.42, 0.52, 0.60];
+    const frac     = wksAfter < lngRamp.length ? lngRamp[wksAfter] : 0.65;
+    return Math.round(basePct * (1 - frac));
+  });
+}
+
+// TTF tracks LNG but ~28% lower amplitude (pipeline alternatives)
+function calcTtfPcts() {
+  return calcLngPcts().map((p, i) => {
+    if (i < 3) return [45, 71, 89][i];
+    return Math.round(p * 0.72);
+  });
+}
+
+// ── SCALE OIL-LINKED COMMODITIES ──
+function scaleOil(oilPcts, factor, fixedW123, floor) {
+  return oilPcts.map((p, i) => {
+    if (i < 3) return fixedW123[i];
+    return Math.max(floor, Math.round(p * factor));
+  });
+}
+
+// ── ALL COMMODITY PERCENTAGES ──
+function calcAllPcts() {
+  const oil = calcOilPcts();
+  const lng = calcLngPcts();
+  const ttf = calcTtfPcts();
+  const fm  = ASMP.china ? 0.78 : 1.0; // China fertiliser factor
+
+  // Helium: Qatar-driven (same restart lag as LNG), not oil-linked
+  // At base: +333% peak. With ceasefire: trails LNG restart by 2 wks
+  const helBase = [70, 90, 100, 138, 175, 213, 250, 288, 313, 325, 330, 333];
+  const helium  = helBase.map((p, i) => {
+    if (i < 3) return p;
+    if (ASMP.reopening === 0) return p;
+    const helRestartWk = ASMP.reopening + LNG_RESTART_LAG + 2;
+    const wk = i + 1;
+    if (wk < helRestartWk) return p;
+    const wksAfter = wk - helRestartWk;
+    const ramp = [0.05, 0.12, 0.22, 0.35, 0.48];
+    const frac = wksAfter < ramp.length ? ramp[wksAfter] : 0.55;
+    return Math.round(p * (1 - frac));
+  });
+
+  return {
+    brent:   oil,
+    jkm:     lng,
+    ttf:     ttf,
+    helium:  helium,
+    alum:    scaleOil(oil, 0.72, [10, 19, 23], 10),
+    urea:    [6,17,24, ...oil.slice(3).map(p => Math.round(Math.min(p*0.95,110)*fm))],
+    ammonia: [5,12,20, ...oil.slice(3).map(p => Math.round(Math.min(p*0.90,105)*fm))],
+    dap:     [4,10,14, ...oil.slice(3).map(p => Math.round(Math.min(p*0.77, 90)*fm))],
+    sulfur:  [8,19,29, ...oil.slice(3).map(p => Math.round(Math.min(p*1.12,140)))],
+    pe:      scaleOil(oil, 0.90, [7, 14, 21], 7),
+    jet:     scaleOil(oil, 1.38, [14, 31, 39], 14),
+    diesel:  scaleOil(oil, 1.30, [15, 32, 40], 15),
+    pump:    [6,15,19, ...oil.slice(3).map(p => Math.round(p * 0.73))],
+    wheat:   [1,4,7,  ...oil.slice(3).map((p,i) => Math.round(p*(0.35+i*0.025)))],
+    corn:    [1,4,8,  ...oil.slice(3).map((p,i) => Math.round(p*(0.33+i*0.025)))],
+  };
+}
+
+// ── KEY LOOKUP ──
+function getPctKey(catId, rowName) {
+  if (catId === 'energy') return 'brent';
+  if (rowName.includes('JKM'))         return 'jkm';
+  if (rowName.includes('TTF'))         return 'ttf';
+  if (rowName.includes('Helium'))      return 'helium';
+  if (rowName.includes('Aluminium'))   return 'alum';
+  if (rowName.includes('Urea'))        return 'urea';
+  if (rowName.includes('Ammonia'))     return 'ammonia';
+  if (rowName.includes('DAP'))         return 'dap';
+  if (rowName.includes('Sulfur'))      return 'sulfur';
+  if (rowName.includes('Polyethylene'))return 'pe';
+  if (rowName.includes('Jet'))         return 'jet';
+  if (rowName.includes('Diesel'))      return 'diesel';
+  if (rowName.includes('Pump'))        return 'pump';
+  if (rowName.includes('Wheat'))       return 'wheat';
+  if (rowName.includes('Corn'))        return 'corn';
+  return null;
+}
+
+// ── REFRESH ALL PRICES ──
+function refreshPrices() {
+  const all = calcAllPcts();
+  CATEGORIES.forEach(cat => {
+    cat.rows.forEach((row, rowIdx) => {
+      const key = getPctKey(cat.id, row.name);
+      if (!key || !all[key]) return;
+      const newPcts = all[key];
+      const catIdxR = CATEGORIES.indexOf(cat);
+      const numId   = catIdxR + '-' + rowIdx;
+      document.querySelectorAll(`[data-rowid="${numId}"]`).forEach((cell, i) => {
+        if (i < 2) return; // W1-W2 actuals always locked
+        const pct   = newPcts[i];
+        const price = row.baseline * (1 + pct / 100);
+        const s     = sevClasses(pct);
+        cell.querySelector('.cell-price').className = `cell-price ${s.price}`;
+        cell.querySelector('.cell-price').textContent = formatPrice(price, row.fmt);
+        cell.querySelector('.cell-pct').className = `cell-pct ${s.pct}`;
+        cell.querySelector('.cell-pct').textContent = `+${pct}%`;
+      });
+    });
+  });
+  updateCeasefireMarkers();
+}
+
+// ── CEASEFIRE WEEK MARKERS ──
+// Visually mark which week ceasefire occurs + first transit + LNG restart
+function updateCeasefireMarkers() {
+  // Remove existing markers
+  document.querySelectorAll('.cf-marker').forEach(el => el.remove());
+  if (ASMP.reopening === 0) return;
+
+  const cf  = ASMP.reopening;
+  const ft  = cf + MINE_CLEAR_WEEKS;    // first transit week
+  const lng = cf + LNG_RESTART_LAG;    // LNG restart week
+
+  // Add subtle top-border markers to week header cells
+  document.querySelectorAll('.col-h-week').forEach((cell, i) => {
+    const wk = i + 1;
+    let label = null;
+    let color = null;
+    if (wk === cf)  { label = '⚑ Ceasefire';        color = '#2a7a2a'; }
+    if (wk === ft)  { label = '⚓ First transit';    color = '#00549f'; }
+    if (wk === lng && lng <= 12) { label = '⛽ LNG restart'; color = '#7a2a7a'; }
+    if (label) {
+      const m = document.createElement('div');
+      m.className = 'cf-marker';
+      m.textContent = label;
+      m.style.cssText = `font-size:7.5px;font-weight:800;color:${color};
+        text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;
+        border-top:2px solid ${color};padding-top:2px;`;
+      cell.appendChild(m);
+    }
+  });
+}
+
+/* ── ASSUMPTION CONTROL HANDLERS ── */
+
+function updateOffsetScenario(val) {
+  const scenarios = ['pessimistic', 'base', 'optimistic'];
+  const labels    = ['Pessimistic', 'Base case', 'Optimistic'];
+  const idx = parseInt(val);
+  ASMP.offsetScenario = scenarios[idx];
+  const el = document.getElementById('val-offset');
+  el.textContent = labels[idx];
+  el.className = idx === 1 ? 'asmp-val' : 'asmp-val asmp-changed';
+  refreshPrices();
+}
+
+function updateSlider(key, val) {
+  ASMP[key] = parseFloat(val);
+  const el  = document.getElementById('val-' + key);
+  const fmt = {
+    offsetScenario: v => ({pessimistic:'Pessimistic',base:'Base case',optimistic:'Optimistic'})[v] || v,
+    passage:   v => parseFloat(v).toFixed(1) + ' mb/d',
+    panic:     v => '$' + v + '/bbl',
+    reopening: v => parseInt(v) === 0 ? 'None in window' : 'Week ' + v,
+    infra:     v => parseInt(v) + '% damaged',
+  };
+  if (fmt[key]) el.textContent = fmt[key](val);
+  el.className = parseFloat(val) == BASE_ASMP[key] ? 'asmp-val' : 'asmp-val asmp-changed';
+
+  // Show/hide ceasefire cascade info
+  if (key === 'reopening') {
+    const info = document.getElementById('cf-cascade');
+    const v = parseInt(val);
+    if (v === 0) {
+      info.style.display = 'none';
+    } else {
+      const ft  = v + MINE_CLEAR_WEEKS;
+      const lng = v + LNG_RESTART_LAG;
+      info.style.display = 'block';
+      info.innerHTML =
+        `⚓ First transits: <strong>W${ft}</strong> &nbsp;|&nbsp; ` +
+        `⛽ LNG restart: <strong>${lng <= 12 ? 'W'+lng : 'Outside window'}</strong> &nbsp;|&nbsp; ` +
+        `📋 Insurance elevated: <strong>12–18 months post-ceasefire</strong>`;
+    }
+  }
+  refreshPrices();
+}
+
+function updateToggle(key, val) {
+  ASMP[key] = val;
+  document.getElementById('china-label').textContent =
+    val ? 'China reopening exports (−22% fertiliser ceiling)' : 'China export curbs remain';
+  const el = document.getElementById('val-china');
+  el.textContent = val ? 'Reopening' : 'Blocked';
+  el.className = val !== BASE_ASMP[key] ? 'asmp-val asmp-changed' : 'asmp-val';
+  refreshPrices();
+}
+
+function resetAssumptions(e) {
+  e && e.stopPropagation();
+  ASMP = { ...BASE_ASMP };
+  document.getElementById('sl-offset').value    = '1'; // base = middle position
+  document.getElementById('sl-passage').value   = BASE_ASMP.passage;
+  document.getElementById('sl-panic').value     = BASE_ASMP.panic;
+  document.getElementById('sl-reopening').value = BASE_ASMP.reopening;
+  document.getElementById('sl-china').checked   = BASE_ASMP.china;
+
+  ASMP.offsetScenario = 'base';
+  document.getElementById('val-offset').textContent    = 'Base case';
+  document.getElementById('val-passage').textContent   = '1.5 mb/d';
+  document.getElementById('val-panic').textContent     = '$25/bbl';
+  document.getElementById('val-reopening').textContent = 'None in window';
+  document.getElementById('val-infra').textContent     = '15% damaged';
+  document.getElementById('sl-infra').value            = BASE_ASMP.infra;
+  document.getElementById('val-china').textContent     = 'Blocked';
+  document.getElementById('china-label').textContent   = 'China export curbs remain';
+  document.getElementById('cf-cascade').style.display  = 'none';
+
+  ['deficit','panic','reopening','china','shale'].forEach(k => {
+    const el = document.getElementById('val-' + k);
+    if (el) el.className = 'asmp-val';
+  });
+  refreshPrices();
+}
+
+function toggleAsmp() {
+  const body = document.getElementById('asmpBody');
+  const hdr  = document.getElementById('asmpHeader');
+  const open = body.classList.toggle('open');
+  hdr.classList.toggle('open', open);
+}
 
 /* ── HELPERS ── */
 
@@ -762,123 +1520,119 @@ function formatPrice(val, fmt) {
   return '$' + Math.round(val);
 }
 
-function projected(baseline, pct) {
-  return baseline * (1 + pct / 100);
-}
+function projected(baseline, pct) { return baseline * (1 + pct / 100); }
 
 function sevClasses(pct) {
-  if (pct < 15) return { price: 'sev-0', pct: 'sev-0-bg' };
-  if (pct < 40) return { price: 'sev-1', pct: 'sev-1-bg' };
-  if (pct < 80) return { price: 'sev-2', pct: 'sev-2-bg' };
-  return           { price: 'sev-3', pct: 'sev-3-bg' };
+  if (pct < 15) return {price:'sev-0', pct:'sev-0-bg'};
+  if (pct < 40) return {price:'sev-1', pct:'sev-1-bg'};
+  if (pct < 80) return {price:'sev-2', pct:'sev-2-bg'};
+  return             {price:'sev-3', pct:'sev-3-bg'};
 }
 
-function barColor(pct) {
-  if (pct >= 80) return '#8b0000';
-  if (pct >= 50) return '#b05c00';
-  return 'var(--blue)';
+/* ── STORAGE CARDS ── */
+
+const STORAGE_DATA = [
+  {c:'Iraq',f:'Basra terminals · Rumaila, West Qurna, Zubair',st:'st-halt',sl:'Production Cut 70%',pre:'4.3 mb/d',cur:'~1.3 mb/d',fill:70,note:'97% of Iraqi exports transit Hormuz — no bypass. Storage had <3 days headroom on Mar 1 (Kpler). Iraq was first to cut, with Rumaila/West Qurna shut-ins confirmed Mar 3. Approaches zero by W5 under no-resolution.'},
+  {c:'Qatar LNG',f:'Ras Laffan · 14 trains · 77 Mtpa',st:'st-halt',sl:'Fully Offline Since Mar 2',pre:'77 Mtpa',cur:'0 — offline',fill:100,note:'Storage fills in 4 days at full production. Offline since Iranian drone strike. Restart requires ceasefire + mine clearance + physical inspection + 4–6 wk technical restart. Helium (30% global supply) co-located at Ras Laffan, also offline.'},
+  {c:'Kuwait',f:'KPC · Ahmadi fields · Mina al-Ahmadi terminal',st:'st-halt',sl:'Force Majeure Mar 7',pre:'2.6 mb/d',cur:'Cutting',fill:80,note:'100% Hormuz-dependent, no bypass route. KPC declared force majeure Mar 7. JPMorgan: storage exhaustion forces production cuts within 2-3 weeks of closure for producers with no bypass.'},
+  {c:'Saudi Arabia',f:'Abqaiq · Ras Tanura (hit) · Safaniya (shut Mar 13)',st:'st-cut',sl:'Cutting — Partial Bypass',pre:'10.4 mb/d',cur:'Cut ~2.5 mb/d',fill:52,note:'Yanbu Red Sea exports surged to ~2.3 mb/d (Bloomberg) — far below the 6 mb/d exported via Persian Gulf. Ras Tanura refinery hit. Safaniya offshore field (20% capacity) shut Mar 13. Houthis threaten Red Sea bypass route.'},
+  {c:'UAE',f:'Ruwais refinery shut Mar 11 · Fujairah hit Mar 16',st:'st-cut',sl:'Cutting — Partial Bypass',pre:'4.2 mb/d',cur:'Cut ~800k b/d',fill:44,note:'ADCOP pipeline carries ~1.5-1.8 mb/d to Fujairah — UAE\'s only bypass. Ruwais 817k b/d refinery shut after drone strike Mar 11. Fujairah petroleum zone hit Mar 16. Even Fujairah now inside insurers\' war-risk zone.'},
+  {c:'Gulf Refineries',f:'Ras Tanura 550kb/d · Ruwais 817kb/d · Bapco 267kb/d',st:'st-halt',sl:'>4 mb/d Refining at Risk',pre:'3.3 mb/d exports',cur:'Near zero',fill:95,note:'IEA March OMR: more than 4 mb/d of Gulf refining capacity at risk. All major export refineries offline or severely curtailed. Diesel and jet fuel crack spreads blow out independently of crude — no spare global capacity to replace Gulf refined products.'},
+  {c:'Iran (trickle)',f:'Kharg Island · Jask terminal · Shadow fleet',st:'st-cut',sl:'Exporting ~1.5 mb/d',pre:'2.1 mb/d',cur:'~1.5 mb/d to China',fill:25,note:'Iran paradoxically keeps exporting while blocking others. ~1.22-1.5 mb/d confirmed to China (Kpler). Jask terminal loaded 2 Mb in first week. Selective passage for Chinese, Indian, Turkish vessels. US "fine with" some Iranian/Indian/Chinese ships transiting (Treasury Sec Bessent Mar 11).'},
+];
+
+function barCol(pct) {
+  return pct >= 80 ? '#8b0000' : pct >= 50 ? '#b05c00' : 'var(--blue)';
 }
 
-/* week bar removed */
-
-/* ── BUILD STORAGE CARDS ── */
 document.getElementById('storageGrid').innerHTML = STORAGE_DATA.map(s => `
   <div class="sc-card">
-    <div class="sc-country">${s.country}</div>
-    <div class="sc-facility">${s.facility}</div>
-    <span class="sc-status ${s.status}">${s.statusLabel}</span>
-    <div class="sc-row"><span class="sc-label">Pre-war</span><span class="sc-value">${s.preStat}</span></div>
-    <div class="sc-row"><span class="sc-label">Current</span><span class="sc-value">${s.curStat}</span></div>
-    <div class="sc-bar"><div class="sc-fill" style="width:${s.fillPct}%; background:${barColor(s.fillPct)}"></div></div>
+    <div class="sc-country">${s.c}</div>
+    <div class="sc-facility">${s.f}</div>
+    <span class="sc-status ${s.st}">${s.sl}</span>
+    <div class="sc-row"><span class="sc-label">Pre-war</span><span class="sc-value">${s.pre}</span></div>
+    <div class="sc-row"><span class="sc-label">Current</span><span class="sc-value">${s.cur}</span></div>
+    <div class="sc-bar"><div class="sc-fill" style="width:${s.fill}%;background:${barCol(s.fill)}"></div></div>
     <div class="sc-note">${s.note}</div>
   </div>`).join('');
 
 /* ── BUILD CATEGORY SECTIONS ── */
-const catsEl = document.getElementById('categories');
 
-catsEl.innerHTML = CATEGORIES.map(cat => {
+const catsEl    = document.getElementById('categories');
+const initPcts  = calcAllPcts();
 
-  // Build each commodity row's HTML
+catsEl.innerHTML = CATEGORIES.map((cat, catIdx) => {
   const rowsHtml = cat.rows.map((row, rowIdx) => {
+    const key      = getPctKey(cat.id, row.name);
+    const pcts     = (key && initPcts[key]) ? initPcts[key] : Array(12).fill(0);
+    const numRowId = catIdx + '-' + rowIdx;
 
-    // The column-header row (only shown once per row group)
-    const colHeaders = Array.from({ length: 12 }, (_, i) => {
-      const w = i + 1;
-      const isActual  = w <= 2;
-      const isCurrent = w === 3;
-      const cls = isActual ? 'ch-actual' : isCurrent ? 'ch-current' : '';
-      const tag = isActual ? '<span class="ch-tag ch-tag-actual">Actual</span>'
-                : isCurrent ? '<span class="ch-tag ch-tag-now">▶ Now</span>' : '';
-      return `<div class="col-h-week ${cls}">
+    const colHdrs = Array.from({length: 12}, (_, i) => {
+      const w = i+1, isR = w <= 2, isN = w === 3;
+      return `<div class="col-h-week ${isR?'ch-actual':isN?'ch-current':''}">
         <span class="ch-wnum">W${w}</span>
         <span class="ch-date">${DATES[i]}</span>
-        ${tag}
+        ${isR ? '<span class="ch-tag ch-tag-actual">Actual</span>'
+               : isN ? '<span class="ch-tag ch-tag-now">▶ Now</span>' : ''}
       </div>`;
     }).join('');
 
-    // The data cells
-    const cells = Array.from({ length: 12 }, (_, i) => {
-      const w = i + 1;
-      const isActual  = row.actuals[i] !== null;
-      const isCurrent = w === 3;
-      const price = isActual ? row.actuals[i] : projected(row.baseline, row.pcts[i]);
-      const pct   = row.pcts[i];
-      const sev   = sevClasses(pct);
-      const cellClass = isActual ? 'dc-actual' : isCurrent ? 'dc-current' : '';
-      const dotHtml   = isActual
-        ? '<span class="cell-dot dot-actual"></span>'
-        : (isCurrent ? '<span class="cell-dot dot-current"></span>' : '');
-      return `
-        <div class="data-cell ${cellClass}">
-          ${dotHtml}
-          <span class="cell-price ${sev.price}">${formatPrice(price, row.fmt)}</span>
-          <span class="cell-pct ${sev.pct}">+${pct}%</span>
-          <span class="cell-note">${row.notes[i]}</span>
-        </div>`;
+    const cells = Array.from({length: 12}, (_, i) => {
+      const w    = i+1;
+      const isR  = row.actuals[i] !== null;
+      const isN  = w === 3;
+      const pct  = pcts[i];
+      const price = isR ? row.actuals[i] : projected(row.baseline, pct);
+      const s    = sevClasses(pct);
+      const cc   = isR ? 'dc-actual' : isN ? 'dc-current' : '';
+      const dot  = isR ? '<span class="cell-dot dot-actual"></span>'
+                       : isN ? '<span class="cell-dot dot-current"></span>' : '';
+      return `<div class="data-cell ${cc}" data-rowid="${numRowId}" data-actual="${isR?price:''}">
+        ${dot}
+        <span class="cell-price ${s.price}">${formatPrice(price, row.fmt)}</span>
+        <span class="cell-pct ${s.pct}">+${pct}%</span>
+        <span class="cell-note">${row.notes[i]}</span>
+      </div>`;
     }).join('');
 
     const sep = rowIdx > 0 ? '<div class="row-sep"></div>' : '';
-
-    return `
-      ${sep}
+    return `${sep}
       <div class="table-grid">
-        <div class="row-label col-h-label"></div>
-        ${colHeaders}
+        <div class="row-label col-h-label"></div>${colHdrs}
       </div>
       <div class="table-grid">
         <div class="row-label">
           <div class="row-name">${row.name}</div>
           <div class="row-unit">${row.unit}</div>
-          <div class="row-baseline">Pre-war baseline: <strong>${formatPrice(row.baseline, row.fmt)}</strong></div>
+          <div class="row-baseline">Pre-war: <strong>${formatPrice(row.baseline, row.fmt)}</strong></div>
         </div>
         ${cells}
       </div>`;
   }).join('');
 
-  return `
-    <div class="accordion" id="cat-${cat.id}">
-      <div class="acc-trigger cat-trigger ${cat.open ? 'is-open' : ''}" onclick="toggle('cat-${cat.id}')">
-        <span class="cat-name">${cat.name}</span>
-        <span class="cat-desc">${cat.desc}</span>
-        <span class="acc-caret ${cat.open ? 'is-open' : ''}">▼</span>
-      </div>
-      <div class="acc-body ${cat.open ? 'is-open' : ''}" id="cat-${cat.id}-body">
-        ${rowsHtml}
-      </div>
-    </div>`;
+  return `<div class="accordion" id="cat-${cat.id}">
+    <div class="acc-trigger cat-trigger ${cat.open?'is-open':''}" onclick="toggle('cat-${cat.id}')">
+      <span class="cat-name">${cat.name}</span>
+      <span class="cat-desc">${cat.desc}</span>
+      <span class="acc-caret ${cat.open?'is-open':''}">▼</span>
+    </div>
+    <div class="acc-body ${cat.open?'is-open':''}" id="cat-${cat.id}-body">
+      ${rowsHtml}
+    </div>
+  </div>`;
 }).join('');
 
-/* ── ACCORDION TOGGLE ── */
-function toggle(sectionId) {
-  const section = document.getElementById(sectionId);
-  const trigger = section.querySelector('.acc-trigger');
-  const body    = document.getElementById(sectionId + '-body');
-  const caret   = trigger.querySelector('.acc-caret');
-  const isOpen  = body.classList.contains('is-open');
-  body.classList.toggle('is-open', !isOpen);
-  trigger.classList.toggle('is-open', !isOpen);
-  caret.classList.toggle('is-open', !isOpen);
+/* ── ACCORDION TOGGLES ── */
+
+function toggle(id) {
+  const b = document.getElementById(id + '-body');
+  const h = document.getElementById(id).querySelector('.acc-trigger');
+  const o = b.classList.toggle('is-open');
+  h.classList.toggle('is-open', o);
+  h.querySelector('.acc-caret').classList.toggle('is-open', o);
 }
+
+// accordion toggles handled by toggle() function
 
 </script>
 </body>
