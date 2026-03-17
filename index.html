@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Strait of Hormuz — Commodity Impact · No-Resolution · Mar 2026</title>
+<style>
+
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  background: #f0f4f9;
+  color: #0d1e35;
+  min-width: 1200px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── TOKENS ─── */
+:root {
+  --navy:   #083863;
+  --blue:   #00549f;
+  --indigo: #11125d;
+  --yellow: #e8ff03;
+  --white:  #ffffff;
+  --bg:     #f0f4f9;
+  --rule:   #d8e2ef;
+  --ghost:  #ecf0f7;
+  --dim:    #6b7a96;
+  --ink:    #0d1e35;
+  --green-bg: #e8f5ec;
+  --green-ink: #195f2e;
+  --amber-bg: #fffbe6;
+  --amber-ink: #7a6800;
+  --amber-bdr: #c8d200;
+}
+
+/* ─── HEADER ─── */
+.header {
+  background: #ffffff;
+  padding: 11px 24px 10px;
+  border-bottom: 3px solid var(--blue);
+}
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.header-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.ake-img {
+  height: 56px;
+  width: auto;
+  display: block;
+}
+.ake-url {
+  font-size: 8.5px;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+}
+.ake-url:hover { text-decoration: underline; }
+.header-text { flex: 1; }
+.header-eyebrow {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+.header-title {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.header-title span { color: var(--blue); }
+.header-sub {
+  margin-top: 4px;
+  font-size: 9.5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.no-res-badge {
+  flex-shrink: 0;
+  background: #cc0000;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 2px;
+  align-self: flex-start;
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
+/* ─── WEEK BAR ─── */
+.week-bar {
+  background: var(--indigo);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  border-bottom: 2px solid rgba(255,255,255,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+.week-cell {
+  padding: 9px 6px 8px;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+.week-cell.is-actual  { background: rgba(25,95,46,0.14); }
+.week-cell.is-current { background: rgba(232,255,3,0.10); border-top: 3px solid var(--yellow); }
+.w-num  { display: block; font-size: 14px; font-weight: 900; line-height: 1; }
+.w-date { display: block; font-size: 8px;  color: rgba(255,255,255,0.30); margin: 2px 0 4px; }
+.w-phase {
+  display: inline-block;
+  font-size: 7px;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.w-here { display: block; font-size: 7px; font-weight: 800; color: var(--yellow); margin-top: 4px; letter-spacing: 0.05em; }
+
+/* week number colours */
+.wc-actual  { color: #4de888; }
+.wc-current { color: var(--yellow); }
+.wc-future  { color: rgba(255,255,255,0.18); }
+
+/* phase pill colours */
+.ph-shock    { background: rgba(249,115,22,0.14); color: #f97316; }
+.ph-surge    { background: rgba(220,38,38,0.14);  color: #f87171; }
+.ph-spread   { background: rgba(232,255,3,0.13);  color: var(--yellow); border: 1px solid rgba(232,255,3,0.28); }
+.ph-contract { background: rgba(251,191,36,0.14); color: #fbbf24; }
+.ph-short    { background: rgba(239,68,68,0.18);  color: #fca5a5; }
+.ph-crisis   { background: rgba(185,28,28,0.20);  color: #fca5a5; }
+.ph-recess   { background: rgba(139,0,0,0.25);    color: #fecaca; }
+
+/* ─── LEGEND BAR ─── */
+.legend-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--rule);
+  padding: 7px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 9.5px;
+  color: var(--dim);
+  flex-wrap: wrap;
+}
+.legend-title { font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink); }
+.leg { display: flex; align-items: center; gap: 5px; }
+.leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.legend-right { margin-left: auto; display: flex; gap: 16px; }
+
+/* ─── ACCORDION SHARED ─── */
+.accordion { border-bottom: 1px solid var(--rule); }
+.acc-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 20px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+.acc-trigger .acc-caret { font-size: 10px; transition: transform 0.2s; margin-left: auto; }
+.acc-trigger.is-open .acc-caret { transform: rotate(180deg); }
+.acc-body { display: none; }
+.acc-body.is-open { display: block; }
+
+/* storage trigger */
+.storage-trigger { background: var(--blue); }
+.storage-trigger:hover { background: #005fbb; }
+.storage-trigger .acc-title { font-size: 10px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: #fff; }
+.storage-trigger .acc-sub   { font-size: 9px; color: rgba(255,255,255,0.48); margin-top: 2px; }
+.storage-trigger .acc-caret { color: rgba(255,255,255,0.4); }
+
+/* category trigger */
+.cat-trigger { background: var(--navy); }
+.cat-trigger:hover { background: #0a4678; }
+.cat-trigger .cat-icon  { font-size: 15px; }
+.cat-trigger .cat-name  { font-size: 10px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: #fff; }
+.cat-trigger .cat-desc  { font-size: 9px; color: rgba(255,255,255,0.40); }
+.cat-trigger .acc-caret { color: rgba(255,255,255,0.38); }
+
+/* sources trigger */
+.src-trigger { background: var(--white); border-top: 2px solid var(--rule); }
+.src-trigger:hover { background: var(--ghost); }
+.src-trigger .acc-title { font-size: 9.5px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--navy); }
+.src-trigger .acc-caret { color: var(--dim); }
+
+/* ─── STORAGE GRID ─── */
+.storage-body { padding: 14px 20px 16px; background: var(--white); }
+.storage-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+.sc-card {
+  background: var(--ghost);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+.sc-country  { font-size: 10px; font-weight: 800; color: var(--navy); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1px; }
+.sc-facility { font-size: 8px;  color: var(--dim);  margin-bottom: 6px;  line-height: 1.4; }
+.sc-status   { display: inline-block; font-size: 7.5px; font-weight: 800; padding: 1px 6px; border-radius: 2px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+.st-halt   { background: #fcd5d5; color: #8b0000; }
+.st-cut    { background: #fff0cc; color: #7a4800; }
+.sc-row    { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+.sc-label  { font-size: 8px;  color: var(--dim); }
+.sc-value  { font-size: 12px; font-weight: 800; color: var(--ink); }
+.sc-bar    { height: 3px; background: var(--rule); border-radius: 2px; margin: 5px 0 7px; }
+.sc-fill   { height: 3px; border-radius: 2px; transition: width 0.3s; }
+.sc-note   { font-size: 8px; color: var(--dim); line-height: 1.45; }
+
+/* ─── THE MAIN TABLE GRID ─── */
+/*
+  Layout: fixed 13-column grid.
+  Col 1: row label (200px)
+  Cols 2–13: 12 week cells (equal)
+*/
+.table-grid {
+  display: grid;
+  grid-template-columns: 200px repeat(12, 1fr);
+  width: 100%;
+}
+
+/* column headers row */
+.col-header-row { display: contents; }
+.col-h-label {
+  grid-column: 1;
+  background: var(--ghost);
+  border-bottom: 2px solid var(--rule);
+  border-right: 2px solid var(--navy);
+  height: 46px;
+}
+.col-h-week {
+  padding: 6px 3px 5px;
+  text-align: center;
+  background: var(--ghost);
+  border-bottom: 2px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  height: 46px;
+}
+.col-h-week.ch-actual  { background: #ebf5ef; border-bottom-color: var(--green-ink); }
+.col-h-week.ch-current { background: #fffbdc; border-bottom-color: var(--amber-bdr); }
+.ch-wnum { font-size: 11px; font-weight: 900; color: var(--navy); line-height: 1; display: block; }
+.ch-date { font-size: 7.5px; color: var(--muted); display: block; line-height: 1.3; }
+.ch-tag  { font-size: 7px; font-weight: 800; padding: 1px 4px; border-radius: 2px; display: inline-block; margin-top: 1px; text-transform: uppercase; letter-spacing: 0.04em; }
+.ch-tag-actual { background: var(--green-bg); color: var(--green-ink); }
+.ch-tag-now    { background: var(--amber-bg); color: var(--amber-ink); }
+
+/* data row */
+.data-row { display: contents; }
+
+/* row label cell */
+.row-label {
+  grid-column: 1;
+  padding: 0 14px 0 18px;
+  background: var(--white);
+  border-bottom: 1px solid var(--rule);
+  border-right: 2px solid var(--navy);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 70px;
+}
+.row-name     { font-size: 11px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+.row-unit     { font-size: 8px; color: var(--dim); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.04em; }
+.row-baseline { font-size: 8.5px; color: var(--dim); margin-top: 4px; }
+.row-baseline strong { color: var(--navy); font-weight: 700; }
+
+/* data cell */
+.data-cell {
+  padding: 7px 4px 6px;
+  text-align: center;
+  background: var(--white);
+  border-bottom: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 70px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.1s;
+}
+.data-cell:hover { background: #f4f7fc; }
+.data-cell.dc-actual  { background: var(--green-bg); }
+.data-cell.dc-current { background: var(--amber-bg); border-top: 2px solid var(--amber-bdr); }
+
+/* cell content */
+.cell-price { font-size: 13px; font-weight: 800; line-height: 1; display: block; }
+.cell-pct   { font-size: 8.5px; font-weight: 800; padding: 1px 5px; border-radius: 2px; display: inline-block; margin-top: 2px; }
+.cell-note  { font-size: 7px; color: var(--dim); line-height: 1.3; margin-top: 2px; max-width: 76px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.cell-dot   { position: absolute; top: 4px; right: 4px; width: 5px; height: 5px; border-radius: 50%; }
+.dot-actual  { background: var(--green-ink); }
+.dot-current { background: var(--amber-ink); }
+
+/* severity colour pairs */
+.sev-0 { color: var(--blue); }       .sev-0-bg { background: #dde8ff; color: var(--blue); }
+.sev-1 { color: #b05c00; }           .sev-1-bg { background: #fff2da; color: #b05c00; }
+.sev-2 { color: #9e2400; }           .sev-2-bg { background: #ffe5db; color: #9e2400; }
+.sev-3 { color: #800000; }           .sev-3-bg { background: #ffd2d2; color: #800000; }
+
+/* separator between commodity rows inside a category */
+.row-sep {
+  grid-column: 1 / -1;
+  height: 4px;
+  background: var(--ghost);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* ─── SOURCES BODY ─── */
+.sources-body { padding: 16px 20px 24px; background: var(--white); }
+.sources-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px 24px; margin-bottom: 16px; }
+.src-block h4 { font-size: 9.5px; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
+.src-block p  { font-size: 9.5px; color: var(--dim); line-height: 1.75; }
+.src-block p strong { color: var(--ink); }
+.sources-list {
+  font-size: 9px; color: var(--dim); line-height: 2;
+  border-top: 1px solid var(--rule); padding-top: 10px;
+}
+.status-bar {
+  background: #b80000;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 7px 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  flex-shrink: 0;
+  animation: blink 1.4s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-row">
+    <div class="header-logo">
+      <img src="data:image/png;base64,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" alt="AKE International" class="ake-img"/>
+      <a href="https://www.akegroup.com" target="_blank" class="ake-url">akegroup.com</a>
+    </div>
+    <div class="header-text">
+      <div class="header-title">Strait of Hormuz — Commodity Price Impact Model</div>
+      <div class="header-sub">No-resolution scenario &nbsp;·&nbsp; W1–W2 confirmed actual data &nbsp;·&nbsp; W3 onwards projected &nbsp;·&nbsp; Mar 17, 2026</div>
+    </div>
+  </div>
+</div>
+<div class="status-bar">
+  <span class="status-dot"></span>
+  Strait of Hormuz Remains Under Iranian Control — Commercial Shipping Near Zero
+</div>
+<div id="categories"></div>
+
+<!-- STORAGE ACCORDION -->
+<div class="accordion" id="storageSection">
+  <div class="acc-trigger storage-trigger" onclick="toggle('storageSection')">
+    <div style="flex:1">
+      <div class="acc-title">The Storage Cascade — Why Production Must Halt</div>
+      <div class="acc-sub">Blocked exports → tanks fill → wells must stop. Bypass pipelines also under attack.</div>
+    </div>
+    <span class="acc-caret">▼</span>
+  </div>
+  <div class="acc-body" id="storageSection-body">
+    <div class="storage-body">
+      <div class="storage-grid" id="storageGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SOURCES ACCORDION -->
+<div class="accordion" id="sourcesSection" style="border-top:2px solid var(--rule)">
+  <div class="acc-trigger src-trigger" onclick="toggle('sourcesSection')">
+    <span class="acc-title">Sources, Methodology &amp; Price Calibration</span>
+    <span class="acc-caret">▼</span>
+  </div>
+  <div class="acc-body" id="sourcesSection-body">
+    <div class="sources-body">
+      <div class="sources-grid">
+        <div class="src-block">
+          <h4>Oil Price Model — First Principles</h4>
+          <p><strong>Gross disruption: ~9.7 mb/d</strong> (Iraq −3.0, Kuwait −2.6, Qatar −0.6, Bahrain −0.2, Saudi −2.5, UAE −0.8). <strong>Realistic offsets: ~4.3 mb/d</strong> — Yanbu net ~1.5 mb/d (port cap at 4.5 mb/d less ~2 mb/d Saudi refinery consumption), Fujairah ~1.0 mb/d (terminal hit Mar 16 and at capacity), Russia ~1.5 mb/d (US 30-day waiver, shadow fleet saturated), non-OPEC ramp ~0.3 mb/d. <strong>Net structural deficit: ~5.4 mb/d</strong> = 5.1% of global demand (105 mb/d). Short-run price elasticity −0.07 (IEA midpoint): 5.1% ÷ 0.07 = 73% above pre-war = ~$126 fundamental equilibrium. Adding panic premium of $20–30/bbl (Goldman estimated $18/bbl on Day 1; sustained by new supreme leader's public commitment to closure, ongoing infrastructure attacks, and insurance withdrawal) gives W7–8 peak of ~$155–160. Recession demand destruction is minimal within 12 weeks — historically takes 6–18 months; modelled at −0.5 mb/d from W9. IEA 400 Mb release (max 3 mb/d drawdown) suppresses prices in W1–4 only; exhausted by W5.</p>
+        </div>
+        <div class="src-block">
+          <h4>Insurance &amp; Shipping — A Structural Price Driver</h4>
+          <p>The strait was closed commercially by the insurance market, not just military force. P&amp;I (Protection &amp; Indemnity) cover was withdrawn from March 5. War risk premiums jumped from 0.125% to 0.4% of hull value per transit — for a $100M VLCC, a $275,000 increase per voyage, passed directly into freight rates and landed costs (+$3–5/bbl on crude). Critically, <strong>insurance does not return with a ceasefire</strong> — underwriters require sustained stability before reissuing cover, creating a 2–4 week commercial lag on top of any political resolution. Ships diverting to the Cape of Good Hope add 10–14 days and $1–2M per round voyage in additional bunker fuel. At diesel prices of $240+/bbl, this premium compounds further. The net effect: every commodity that moves by sea — which is all of them — carries an embedded Cape rerouting cost of $3–8 per tonne depending on route and vessel type. This is baked into all price projections in this model and sustains the premium even as the fundamental supply deficit is the primary driver.</p>
+        </div>
+        <div class="src-block">
+          <h4>Storage Cascade &amp; Refinery Shock</h4>
+          <p>Gulf storage was ~100 Mb remaining (Kayrros/JPMorgan Mar 2026). At 10 mb/d shut-in, exhausted in ~10 days — already past this in W3. Iraq, Kuwait, Qatar and Bahrain have <strong>zero bypass infrastructure</strong> and must simply stop producing. Production shut-ins require weeks to months to restart even after a ceasefire. Qatar LNG storage fills in 4 days at full rate — no buffer. CEO: no restart until conflict fully ends + 4–6 weeks technical restart. <strong>Refinery shock is separate from crude:</strong> ~1.8 mb/d of Gulf refining offline (Ras Tanura 550k b/d; Ruwais 817k b/d; Bapco 267k b/d). Gulf pre-war refined product exports 3.3 mb/d — now near zero. No spare global refining capacity. NW Europe jet fuel hit $218/bbl in W2 at $100 crude; crack spreads blow out further at $155+ crude, driving diesel and jet fuel above crude-only percentage gains.</p>
+        </div>
+        <div class="src-block">
+          <h4>Cascade Methodology &amp; Food Lag</h4>
+          <p>All non-energy commodities are recascaded from the revised oil trajectory. At $155+ oil, global gas prices rise, raising production costs for alternative fertiliser producers who were supposed to moderate prices — the replacement supply is itself now expensive. Naphtha and ethane (PE feedstocks) track crude directly. Diesel costs at $240+/bbl feed into every tonne of food and goods transported globally. <strong>Food lag:</strong> 60-day input-cost-to-consumer-price lag (RSM US). Spring planting in W3 — reduced fertiliser application locks in harvest shortfall regardless of when the crisis ends. W8–W12 food prices reflect both elevated input costs AND lower harvest volumes simultaneously. Urea calibrated against 2022 Ukraine spike (~$900/t); current disruption is deeper. Goldman: US CPI peaks 4.5%. Oxford Economics: eurozone/UK/Japan contraction at $140 average oil — this model's peak weeks are above that threshold.</p>
+        </div>
+      </div>
+      <div class="sources-list">
+        <strong>Primary sources:</strong> &nbsp;
+        IEA Oil Market Report March 2026 &nbsp;·&nbsp;
+        Goldman Sachs commodity research (Struyven) &amp; economics (Abecasis, Mericle) &nbsp;·&nbsp;
+        Bank of America commodity strategy (Akamine) &nbsp;·&nbsp;
+        Capital Economics prolonged-disruption scenario &nbsp;·&nbsp;
+        JPMorgan Global Commodity Strategy (Kaneva) &nbsp;·&nbsp;
+        Oxford Economics $140 "breaking point" analysis &nbsp;·&nbsp;
+        Man Group commodity strategy &nbsp;·&nbsp;
+        NDSU Agricultural Trade Monitor March 2026 &nbsp;·&nbsp;
+        Carnegie Endowment for International Peace &nbsp;·&nbsp;
+        Kayrros / Antoine Halff (Gulf storage) &nbsp;·&nbsp;
+        QatarEnergy force majeure statements &amp; CEO interviews &nbsp;·&nbsp;
+        Kornbluth Helium Consulting &nbsp;·&nbsp;
+        AAA Gas Prices Mar 16, 2026 &nbsp;·&nbsp;
+        EIA Weekly Petroleum Status Report &nbsp;·&nbsp;
+        Argus Media LNG spot pricing &nbsp;·&nbsp;
+        ENR Engineering News-Record (bypass infrastructure analysis) &nbsp;·&nbsp;
+        Al Jazeera · CNN · Bloomberg · CNBC · Reuters · Fortune (Mar 1–17, 2026)
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+/* ── DATA ── */
+
+const DATES = [
+  'Mar 2–8','Mar 9–15','Mar 16–22','Mar 23–29',
+  'Mar 30–Apr 5','Apr 6–12','Apr 13–19','Apr 20–26',
+  'Apr 27–May 3','May 4–10','May 11–17','May 18–24'
+];
+
+const PHASES = [
+  { label: 'Shock',      css: 'ph-shock'    },
+  { label: 'Surge',      css: 'ph-surge'    },
+  { label: 'Spreading',  css: 'ph-spread'   },
+  { label: 'Contraction',css: 'ph-contract' },
+  { label: 'Shortages',  css: 'ph-short'    },
+  { label: 'Crisis',     css: 'ph-crisis'   },
+  { label: 'Recession',  css: 'ph-recess'   },
+  { label: 'Deep Crisis',css: 'ph-recess'   },
+  { label: 'Breakdown',  css: 'ph-recess'   },
+  { label: 'Plateau',    css: 'ph-contract' },
+  { label: 'Sustained',  css: 'ph-contract' },
+  { label: 'New Reality',css: 'ph-short'    },
+];
+
+const STORAGE_DATA = [
+  {
+    country: 'Iraq',
+    facility: 'Basra terminals · Rumaila, West Qurna, Zubair',
+    status: 'st-halt', statusLabel: 'Production Cut 70%',
+    preStat: '4.3 mb/d', curStat: '~1.3 mb/d', fillPct: 70,
+    note: '97% of Iraqi exports transit Hormuz — no bypass exists. IEA confirmed 70% cut by W1. Storage exhausted. Approaches zero by W5 under no-resolution.'
+  },
+  {
+    country: 'Qatar LNG',
+    facility: 'Ras Laffan · 14 trains · 77 Mtpa',
+    status: 'st-halt', statusLabel: 'Fully Offline Since Mar 2',
+    preStat: '77 Mtpa', curStat: '0 — offline', fillPct: 100,
+    note: 'Storage fills in just 4 days at full production. Offline since Iranian drone strike. CEO: no restart until conflict ends + 4–6 wk restart. Helium (30% global supply) also offline.'
+  },
+  {
+    country: 'Kuwait',
+    facility: 'KPC · Ahmadi fields · Mina al-Ahmadi terminal',
+    status: 'st-halt', statusLabel: 'Force Majeure Mar 7',
+    preStat: '2.6 mb/d', curStat: 'Cutting', fillPct: 80,
+    note: '100% of exports via Hormuz — no alternative route. JPMorgan: some Gulf producers exhaust storage in ~3 weeks. Further cuts inevitable by W4–5.'
+  },
+  {
+    country: 'Saudi Arabia',
+    facility: 'Abqaiq · Ras Tanura (hit) · Safaniya (shut Mar 13)',
+    status: 'st-cut', statusLabel: 'Cutting — Partial Bypass',
+    preStat: '10.4 mb/d', curStat: 'Cut 2–2.5 mb/d', fillPct: 52,
+    note: 'Yanbu net export capacity ~2.5 mb/d after Saudi refinery consumption. Ras Tanura refinery hit by drones. Safaniya field (20% of capacity) shut Mar 13. Houthis threaten Red Sea bypass.'
+  },
+  {
+    country: 'UAE',
+    facility: 'Ruwais refinery shut Mar 11 · Fujairah hit Mar 16',
+    status: 'st-cut', statusLabel: 'Cutting — Partial Bypass',
+    preStat: '4.2 mb/d', curStat: 'Cut ~800k b/d', fillPct: 44,
+    note: 'ADCOP handles ~1.6 mb/d — only 40% of UAE exports. Ruwais shut after drone strike. Fujairah petroleum zone hit Mar 16. Refined products have no bypass at all.'
+  },
+  {
+    country: 'Bahrain + Rest',
+    facility: 'Bapco · All 100% Hormuz-dependent',
+    status: 'st-halt', statusLabel: 'All Force Majeure',
+    preStat: '~100 Mb left', curStat: '~10-day buffer', fillPct: 87,
+    note: 'Combined Gulf storage ~100 Mb remaining (Kayrros). At 10 mb/d shut-in rate, exhausted in ~10 days — already past this in W3. Production cascade accelerates W4–6.'
+  },
+  {
+    country: 'Gulf Refineries',
+    facility: 'Ras Tanura 550kb/d · Ruwais 817kb/d · Bapco 267kb/d · Basra 140kb/d',
+    status: 'st-halt', statusLabel: '~1.8 mb/d Offline',
+    preStat: '3.3 mb/d exports', curStat: 'Near zero', fillPct: 95,
+    note: 'Gulf exported 3.3 mb/d of refined products pre-war. Ras Tanura (hit by drones), Ruwais (drone strike Mar 11), Bapco (force majeure) all offline. No spare global refining capacity to replace. Crack spreads explode independently of crude price — NW Europe jet fuel already $218/bbl in W2. Diesel and jet 30–50% worse than crude price alone implies.'
+  },
+];
+
+const CATEGORIES = [
+  {
+    id: 'energy', icon: '', name: 'Oil', open: true,
+    desc: 'Brent crude — the primary supply shock driver',
+    rows: [
+      {
+        name: 'Brent Crude', unit: '$/bbl', baseline: 73, fmt: '$',
+        actuals: [87, 102, 100, null, null, null, null, null, null, null, null, null],
+        pcts:    [19, 40, 37, 58, 78, 96, 112, 117, 115, 110, 106, 102],
+        notes: [
+          'Peaked $126 intraday W2', '$100+ confirmed — 1st since 2022', '$100 IEA buffer holds',
+          'IEA thinning; ~$115', 'IEA exhausting; ~$143', 'Deficit exposed + insurance premium',
+          'Panic peak ~$182; Cape rerouting adds $4/bbl', 'Plateau; recession not yet biting', 'Demand −0.5mb/d offset',
+          'Structural plateau ~$153', 'Sustained — no supply return', '~$148 structural new level',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'gas', icon: '', name: 'Natural Gas + LNG', open: true,
+    desc: 'Qatar offline at source — no bypass possible for LNG',
+    rows: [
+      {
+        name: 'LNG Asia — JKM Spot', unit: '$/MMBtu', baseline: 14, fmt: '$',
+        actuals: [20, 28, 32, null, null, null, null, null, null, null, null, null],
+        pcts:    [43, 100, 129, 171, 207, 243, 307, 321, 307, 286, 271, 257],
+        notes: [
+          'Qatar FM; JKM +39% on Day 1', 'Qatar fully offline', 'No alt supply at scale',
+          'Industrial rationing begins', 'Asia power cuts; ~$41', 'Energy equiv. to $137 oil',
+          'Force majeure cascades; ~$54', 'Peak — Asia pays anything', 'Slight demand fall',
+          'High plateau ~$50', 'No LNG restart in sight', 'Structural new level',
+        ],
+      },
+      {
+        name: 'EU Gas — TTF', unit: '€/MWh', baseline: 38, fmt: '€',
+        actuals: [55, 65, 72, null, null, null, null, null, null, null, null, null],
+        pcts:    [45, 71, 89, 118, 145, 168, 189, 197, 189, 176, 166, 158],
+        notes: [
+          'TTF +50% on Mar 2 alone', 'Goldman: doubling risk', '€72 — near pre-war double',
+          'Industrial rationing', 'Emergency measures; ~€88', 'Storage emergency',
+          'Industry curtailed; ~€103', 'Peak ~€105; $150 oil amplifies', 'Demand slightly down',
+          'Plateau ~€98', 'Sustained high', 'New energy baseline €93',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'industrial', icon: '', name: 'Industrial Gases + Metals', open: true,
+    desc: 'Helium offline at source; aluminium smelting under energy pressure',
+    rows: [
+      {
+        name: 'Helium Spot', unit: '$/Mcf', baseline: 400, fmt: '$',
+        actuals: [680, 760, 800, null, null, null, null, null, null, null, null, null],
+        pcts:    [70, 90, 100, 138, 175, 213, 250, 288, 313, 325, 330, 333],
+        notes: [
+          'Kornbluth: +70–100% W1', 'Qatar offline at source', 'Contracts at risk',
+          'Chip fab rationing begins', 'MRI equipment delays', 'Semiconductor crisis',
+          'Force majeure cascade', 'Critical industries only', 'Spot market seizes',
+          'Allocation-only market', 'Deep structural shortage', 'Structural deficit',
+        ],
+      },
+      {
+        name: 'Aluminium', unit: '$/tonne', baseline: 2400, fmt: '$k',
+        actuals: [2650, 2860, 2950, null, null, null, null, null, null, null, null, null],
+        pcts:    [10, 19, 23, 36, 50, 62, 72, 80, 82, 80, 77, 74],
+        notes: [
+          'CNN: 4-year high confirmed', 'UAE Ruwais drone hit', '$2,950 confirmed',
+          'Building materials surge', 'Smelting energy costs surge', 'EU smelters curtailing',
+          'Auto/aerospace shortfall', '$150 oil doubles energy input', 'Demand falling',
+          'Plateau ~$4,320', 'Sustained structural gap', 'New structural level',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'fert', icon: '', name: 'Fertilisers', open: true,
+    desc: 'LNG feedstock also blocked; spring planting decisions being made NOW',
+    rows: [
+      {
+        name: 'Urea (NOLA)', unit: '$/tonne', baseline: 475, fmt: '$',
+        actuals: [505, 556, 591, null, null, null, null, null, null, null, null, null],
+        pcts:    [6, 17, 24, 46, 64, 80, 96, 105, 105, 103, 100, 97],
+        notes: [
+          'W1 +6%', 'W2 +17% confirmed', '$591 confirmed +25%',
+          'Spring planting NOW', 'Feedstock + transit blocked', 'Alt producers also costly',
+          'Harvest shortfall locked in', 'Near $975 — 2022 record broken', 'Harvest baked in',
+          'Plateau ~$965', 'Sustained — no cheap gas anywhere', 'New price reality',
+        ],
+      },
+      {
+        name: 'Ammonia', unit: '$/tonne', baseline: 350, fmt: '$',
+        actuals: [367, 392, 420, null, null, null, null, null, null, null, null, null],
+        pcts:    [5, 12, 20, 38, 55, 70, 84, 98, 100, 98, 94, 91],
+        notes: [
+          'Lagging urea', 'India/Bangladesh stressed', '$420 confirmed',
+          'Plant shutdowns widen', 'Qatar LNG feedstock gone', 'Global gas prices elevated',
+          'Harvest locked in', 'Near $700 — alt production costly', 'Food shock baked',
+          'Plateau ~$686', 'Sustained', 'New level',
+        ],
+      },
+      {
+        name: 'DAP Phosphate', unit: '$/tonne', baseline: 580, fmt: '$',
+        actuals: [605, 636, 660, null, null, null, null, null, null, null, null, null],
+        pcts:    [4, 10, 14, 27, 40, 54, 65, 76, 82, 81, 78, 75],
+        notes: [
+          'Saudi blocked', 'Saudi + China export curbs', '$660 confirmed',
+          'Sulfur cascade adds', 'Structural gap (NDSU)', 'Record prices',
+          'Harvest locked in', 'Near $1,050 — 2022 record broken', 'Peak disruption',
+          'Plateau ~$1,050', 'Demand adjusts', 'New baseline',
+        ],
+      },
+      {
+        name: 'Sulfur', unit: '$/tonne', baseline: 120, fmt: '$',
+        actuals: [130, 143, 155, null, null, null, null, null, null, null, null, null],
+        pcts:    [8, 19, 29, 54, 75, 95, 112, 124, 130, 128, 124, 120],
+        notes: [
+          '~50% global supply from Gulf', 'NDSU "sulfur cascade"', '$155 confirmed',
+          'Phosphate chain hit', 'Global fertiliser cascade', 'Critical shortage',
+          'Agricultural emergency; ~$254', 'Harvest consequence; ~$269', 'Structural gap',
+          'Plateau ~$274', 'Demand adjusts', 'New level',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'petrochem', icon: '', name: 'Petrochemicals + Refined Products', open: true,
+    desc: '85% of ME polyethylene via Hormuz; jet fuel distillate crisis confirmed',
+    rows: [
+      {
+        name: 'Polyethylene (PE)', unit: '¢/lb', baseline: 58, fmt: '¢',
+        actuals: [62, 66, 70, null, null, null, null, null, null, null, null, null],
+        pcts:    [7, 14, 21, 36, 53, 68, 82, 95, 103, 101, 97, 93],
+        notes: [
+          '85% ME exports via Hormuz', 'Polymer plants cutting', '70¢ confirmed',
+          'Packaging chains hit', 'Naphtha crack spread widens', 'Saudi hubs stranded',
+          'Consumer goods surge; ~105¢', 'Near 115¢ — refinery + shortage', 'Allocation-only',
+          'Plateau ~117¢', 'Structural gap', 'New supply level',
+        ],
+      },
+      {
+        name: 'Jet Fuel / Kerosene', unit: '$/bbl', baseline: 90, fmt: '$',
+        actuals: [103, 118, 125, null, null, null, null, null, null, null, null, null],
+        pcts:    [14, 31, 39, 65, 82, 102, 128, 148, 152, 148, 142, 136],
+        notes: [
+          'Crack spread blows out', '$118 W2 confirmed', '$125 confirmed',
+          'Refinery capacity offline adds', 'Airline hedges expire; ~$165', 'Distillate crisis; ~$182',
+          'Crack spread $130+; ~$230', '$150 crude + refinery gap; ~$263', 'Demand falls; cancellations',
+          'Plateau ~$263', 'Structural refinery gap', 'New aviation reality',
+        ],
+      },
+      {
+        name: 'Diesel',
+        unit: '$/bbl',
+        baseline: 100,
+        fmt: '$',
+        actuals: [115, 132, 140, null, null, null, null, null, null, null, null, null],
+        pcts:    [15, 32, 40, 62, 78, 98, 122, 142, 148, 144, 138, 131],
+        notes: [
+          'Crack spread widens', '$132 W2 confirmed', '$140 confirmed',
+          'Refinery capacity offline; ~$162', '30% EU diesel from ME; ~$178', 'Distillate crisis',
+          'Refinery gap + $150 crude; ~$222', 'Peak ~$242; farming/trucking hit', 'Transport costs cascade',
+          'Plateau ~$244; every good affected', 'Structural supply gap', 'New transport reality',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'pump', icon: '', name: 'Consumer Fuel Prices', open: true,
+    desc: 'Retail pump prices — reflecting crude, refinery crack spreads, insurance and Cape rerouting costs',
+    rows: [
+      {
+        name: 'US Pump Price (National Avg)', unit: '$/gal', baseline: 3.18, fmt: 'gal',
+        actuals: [3.38, 3.65, 3.79, null, null, null, null, null, null, null, null, null],
+        pcts:    [6, 15, 19, 33, 47, 62, 74, 83, 85, 82, 79, 76],
+        notes: [
+          'AAA confirmed Mar 8', 'AAA $3.65 confirmed', 'AAA $3.79 highest since Oct \'23',
+          'Airlines & trucking surge; ~$4.23', 'Near 2022 record; ~$4.67', 'Record broken; ~$5.35',
+          'Rationing; ~$5.93', 'Deep pain; ~$6.14', 'Demand eases slightly',
+          'Plateau ~$5.79', 'Sustained high', '~$5.60 structural new level',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'food', icon: '', name: 'Food + Agriculture', open: true,
+    desc: '60-day lag from input cost to consumer price',
+    rows: [
+      {
+        name: 'Wheat — CBOT', unit: '$/bu', baseline: 5.40, fmt: 'dec',
+        actuals: [5.46, 5.61, 5.80, null, null, null, null, null, null, null, null, null],
+        pcts:    [1, 4, 7, 14, 23, 33, 43, 56, 67, 73, 77, 80],
+        notes: [
+          'Slow — 60-day lag', 'Fertiliser costs rising', '$5.80 confirmed',
+          'Input double-whammy', 'Diesel + urea amplified by $150 oil', 'Farm margin collapse',
+          'Harvest shortfall visible', 'Food CPI emergency', 'Shortfall + cost compound',
+          'Near $9.50 — 2022 highs approached', 'Global food insecurity', 'Structural food shock',
+        ],
+      },
+      {
+        name: 'Corn — CBOT', unit: '$/bu', baseline: 4.40, fmt: 'dec',
+        actuals: [4.45, 4.58, 4.75, null, null, null, null, null, null, null, null, null],
+        pcts:    [1, 4, 8, 14, 22, 32, 43, 57, 70, 77, 81, 83],
+        notes: [
+          'Slow start — 60-day lag', 'Brazil urea crisis', '$4.75 confirmed',
+          'Feed cost surge', 'Ethanol demand surges at $150 oil', 'Livestock impact',
+          'Harvest shortfall baked in', 'CPI food emergency', 'Livestock culling begins',
+          'Near $7.57 — $150 oil amplifies', 'Global food shock', 'Structural food crisis',
+        ],
+      },
+    ],
+  },
+];
+
+/* ── HELPERS ── */
+
+function formatPrice(val, fmt) {
+  if (val === null || val === undefined) return '—';
+  if (fmt === 'gal')  return '$' + val.toFixed(2);
+  if (fmt === '€')    return '€' + Math.round(val);
+  if (fmt === '¢')    return Math.round(val) + '¢';
+  if (fmt === 'dec')  return '$' + val.toFixed(2);
+  if (fmt === '$k')   return val >= 1000 ? '$' + Math.round(val).toLocaleString() : '$' + Math.round(val);
+  if (val >= 1000)    return '$' + Math.round(val).toLocaleString();
+  if (val < 20)       return '$' + val.toFixed(2);
+  return '$' + Math.round(val);
+}
+
+function projected(baseline, pct) {
+  return baseline * (1 + pct / 100);
+}
+
+function sevClasses(pct) {
+  if (pct < 15) return { price: 'sev-0', pct: 'sev-0-bg' };
+  if (pct < 40) return { price: 'sev-1', pct: 'sev-1-bg' };
+  if (pct < 80) return { price: 'sev-2', pct: 'sev-2-bg' };
+  return           { price: 'sev-3', pct: 'sev-3-bg' };
+}
+
+function barColor(pct) {
+  if (pct >= 80) return '#8b0000';
+  if (pct >= 50) return '#b05c00';
+  return 'var(--blue)';
+}
+
+/* week bar removed */
+
+/* ── BUILD STORAGE CARDS ── */
+document.getElementById('storageGrid').innerHTML = STORAGE_DATA.map(s => `
+  <div class="sc-card">
+    <div class="sc-country">${s.country}</div>
+    <div class="sc-facility">${s.facility}</div>
+    <span class="sc-status ${s.status}">${s.statusLabel}</span>
+    <div class="sc-row"><span class="sc-label">Pre-war</span><span class="sc-value">${s.preStat}</span></div>
+    <div class="sc-row"><span class="sc-label">Current</span><span class="sc-value">${s.curStat}</span></div>
+    <div class="sc-bar"><div class="sc-fill" style="width:${s.fillPct}%; background:${barColor(s.fillPct)}"></div></div>
+    <div class="sc-note">${s.note}</div>
+  </div>`).join('');
+
+/* ── BUILD CATEGORY SECTIONS ── */
+const catsEl = document.getElementById('categories');
+
+catsEl.innerHTML = CATEGORIES.map(cat => {
+
+  // Build each commodity row's HTML
+  const rowsHtml = cat.rows.map((row, rowIdx) => {
+
+    // The column-header row (only shown once per row group)
+    const colHeaders = Array.from({ length: 12 }, (_, i) => {
+      const w = i + 1;
+      const isActual  = w <= 2;
+      const isCurrent = w === 3;
+      const cls = isActual ? 'ch-actual' : isCurrent ? 'ch-current' : '';
+      const tag = isActual ? '<span class="ch-tag ch-tag-actual">Actual</span>'
+                : isCurrent ? '<span class="ch-tag ch-tag-now">▶ Now</span>' : '';
+      return `<div class="col-h-week ${cls}">
+        <span class="ch-wnum">W${w}</span>
+        <span class="ch-date">${DATES[i]}</span>
+        ${tag}
+      </div>`;
+    }).join('');
+
+    // The data cells
+    const cells = Array.from({ length: 12 }, (_, i) => {
+      const w = i + 1;
+      const isActual  = row.actuals[i] !== null;
+      const isCurrent = w === 3;
+      const price = isActual ? row.actuals[i] : projected(row.baseline, row.pcts[i]);
+      const pct   = row.pcts[i];
+      const sev   = sevClasses(pct);
+      const cellClass = isActual ? 'dc-actual' : isCurrent ? 'dc-current' : '';
+      const dotHtml   = isActual
+        ? '<span class="cell-dot dot-actual"></span>'
+        : (isCurrent ? '<span class="cell-dot dot-current"></span>' : '');
+      return `
+        <div class="data-cell ${cellClass}">
+          ${dotHtml}
+          <span class="cell-price ${sev.price}">${formatPrice(price, row.fmt)}</span>
+          <span class="cell-pct ${sev.pct}">+${pct}%</span>
+          <span class="cell-note">${row.notes[i]}</span>
+        </div>`;
+    }).join('');
+
+    const sep = rowIdx > 0 ? '<div class="row-sep"></div>' : '';
+
+    return `
+      ${sep}
+      <div class="table-grid">
+        <div class="row-label col-h-label"></div>
+        ${colHeaders}
+      </div>
+      <div class="table-grid">
+        <div class="row-label">
+          <div class="row-name">${row.name}</div>
+          <div class="row-unit">${row.unit}</div>
+          <div class="row-baseline">Pre-war baseline: <strong>${formatPrice(row.baseline, row.fmt)}</strong></div>
+        </div>
+        ${cells}
+      </div>`;
+  }).join('');
+
+  return `
+    <div class="accordion" id="cat-${cat.id}">
+      <div class="acc-trigger cat-trigger ${cat.open ? 'is-open' : ''}" onclick="toggle('cat-${cat.id}')">
+        <span class="cat-name">${cat.name}</span>
+        <span class="cat-desc">${cat.desc}</span>
+        <span class="acc-caret ${cat.open ? 'is-open' : ''}">▼</span>
+      </div>
+      <div class="acc-body ${cat.open ? 'is-open' : ''}" id="cat-${cat.id}-body">
+        ${rowsHtml}
+      </div>
+    </div>`;
+}).join('');
+
+/* ── ACCORDION TOGGLE ── */
+function toggle(sectionId) {
+  const section = document.getElementById(sectionId);
+  const trigger = section.querySelector('.acc-trigger');
+  const body    = document.getElementById(sectionId + '-body');
+  const caret   = trigger.querySelector('.acc-caret');
+  const isOpen  = body.classList.contains('is-open');
+  body.classList.toggle('is-open', !isOpen);
+  trigger.classList.toggle('is-open', !isOpen);
+  caret.classList.toggle('is-open', !isOpen);
+}
+
+</script>
+</body>
+</html>
