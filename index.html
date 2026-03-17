@@ -623,10 +623,10 @@ input[type=range].asmp-slider {
       </div>
 
       <div class="asmp-item">
-        <div class="asmp-label">Futures market risk premium <span class="asmp-val" id="val-panic">$25/bbl</span></div>
+        <div class="asmp-label">Oil futures risk premium <span class="asmp-val" id="val-panic">$25/bbl</span></div>
         <input type="range" class="asmp-slider" id="sl-panic" min="0" max="50" step="5" value="25"
                oninput="updateSlider('panic',this.value)">
-        <div class="asmp-desc">Futures markets price forward uncertainty, not just today's supply gap. When traders fear escalation — Abqaiq strike, Kharg Island hit, Houthi Red Sea attack — they buy futures contracts, bidding up the forward curve and pulling spot prices higher with it. Goldman estimated this at $18/bbl on Day 1. By W3 of a sustained closure with no resolution, forward uncertainty is higher — base $25/bbl. This premium collapses almost immediately on a credible reopening announcement, before a single extra tanker moves. Range: $0 (no uncertainty premium) → $50/bbl (imminent major infrastructure strike).</div>
+        <div class="asmp-desc">Geopolitical risk premium embedded in oil futures above the supply/demand fundamental. When traders fear escalation — Abqaiq strike, Kharg Island hit, wider regional war — they buy forward contracts, pulling spot prices higher. Goldman estimated $18/bbl on Day 1; base $25/bbl reflects W3 sustained closure. Collapses immediately on credible reopening before a single tanker moves. <strong>Oil-specific:</strong> flows proportionally into all oil-derived commodities (jet, diesel, PE, LPG, aluminium, fertilisers). LNG, TTF and helium receive a separate smaller transmission (0.30×/0.20×) for restart-timing uncertainty. <strong>Food commodities (wheat, corn, rice, palm oil) respond to the reopening slider only</strong> — their trajectories are fixed calibrated paths embedding the $25/bbl base assumption; they do not change when this slider moves. See methodology for the full slider response matrix.</div>
       </div>
 
       <div class="asmp-item">
@@ -716,7 +716,7 @@ input[type=range].asmp-slider {
               <strong style="color:var(--navy); display:block; margin-bottom:4px;">PRICE MODEL</strong>
               Pre-war Brent baseline: <strong>$73/bbl</strong> — <em>Brent closing price Feb 27 2026 (EIA); pre-war forecast $69–74/bbl (EIA STEO Dec 2025)</em><br>
               Short-run price elasticity: <strong>−0.05</strong> — <em>IEA range −0.02 to −0.15; academic short-run consensus −0.03 to −0.06 for acute shocks; Goldman 120-day sustained closure implies ~−0.05 (Goldman Sachs Mar 2026 note)</em><br>
-              Futures market risk premium: <strong>$25/bbl peak</strong> — <em>Goldman Day-1 estimate $18/bbl (Goldman Mar 1); Al Jazeera cites analyst: "$40/bbl geopolitical premium at peak"; $25/bbl is mid-range for W3 sustained closure</em><br>
+              Oil futures risk premium: <strong>$25/bbl peak</strong> — <em>Goldman Day-1 estimate $18/bbl (Goldman Mar 1); Al Jazeera cites analyst: "$40/bbl geopolitical premium at peak"; $25/bbl is mid-range for W3 sustained closure</em><br>
               IEA seam correction: W4–W6 blended from W3 actual ($100) — <em>Brent W3 actual $100 confirmed (AAA, EIA); IEA buffer suppresses ~$17 below model fundamental; blend prevents artificial cliff at handoff</em><br>
               Infrastructure damage base: <strong>12%</strong> — <em>Confirmed W3: Ras Tanura 550 kb/d (Al Jazeera Mar 4), Ruwais 817–922 kb/d (Wikipedia), Bapco 267 kb/d (NPR Mar 6), Safaniya ~500 kb/d partial (Bloomberg), Shah gas (CNBC Mar 17), Ras Laffan 77 Mtpa (QatarEnergy force majeure Mar 4)</em><br>
               Insurance floor post-reopening: <strong>$16/bbl embedded</strong> — <em>Red Sea precedent: premiums elevated 12–18 months post-Houthi (House of Saud analysis); Jeff Currie (Goldman/Carlyle): "premiums elevated long after last missile fired"; Substack insurance analysis Mar 2026: $16–20/bbl estimated</em>
@@ -751,7 +751,7 @@ input[type=range].asmp-slider {
               <strong style="color:var(--ink); display:block; margin-bottom:3px; border-bottom:1px solid var(--rule); padding-bottom:3px;">BRENT CRUDE — Energy, supply-constrained</strong>
               <em>Trajectory:</em> W1 +19% → W3 actual $100 → W7 peak ~$153 → W12 $147. W4–W6 blended from W3 actual to prevent artificial cliff at IEA buffer handoff. Peak driven by fully exposed structural deficit once IEA buffer exhausts (W5).<br>
               <em>Key assumptions:</em> BASE_RESIDUAL = 10.0 mb/d net structural deficit before passage/bypass offsets. Short-run elasticity −0.05 (IEA/Goldman consensus). Risk premium $25/bbl base ($18/bbl Goldman Day-1; $40/bbl analyst peak — $25 mid-range for sustained W3 closure). IEA 400 Mb release effective W1 at 3.0 mb/d, exhausted W6. Omani bypass degrades from 3.0 → 2.6 mb/d W4+ (Duqm/Salalah drone strikes).<br>
-              <em>Sliders:</em> Passage ↑ reduces deficit (each 1 mb/d ≈ −5pp Brent). Infra ↑ caps recovery ceiling post-reopening and degrades bypass pipelines. Panic ↑ adds linearly above fundamental. Supply offset affects deficit directly from W4. Kharg strike: passage → 0 + infra floor from strike week — permanent.<br>
+              <em>Sliders:</em> Passage ↑ reduces deficit (each 1 mb/d ≈ −5pp Brent). Infra ↑ caps recovery ceiling post-reopening and degrades bypass pipelines. <strong>Oil futures risk premium ↑</strong> adds linearly to Brent AND flows proportionally into all oil-derived commodities (jet/diesel 1.38–1.42×, aluminium 0.50×, PE 0.52×, LPG 0.85×, fertilisers 0.52–0.70×). LNG, TTF and helium receive a separate smaller panic transmission (0.30× and 0.20× respectively) — restart-timing uncertainty, not oil positioning. <strong>Food commodities (wheat, corn, rice, palm oil) use fixed calibrated trajectories and do not respond dynamically to the panic slider</strong> — their trajectories embed the $25/bbl base assumption. Supply offset affects deficit directly from W4. Kharg strike: passage → 0 + infra floor from strike week — permanent.<br>
               <em>Ceasefire dynamics:</em> Three-phase futures repricing: W+0 announcement −28% total elevation (forward repricing); W+1–2 doubt/bounce (discount eases, panic bounces); W+3+ gradual decay. Physical recovery 9-week mine clearance + production restart lag. Insurance floor $16/bbl embedded regardless — prices cannot return fully to pre-war within model window. Base case: Brent ~$95–100 at W12 even with ceasefire at W4.
             </div>
 
@@ -767,7 +767,7 @@ input[type=range].asmp-slider {
               <strong style="color:var(--ink); display:block; margin-bottom:3px; border-bottom:1px solid var(--rule); padding-bottom:3px;">LNG JKM (ASIA SPOT) — Supply-constrained, Qatar-driven</strong>
               <em>Trajectory:</em> W1 +43% → W3 actual $32/MMBtu → W7 peak $43.1 → plateau. Coal switching ceiling ~$45–50 caps upside. Summer heat demand W9–W12 adds second wave (+6–9pp).<br>
               <em>Key assumptions:</em> Qatar = 30–33% globally traded LNG supply. Ras Laffan physically offline from drone strike — not an export restriction, a production halt. No LNG bypass exists (LNG tankers cannot transit alternate routes at meaningful scale). Australian/US LNG fully contracted; only marginal spot available. JKM is fully independent of oil price — even at $50 Brent, JKM stays at crisis levels until Ras Laffan physically restarts.<br>
-              <em>Sliders:</em> Reopening triggers Ras Laffan restart +10 weeks after ceasefire (QatarEnergy CEO: conflict fully ends + 4–6 week technical restart + mine clearance + physical inspection). Houthi: minimal direct JKM impact (Atlantic LNG rarely reaches JKM market at scale). Infra damage: Ras Laffan physical damage above W3 baseline extends restart beyond +10 weeks.<br>
+              <em>Sliders:</em> Reopening triggers Ras Laffan restart +10 weeks after ceasefire (QatarEnergy CEO: conflict fully ends + 4–6 week technical restart + mine clearance + physical inspection). Houthi: minimal direct JKM impact (Atlantic LNG rarely reaches JKM market at scale). Infra damage: Ras Laffan physical damage above W3 baseline extends restart beyond +10 weeks. <strong>Oil futures risk premium:</strong> LNG receives 0.30× of the oil panic transmission — reflecting restart-timing uncertainty (when will Qatar come back?) rather than oil positioning. At $25 base panic this adds ~10pp to JKM at W7; collapses on ceasefire announcement same as oil.<br>
               <em>Ceasefire dynamics:</em> JKM does NOT fall on ceasefire announcement — Ras Laffan physical restart takes 10+ weeks after any ceasefire regardless. No other source substitutes Qatar at scale. Only begins declining once Qatari trains physically restart (outside 12-week window for late ceasefires).
             </div>
 
@@ -775,7 +775,7 @@ input[type=range].asmp-slider {
               <strong style="color:var(--ink); display:block; margin-bottom:3px; border-bottom:1px solid var(--rule); padding-bottom:3px;">EU GAS TTF — Energy-linked, injection-season amplified</strong>
               <em>Trajectory:</em> W1 +45% → W3 actual €72/MWh → W7 peak ~€98 → gradual decline. 0.72× of JKM (pipeline alternatives dampen amplitude). Storage injection premium adds +8–10pp W4–W8: EU at 36% capacity must refill to 90% by Nov 1.<br>
               <em>Key assumptions:</em> EU depends on Qatar for ~12–14% of LNG supply. Norway/Algeria pipeline provides baseload but cannot fill Qatar gap alone. Injection season (Apr–Oct) creates competing demand from storage buyers. Atlantic LNG (US, Nigeria) is the marginal substitute but must reroute Cape if Houthi active (+10 days, +$1.5/MMBtu).<br>
-              <em>Sliders:</em> Houthi primary food commodity impact is TTF: Red Sea disruption adds +€5–7/MWh to TTF via Atlantic LNG freight premium. Reopening restores Qatar after +10 week lag. Infra damage: Ras Laffan physical damage extends TTF elevated period.<br>
+              <em>Sliders:</em> Houthi primary food commodity impact is TTF: Red Sea disruption adds +€5–7/MWh to TTF via Atlantic LNG freight premium. Reopening restores Qatar after +10 week lag. Infra damage: Ras Laffan physical damage extends TTF elevated period. <strong>Oil futures risk premium:</strong> TTF receives 0.72× of the LNG panic transmission (same dampening ratio as the base TTF/JKM relationship) — adds ~7pp at W7 at $25 base panic; collapses on ceasefire.<br>
               <em>Ceasefire dynamics:</em> TTF falls moderately on announcement (pipeline supply continues, partial panic relief). Full recovery requires Qatar restart (+10 weeks). Storage injection deficit from summer 2026 creates a structural price floor into winter — TTF remains elevated even after Ras Laffan restarts. Houthi stand-down (assumed simultaneous with ceasefire) reduces Atlantic LNG freight premium within 4–6 weeks.
             </div>
 
@@ -783,7 +783,7 @@ input[type=range].asmp-slider {
               <strong style="color:var(--ink); display:block; margin-bottom:3px; border-bottom:1px solid var(--rule); padding-bottom:3px;">HELIUM — Supply-constrained, Qatar monopoly</strong>
               <em>Trajectory:</em> W1 +70% → W3 actual $800/Mcf → W7 peak ~$1,100 → gradual plateau. Kornbluth: "+70–100% in week 1" confirmed. Shortage 5.0 declared (Gasworld Mar 2026). $2,000+/Mcf warned if disruptions extend beyond 2 weeks (C&amp;EN/Middle East Forum).<br>
               <em>Key assumptions:</em> Qatar = 30–33% globally traded helium. Co-produced at Ras Laffan. US BLM Reserve and private production cover 42% independently. No bypass or substitution possible for the Qatar portion. Key end-use markets (MRI, semiconductor fabs, fiber optics) have no substitute gas. Current model peaks at $1,100 — conservative given $2,000+ warnings; appropriate for base assuming no facility physical damage.<br>
-              <em>Sliders:</em> Reopening triggers helium restart +12 weeks (2-week additional lag vs LNG for helium-specific train restart, Kornbluth). Infrastructure damage: if Ras Laffan trains physically destroyed, helium supply may not return within model window. Houthi: no additional impact (helium not shipped in bulk by sea).<br>
+              <em>Sliders:</em> Reopening triggers helium restart +12 weeks (2-week additional lag vs LNG for helium-specific train restart, Kornbluth). Infrastructure damage: if Ras Laffan trains physically destroyed, helium supply may not return within model window. Houthi: no additional impact (helium not shipped in bulk by sea). <strong>Oil futures risk premium:</strong> Helium receives 0.20× of the oil panic transmission — smallest of all commodities, reflecting that the physical restart constraint dominates over forward uncertainty. At $25 base this adds ~7pp at W7; collapses on ceasefire.<br>
               <em>Ceasefire dynamics:</em> No immediate price relief — physical restart lag is binding constraint. Prices remain elevated until Ras Laffan helium trains restart (+12 weeks post-ceasefire minimum). Medical/semiconductor/MRI sectors face extended supply disruption regardless of political resolution. Logistics normalisation (ISO container repositioning) adds 2 further months beyond physical restart (Kornbluth).
             </div>
 
@@ -930,6 +930,22 @@ input[type=range].asmp-slider {
                   <strong style="color:var(--ink);">China fertiliser exports toggle:</strong> Currently blocked until Aug 2026 (NDSU confirmed). If reversed: caps urea/DAP/ammonia ceiling by ~22%. China toggle is independent of Hormuz ceasefire — domestic export policy decision. Most impactful for urea (where China is a dominant marginal supplier globally).
                 </div>
               </div>
+              <div style="margin-top:12px; padding-top:10px; border-top:1px solid #e8d5b0;">
+                <strong style="color:var(--navy); font-size:9.5px; display:block; margin-bottom:6px;">SLIDER RESPONSE BY COMMODITY</strong>
+                <div style="font-size:9px; line-height:1.8; color:var(--dim); display:grid; grid-template-columns:1fr 1fr; gap:4px 24px;">
+                  <div>
+                    <strong style="color:var(--ink);">All 8 sliders:</strong> DAP Phosphate<br>
+                    <strong style="color:var(--ink);">7 sliders</strong> (all except Kharg or China): Aluminium, PE<br>
+                    <strong style="color:var(--ink);">6 sliders</strong> (all oil drivers + reopening, no Houthi/China): Brent, WTI, Sulfur, LPG, Jet, Diesel, US Pump, Urea<br>
+                    <strong style="color:var(--ink);">5 sliders</strong> (oil + reopening + Houthi + panic + China): Ammonia
+                  </div>
+                  <div>
+                    <strong style="color:var(--ink);">4 sliders</strong> (reopening, panic, Houthi, infra/passage via oil): JKM, TTF<br>
+                    <strong style="color:var(--ink);">2 sliders</strong> (reopening + panic only): Helium — supply-constrained; no oil link; no Houthi exposure<br>
+                    <strong style="color:var(--ink);">Reopening only — Wheat, Corn, Rice, Palm Oil:</strong> Food commodities use calibrated fixed trajectories that embed the $25/bbl base panic assumption. They do not respond to passage, infra, panic, supply offset, Houthi or Kharg. The reopening slider applies commodity-specific post-ceasefire profiles (corn retains 60% of elevation — locked acreage; rice briefly upticks on announcement; palm oil resolves fastest at 120% of oil discount rate).
+                  </div>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -988,7 +1004,7 @@ input[type=range].asmp-slider {
               <strong style="color:var(--navy); display:block; margin-bottom:4px;">PRICE MODEL</strong>
               Pre-war Brent baseline: <strong>$73/bbl</strong> — <em>Brent closing price Feb 27 2026 (EIA); pre-war forecast $69–74/bbl (EIA STEO Dec 2025)</em><br>
               Short-run price elasticity: <strong>−0.05</strong> — <em>IEA range −0.02 to −0.15; academic short-run consensus −0.03 to −0.06 for acute shocks; Goldman 120-day sustained closure implies ~−0.05 (Goldman Sachs Mar 2026 note)</em><br>
-              Futures market risk premium: <strong>$25/bbl peak</strong> — <em>Goldman Day-1 estimate $18/bbl (Goldman Mar 1); Al Jazeera cites analyst: "$40/bbl geopolitical premium at peak"; $25/bbl is mid-range for W3 sustained closure</em><br>
+              Oil futures risk premium: <strong>$25/bbl peak</strong> — <em>Goldman Day-1 estimate $18/bbl (Goldman Mar 1); Al Jazeera cites analyst: "$40/bbl geopolitical premium at peak"; $25/bbl is mid-range for W3 sustained closure</em><br>
               IEA seam correction: W4–W6 blended from W3 actual ($100) — <em>Brent W3 actual $100 confirmed (AAA, EIA); IEA buffer suppresses ~$17 below model fundamental; blend prevents artificial cliff at handoff</em><br>
               Infrastructure damage base: <strong>12%</strong> — <em>Confirmed W3: Ras Tanura 550 kb/d (Al Jazeera Mar 4), Ruwais 817–922 kb/d (Wikipedia), Bapco 267 kb/d (NPR Mar 6), Safaniya ~500 kb/d partial (Bloomberg), Shah gas (CNBC Mar 17), Ras Laffan 77 Mtpa (QatarEnergy force majeure Mar 4)</em><br>
               Insurance floor post-reopening: <strong>$16/bbl embedded</strong> — <em>Red Sea precedent: premiums elevated 12–18 months post-Houthi (House of Saud analysis); Jeff Currie (Goldman/Carlyle): "premiums elevated long after last missile fired"; Substack insurance analysis Mar 2026: $16–20/bbl estimated</em>
@@ -1126,7 +1142,7 @@ const CATEGORIES = [
         name: 'LNG Asia — JKM Spot',
         key: 'jkm', unit: '$/MMBtu', baseline: 14, fmt: '$',
         actuals: [20, 28, 32, null, null, null, null, null, null, null, null, null],
-        pcts:    [43, 100, 129, 171, 207, 243, 307, 321, 307, 286, 271, 257],
+        pcts:    [43, 100, 129, 158, 178, 196, 208, 214, 217, 216, 210, 204],
         notes: [
           'Qatar force majeure Day 1; JKM +39% on open — confirmed',
           'Ras Laffan fully offline; spot prices double within days',
@@ -2005,9 +2021,34 @@ function scaleOil(oilPcts, factor, fixedW123, floor) {
 function calcAllPcts() {
   const oil = calcOilPcts();
   const wti = calcWtiPcts(oil);
-  const lng = calcLngPcts();
-  const ttf = calcTtfPcts();
+  const lngRaw = calcLngPcts();
+  const ttfRaw = calcTtfPcts();
   const fm  = ASMP.china ? 0.78 : 1.0;
+
+  // ── LNG/TTF/HELIUM PANIC TRANSMISSION ──
+  // The oil futures risk premium slider is oil-specific, but LNG, TTF and helium
+  // also carry forward uncertainty — about WHEN Ras Laffan restarts, whether
+  // facility damage is worse than known, whether ceasefire holds long enough.
+  // This is restart-timing uncertainty, not oil positioning, so it is:
+  //   - Smaller than oil (supply constraint is known; uncertainty is duration)
+  //   - Independent of the oil panic (different risk type)
+  //   - Applied only from W4+ (W1-W3 are locked actuals)
+  // LNG/TTF: 0.30× of oil panic factor (modest — coal switching ceiling caps upside)
+  // Helium:  0.20× of oil panic factor (small — physical restart lag dominates)
+  // Panic collapses on reopening announcement same as oil (forward repricing).
+  const PANIC_CURVE = [0.55, 0.85, 0.75, 0.85, 0.92, 1.0, 1.0, 0.95, 0.88, 0.80, 0.72, 0.65];
+  const lngPanicPP  = PANIC_CURVE.map((pf, i) => {
+    if (i < 3) return 0; // actuals locked
+    if (ASMP.reopening > 0 && i >= ASMP.reopening - 1) return 0; // collapses on ceasefire
+    return Math.round((ASMP.panic * 0.30 * pf / 73) * 100);
+  });
+  const helPanicPP  = PANIC_CURVE.map((pf, i) => {
+    if (i < 3) return 0;
+    if (ASMP.reopening > 0 && i >= ASMP.reopening - 1) return 0;
+    return Math.round((ASMP.panic * 0.20 * pf / 73) * 100);
+  });
+  const lng = lngRaw.map((p, i) => i < 3 ? p : p + lngPanicPP[i]);
+  const ttf = ttfRaw.map((p, i) => i < 3 ? p : p + Math.round(lngPanicPP[i] * 0.72)); // TTF dampened same as base ratio
 
   // ── HELIUM ──
   // Fixed trajectory tied to Qatar/Ras Laffan — NOT oil-linked.
@@ -2030,12 +2071,12 @@ function calcAllPcts() {
   const helBase = [70, 90, 100, 125, 152, 168, 175, 178, 175, 172, 168, 164];
   const helium = helBase.map((p, i) => {
     if (i < 3) return p;
-    if (ASMP.reopening === 0) return p;
-    const helRestartWk = ASMP.reopening + LNG_RESTART_LAG + 2; // +12 weeks from reopening
+    const panicAdd = helPanicPP[i] || 0; // 0 when reopening is set (panic collapses)
+    if (ASMP.reopening === 0) return p + panicAdd;
+    const helRestartWk = ASMP.reopening + LNG_RESTART_LAG + 2;
     const wk = i + 1;
-    if (wk < helRestartWk) return p;
+    if (wk < helRestartWk) return p + panicAdd; // panic=0 post-ceasefire; still correct
     const wksAfter = wk - helRestartWk;
-    // Slow recovery: container repositioning takes months; recycling increases
     const ramp = [0.05, 0.10, 0.18, 0.28, 0.38];
     const frac = wksAfter < ramp.length ? ramp[wksAfter] : 0.45;
     return Math.round(p * (1 - frac));
