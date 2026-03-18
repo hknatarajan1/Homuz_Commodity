@@ -1629,6 +1629,7 @@ const PROD_RAMP_WEEKS  = 8;    // weeks first transit → ~67% volume recovery
                                 // (storage-forced: 2-8wks sequential restart per facility;
                                 //  physically damaged: months, handled by infra slider)
 const LNG_RESTART_LAG  = 10;   // weeks ceasefire → any Ras Laffan flow
+const KHARG_LNG_RESTART_LAG = 18; // extended lag when Kharg active (Qatar requires full end of infrastructure war)
 
 // IEA emergency release: 400 Mb over 120 days = ~3.3 mb/d
 // But logistics constrain delivery — modelled as effective buffer:
@@ -1849,12 +1850,19 @@ function calcOilPcts() {
     let resolutionDiscount = 0;
     if (ASMP.reopening > 0 && i >= ASMP.reopening - 1) {
       const wksSince = i - (ASMP.reopening - 1);
-      // Panic factors post-announcement (dips then bounces then decays)
       const panicFactors       = [0.10, 0.22, 0.28, 0.22, 0.16, 0.11, 0.07, 0.04];
-      // Resolution discount on total elevation (larger = more price drop)
       const resolutionDiscounts = [0.28, 0.18, 0.15, 0.22, 0.27, 0.31, 0.34, 0.36];
       panicFactor       = wksSince < panicFactors.length       ? panicFactors[wksSince]       : 0.03;
       resolutionDiscount = wksSince < resolutionDiscounts.length ? resolutionDiscounts[wksSince] : 0.38;
+      // Kharg active: Strait opening is hollow.
+      // Iran's main export terminal is destroyed; ~18% of pre-war Hormuz flow
+      // (Iran ~3 mb/d) cannot return regardless of ceasefire.
+      // Panic stays elevated (structural permanent loss), resolution discount dampened.
+      if (khargActive) {
+        const khargPanicFactors = [0.35, 0.42, 0.38, 0.32, 0.26, 0.20, 0.15, 0.10];
+        panicFactor = wksSince < khargPanicFactors.length ? khargPanicFactors[wksSince] : 0.08;
+        resolutionDiscount *= 0.82; // 18% of supply never returns
+      }
     }
     const effectivePanic = khargPanicOverride !== null ? khargPanicOverride : ASMP.panic;
     const panicPct = (effectivePanic * panicFactor / 73) * 100;
@@ -1867,7 +1875,8 @@ function calcOilPcts() {
     // War-risk premiums stay elevated 12-18 months. Applied as a price floor, not an
     // additive — avoids artificial bumps at first transit week.
     const RECOVERY_FLOOR_PCT = 25; // ~$91 Brent — minimum plausible post-reopening price
-    const effectiveFloor = isOpen ? RECOVERY_FLOOR_PCT : 37;
+    // Kharg active: Iran cannot export post-ceasefire; structural floor ~$99 (+35pp)
+    const effectiveFloor = isOpen ? (khargActive ? 35 : RECOVERY_FLOOR_PCT) : 37;
     const floored = Math.max(effectiveFloor, raw);
 
     // Seam-smoothing: W3 actual ($100, +37%) is IEA-suppressed ~$17 below
@@ -2079,7 +2088,7 @@ function calcAllPcts() {
   //     not just ceasefire, when infrastructure is being actively destroyed).
   const KHARG_LNG_SPIKE_PP    = 65;  // strike week structural repricing
   const KHARG_LNG_STRUCT_PP   = 20;  // permanent post-strike base uplift
-  const KHARG_LNG_RESTART_LAG = 18;  // vs normal LNG_RESTART_LAG of 10
+  // KHARG_LNG_RESTART_LAG = 18 defined at module level
   const helPanicPP  = PANIC_CURVE.map((pf, i) => {
     if (i < 3) return 0;
     if (ASMP.reopening > 0 && i >= ASMP.reopening - 1) return 0;
@@ -2445,7 +2454,8 @@ function updateCeasefireMarkers() {
 
   const cf  = ASMP.reopening;
   const ft  = cf + MINE_CLEAR_WEEKS;    // first transit week
-  const lng = cf + LNG_RESTART_LAG;    // LNG restart week
+  const effectiveLngLag = ASMP.kharg > 0 ? (KHARG_LNG_RESTART_LAG || 18) : LNG_RESTART_LAG;
+  const lng = cf + effectiveLngLag;    // LNG restart week
 
   // Add subtle top-border markers to week header cells
   document.querySelectorAll('.col-h-week').forEach((cell, i) => {
@@ -2509,11 +2519,12 @@ function updateSlider(key, val) {
       }
       // NOTE: Kharg damage is NOT zeroed on ceasefire — physical destruction persists.
       const ft  = v + MINE_CLEAR_WEEKS;
-      const lng = v + LNG_RESTART_LAG;
+      const effectiveRestartLag = ASMP.kharg > 0 ? (KHARG_LNG_RESTART_LAG || 18) : LNG_RESTART_LAG;
+      const lng = v + effectiveRestartLag;
       info.style.display = 'block';
       info.innerHTML =
         `⚓ First transits: <strong>W${ft}</strong> &nbsp;|&nbsp; ` +
-        `⛽ LNG restart: <strong>${lng <= 12 ? 'W'+lng : 'Outside window'}</strong> &nbsp;|&nbsp; ` +
+        `⛽ LNG restart: <strong>${lng <= 12 ? 'W'+lng : 'Outside window'}</strong>${ASMP.kharg > 0 ? ' <span style="color:#b05c00;font-size:9px;">(Kharg: +18wk lag)</span>' : ''} &nbsp;|&nbsp; ` +
         `📋 Insurance elevated: <strong>12–18 months post-ceasefire</strong>`;
     }
   }
@@ -2567,7 +2578,7 @@ function updateKharg() {
   // Update active severity button styling
   ['light','moderate','severe'].forEach(function(s) {
     const btn = document.getElementById('kharg-sev-' + s);
-    if (btn) btn.className = 'kharg-sev-btn' + (s === sev && week > 0 ? ' active' : '');
+    if (btn) btn.className = 'kharg-sev-btn' + (s === sev ? ' active' : '');
   });
 
   // Grey out passage slider (permanently 0 from strike week)
@@ -2617,7 +2628,7 @@ function resetAssumptions(e) {
   document.querySelector('input[name="kharg-sev"][value="moderate"]').checked = true;
   updateKharg();
 
-  ['deficit','panic','reopening','china','shale'].forEach(k => {
+  ['passage','infra','panic','reopening','china','houthi','kharg','offset'].forEach(k => {
     const el = document.getElementById('val-' + k);
     if (el) el.className = 'asmp-val';
   });
