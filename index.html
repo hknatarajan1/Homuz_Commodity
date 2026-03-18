@@ -775,10 +775,11 @@ input[type=range].asmp-slider {
 
             <div>
               <strong style="color:var(--ink); display:block; margin-bottom:3px; border-bottom:1px solid var(--rule); padding-bottom:3px;">EU GAS TTF — Energy-linked, injection-season amplified</strong>
-              <em>Trajectory:</em> W1 +45% → W3 actual €72/MWh → W7 peak ~€101 → gradual decline. 0.72× of JKM (pipeline alternatives dampen amplitude). Storage injection premium adds +8–10pp W4–W8: EU at 36% capacity must refill to 90% by Nov 1.<br>
-              <em>Key assumptions:</em> EU depends on Qatar for ~12–14% of LNG supply. Norway/Algeria pipeline provides baseload but cannot fill Qatar gap alone. Injection season (Apr–Oct) creates competing demand from storage buyers. Atlantic LNG (US, Nigeria) is the marginal substitute but must reroute Cape if Houthi active (+10 days, +$1.5/MMBtu).<br>
-              <em>Sliders:</em> Houthi primary food commodity impact is TTF: Red Sea disruption adds +€5–7/MWh to TTF via Atlantic LNG freight premium. Reopening restores Qatar after +10 week lag. Infra damage: Ras Laffan physical damage extends TTF elevated period. <strong>Oil futures risk premium:</strong> TTF receives 0.72× of the LNG panic transmission (same dampening ratio as the base TTF/JKM relationship) — adds ~7pp at W7 at $25 base panic; collapses on ceasefire.<br>
-              <em>Ceasefire dynamics:</em> TTF falls moderately on announcement (pipeline supply continues, partial panic relief). Full recovery requires Qatar restart (+10 weeks). Storage injection deficit from summer 2026 creates a structural price floor into winter — TTF remains elevated even after Ras Laffan restarts. Houthi stand-down (assumed simultaneous with ceasefire) reduces Atlantic LNG freight premium within 4–6 weeks.
+              <em>Trajectory:</em> W3 actual €72/MWh → W7 ~€116 → W8 peak ~€120 → gradual decline. The 0.72× JKM ratio captures pipeline gas buffer (Norway, Algeria, Azerbaijan supply ~60% of EU needs unaffected). Storage injection premium adds €12–18/MWh absolute W4–W8: EU at 36% capacity must refill to 90% by Nov 1, with ~18 bcm less supply available (13 bcm Qatar loss + ~5 bcm Atlantic LNG diverted to Asia at JKM premium).<br>
+              <em>Key assumptions:</em> Qatar supplies ~5–6% of EU total gas (vs 30–33% of Asian LNG trade) — far smaller direct exposure than JKM. EU has large pipeline buffer that Asia lacks, hence the 0.72× dampening. However two factors amplify the impact above the direct Qatar effect: (1) the injection season deficit is structural and independent of Qatar — EU must refill 56 bcm in 6 months with ~18 bcm less supply available; (2) Atlantic LNG spot cargoes are being pulled to Asia by the $16/MMBtu JKM-TTF spread, giving Europe an incremental secondary supply loss. The injection premium (€12–18/MWh at peak) is the single largest TTF-specific driver — absent this, TTF would peak around €95–100.<br>
+              <em>Sliders:</em> Houthi adds +€5–7/MWh via Atlantic LNG freight premium — note this is slightly overstated when the JKM-TTF spread is very wide (>$10/MMBtu), because at those levels Atlantic cargoes are going to Asia regardless of Red Sea routing. Reopening restores Qatar after +10 week lag. Infra damage: Ras Laffan physical damage extends TTF elevated period. <strong>Oil futures risk premium:</strong> TTF receives 0.72× of the LNG panic transmission — adds ~€7/MWh at W7 base case; collapses on ceasefire.<br>
+              <em>Ceasefire dynamics:</em> TTF falls moderately on announcement (pipeline supply unchanged, panic relief). Full Qatar-driven recovery requires Ras Laffan restart (+10 weeks). <strong>However the injection season deficit does NOT resolve on ceasefire</strong> — EU storage was at 36% when the crisis began and the supply loss during the injection season (April–October) is cumulative and permanent for winter 2026/27. Even with Qatar restarting at W12, EU will enter winter short of the 90% target. This means TTF has a structural floor from the storage deficit that persists well beyond the model window, independent of political resolution.<br>
+              <em>Model caveats:</em> (1) The 0.72× JKM ratio is historically calibrated and works as a composite proxy — but strictly the direct Qatar contribution to TTF is only ~0.18× (Qatar is 5-6% of EU gas vs 31% of Asian LNG), with the rest coming from the injection deficit and Atlantic LNG competition. The ratio gives the right answer here but breaks down in edge scenarios where JKM moves for reasons that don't affect Europe. (2) Houthi freight premium should theoretically shrink when JKM-TTF spread exceeds ~$10/MMBtu, as Atlantic cargoes prioritise Asia regardless — the model applies it in full regardless of spread.
             </div>
 
             <div>
@@ -1164,7 +1165,7 @@ const CATEGORIES = [
         name: 'EU Gas — TTF',
         key: 'ttf', unit: '€/MWh', baseline: 38, fmt: '€',
         actuals: [60, 65, 72, null, null, null, null, null, null, null, null, null],
-        pcts:    [45, 71, 89, 118, 145, 168, 189, 197, 189, 176, 166, 158],
+        pcts:    [58, 71, 89, 146, 175, 188, 197, 207, 189, 169, 165, 160],
         notes: [
           'TTF surges on Qatar news; pipeline alternatives limit Europe vs Asia',
           'Goldman warns doubling risk; Europe 12-14% Qatar-exposed (Wikipedia)',
@@ -1917,7 +1918,8 @@ function calcLngPcts() {
 
     if (ASMP.reopening === 0) return basePct;
 
-    const lngRestartWk = ASMP.reopening + LNG_RESTART_LAG;
+    const effectiveLngRestartLag = (ASMP.kharg > 0) ? KHARG_LNG_RESTART_LAG : LNG_RESTART_LAG;
+    const lngRestartWk = ASMP.reopening + effectiveLngRestartLag;
     const wk = i + 1;
     if (wk < lngRestartWk) return basePct; // no LNG relief yet
 
@@ -1943,7 +1945,16 @@ function calcLngPcts() {
 // as the injection season completes and summer heat demand shifts buying to Asia.
 // Sources: Kpler Dec 2025; ENTSOG Summer Outlook 2025; Timera Energy Aug 2025;
 //          IEA Q3-2025 Gas Market Report.
-const TTF_INJECTION_PP = [0, 0, 0, 8, 10, 10, 8, 5, 0, 0, 0, 0];
+// TTF storage injection premium — expressed as absolute €/MWh, not pp of baseline.
+// EU must refill from 36% to 90% (56 bcm) by Nov 1 with ~18 bcm less supply available
+// (13 bcm Qatar loss + ~5 bcm Atlantic LNG diverted to Asia at JKM premium).
+// This is structurally independent of Qatar — the injection season pressure exists
+// regardless of LNG price level. Applied W4-W9 (April-September).
+// Peak W5-W8: €18/MWh. Tapers at shoulders.
+// Source: 2021-22 injection season precedent (€40-60 over winter); this crisis smaller
+// supply loss (5% not 20%) but compounded by storage deficit.
+const TTF_INJECTION_MWH = [0, 0, 0, 12, 18, 18, 18, 15, 8, 0, 0, 0]; // absolute €/MWh
+const TTF_BASELINE_EUR = 38; // baseline for pp conversion
 
 // ── HOUTHI RED SEA DISRUPTION ──
 // Not in base case (no confirmed resumption W3 Mar 2026).
@@ -1971,8 +1982,10 @@ function houthiFreightPct(weekIdx) {
 
 function calcTtfPcts() {
   return calcLngPcts().map((p, i) => {
-    if (i < 3) return [45, 71, 89][i];
-    return Math.round(p * 0.72) + TTF_INJECTION_PP[i] + houthiLngPP(i);
+    if (i < 3) return [58, 71, 89][i];
+    // Injection premium: absolute €/MWh converted to pp of baseline
+    const injPP = Math.round(TTF_INJECTION_MWH[i] / TTF_BASELINE_EUR * 100);
+    return Math.round(p * 0.72) + injPP + houthiLngPP(i);
   });
 }
 
@@ -2054,13 +2067,42 @@ function calcAllPcts() {
     if (ASMP.reopening > 0 && i >= ASMP.reopening - 1) return 0; // collapses on ceasefire
     return Math.round((ASMP.panic * 0.30 * pf / 73) * 100);
   });
+
+  // Kharg Island LNG effects — three distinct mechanisms:
+  // (1) Strike week: structural repricing spike (~+65pp = ~+$9/MMBtu)
+  //     Not the 0.30× oil panic — this is the moment the market flips from
+  //     'temporary disruption' to 'infrastructure war / structural loss'.
+  //     Qatar won't restart Ras Laffan while Iran is striking oil terminals.
+  //     Forward LNG reprices immediately from ~$15 (temp) toward $35-40 (structural).
+  // (2) Post-strike base: permanent +20pp structural ceiling lift on all subsequent weeks.
+  // (3) Restart lag: extends from 10 → 18 weeks (Qatar requires full conflict end,
+  //     not just ceasefire, when infrastructure is being actively destroyed).
+  const KHARG_LNG_SPIKE_PP    = 65;  // strike week structural repricing
+  const KHARG_LNG_STRUCT_PP   = 20;  // permanent post-strike base uplift
+  const KHARG_LNG_RESTART_LAG = 18;  // vs normal LNG_RESTART_LAG of 10
   const helPanicPP  = PANIC_CURVE.map((pf, i) => {
     if (i < 3) return 0;
     if (ASMP.reopening > 0 && i >= ASMP.reopening - 1) return 0;
     return Math.round((ASMP.panic * 0.20 * pf / 73) * 100);
   });
-  const lng = lngRaw.map((p, i) => i < 3 ? p : p + lngPanicPP[i]);
-  const ttf = ttfRaw.map((p, i) => i < 3 ? p : p + Math.round(lngPanicPP[i] * 0.72)); // TTF dampened same as base ratio
+  const lng = lngRaw.map((p, i) => {
+    if (i < 3) return p;
+    let pp = lngPanicPP[i];
+    if (ASMP.kharg > 0) {
+      if (i === ASMP.kharg - 1) pp += KHARG_LNG_SPIKE_PP;      // strike week spike
+      else if (i > ASMP.kharg - 1) pp += KHARG_LNG_STRUCT_PP;  // permanent structural uplift
+    }
+    return p + pp;
+  });
+  const ttf = ttfRaw.map((p, i) => {
+    if (i < 3) return p;
+    let pp = Math.round(lngPanicPP[i] * 0.72);
+    if (ASMP.kharg > 0) {
+      if (i === ASMP.kharg - 1) pp += Math.round(KHARG_LNG_SPIKE_PP * 0.72);
+      else if (i > ASMP.kharg - 1) pp += Math.round(KHARG_LNG_STRUCT_PP * 0.72);
+    }
+    return p + pp;
+  }); // TTF dampened same as base ratio
 
   // ── HELIUM ──
   // Fixed trajectory tied to Qatar/Ras Laffan — NOT oil-linked.
@@ -2083,9 +2125,14 @@ function calcAllPcts() {
   const helBase = [70, 90, 100, 125, 152, 168, 175, 178, 175, 172, 168, 164];
   const helium = helBase.map((p, i) => {
     if (i < 3) return p;
-    const panicAdd = helPanicPP[i] || 0; // 0 when reopening is set (panic collapses)
+    let panicAdd = helPanicPP[i] || 0;
+    // Kharg: structural spike on strike week + permanent uplift after (0.20× ratio vs LNG)
+    if (ASMP.kharg > 0) {
+      if (i === ASMP.kharg - 1) panicAdd += Math.round(KHARG_LNG_SPIKE_PP * 0.20);
+      else if (i > ASMP.kharg - 1) panicAdd += Math.round(KHARG_LNG_STRUCT_PP * 0.20);
+    }
     if (ASMP.reopening === 0) return p + panicAdd;
-    const helRestartWk = ASMP.reopening + LNG_RESTART_LAG + 2;
+    const helRestartWk = ASMP.reopening + (ASMP.kharg > 0 ? KHARG_LNG_RESTART_LAG : LNG_RESTART_LAG) + 2;
     const wk = i + 1;
     if (wk < helRestartWk) return p + panicAdd; // panic=0 post-ceasefire; still correct
     const wksAfter = wk - helRestartWk;
@@ -2565,22 +2612,10 @@ function resetAssumptions(e) {
   document.getElementById('val-houthi').className      = 'asmp-val';
   document.getElementById('cf-cascade').style.display  = 'none';
 
-  // Reset Kharg
-  document.getElementById('sl-kharg').value            = '0';
-  document.getElementById('kharg-week-label').textContent = 'Off';
-  document.getElementById('val-kharg').textContent     = 'Inactive';
-  document.getElementById('val-kharg').className       = 'asmp-val';
-  document.getElementById('kharg-warning').style.display = 'none';
-  document.getElementById('kharg-severity-row').classList.remove('enabled');
-  // Reset severity to moderate (default)
+  // Reset Kharg — set slider to 0 then let updateKharg() clean up all state
+  document.getElementById('sl-kharg').value = '0';
   document.querySelector('input[name="kharg-sev"][value="moderate"]').checked = true;
-  ['light','moderate','severe'].forEach(function(s) {
-    const btn = document.getElementById('kharg-sev-' + s);
-    if (btn) btn.className = 'kharg-sev-btn' + (s === 'moderate' ? '' : '');
-  });
-  // Restore passage slider opacity
-  const passEl = document.getElementById('sl-passage');
-  if (passEl) passEl.style.opacity = '';
+  updateKharg();
 
   ['deficit','panic','reopening','china','shale'].forEach(k => {
     const el = document.getElementById('val-' + k);
