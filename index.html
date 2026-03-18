@@ -765,10 +765,17 @@ input[type=range].asmp-slider {
 
             <div>
               <strong style="color:var(--ink); display:block; margin-bottom:3px; border-bottom:1px solid var(--rule); padding-bottom:3px;">LNG JKM (ASIA SPOT) — Supply-constrained, Qatar-driven</strong>
-              <em>Trajectory:</em> W1 +43% → W3 actual $32/MMBtu → W7 peak $44.5 → plateau. Coal switching ceiling ~$45–50 caps upside. Summer heat demand W9–W12 adds second wave (+6–9pp).<br>
+              <em>Trajectory:</em> W1 +43% → W3 actual $32/MMBtu → W7 peak $44.5 → plateau constrained by coal ceiling. W9–W12 (late April–May) carry a modest uplift (+4–9pp) from pre-summer injection demand as Asian utilities refill storage ahead of the June–August cooling season — not a summer A/C demand wave, which falls outside this window.<br>
               <em>Key assumptions:</em> Qatar = 30–33% globally traded LNG supply. Ras Laffan physically offline from drone strike — not an export restriction, a production halt. No LNG bypass exists (LNG tankers cannot transit alternate routes at meaningful scale). Australian/US LNG fully contracted; only marginal spot available. JKM is fully independent of oil price — even at $50 Brent, JKM stays at crisis levels until Ras Laffan physically restarts.<br>
               <em>Sliders:</em> Reopening triggers Ras Laffan restart +10 weeks after ceasefire (QatarEnergy CEO: conflict fully ends + 4–6 week technical restart + mine clearance + physical inspection). Houthi: minimal direct JKM impact (Atlantic LNG rarely reaches JKM market at scale). Infra damage: Ras Laffan physical damage above W3 baseline extends restart beyond +10 weeks. <strong>Oil futures risk premium:</strong> LNG receives 0.30× of the oil panic transmission — reflecting restart-timing uncertainty (when will Qatar come back?) rather than oil positioning. At $25 base panic this adds ~10pp to JKM at W7; collapses on ceasefire announcement same as oil.<br>
-              <em>Ceasefire dynamics:</em> JKM does NOT fall on ceasefire announcement — Ras Laffan physical restart takes 10+ weeks after any ceasefire regardless. No other source substitutes Qatar at scale. Only begins declining once Qatari trains physically restart (outside 12-week window for late ceasefires).
+              <em>Ceasefire dynamics:</em> JKM does NOT fall on ceasefire announcement — Ras Laffan physical restart takes 10+ weeks after any ceasefire regardless. No other source substitutes Qatar at scale. Only begins declining once Qatari trains physically restart (outside 12-week window for late ceasefires).<br>
+              <em>Model caveats — two structural gaps:</em><br>
+              <strong>(1) LNG tanker freight not captured.</strong> With Qatar offline and the Strait mined, ~60–70 LNG carriers normally operating Gulf routes are displaced. Rerouting Atlantic LNG to Asia (US to Japan via Cape) adds ~10–15 days voyage time versus normal routing, effectively removing ~15–20% of global LNG shipping capacity from the market. Freight rates spike independently of the commodity price. Real delivered JKM in Tokyo Bay could be $2–4/MMBtu higher than the benchmark price this model tracks — the commodity price is the floor, not the all-in delivered cost.<br>
+              <strong>(2) Spot market liquidity — read as trajectory, not point forecast.</strong> Only ~30–35% of global LNG trades spot or short-term; the rest is locked under long-term contracts. In a genuine supply crisis, spot prices are set by the most exposed, least hedged buyers — often developing country importers who will pay almost any price for physical availability. The 2022 crisis saw JKM move $15–20/MMBtu in single sessions and briefly reach $70+. This model's smooth weekly progression is a central tendency. Actual realised weekly prices could range $35–55 with the average landing near $44 — the direction and plateau level are robust; the week-by-week path is not.<br>
+              <em>Coal ceiling — what it is and how it works:</em><br>
+              The $45–50/MMBtu ceiling is a <strong>physical capacity constraint, not an economic switching threshold.</strong> A critical distinction: coal is already 4–6× cheaper than JKM on a pure energy basis at current prices. Newcastle 6,000 kcal/kg coal traded at $129.62/t in the week of Mar 6 (Argus/Reuters confirmed) — that is $5.45/MMBtu. At $32+ JKM, gas-to-coal switching is economically trivial. What limits it is <em>physical dispatch capacity</em>: how many coal megawatts can actually increase output.<br>
+              The ceiling operates in three phases. <strong>Phase 1 (W3–W5):</strong> plants already holding coal inventory that were running at partial utilisation ramp to full output immediately — no new supply needed, ~15–20 GW incremental dispatch available. Korea's coal demand fell 17% in H1 2025 (IEA) and Japan has 33 GW of nuclear newly online (EIA Feb 2026), meaning both countries have meaningful coal headroom. <strong>Phase 2 (W5–W8):</strong> new coal procurement orders are placed; Newcastle coal rose +11.6% in W1–2 of the crisis (Argus Mar 12) and further price rises incentivise more Australian/Indonesian supply. Delivery lag: 4–6 weeks from order to arrival. <strong>Phase 3 (W8+):</strong> port congestion, shipping competition, and coal supply elasticity form the true ceiling — this is where $45–50 applies.<br>
+              <strong>Restart friction cuts both ways.</strong> The previous framing — that coal restart friction would make the model too high — was backwards. High friction (mothballed plants taking 4–8 weeks to restart, boiler inspections, grid sync approvals) means <em>less</em> coal switching materialises in Phase 1–2, so the ceiling is <em>higher</em> and softer, not lower. Easy restarts (low friction) mean more coal supply comes online faster, the ceiling is firmer at $42–45, and the model could be ~$3–5/MMBtu too high in W7–W9. Given Japan retired 1,200 MW in three years and Korea is phasing out 40 of 61 units by 2040, some plant-level friction is likely, supporting the $45–50 range rather than $42–45.
             </div>
 
             <div>
@@ -1151,11 +1158,11 @@ const CATEGORIES = [
           'Asian power cuts; Australian/US LNG fully contracted, limited spot',
           'Emergency measures activated; LNG-to-power substitution maxed out',
           'Force majeure cascades to downstream buyers in Asia; coal ceiling forming',
-          'Peak supply shock — coal switching price (~$45-50/MMBtu) caps further upside',
-          'Asian summer heat demand adds second wave — Japan/Korea A/C surge (June)',
-          'Peak summer demand overlap with supply shortage — JKM stays elevated (July)',
-          'Summer heat demand beginning to ease; structural supply gap remains',
-          'Post-summer softening but still structurally elevated; Ras Laffan offline',
+          'Peak supply shock — physical coal capacity ceiling (~$45-50/MMBtu) constrains further upside',
+          'Pre-summer injection season — Asian utilities refilling storage ahead of June peak',
+          'Injection demand sustained; no Ras Laffan restart; structural supply gap holds',
+          'Late spring: some early cooling demand emerging; coal switching maintaining ceiling',
+          'May close — injection season continues; JKM structurally elevated, Ras Laffan offline',
         ],
       },
       {
@@ -1889,14 +1896,23 @@ const // Corrected from +321% peak to +214% peak (W8):
 // Qatar = 30-33% global LNG (not 40%). Australia/US partially substitute.
 // Coal switching caps demand faster than oil. 2022 Russia crisis (+250% from lower base)
 // is the reference; Qatar loss smaller share. Source: IEA OMR Mar 2026; Oxford Economics
-// W9-W12 uplift reflects Asian summer heat demand (June-August):
-// Japan/Korea air conditioning surge drives gas-to-power demand spike.
-// S&P Global: "Asian summer spot demand picks up as heat waves sweep Northeast Asia"
-// Argus: "record-high gas generation in August at peak of heatwave" (Japan 2025).
-// W9-W12 increments: +6, +9, +7, +4 pp — flattens the post-peak decline.
-// Coal switching ceiling ~$45-50/MMBtu caps the upside (Japan already 44% above
-// coal-to-gas switching price pre-uplift; Chinese/Korean generators switch to coal).
-// Source: S&P Global Jul 2025; IEA Q3-2025 Gas Market Report; Argus Media Aug 2025.
+// W9-W12 uplift reflects pre-summer injection demand (late April / May):
+// Asian utilities refill gas storage ahead of the June-August cooling peak.
+// NOTE: W9-W12 = late April to late May — spring, NOT peak summer A/C season.
+// Japan/Korea peak cooling demand falls at W15-W24 (June-August), outside window.
+// Uplift +6/+9/+7/+4pp = injection season demand, not cooling loads.
+// COAL CEILING $45-50/MMBtu: This is a PHYSICAL CAPACITY ceiling, not an economic one.
+// Coal is already 4-6x cheaper than JKM on energy basis at current prices
+// (Newcastle 6000 kcal/kg = $5.45/MMBtu at $129/t — Mar 2026 Argus/Reuters).
+// Switching is not triggered by economics — it is already economic at $32+ JKM.
+// The ceiling is the point at which ALL available coal capacity is fully dispatched.
+// Three phases: Phase 1 (W3-5) idle/partial units ramp up immediately using existing stocks;
+// Phase 2 (W5-8) new procurement delivered (Newcastle +12% in W2, 4-6 wk delivery lag);
+// Phase 3 (W8+) physical port/shipping constraint forms the true ceiling.
+// Korea coal demand fell 17% H1 2025 (IEA) — significant spare capacity exists.
+// Japan: 15 nuclear reactors online (33 GW) reduce gas burn, freeing headroom.
+// Restart friction cuts both ways: high friction = less switching = HIGHER ceiling.
+// Source: Reuters/Argus Mar 12 2026; IEA Coal Mid-Year 2025; EIA Japan nuclear Feb 2026.
 BASE_LNG_PCTS = [43, 100, 129, 158, 178, 196, 208, 214, 217, 216, 210, 204];
 
 function calcLngPcts() {
