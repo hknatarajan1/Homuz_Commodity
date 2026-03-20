@@ -237,7 +237,7 @@ body {
 */
 .table-grid {
   display: grid;
-  grid-template-columns: 200px repeat(12, 1fr);
+  grid-template-columns: 200px repeat(var(--display-weeks, 16), 1fr);
   width: 100%;
 }
 
@@ -521,6 +521,49 @@ input[type=range].asmp-slider {
   line-height: 1.5;
 }
 .kharg-warning strong { color: #7a4400; }
+/* ── WEEK SELECTOR ── */
+.week-selector {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--white);
+  border-bottom: 1px solid var(--rule);
+  flex-wrap: wrap;
+}
+.wk-sel-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-right: 4px;
+}
+.wk-sel-btn {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  cursor: pointer;
+  color: var(--dim);
+  background: var(--ghost);
+  transition: all 0.15s;
+  letter-spacing: 0.03em;
+}
+.wk-sel-btn:hover { border-color: var(--navy); color: var(--navy); }
+.wk-sel-btn.active {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+.wk-sel-note {
+  font-size: 9px;
+  color: var(--muted);
+  margin-left: 8px;
+  font-style: italic;
+}
+
 .status-bar {
   background: #b80000;
   color: #fff;
@@ -548,7 +591,7 @@ input[type=range].asmp-slider {
 <!-- STATUS BAR -->
 <div class="status-bar">
   <span class="status-dot"></span>
-  Strait of Hormuz Remains Under Iranian Control — Commercial Shipping Near Zero
+  Strait of Hormuz Closed W4 — South Pars &amp; Ras Laffan Struck — Commercial Shipping Near Zero
 </div>
 <!-- HEADER -->
 <div class="header">
@@ -592,23 +635,23 @@ input[type=range].asmp-slider {
 
       <div class="asmp-item">
         <div class="asmp-label">Strait reopening week <span class="asmp-val" id="val-reopening">None in window</span></div>
-        <input type="range" class="asmp-slider" id="sl-reopening" min="0" max="12" step="1" value="0"
+        <input type="range" class="asmp-slider" id="sl-reopening" min="0" max="16" step="1" value="0"
                oninput="updateSlider('reopening',this.value)">
-        <div class="asmp-desc">Week of confirmed Strait reopening — triggers Ras Laffan restart attempt simultaneously. Auto-cascades: +9 wks mine clearance (raised from 7 — Iran confirmed mine-laying from W2, Mar 10) → first transits → LNG/helium flow +10 wks. Risk premium collapses on announcement. Insurance floor persists 12–18 months.</div>
+        <div class="asmp-desc">Week of <strong>genuine bilateral ceasefire</strong> with Iranian agreement to clear mines and restore passage — triggers Ras Laffan restart attempt simultaneously. Auto-cascades: +9 wks mine clearance → first transits → LNG/helium flow +10 wks. Risk premium drops on announcement then partially bounces (+1/+2 wk doubt phase) before decaying. Insurance floor persists 12–18 months. <strong>Note — partial/nominal ceasefire not modelled:</strong> a US unilateral declaration while Iran retains Strait control does not trigger this slider — passage remains Iranian-controlled (~0.5 mb/d vetting system), no mine clearance, no mainstream shipping resumes. That scenario is captured by moving the Selective Passage slider upward instead.</div>
       </div>
 
       <div class="asmp-item">
-        <div class="asmp-label">Selective passage while closed <span class="asmp-val" id="val-passage">2.0 mb/d</span></div>
-        <input type="range" class="asmp-slider" id="sl-passage" min="0.5" max="6" step="0.5" value="2.0"
+        <div class="asmp-label">Selective passage while closed <span class="asmp-val" id="val-passage">0.5 mb/d</span></div>
+        <input type="range" class="asmp-slider" id="sl-passage" min="0.5" max="6" step="0.5" value="0.5"
                oninput="updateSlider('passage',this.value)">
-        <div class="asmp-desc">What Iran permits through while nominally closed. <strong>Base 2.0 mb/d</strong> = Iran own exports ~1.5 mb/d to China (Kpler confirmed) + bilateral deals now confirmed with India, Turkey, Pakistan (W3). Falls if US pressures China. Max ~6 mb/d if Iran de-facto reopens for non-Western flags.</div>
+        <div class="asmp-desc">What Iran permits through while nominally closed. <strong>Base 0.5 mb/d</strong> = confirmed ~1 tanker/day average (S&amp;P Global: 21 tankers in 21 days). Iran developing IRGC vetting/registration system (Lloyd's Mar 19); China, India, Pakistan, Iraq in direct talks. Grows to ~1.5 mb/d by W10 as system formalises. Falls if US pressures China or attacks increase. Max ~6 mb/d if Iran de-facto reopens for non-Western flags. <strong>Note:</strong> bypass pipeline capacity (5.0 mb/d) is separate from this figure.</div>
       </div>
 
       <div class="asmp-item">
-        <div class="asmp-label">Infrastructure destruction <span class="asmp-val" id="val-infra">12% damaged</span></div>
-        <input type="range" class="asmp-slider" id="sl-infra" min="0" max="60" step="5" value="12"
+        <div class="asmp-label">Infrastructure destruction <span class="asmp-val" id="val-infra">22% damaged</span></div>
+        <input type="range" class="asmp-slider" id="sl-infra" min="0" max="60" step="5" value="22"
                oninput="updateSlider('infra',this.value)">
-        <div class="asmp-desc"><strong>Base 12%</strong> = confirmed W3: Ras Tanura, Ruwais, Bapco, Safaniya partial, Shah gas, Ras Laffan. Minimal effect while Strait is closed — closure dominates. Bites hardest post-reopening: caps recovery ceiling. Bypass pipeline degradation activates above 15%. Abqaiq hit = +15pp; East-West pipeline = +10pp. Repair: months–years.</div>
+        <div class="asmp-desc"><strong>Base 22%</strong> = confirmed W4: Ras Tanura, Ruwais (closed after fire), Bapco, Safaniya partial, Shah gas field, Ras Laffan LNG trains 4+6 (17% Qatar capacity, 3–5 yr repair), South Pars gas field + Asaluyeh refinery (~12% Iran gas, struck Mar 18), Kuwait refineries (drone strikes), Asaluyeh condensate. Raised from 12% (W3 base) — additional ~10pp from Mar 16–19 strikes. Minimal effect while Strait is closed — closure dominates. Bites hardest post-reopening: caps recovery ceiling. Bypass pipeline degradation activates above 15%. Abqaiq hit = +15pp; East-West pipeline = +10pp. Repair: months–years.</div>
       </div>
 
       <div class="asmp-item">
@@ -623,10 +666,10 @@ input[type=range].asmp-slider {
       </div>
 
       <div class="asmp-item">
-        <div class="asmp-label">Oil futures risk premium <span class="asmp-val" id="val-panic">$25/bbl</span></div>
-        <input type="range" class="asmp-slider" id="sl-panic" min="0" max="50" step="5" value="25"
+        <div class="asmp-label">Oil futures risk premium <span class="asmp-val" id="val-panic">$35/bbl</span></div>
+        <input type="range" class="asmp-slider" id="sl-panic" min="0" max="50" step="5" value="35"
                oninput="updateSlider('panic',this.value)">
-        <div class="asmp-desc">Geopolitical risk premium embedded in oil futures above the supply/demand fundamental. When traders fear escalation — Abqaiq strike, Kharg Island hit, wider regional war — they buy forward contracts, pulling spot prices higher. Goldman estimated $18/bbl on Day 1; base $25/bbl reflects W3 sustained closure. Collapses immediately on credible reopening before a single tanker moves. <strong>Oil-specific:</strong> flows proportionally into all oil-derived commodities (jet, diesel, PE, LPG, aluminium, fertilisers). LNG, TTF and helium receive a separate smaller transmission (0.30×/0.20×) for restart-timing uncertainty. <strong>Food commodities (wheat, corn, rice, palm oil) respond to the reopening slider only</strong> — their trajectories are fixed calibrated paths embedding the $25/bbl base assumption; they do not change when this slider moves. See methodology for the full slider response matrix.</div>
+        <div class="asmp-desc">Geopolitical risk premium embedded in oil futures above the supply/demand fundamental. When traders fear escalation — Abqaiq strike, Kharg Island hit, wider regional war — they buy forward contracts, pulling spot prices higher. Goldman estimated $18/bbl on Day 1; Mizuho notes $5–15/bbl insurance alone; $35/bbl default reflects W4 market-implied premium (~$108 spot vs ~$73 pre-war fundamental). Collapses immediately on credible reopening before a single tanker moves. <strong>Oil-specific:</strong> flows proportionally into all oil-derived commodities (jet, diesel, PE, LPG, aluminium, fertilisers). LNG, TTF and helium receive a separate smaller transmission (0.30×/0.20×) for restart-timing uncertainty. <strong>Food commodities (wheat, corn, rice, palm oil) respond to the reopening slider only</strong> — their trajectories are fixed calibrated paths embedding the $35/bbl base assumption; they do not change when this slider moves. See methodology for the full slider response matrix.</div>
       </div>
 
       <div class="asmp-item">
@@ -638,7 +681,7 @@ input[type=range].asmp-slider {
 
       <div class="asmp-item" id="kharg-item">
         <div class="asmp-label">Kharg Island strike <span class="asmp-val" id="val-kharg">Inactive</span></div>
-        <input type="range" class="asmp-slider" id="sl-kharg" min="0" max="12" step="1" value="0"
+        <input type="range" class="asmp-slider" id="sl-kharg" min="0" max="16" step="1" value="0"
                oninput="updateKharg()">
         <div id="kharg-severity-row" style="margin:5px 0 2px;">
           <div style="display:flex;gap:5px;">
@@ -677,6 +720,13 @@ input[type=range].asmp-slider {
     </div>
   </div>
 </div>
+<div class="week-selector">
+  <span class="wk-sel-label">Show weeks:</span>
+  <button class="wk-sel-btn" id="wk-btn-8" onclick="setDisplayWeeks(8)">W1–8</button>
+  <button class="wk-sel-btn" id="wk-btn-12" onclick="setDisplayWeeks(12)">W1–12</button>
+  <button class="wk-sel-btn active" id="wk-btn-16" onclick="setDisplayWeeks(16)">W1–16</button>
+  <span class="wk-sel-note">W1 = Mar 2 · W16 = Jun 15</span>
+</div>
 <div id="categories"></div>
 
 <!-- METHODOLOGY ACCORDION -->
@@ -690,7 +740,7 @@ input[type=range].asmp-slider {
       <div class="sources-grid">
         <div class="src-block">
           <h4>Oil Price Model — First Principles</h4>
-          <p><strong>Gross disruption: ~9.7 mb/d</strong> (Iraq −3.0, Kuwait −2.6, Qatar −0.6, Bahrain −0.2, Saudi −2.5, UAE −0.8). <strong>Realistic offsets: ~4.3 mb/d</strong> — Yanbu net ~1.5 mb/d (port cap at 4.5 mb/d less ~2 mb/d Saudi refinery consumption), Fujairah ~1.0 mb/d (terminal hit Mar 16 and at capacity), Russia ~1.5 mb/d (US 30-day waiver, shadow fleet saturated), non-OPEC ramp ~0.3 mb/d. <strong>Net structural deficit: ~5.4 mb/d</strong> = 5.1% of global demand (105 mb/d). Short-run price elasticity −0.05 (academic consensus for acute supply shocks under 3 months; IEA range −0.02 to −0.15, Goldman-implied ~−0.05 for sustained 120-day closure): gross ceiling 5.1% ÷ 0.05 = ~$148/bbl before IEA buffer, bypass and supply offsets. At base assumptions, effective deficit narrows to ~3.0 mb/d by W7 (after 2.0 mb/d selective passage, 2.6 mb/d bypass, 2.4 mb/d non-Gulf offset), yielding <strong>W7 model peak ~$139/bbl base case</strong> (fundamental +57%, panic +34pp at $25/bbl). Higher analyst estimates ($147–$153) reflect pessimistic offset assumptions. IEA 400 Mb release suppresses prices W1–4; exhausted W5. Recession demand destruction minimal within 12 weeks; modelled at −0.5 mb/d from W9.</p>
+          <p><strong>Gross disruption: ~9.7 mb/d</strong> (Iraq −3.0, Kuwait −2.6, Qatar −0.6, Bahrain −0.2, Saudi −2.5, UAE −0.8). <strong>Realistic offsets: ~5.0 mb/d</strong> — Yanbu net ~4.0 mb/d export (Petroline converted to 7 mb/d full capacity Mar 11; Rystad 2.5–3.0 mb/d sustained loadings; less ~2 mb/d Saudi Red Sea refinery consumption; net export ~4.0 mb/d per CNBC/Kpler Mar 12), Fujairah ~1.0 mb/d (ADCOP 1.8 mb/d capacity; impaired by drone strikes but not zeroed; Kpler 71% utilisation Mar 12), Russia ~1.5 mb/d (US 30-day waiver), non-OPEC ramp ~0.3 mb/d. <strong>Net structural deficit: ~4.7 mb/d</strong> = 4.5% of global demand (105 mb/d). Short-run price elasticity −0.05 (academic consensus for acute supply shocks under 3 months; IEA range −0.02 to −0.15, Goldman-implied ~−0.05 for sustained 120-day closure): gross ceiling 4.5% ÷ 0.05 = ~$137/bbl before IEA buffer, bypass and supply offsets. At base assumptions (passage 0.5 mb/d flat (no-ceasefire: Iran vetting corridor held constant — no incentive to expand); bypass 5.0 mb/d flat at ceiling; IEA first + second release peaking W3–4 at ~3.5 mb/d; non-Gulf offset ~2.6 mb/d by W16; elasticity bleeds from −0.05 → −0.07 from W12+), effective deficit ~2.0 mb/d W4–W16, yielding <strong>W6–W8 model peak ~$135–137/bbl base case</strong> (fundamental ~$39pp + panic $35/bbl ~$48pp). No-ceasefire W16: ~$107. Goldman Q4 risk ($93) reflects faster normalisation than base. Goldman Sachs base: >$100 March, $85 April; warned prices may stay above $100 through 2027 in risk scenarios. EIA STEO Mar 10: above $95 through May. Peak anchored by: (1) bypass at physical ceiling 5.0 mb/d; (2) IEA second release activating W7; (3) demand destruction ~1 mb/d. Floor W11–16 (~$90–$100): mechanically derived from residual deficit ~0.8 mb/d + decaying panic premium. Goldman Q4 risk scenario ($93/bbl) maps to W14. Extended to 16 weeks (through mid-June 2026).</p>
         </div>
         <div class="src-block">
           <h4>Insurance &amp; Shipping — A Structural Price Driver</h4>
@@ -715,16 +765,16 @@ input[type=range].asmp-slider {
             <div>
               <strong style="color:var(--navy); display:block; margin-bottom:4px;">PRICE MODEL</strong>
               Pre-war Brent baseline: <strong>$73/bbl</strong> — <em>Brent closing price Feb 27 2026 (EIA); pre-war forecast $69–74/bbl (EIA STEO Dec 2025)</em><br>
-              Short-run price elasticity: <strong>−0.05</strong> — <em>IEA range −0.02 to −0.15; academic short-run consensus −0.03 to −0.06 for acute shocks; Goldman 120-day sustained closure implies ~−0.05 (Goldman Sachs Mar 2026 note)</em><br>
-              Oil futures risk premium: <strong>$25/bbl peak</strong> — <em>Goldman Day-1 estimate $18/bbl (Goldman Mar 1); Al Jazeera cites analyst: "$40/bbl geopolitical premium at peak"; $25/bbl is mid-range for W3 sustained closure</em><br>
+              Short-run price elasticity: <strong>−0.05 (W1–W11) → −0.07 (W16)</strong> — <em>−0.05 is academic short-run consensus for acute shocks (&lt;3 months); IEA range −0.02 to −0.15. From W12+ the leading edge of medium-run demand response bleeds in (fuel switching, airline capacity cuts, EM rationing) — elasticity ramps conservatively to −0.07 by W16. Full medium-run (−0.3 to −0.8) takes 6–18 months. No-ceasefire: passage held flat (Iran has no incentive to expand the vetting corridor commercially without political concessions). Source: Hamilton (2009); Kilian &amp; Murphy (2014); Goldman Mar 2026</em><br>
+              Oil futures risk premium: <strong>$35/bbl default</strong> — <em>Goldman Day-1 estimate $18/bbl; Mizuho: $5–15/bbl insurance alone; market-implied W4 premium ~$35 ($108 spot − $73 fundamental); analyst peak $40/bbl</em><br>
               IEA seam correction: W4–W6 blended from W3 actual ($100) — <em>Brent W3 actual $100 confirmed (AAA, EIA); IEA buffer suppresses ~$17 below model fundamental; blend prevents artificial cliff at handoff</em><br>
-              Infrastructure damage base: <strong>12%</strong> — <em>Confirmed W3: Ras Tanura 550 kb/d (Al Jazeera Mar 4), Ruwais 817–922 kb/d (Wikipedia), Bapco 267 kb/d (NPR Mar 6), Safaniya ~500 kb/d partial (Bloomberg), Shah gas (CNBC Mar 17), Ras Laffan 77 Mtpa (QatarEnergy force majeure Mar 4)</em><br>
+              Infrastructure damage base: <strong>22%</strong> — <em>W4 confirmed: Ras Tanura 550 kb/d, Ruwais 817 kb/d (closed after fire), Bapco 267 kb/d, Safaniya ~500 kb/d partial, Shah gas, Ras Laffan trains 4+6 (QatarEnergy force majeure), South Pars + Asaluyeh refinery (Mar 18 Israeli strike, ~12% Iran gas), Kuwait refineries (drone strikes). Raised +10pp from W3 base of 12%</em><br>
               Insurance floor post-reopening: <strong>$16/bbl embedded</strong> — <em>Red Sea precedent: premiums elevated 12–18 months post-Houthi (House of Saud analysis); Jeff Currie (Goldman/Carlyle): "premiums elevated long after last missile fired"; Substack insurance analysis Mar 2026: $16–20/bbl estimated</em>
             </div>
             <div>
               <strong style="color:var(--navy); display:block; margin-bottom:4px;">REOPENING CASCADE</strong>
               Mine clearance lag: <strong>+9 weeks</strong> (raised from 7 — Iran confirmed active mine-laying from W2, Mar 10) — <em>US decommissioned 4 purpose-built minesweepers Jan 2026 (The National Mar 15); 1991 Kuwait: 2+ months with 12+ allied MCM vessels in permissive conditions (House of Saud Mar 13); US Energy Sec Wright: "simply not ready" Mar 12</em><br>
-              First transit → ~67% volume recovery: <strong>+8 weeks</strong> — <em>Three compounding lags: (1) Insurance/confidence lag 2–4 wks (Red Sea precedent); (2) Sequential production restart — storage-forced shutdowns need 2–8 wks depending on facility (wells 1–2 wks, offshore platforms 2–4 wks, refineries 2–3 wks, LNG trains 3–5 wks); Iraq alone has 3 fields requiring sequential restart by same teams. (3) Tanker repositioning: 150+ vessels anchored need repositioning globally. Restart ramp is deliberately flat in first 4 weeks. IEA OMR Mar 2026; industry engineering norms</em><br>
+              First transit → ~58–68% volume recovery: <strong>+8–10 weeks</strong> — <em>Three compounding lags: (1) Cold-restart penalty: all Gulf fields now 3+ weeks cold-shutdown — cold restart takes 2–4× longer than hot (wells 2–4 wks, offshore platforms 4–6 wks, refineries 3–5 wks). (2) Sequential restart: Iraq 3 fields (Rumaila/WQ/Majnoon), Kuwait onshore+offshore — same engineering teams, cannot parallelise. Storage must drain before upstream can restart. (3) Shipper psychology: Red Sea 2024 precedent — mainstream owners "slow and cautious" for weeks after hostilities end; insurers require 2–3 weeks of clean transits before underwriting. Iran vetting corridor (already ~0.5 mb/d) seeds the ramp but does not accelerate it meaningfully. Full normalisation (>85%) realistically 4–6 months — beyond model window. IEA OMR Mar 2026; Red Sea 2024 shipping precedent</em><br>
               Maximum Strait recovery: <strong>75%</strong> of pre-war — <em>Lloyd's List: "10% realistic with naval escorts initially"; insurance premium and Iran's demonstrated willingness to attack vessels permanently cap full normalisation (Columbia CGEP Mar 2026)</em><br>
               Ras Laffan restart lag: <strong>+10 weeks</strong> — <em>QatarEnergy CEO Saad al-Kaabi: no restart "until conflict fully ends + 4–6 week technical restart" (QatarEnergy force majeure statement Mar 4); adds mine clearance + physical inspection to CEO's floor</em><br>
               Helium restart lag: <strong>+12 weeks</strong> — <em>Co-produced at Ras Laffan; additional 2-week lag vs LNG for helium-specific train restart (Kornbluth Associates helium market analysis)</em><br>
@@ -750,9 +800,9 @@ input[type=range].asmp-slider {
             <div>
               <strong style="color:var(--ink); display:block; margin-bottom:3px; border-bottom:1px solid var(--rule); padding-bottom:3px;">BRENT CRUDE — Energy, supply-constrained</strong>
               <em>Trajectory:</em> W1 +19% → W3 actual $100 → W7 peak ~$139 → W12 ~$106. W4–W6 blended from W3 actual to prevent artificial cliff at IEA buffer handoff. Peak driven by structural deficit once IEA buffer exhausts (W5). Base case reflects base assumptions — pessimistic offset scenario adds ~$20–30/bbl.<br>
-              <em>Key assumptions:</em> BASE_RESIDUAL = 10.0 mb/d net structural deficit before passage/bypass offsets. Short-run elasticity −0.05 (IEA/Goldman consensus). Risk premium $25/bbl base ($18/bbl Goldman Day-1; $40/bbl analyst peak — $25 mid-range for sustained W3 closure). IEA 400 Mb release effective W1 at 3.0 mb/d, exhausted W6. Omani bypass degrades from 3.0 → 2.6 mb/d W4+ (Duqm/Salalah drone strikes).<br>
-              <em>Sliders:</em> Passage ↑ reduces deficit (each 1 mb/d ≈ −5pp Brent). Infra ↑ caps recovery ceiling post-reopening and degrades bypass pipelines. <strong>Oil futures risk premium ↑</strong> adds linearly to Brent AND flows proportionally into all oil-derived commodities (jet/diesel 1.38–1.42×, aluminium 0.50×, PE 0.52×, LPG 0.85×, fertilisers 0.52–0.70×). LNG, TTF and helium receive a separate smaller panic transmission (0.30× and 0.20× respectively) — restart-timing uncertainty, not oil positioning. <strong>Food commodities (wheat, corn, rice, palm oil) use fixed calibrated trajectories and do not respond dynamically to the panic slider</strong> — their trajectories embed the $25/bbl base assumption. Supply offset affects deficit directly from W4. Kharg strike: passage → 0 + infra floor from strike week — permanent.<br>
-              <em>Ceasefire dynamics:</em> Three-phase futures repricing: W+0 announcement −28% total elevation (forward repricing); W+1–2 doubt/bounce (discount eases, panic bounces); W+3+ gradual decay. Physical recovery 9-week mine clearance + production restart lag. Insurance floor $16/bbl embedded regardless — prices cannot return fully to pre-war within model window. Base case: Brent ~$95–100 at W12 even with ceasefire at W4.
+              <em>Key assumptions:</em> BASE_RESIDUAL = 10.0 mb/d net structural deficit before passage/bypass offsets. Short-run elasticity −0.05 (IEA/Goldman consensus). Risk premium $35/bbl default ($18/bbl Goldman Day-1; Mizuho $5–15 insurance alone; market-implied ~$35 at W4; $40/bbl analyst peak — $35 reflects W4 sustained closure). IEA 400 Mb release effective W1 at 3.0 mb/d, exhausted W6. Omani bypass degrades from 3.0 → 2.6 mb/d W4+ (Duqm/Salalah drone strikes).<br>
+              <em>Sliders:</em> Passage ↑ reduces deficit (each 1 mb/d ≈ −5pp Brent). Infra ↑ caps recovery ceiling post-reopening and degrades bypass pipelines. <strong>Oil futures risk premium ↑</strong> adds linearly to Brent AND flows proportionally into all oil-derived commodities (jet/diesel 1.38–1.42×, aluminium 0.50×, PE 0.52×, LPG 0.85×, fertilisers 0.52–0.70×). LNG, TTF and helium receive a separate smaller panic transmission (0.30× and 0.20× respectively) — restart-timing uncertainty, not oil positioning. <strong>Food commodities (wheat, corn, rice, palm oil) use fixed calibrated trajectories and do not respond dynamically to the panic slider</strong> — their trajectories embed the $35/bbl base assumption. Supply offset affects deficit directly from W4. Kharg strike: passage → 0 + infra floor from strike week — permanent.<br>
+              <em>Ceasefire panic dynamics:</em> Dip → bounce → slow decay. <strong>+0 (announcement):</strong> panic drops to ~45% of pre-ceasefire level (~$16/bbl at $35 default) — "drops a lot but not eliminated". Forward curve repriced -28%. <strong>+1:</strong> bounces to 60% (~$21/bbl) — "will Iran honour this? mines still in water, no tankers moving". <strong>+2:</strong> slight further uptick to 63% — uncertainty peak, ceasefire unconfirmed by physical events. <strong>+3 onward:</strong> slow steady decay as confidence builds week by week. Never reaches zero within window — residual structural risk + 12–18 month insurance lag. Calibrated to: 1991 Gulf War (−$10/bbl day 1); 2025 Israel-Iran (−12% then +5% bounce); Ukraine 2022 (−22% then partial recovery). Physical recovery adds separate lag: 9-week mine clearance → production cold-restart 10 weeks → insurance normalisation months.
             </div>
 
             <div>
@@ -905,7 +955,7 @@ input[type=range].asmp-slider {
                   <strong style="color:var(--ink);">What the reopening slider does:</strong> Sets the week of confirmed ceasefire announcement. This triggers: (1) Three-phase futures market repricing on oil (−28% total elevation W+0, doubt bounce W+1–2, gradual decay W+3+); (2) Houthi auto-zero (Iran ceasefire ends Houthi campaign and material support); (3) Mine clearance clock starts (+9 weeks to first transits); (4) Ras Laffan restart clock starts (+10 weeks to LNG/helium); (5) Commodity-specific recovery profiles engage. Kharg damage is NOT zeroed — physical destruction persists regardless of ceasefire.
                 </div>
                 <div>
-                  <strong style="color:var(--ink);">Why prices don't return to pre-war:</strong> Six structural factors keep prices above pre-war even after full political resolution: (1) Insurance floor $16–20/bbl embedded for 12–18 months — underwriters require sustained stability; (2) Physical infrastructure damage (12% base, higher with Kharg/Abqaiq) caps production recovery ceiling; (3) Mine clearance takes 9 weeks minimum; (4) Production restart lag — sequential restarts, 150+ tankers to reposition; (5) Agricultural damage already locked in (corn acreage, wheat planting window); (6) EU gas storage deficit from 2026 injection season persists into winter.
+                  <strong style="color:var(--ink);">Why prices stay above $100 post-ceasefire:</strong> Six structural factors prevent prices returning to pre-war within the model window: (1) Insurance: war-risk premiums elevated 12–18 months — underwriters require sustained clean-transit history; (2) Cold-restart production lag: 10-week restart debt, sequential Iraq/Kuwait/Qatar field restarts — physically cannot ramp immediately; (3) Mine clearance 9 weeks minimum — no commercial shipping before then; (4) 150+ tankers repositioning — weeks to reach loading ports; (5) Ras Laffan 17% Qatar LNG offline 3–5 years — permanently raises energy cost floor; (6) Infrastructure 22% damaged — caps recovery ceiling. Floor: ~$102 Brent (+40% pre-war) within model window. Full pre-war normalisation: 6–18 months, beyond W16.
                 </div>
                 <div>
                   <strong style="color:var(--ink);">Recovery timeline by commodity:</strong><br>
@@ -922,7 +972,7 @@ input[type=range].asmp-slider {
               <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:10px 20px; font-size:9.5px; line-height:1.65; color:var(--dim);">
                 <div>
                   <strong style="color:var(--ink);">Selective passage (0.5–6 mb/d):</strong> Base 2.0 mb/d = Iran own exports to China + confirmed Indian/Turkish/Pakistani bilateral deals (W3). Each 1 mb/d increase ≈ −5pp Brent (~−$3.65/bbl at current levels). At 6 mb/d: Iran de-facto reopening for all non-Western flags, near-ceasefire economics. At 0 mb/d: Iran stops all selective passage (maximum pressure response to US/Israeli escalation).<br><br>
-                  <strong style="color:var(--ink);">Infrastructure damage (12–60%):</strong> Base 12% = confirmed W3 physical damage. Abqaiq hit = +15pp (historically: 5.7 mb/d temporarily offline, 2019). East-West pipeline = +10pp (eliminates Yanbu bypass entirely). Each +10pp above base reduces recoveryCap by ~11.5% and degrades bypass capacity.
+                  <strong style="color:var(--ink);">Infrastructure damage (22–60%):</strong> Base 22% = confirmed W4 physical damage (raised from 12% W3 — South Pars, Asaluyeh, Kuwait refineries added Mar 18–19). Abqaiq hit = +15pp (historically: 5.7 mb/d temporarily offline, 2019). East-West pipeline = +10pp (eliminates Yanbu bypass entirely). Each +10pp above base reduces recoveryCap by ~11.5% and degrades bypass capacity.
                 </div>
                 <div>
                   <strong style="color:var(--ink);">Non-Gulf supply response:</strong> Pessimistic (total W12: 2.5 mb/d offset) = E&amp;Ps maintain capital discipline; no fast shale; demand holds. Base (5.0 mb/d) = Russia/Iran +1.0 mb/d, non-Gulf record +2.0 mb/d, US shale +0.3 mb/d by W8, demand destruction 0.5–1.0 mb/d. Optimistic (7.0 mb/d) = fast shale (+0.6 mb/d by W6), Venezuela uplift, 1.5 mb/d demand destruction. Only affects W4+ (W1–W3 locked to actuals). Largest scenario spread at W10–W12 (~$25–30/bbl Brent range between pessimistic and optimistic).<br><br>
@@ -945,7 +995,7 @@ input[type=range].asmp-slider {
                   <div>
                     <strong style="color:var(--ink);">4 sliders</strong> (reopening, panic, Houthi, infra/passage via oil): JKM, TTF<br>
                     <strong style="color:var(--ink);">2 sliders</strong> (reopening + panic only): Helium — supply-constrained; no oil link; no Houthi exposure<br>
-                    <strong style="color:var(--ink);">Reopening only — Wheat, Corn, Rice, Palm Oil:</strong> Food commodities use calibrated fixed trajectories that embed the $25/bbl base panic assumption. They do not respond to passage, infra, panic, supply offset, Houthi or Kharg. The reopening slider applies commodity-specific post-ceasefire profiles (corn retains 60% of elevation — locked acreage; rice briefly upticks on announcement; palm oil resolves fastest at 120% of oil discount rate).
+                    <strong style="color:var(--ink);">Reopening only — Wheat, Corn, Rice, Palm Oil:</strong> Food commodities use calibrated fixed trajectories that embed the $35/bbl base panic assumption. They do not respond to passage, infra, panic, supply offset, Houthi or Kharg. The reopening slider applies commodity-specific post-ceasefire profiles (corn retains 60% of elevation — locked acreage; rice briefly upticks on announcement; palm oil resolves fastest at 120% of oil discount rate).
                   </div>
                 </div>
               </div>
@@ -981,7 +1031,7 @@ input[type=range].asmp-slider {
       <div class="sources-grid">
         <div class="src-block">
           <h4>Oil Price Model — First Principles</h4>
-          <p><strong>Gross disruption: ~9.7 mb/d</strong> (Iraq −3.0, Kuwait −2.6, Qatar −0.6, Bahrain −0.2, Saudi −2.5, UAE −0.8). <strong>Realistic offsets: ~4.3 mb/d</strong> — Yanbu net ~1.5 mb/d (port cap at 4.5 mb/d less ~2 mb/d Saudi refinery consumption), Fujairah ~1.0 mb/d (terminal hit Mar 16 and at capacity), Russia ~1.5 mb/d (US 30-day waiver, shadow fleet saturated), non-OPEC ramp ~0.3 mb/d. <strong>Net structural deficit: ~5.4 mb/d</strong> = 5.1% of global demand (105 mb/d). Short-run price elasticity −0.05 (academic consensus for acute supply shocks under 3 months; IEA range −0.02 to −0.15, Goldman-implied ~−0.05 for sustained 120-day closure): gross ceiling 5.1% ÷ 0.05 = ~$148/bbl before IEA buffer, bypass and supply offsets. At base assumptions, effective deficit narrows to ~3.0 mb/d by W7 (after 2.0 mb/d selective passage, 2.6 mb/d bypass, 2.4 mb/d non-Gulf offset), yielding <strong>W7 model peak ~$139/bbl base case</strong> (fundamental +57%, panic +34pp at $25/bbl). Higher analyst estimates ($147–$153) reflect pessimistic offset assumptions. IEA 400 Mb release suppresses prices W1–4; exhausted W5. Recession demand destruction minimal within 12 weeks; modelled at −0.5 mb/d from W9.</p>
+          <p><strong>Gross disruption: ~9.7 mb/d</strong> (Iraq −3.0, Kuwait −2.6, Qatar −0.6, Bahrain −0.2, Saudi −2.5, UAE −0.8). <strong>Realistic offsets: ~5.0 mb/d</strong> — Yanbu net ~4.0 mb/d export (Petroline converted to 7 mb/d full capacity Mar 11; Rystad 2.5–3.0 mb/d sustained; less ~2 mb/d refinery consumption), Fujairah ~1.0 mb/d (impaired by drone strikes but operational), Russia ~1.5 mb/d (US waiver), non-OPEC ~0.3 mb/d. <strong>Net structural deficit: ~4.7 mb/d</strong> = 4.5% of global demand (105 mb/d). Short-run price elasticity −0.05: gross ceiling 4.5% ÷ 0.05 = ~$137/bbl before IEA buffer and offsets. At base assumptions (passage 0.5 mb/d; bypass 5.0 mb/d; IEA releases peaking ~3.5 mb/d W3–4), effective deficit narrows from ~2.4 mb/d (W4) to ~0.8 mb/d (W16), yielding <strong>W6 model peak ~$118/bbl base case</strong> (fundamental ~$83 + panic $35). Goldman warns prices may stay above $100 through 2027. IEA 400 Mb release suppresses prices W1–4. Recession demand destruction modelled −0.5 mb/d from W9.</p>
         </div>
         <div class="src-block">
           <h4>Insurance &amp; Shipping — A Structural Price Driver</h4>
@@ -1006,16 +1056,16 @@ input[type=range].asmp-slider {
             <div>
               <strong style="color:var(--navy); display:block; margin-bottom:4px;">PRICE MODEL</strong>
               Pre-war Brent baseline: <strong>$73/bbl</strong> — <em>Brent closing price Feb 27 2026 (EIA); pre-war forecast $69–74/bbl (EIA STEO Dec 2025)</em><br>
-              Short-run price elasticity: <strong>−0.05</strong> — <em>IEA range −0.02 to −0.15; academic short-run consensus −0.03 to −0.06 for acute shocks; Goldman 120-day sustained closure implies ~−0.05 (Goldman Sachs Mar 2026 note)</em><br>
-              Oil futures risk premium: <strong>$25/bbl peak</strong> — <em>Goldman Day-1 estimate $18/bbl (Goldman Mar 1); Al Jazeera cites analyst: "$40/bbl geopolitical premium at peak"; $25/bbl is mid-range for W3 sustained closure</em><br>
+              Short-run price elasticity: <strong>−0.05 (W1–W11) → −0.07 (W16)</strong> — <em>−0.05 is academic short-run consensus for acute shocks (&lt;3 months); IEA range −0.02 to −0.15. From W12+ the leading edge of medium-run demand response bleeds in (fuel switching, airline capacity cuts, EM rationing) — elasticity ramps conservatively to −0.07 by W16. Full medium-run (−0.3 to −0.8) takes 6–18 months. No-ceasefire: passage held flat (Iran has no incentive to expand the vetting corridor commercially without political concessions). Source: Hamilton (2009); Kilian &amp; Murphy (2014); Goldman Mar 2026</em><br>
+              Oil futures risk premium: <strong>$35/bbl default</strong> — <em>Goldman Day-1 estimate $18/bbl; Mizuho: $5–15/bbl insurance alone; market-implied W4 premium ~$35 ($108 spot − $73 fundamental); analyst peak $40/bbl</em><br>
               IEA seam correction: W4–W6 blended from W3 actual ($100) — <em>Brent W3 actual $100 confirmed (AAA, EIA); IEA buffer suppresses ~$17 below model fundamental; blend prevents artificial cliff at handoff</em><br>
-              Infrastructure damage base: <strong>12%</strong> — <em>Confirmed W3: Ras Tanura 550 kb/d (Al Jazeera Mar 4), Ruwais 817–922 kb/d (Wikipedia), Bapco 267 kb/d (NPR Mar 6), Safaniya ~500 kb/d partial (Bloomberg), Shah gas (CNBC Mar 17), Ras Laffan 77 Mtpa (QatarEnergy force majeure Mar 4)</em><br>
+              Infrastructure damage base: <strong>22%</strong> — <em>W4 confirmed: Ras Tanura 550 kb/d, Ruwais 817 kb/d (closed after fire), Bapco 267 kb/d, Safaniya ~500 kb/d partial, Shah gas, Ras Laffan trains 4+6 (QatarEnergy force majeure), South Pars + Asaluyeh refinery (Mar 18 Israeli strike, ~12% Iran gas), Kuwait refineries (drone strikes). Raised +10pp from W3 base of 12%</em><br>
               Insurance floor post-reopening: <strong>$16/bbl embedded</strong> — <em>Red Sea precedent: premiums elevated 12–18 months post-Houthi (House of Saud analysis); Jeff Currie (Goldman/Carlyle): "premiums elevated long after last missile fired"; Substack insurance analysis Mar 2026: $16–20/bbl estimated</em>
             </div>
             <div>
               <strong style="color:var(--navy); display:block; margin-bottom:4px;">REOPENING CASCADE</strong>
               Mine clearance lag: <strong>+9 weeks</strong> (raised from 7 — Iran confirmed active mine-laying from W2, Mar 10) — <em>US decommissioned 4 purpose-built minesweepers Jan 2026 (The National Mar 15); 1991 Kuwait: 2+ months with 12+ allied MCM vessels in permissive conditions (House of Saud Mar 13); US Energy Sec Wright: "simply not ready" Mar 12</em><br>
-              First transit → ~67% volume recovery: <strong>+8 weeks</strong> — <em>Three compounding lags: (1) Insurance/confidence lag 2–4 wks (Red Sea precedent); (2) Sequential production restart — storage-forced shutdowns need 2–8 wks depending on facility (wells 1–2 wks, offshore platforms 2–4 wks, refineries 2–3 wks, LNG trains 3–5 wks); Iraq alone has 3 fields requiring sequential restart by same teams. (3) Tanker repositioning: 150+ vessels anchored need repositioning globally. Restart ramp is deliberately flat in first 4 weeks. IEA OMR Mar 2026; industry engineering norms</em><br>
+              First transit → ~58–68% volume recovery: <strong>+8–10 weeks</strong> — <em>Three compounding lags: (1) Cold-restart penalty: all Gulf fields now 3+ weeks cold-shutdown — cold restart takes 2–4× longer than hot (wells 2–4 wks, offshore platforms 4–6 wks, refineries 3–5 wks). (2) Sequential restart: Iraq 3 fields (Rumaila/WQ/Majnoon), Kuwait onshore+offshore — same engineering teams, cannot parallelise. Storage must drain before upstream can restart. (3) Shipper psychology: Red Sea 2024 precedent — mainstream owners "slow and cautious" for weeks after hostilities end; insurers require 2–3 weeks of clean transits before underwriting. Iran vetting corridor (already ~0.5 mb/d) seeds the ramp but does not accelerate it meaningfully. Full normalisation (>85%) realistically 4–6 months — beyond model window. IEA OMR Mar 2026; Red Sea 2024 shipping precedent</em><br>
               Maximum Strait recovery: <strong>75%</strong> of pre-war — <em>Lloyd's List: "10% realistic with naval escorts initially"; insurance premium and Iran's demonstrated willingness to attack vessels permanently cap full normalisation (Columbia CGEP Mar 2026)</em><br>
               Ras Laffan restart lag: <strong>+10 weeks</strong> — <em>QatarEnergy CEO Saad al-Kaabi: no restart "until conflict fully ends + 4–6 week technical restart" (QatarEnergy force majeure statement Mar 4); adds mine clearance + physical inspection to CEO's floor</em><br>
               Helium restart lag: <strong>+12 weeks</strong> — <em>Co-produced at Ras Laffan; additional 2-week lag vs LNG for helium-specific train restart (Kornbluth Associates helium market analysis)</em><br>
@@ -1068,10 +1118,17 @@ input[type=range].asmp-slider {
 <script>
 /* ── STATIC DATA ── */
 
+// ── WEEK DISPLAY CONTROL ──
+// Users can select how many weeks to display: 8, 12, or 16.
+// NUM_WEEKS drives all array lengths and table rendering.
+let DISPLAY_WEEKS = 16; // default: show all 16 weeks
+const NUM_WEEKS = 16;   // total model weeks (fixed)
+
 const DATES = [
   'Mar 2–8','Mar 9–15','Mar 16–22','Mar 23–29',
   'Mar 30–Apr 5','Apr 6–12','Apr 13–19','Apr 20–26',
-  'Apr 27–May 3','May 4–10','May 11–17','May 18–24'
+  'Apr 27–May 3','May 4–10','May 11–17','May 18–24',
+  'May 25–31','Jun 1–7','Jun 8–14','Jun 15–21'
 ];
 
 const PHASES = [
@@ -1086,7 +1143,11 @@ const PHASES = [
   {label:'Breakdown',  css:'ph-recess'},
   {label:'Plateau',    css:'ph-contract'},
   {label:'Sustained',  css:'ph-contract'},
-  {label:'New Reality',css:'ph-short'}
+  {label:'New Reality',css:'ph-short'},
+  {label:'Extended',   css:'ph-short'},
+  {label:'Extended',   css:'ph-short'},
+  {label:'Extended',   css:'ph-short'},
+  {label:'Extended',   css:'ph-short'}
 ];
 
 const CATEGORIES = [
@@ -1097,27 +1158,31 @@ const CATEGORIES = [
       {
         name: 'Brent Crude',
         key: 'brent', unit: '$/bbl', baseline: 73, fmt: '$',
-        actuals: [87, 102, 100, null, null, null, null, null, null, null, null, null],
-        pcts:    [19, 40, 37, 48, 68, 89, 91, 82, 72, 62, 53, 45],
+        actuals: [87, 102, 100, 108, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [19, 40, 37, 48, 55, 62, 59, 53, 48, 42, 37, 33, 30, 27, 25, 23],
         notes: [
           'Intraday spike on Day 1; IEA pre-commits reserves',
           'IEA 400Mb release announced; buffer holds',
-          'IEA buffer active — suppressing fundamental price',
-          'IEA thinning; structural deficit asserting',
-          'IEA buffer near exhausted; deficit fully exposed',
-          'Full deficit + insurance premium in price',
+          'W3 actual $100 — IEA buffer active; Ras Laffan suspended',
+          'W4 actual $108 — South Pars/Ras Laffan strikes priced in',
+          'Ras Laffan structural damage absorbed; IEA second release not yet',
+          'Peak — full deficit + Ras Laffan permanent loss + war premium',
           'Peak panic — Cape rerouting adds significant freight premium',
           'Plateau; recession demand destruction not yet biting',
           'Mild demand erosion begins offsetting deficit',
           'Structural plateau — no supply return in sight',
           'Sustained elevated; new energy security pricing',
           'Structural new level reflects permanent risk premium',
+          'Structural repricing floor ~$95 — Strait closure becomes new normal',
+          'Demand destruction accumulating; US shale now +0.5mb/d',
+          'Bypass routes at capacity ceiling; passage growing to ~1.3mb/d',
+          'Extended disruption floor — Goldman Q4 risk $93/bbl'
         ],
       },
       {
         name: 'WTI Crude',
         key: 'wti', unit: '$/bbl', baseline: 69.5, fmt: '$',
-        actuals: [81, 96, 96.2, null, null, null, null, null, null, null, null, null],
+        actuals: [81, 96, 96.2, null, null, null, null, null, null, null, null, null, null, null, null, null],
         pcts: null, // derived dynamically from Brent via calcWtiPcts()
         notes: [
           'WTI surges with Brent; spread $6/bbl (normal pre-war differential)',
@@ -1132,6 +1197,10 @@ const CATEGORIES = [
           'Medium-run: WTI/Brent converging as US crude fills Atlantic basin gap',
           'Structural compression continues; spread heading toward $4',
           'Sustained narrow spread ~$3.8 — US export role permanently elevated',
+          'WTI-Brent spread widens — US insulated from worst of shortage',
+          'US domestic production at record; SPR replenishment signals',
+          'Atlantic basin premiums normalising; WTI discount recovers',
+          'Structural floor ~$88 — war risk premium embedded'
         ],
       },
     ],
@@ -1144,8 +1213,8 @@ const CATEGORIES = [
       {
         name: 'LNG Asia — JKM Spot',
         key: 'jkm', unit: '$/MMBtu', baseline: 14, fmt: '$',
-        actuals: [20, 28, 32, null, null, null, null, null, null, null, null, null],
-        pcts:    [43, 100, 129, 158, 178, 196, 208, 233, 234, 235, 229, 222],
+        actuals: [20, 28, 32, 36, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [43, 100, 129, 158, 178, 196, 208, 233, 234, 235, 229, 222, 218, 212, 210, 208],
         notes: [
           'Qatar force majeure Day 1; JKM +39% on open — confirmed',
           'Ras Laffan fully offline; spot prices double within days',
@@ -1159,18 +1228,22 @@ const CATEGORIES = [
           'Injection demand sustained; no Ras Laffan restart; structural supply gap holds',
           'Late spring: some early cooling demand emerging; coal switching maintaining ceiling',
           'May close — injection season continues; JKM structurally elevated, Ras Laffan offline',
+          'Injection season dominant; A/C pre-season W15+ lifts demand',
+          'Ras Laffan 17% permanent loss keeps structural floor elevated',
+          'Pre-summer A/C demand (Japan/Korea) supporting $38-42 range',
+          'JKM structurally repriced — North Field expansion delayed'
         ],
       },
       {
         name: 'EU Gas — TTF',
         key: 'ttf', unit: '€/MWh', baseline: 38, fmt: '€',
-        actuals: [60, 65, 72, null, null, null, null, null, null, null, null, null],
-        pcts:    [58, 71, 89, 146, 175, 188, 197, 207, 189, 169, 165, 160],
+        actuals: [60, 65, 72, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [58, 71, 89, 63, 89, 105, 116, 111, 97, 79, 71, 63, 58, 53, 50, 47],
         notes: [
           'TTF surges on Qatar news; pipeline alternatives limit Europe vs Asia',
           'Goldman warns doubling risk; Europe 12-14% Qatar-exposed (Wikipedia)',
           'Near pre-war double; Norway/Algeria pipeline gas continues — confirmed €72',
-          'Storage injection season begins — EU at 36% full, needs 90% by Nov 1 (Kpler)',
+          'W4 actual €62 confirmed — seasonal cooling offsets LNG crisis premium; injection begins',
           'Injection premium peaks — Europe bidding hard against Asia for scarce cargoes',
           'EU paying maximum injection premium; Qatar offline precisely during fill season',
           'Injection season at full intensity; pipeline gas cannot bridge the Qatar gap',
@@ -1179,6 +1252,10 @@ const CATEGORIES = [
           'Post-injection season; pipeline alternatives partly offset Qatar exposure',
           'Sustained elevated; EU exposed less than Asia but Qatar gap is structural',
           'New European energy cost baseline; storage injection deficit carries into winter',
+          'Injection season lowers prompt; winter 26/27 curve spiking',
+          'European storage injection at crisis pace despite high prices',
+          'Summer low but winter curve €90-120 — Ras Laffan permanent loss',
+          'Prompt TTF at seasonal low; injection deficit priced in winter'
         ],
       },
     ],
@@ -1191,8 +1268,8 @@ const CATEGORIES = [
       {
         name: 'Polyethylene (PE)',
         key: 'pe', unit: '¢/lb', baseline: 58, fmt: '¢',
-        actuals: [62, 66, 70, null, null, null, null, null, null, null, null, null],
-        pcts:    [7, 14, 21, 36, 53, 68, 82, 95, 103, 101, 97, 93],
+        actuals: [62, 66, 70, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [7, 14, 21, 36, 53, 68, 82, 95, 103, 101, 97, 93, 90, 87, 85, 82],
         notes: [
           '84% of ME polymer exports transit Hormuz (IEA OMR Mar 2026) — confirmed',
           'Gulf polymer plants cutting runs; naphtha/ethane feedstock disrupted',
@@ -1206,13 +1283,17 @@ const CATEGORIES = [
           'Structural gap plateauing; non-Gulf capacity limits further rises',
           'Demand substitution emerging as prices cap; Gulf restart would sharply reduce prices',
           'New supply level reflecting permanent ME logistics risk premium',
+          'Supply chain adjustments reducing PE premium',
+          'Alternative feedstock routes partially established',
+          'Demand destruction in single-use plastics partially offset',
+          'PE premium persists — structural supply loss not resolved'
         ],
       },
       {
         name: 'LPG / Propane',
         key: 'lpg', unit: '$/tonne', baseline: 540, fmt: '$',
-        actuals: [583, 637, 691, null, null, null, null, null, null, null, null, null],
-        pcts:    [8, 18, 28, 52, 68, 80, 80, 80, 78, 74, 70, 66],
+        actuals: [583, 637, 691, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [8, 18, 28, 52, 68, 80, 80, 80, 78, 74, 70, 66, 63, 60, 58, 56],
         notes: [
           'Gulf LPG exports ~1.5 mb/d disrupted from Day 1 (IEA OMR Mar 2026)',
           'India cooking fuel crisis acute — LPG essential for hundreds of millions (CBS News)',
@@ -1226,13 +1307,17 @@ const CATEGORIES = [
           'Structural shortage in import-dependent EM markets; US exports constrained by terminal capacity',
           'Recovery requires Gulf shipping resumption; US cannot fill the gap at this scale',
           'New price floor — EM cooking fuel inflation persists; accelerates LPG infrastructure diversification',
+          'LPG premium persists — Indian cooking gas supply still tight',
+          'Qatar GTL train damage means -13% Qatar LPG for 3-5 years',
+          'Alternative supply (US, Africa) partially filling gap',
+          'Structural LPG deficit — Ras Laffan damage not repairable W16'
         ],
       },
       {
         name: 'Jet Fuel / Kerosene',
         key: 'jet', unit: '$/bbl', baseline: 90, fmt: '$',
-        actuals: [103, 118, 125, null, null, null, null, null, null, null, null, null],
-        pcts:    [14, 31, 39, 65, 82, 102, 128, 148, 152, 148, 142, 136],
+        actuals: [103, 118, 125, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [14, 31, 39, 65, 82, 102, 128, 148, 152, 148, 142, 136, 130, 124, 119, 115],
         notes: [
           'Crack spread blows out; refinery capacity offline',
           'Major Middle East refinery shutdowns confirmed',
@@ -1246,6 +1331,10 @@ const CATEGORIES = [
           'Plateau — structural refinery gap persists',
           'Some demand recovery offset by structural gap',
           'New aviation fuel reality; refinery gap persists',
+          'Jet fuel premium elevated — Gulf refinery capacity not restored',
+          'Aviation demand destruction partially offset by price',
+          'Structural jet supply deficit persists through W16',
+          'War-risk insurance embedded in jet fuel price permanently'
         ],
       },
       {
@@ -1253,8 +1342,8 @@ const CATEGORIES = [
         unit: '$/bbl',
         baseline: 100,
         fmt: '$',
-        actuals: [115, 132, 140, null, null, null, null, null, null, null, null, null],
-        pcts:    [15, 32, 40, 62, 78, 98, 122, 142, 148, 144, 138, 131],
+        actuals: [115, 132, 140, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [15, 32, 40, 62, 78, 98, 122, 142, 148, 144, 138, 131, 125, 119, 114, 110],
         notes: [
           'Crack spread widens; Gulf refinery disruption',
           'Middle East refinery shutdowns confirmed',
@@ -1268,6 +1357,10 @@ const CATEGORIES = [
           'Plateau — every product in economy affected',
           'Structural supply gap; demand slowly adjusting',
           'New transport and logistics cost reality',
+          'Diesel premium moderates as demand destruction bites',
+          'Agricultural diesel demand seasonally lower in N.Hemisphere',
+          'European diesel imports from Atlantic basin partially filling gap',
+          'Structural diesel premium ~65% above pre-war remains'
         ],
       },
     ],
@@ -1280,8 +1373,8 @@ const CATEGORIES = [
       {
         name: 'US Pump Price (National Avg)',
         key: 'pump', unit: '$/gal', baseline: 3.18, fmt: 'gal',
-        actuals: [3.38, 3.65, 3.79, null, null, null, null, null, null, null, null, null],
-        pcts:    [6, 15, 19, 33, 47, 62, 74, 83, 85, 82, 79, 76],
+        actuals: [3.38, 3.65, 3.79, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [6, 15, 19, 33, 47, 62, 74, 83, 85, 82, 79, 76, 73, 70, 68, 65],
         notes: [
           'AAA confirmed — War Day 1 spike; $3.38 W1 — retail lags crude (0.33× pass-through)',
           'AAA: $3.65 — highest since late 2022; confirmed W2 — retail still catching up',
@@ -1295,6 +1388,10 @@ const CATEGORIES = [
           'Summer blend premium fades; retail begins lagging crude downward (rockets-and-feathers)',
           'Structural new level; US shale ramp modest offset at pump',
           'New baseline reflects permanent supply risk premium in futures curve',
+          'Pump prices plateau — demand destruction reducing consumption',
+          'US insulation from worst of supply shock; SPR release ongoing',
+          'Gas prices stabilising as summer demand nears',
+          'Pump price structural floor — refinery margins embedded'
         ],
       },
     ],
@@ -1307,8 +1404,8 @@ const CATEGORIES = [
       {
         name: 'Helium Spot',
         key: 'helium', unit: '$/Mcf', baseline: 400, fmt: '$',
-        actuals: [680, 760, 800, null, null, null, null, null, null, null, null, null],
-        pcts:    [70, 90, 100, 138, 175, 213, 250, 288, 313, 325, 330, 333],
+        actuals: [680, 760, 800, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [70, 90, 100, 138, 175, 213, 250, 288, 313, 325, 330, 333, 330, 325, 318, 310],
         notes: [
           'Kornbluth (30-yr veteran): "+70-100% in a week" — confirmed (Gasworld Mar 4)',
           'Spot roughly doubled; Ras Laffan co-produces helium with LNG — both offline',
@@ -1322,13 +1419,17 @@ const CATEGORIES = [
           'Container repositioning (3+ months) is binding constraint even after ceasefire',
           'US Rockies/Canada new projects accelerating but 2+ years to meaningful output',
           'Structural shortage persists; new helium baseline even after Ras Laffan restarts',
+          'Helium shortage structural — Qatar -14% permanent (Ras Laffan)',
+          'Tech sector rationing; semiconductor fabs drawing down inventory',
+          'No near-term alternative supply; Russian helium sanctioned',
+          'Helium remains in crisis; structural deficit 3-5 years'
         ],
       },
       {
         name: 'Aluminium',
         key: 'alum', unit: '$/tonne', baseline: 2400, fmt: '$k',
-        actuals: [2650, 2860, 2950, null, null, null, null, null, null, null, null, null],
-        pcts:    [10, 19, 23, 36, 50, 62, 72, 80, 82, 80, 77, 74],
+        actuals: [2650, 2860, 2950, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [10, 19, 23, 36, 50, 62, 72, 80, 82, 80, 77, 74, 71, 68, 65, 62],
         notes: [
           'LME hits 4-yr high; Alba Bahrain and Qatalum cutting output — confirmed',
           'LME $3,269-$3,377 range (Argus/Balaji Mar 12-16); Alba force majeure confirmed',
@@ -1342,6 +1443,10 @@ const CATEGORIES = [
           'Ceasefire: aluminium recovers faster than oil (mainly logistical); China/India unaffected',
           'Gulf smelter restart: 2-4 weeks recommissioning; alumina imports resume',
           'New logistics risk premium embedded permanently; Gulf smelters diversify feedstock',
+          'Aluminium premium moderates as smelters find alternative power',
+          'Middle East smelter restarts partial — energy costs still high',
+          'LME elevated but below peak; demand destruction in autos',
+          'Structural aluminium premium as energy costs remain elevated'
         ],
       },
     ],
@@ -1354,8 +1459,8 @@ const CATEGORIES = [
       {
         name: 'Urea (NOLA)',
         key: 'urea', unit: '$/tonne', baseline: 475, fmt: '$',
-        actuals: [505, 556, 591, null, null, null, null, null, null, null, null, null],
-        pcts:    [6, 17, 24, 46, 64, 80, 96, 105, 105, 103, 100, 97],
+        actuals: [505, 556, 591, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [6, 17, 24, 46, 64, 80, 96, 105, 105, 103, 100, 97, 94, 91, 88, 85],
         notes: [
           'CSIS: $516→$683 (+32%) in one week W1 — early and sharp move',
           'The National/Fitch: $591 (+25%) confirmed; "most important rise" — W2',
@@ -1369,13 +1474,17 @@ const CATEGORIES = [
           'Urea:corn price ratio approaching record — demand destruction begins',
           'Russian urea partially flowing but quotas limit scale; Trinidad/Canada minor relief',
           'New elevated baseline — no quick return; gas feedstock costs structurally higher',
+          'Urea price plateaus at elevated level — fertiliser crisis sustained',
+          'Spring planting season demand beginning to taper',
+          'Ras Laffan GTL offline — nitrogen feedstock still disrupted',
+          'Urea crisis peaks; food security implications becoming clear'
         ],
       },
       {
         name: 'Ammonia',
         key: 'ammonia', unit: '$/tonne', baseline: 350, fmt: '$',
-        actuals: [367, 392, 420, null, null, null, null, null, null, null, null, null],
-        pcts:    [5, 12, 20, 38, 55, 70, 84, 98, 100, 98, 94, 91],
+        actuals: [367, 392, 420, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [5, 12, 20, 38, 55, 70, 84, 98, 100, 98, 94, 91, 88, 85, 82, 79],
         notes: [
           'Lagging urea; India and Bangladesh most exposed — Fitch Mar 2026',
           'Fitch: "not to same extent as urea"; US ~94% domestic consumption (Carnegie)',
@@ -1389,13 +1498,17 @@ const CATEGORIES = [
           'Plateau; US/Trinidad partially offset but cannot fill Gulf gap',
           'Non-Gulf production at full capacity; structural gap remains',
           'New level until Gulf gas feedstock availability normalises post-reopening',
+          'Ammonia premium sustained — feedstock disruption ongoing',
+          'Alternative production routes partially compensating',
+          'Industrial ammonia demand destruction partially offsetting',
+          'Structural ammonia deficit from South Pars damage persists'
         ],
       },
       {
         name: 'DAP Phosphate',
         key: 'dap', unit: '$/tonne', baseline: 580, fmt: '$',
-        actuals: [605, 636, 660, null, null, null, null, null, null, null, null, null],
-        pcts:    [4, 10, 14, 27, 40, 54, 65, 76, 82, 81, 78, 75],
+        actuals: [605, 636, 660, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [4, 10, 14, 27, 40, 54, 65, 76, 82, 81, 78, 75, 72, 69, 67, 65],
         notes: [
           'Saudi phosphate exports blocked; China export curbs pre-existing — W1',
           'Saudi + China compound: two key suppliers simultaneously disrupted — W2',
@@ -1409,13 +1522,17 @@ const CATEGORIES = [
           'Harvest yields locked in at reduced inputs; demand destruction limited — no substitute',
           'No strategic DAP reserve (unlike oil); physical shortage in importing markets',
           'Recovery requires: Gulf shipping + sulfur feedstock supply + Saudi production restart',
+          'DAP premium moderates as some Saudi bypass exports reach market',
+          'China export curbs still in place — no relief from East',
+          'Spring planting season input demand beginning',
+          'DAP structural premium as Ras Laffan GTL production lost'
         ],
       },
       {
         name: 'Sulfur',
         key: 'sulfur', unit: '$/tonne', baseline: 120, fmt: '$',
-        actuals: [130, 143, 155, null, null, null, null, null, null, null, null, null],
-        pcts:    [8, 19, 29, 54, 75, 95, 112, 124, 130, 128, 124, 120],
+        actuals: [130, 143, 155, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [8, 19, 29, 54, 75, 95, 112, 124, 130, 128, 124, 120, 116, 112, 108, 104],
         notes: [
           'Gulf = 44% seaborne sulfur supply (FinancialContent Mar 17) — confirmed',
           'NDSU warns "sulfur cascade" through fertilisers — refinery shutdowns hit supply',
@@ -1429,6 +1546,10 @@ const CATEGORIES = [
           'Plateau — demand adjusted down from phosphate production cuts',
           'Recovery in non-Gulf supply; Gulf refinery restart adds supply',
           'New level reflecting structural Gulf supply gap and logistics premium',
+          'Sulfur deficit structural — Qatar -6% permanent from Ras Laffan',
+          'Fertiliser industry scrambling for alternative sulfur sources',
+          'Canadian/Russian sulfur partially compensating',
+          'Structural sulfur premium — Ras Laffan damage not resolved'
         ],
       },
     ],
@@ -1441,8 +1562,8 @@ const CATEGORIES = [
       {
         name: 'Wheat — CBOT',
         key: 'wheat', unit: '$/bu', baseline: 5.57, fmt: 'dec',
-        actuals: [5.62, 5.88, 6.20, null, null, null, null, null, null, null, null, null],
-        pcts:    [1, 4, 11, 17, 25, 33, 40, 44, 47, 47, 46, 44],
+        actuals: [5.62, 5.88, 6.20, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [1, 4, 11, 17, 25, 33, 40, 44, 47, 47, 46, 44, 43, 42, 41, 40],
         notes: [
           '60-day input cost lag — current crop already in ground; diesel/freight only',
           'Fertiliser and diesel costs rising for next harvest; spring planting decisions imminent',
@@ -1456,13 +1577,17 @@ const CATEGORIES = [
           'Near 2022 food crisis levels — importers in distress; Russian sanctions waiver no direct wheat relief',
           'Global food insecurity; World Food Programme warning; structural next-harvest shortfall locked in',
           'Structural food shock; current-harvest pricing normalises; next-harvest remains elevated',
+          'Fertiliser cost pass-through fully in wheat price',
+          'Spring wheat planting begins under cost pressure',
+          'Food security concerns driving government intervention',
+          'Wheat at structural premium — input costs embedded'
         ],
       },
       {
         name: 'Corn — CBOT',
         key: 'corn', unit: '$/bu', baseline: 4.30, fmt: 'dec',
-        actuals: [4.35, 4.42, 4.52, null, null, null, null, null, null, null, null, null],
-        pcts:    [1, 3, 5, 14, 24, 31, 37, 40, 42, 42, 40, 38],
+        actuals: [4.35, 4.42, 4.52, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [1, 3, 5, 14, 24, 31, 37, 40, 42, 42, 40, 38, 37, 36, 35, 34],
         notes: [
           '60-day lag — early move as traders price forward spring planting',
           'Brazil imports 85% of fertiliser; urea cost shock amplifying US corn outlook',
@@ -1476,13 +1601,17 @@ const CATEGORIES = [
           'Inventory buffer absorbing demand; ethanol sector switching back to oil-blend economics',
           'Global food shock compounding with wheat; but US supply buffer prevents 2022-style spike',
           'Structural acreage shift consequence; next-season supply tighter than current inventory implies',
+          'Corn energy input costs fully passed through',
+          'US spring planting season — energy cost headwinds',
+          'Ethanol demand destruction partially offsetting corn demand',
+          'Corn elevated but moderating — demand destruction'
         ],
       },
       {
         name: 'Rice — CBOT rough rice',
         key: 'rice', unit: '$/cwt', baseline: 11.20, fmt: 'dec',
-        actuals: [11.31, 11.54, 11.54, null, null, null, null, null, null, null, null, null],
-        pcts:    [1, 2, 2, 5, 8, 12, 15, 16, 17, 16, 14, 12],
+        actuals: [11.31, 11.54, 11.54, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [1, 2, 2, 5, 8, 12, 15, 16, 17, 16, 14, 12, 11, 10, 9, 8],
         notes: [
           'Minimal move — global supply ample; India 2025 export ban lift created surplus',
           'India distress-selling: 400kt basmati stranded; Gulf route blocked → dumped in other markets',
@@ -1496,13 +1625,17 @@ const CATEGORIES = [
           'Freight normalisation via Cape rerouting begins to ease landed cost premium',
           'New trade routes established; Gulf importers securing alternative supply contracts',
           'Structural reallocation complete; prices stabilise at new freight-adjusted equilibrium',
+          'Rice remains most insulated of food commodities',
+          'Thai/Vietnamese harvest good — supply ample',
+          'Freight costs elevated but manageable for rice trade',
+          'Rice premium modest and stable through W16'
         ],
       },
       {
         name: 'Palm Oil — Bursa Malaysia',
         key: 'palmoil', unit: '$/t', baseline: 1100, fmt: 'int',
-        actuals: [1144, 1188, 1210, null, null, null, null, null, null, null, null, null],
-        pcts:    [4, 8, 10, 16, 24, 33, 40, 43, 39, 32, 27, 23],
+        actuals: [1144, 1188, 1210, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        pcts:    [4, 8, 10, 16, 24, 33, 40, 43, 39, 32, 27, 23, 20, 18, 16, 15],
         notes: [
           'Immediate energy-agri convergence; biofuel demand surge narrows PO-GO spread',
           'PO-GO spread narrows: palm-based diesel now cost-competitive vs fossil diesel',
@@ -1516,6 +1649,10 @@ const CATEGORIES = [
           'Indonesia mandate pressure eases as crude softens; exportable surplus recovers rapidly',
           'Faster decline than oil: biofuel premium was the marginal buyer — exits first as spreads normalise',
           'New equilibrium ~+20% above pre-war; structural premium from B45 mandate and freight cost persists',
+          'Palm oil premium sustained — biofuel demand conversion',
+          'SE Asian palm oil harvest season approach moderates',
+          'Malaysian production unaffected — exports via Cape viable',
+          'Palm oil structurally elevated vs pre-war baseline'
         ],
       },
     ],
@@ -1572,28 +1709,30 @@ const OFFSET_SCHEDULES = {
   //   Source: IEA demand elasticity review; Hamilton (2009); Kilian & Murphy (2014).
   //
   // Pessimistic: capital discipline, shale cautious, demand holds.
-  pessimistic: [0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.0, 1.1, 1.2, 1.3],
-  // Base (Wood Mac/Vortexa/IEA): Russia+Iran ~1mb/d, non-Gulf record ~2mb/d by W4,
-  // US shale +0.3mb/d by W8, supply-side demand destruction ~0.5mb/d.
-  base:        [0.3, 0.5, 0.7, 0.9, 1.1, 1.3, 1.5, 1.6, 1.7, 2.0, 2.1, 2.2],
+  // Extended to 16 weeks. W13-W16: demand destruction accelerating (+0.1/wk);
+  // US shale fully ramped; Iran/Russia sanctioned volumes normalised.
+  pessimistic: [0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7],
+  // Base (IEA Mar OMR + Wood Mac/Vortexa): Russia+Iran ~1mb/d, non-Gulf record ~2mb/d by W4,
+  // US shale +0.3mb/d by W8 (Trump +730kb/d announced Mar 20), demand destruction ~0.5mb/d.
+  base:        [0.3, 0.5, 0.7, 0.9, 1.1, 1.3, 1.5, 1.6, 1.7, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6],
   // Optimistic: faster shale, Venezuela uplift, larger demand destruction.
-  optimistic:  [0.3, 0.6, 0.9, 1.3, 1.6, 1.9, 2.2, 2.5, 2.6, 2.9, 3.1, 3.2],
+  optimistic:  [0.3, 0.6, 0.9, 1.3, 1.6, 1.9, 2.2, 2.5, 2.6, 2.9, 3.1, 3.2, 3.4, 3.5, 3.6, 3.7],
 };
 
 const BASE_ASMP = {
   offsetScenario: 'base', // 'pessimistic' | 'base' | 'optimistic'
-  passage:  2.0,   // mb/d Iran lets through while Strait nominally closed
+  passage:  0.5,   // mb/d Iran lets through while Strait nominally closed
                    // Base: ~1.5 mb/d confirmed (Iran own exports ~1.5 mb/d to China
                    // via selective passage; Indian/Turkish ships case-by-case).
                    // Could rise with bilateral deals (India, China, Turkey, Pakistan).
                    // Range 1–6 mb/d.
   reopening: 0,    // week of confirmed Strait reopening (0 = none in window)
-  infra:    12,    // % of Gulf capacity with confirmed PHYSICAL DAMAGE requiring repair
+  infra:    22,    // % of Gulf capacity with confirmed PHYSICAL DAMAGE requiring repair
                    // Base 12% = W3 confirmed: Ras Tanura, Ruwais, Bapco,
                    // Safaniya partial, Shah gas, Ras Laffan.
                    // Bypass pipeline degradation activates above 15% (infraAboveBase threshold).
                    // Range 12–60%. Abqaiq hit alone = +15 pp.
-  panic:    25,    // $/bbl geopolitical risk premium above fundamental price
+  panic:    35,    // $/bbl geopolitical risk premium above fundamental price
                    // Goldman Day-1 estimate $18/bbl. Base: $25/bbl peak.
   houthi:   0,     // Week Houthis resume Red Sea disruption (0 = inactive)
                    // Base: 0 — no confirmed resumption as of W3 Mar 2026.
@@ -1609,9 +1748,14 @@ let ASMP = { ...BASE_ASMP };
 
 // ── FIXED STRUCTURAL CONSTANTS (not sliders — based on hard data) ──
 const GROSS_DISRUPTION = 20;   // mb/d — total Hormuz normal flow
-const BYPASS_CAPACITY  = 3.0;  // mb/d — Yanbu ~2.3 mb/d (Bloomberg confirmed W3) + UAE ADCOP ~0.7 mb/d
-                                // (Fujairah petroleum zone hit Mar 14+16 reduces ADCOP effective capacity)
-                                const INSURANCE_FLOOR  = 16;   // $/bbl embedded war-risk premium post-reopening
+const BYPASS_CAPACITY  = 5.0;  // mb/d — Yanbu ~4.0 mb/d operational (Petroline converted to 7 mb/d
+                                // full capacity Mar 11; ~2 mb/d absorbed by Saudi Red Sea refineries;
+                                // Rystad: 2.5–3.0 mb/d sustained + isolated 4.8 mb/d peak. Net export ~4.0)
+                                // + Fujairah ADCOP ~1.0 mb/d (capacity 1.8 mb/d; 71% utilisation per Kpler
+                                // Mar 12; storage ops suspended after drone strikes — impaired, not zeroed).
+                                // Source: CNBC Mar 12 (Kpler/Rystad), ENR Mar 13, MaritimeExec Mar 12.
+                                // Already AT ceiling by W3. Downside risk: Yanbu/Fujairah further strikes.
+                                const INSURANCE_FLOOR  = 29;   // $/bbl embedded war-risk premium post-reopening (~$102 floor = $73 + $29)
                                 // Iran demonstrated active vessel attacks (not just Houthi rockets);
                                 // post-Hormuz normalisation will be slower than Red Sea precedent;
                                 // Jeff Currie (Goldman/Carlyle): premiums 'elevated long after last missile'
@@ -1633,17 +1777,42 @@ const KHARG_LNG_RESTART_LAG = 18; // extended lag when Kharg active (Qatar requi
 
 // IEA emergency release: 400 Mb over 120 days = ~3.3 mb/d
 // But logistics constrain delivery — modelled as effective buffer:
-const IEA_BUFFER = [3.0, 2.8, 2.5, 1.8, 0.8, 0.2, 0, 0, 0, 0, 0, 0];
+// IEA emergency buffer — three components summed.
+// Component A: First release (400mb agreed Mar 11, logistics-lagged to market).
+//   400mb / ~17 weeks = ~3.3 mb/d peak. SPR takes ~13 days to reach US refiners;
+//   European/Asian stocks faster. Ramps W1→W4, then tapers as barrels are delivered.
+//   Source: IEA OMR Mar 12, Al Jazeera Mar 11, CNBC Mar 11.
+const IEA_FIRST_RELEASE  = [3.5, 3.8, 3.3, 3.0, 2.2, 1.5, 1.0, 0.8, 0.7, 0.5, 0.4, 0.3, 0.2, 0.1, 0.05, 0.0];
+// Component B: Second release (conditional — near-certain if no ceasefire by W6).
+//   IEA retains ~800mb capacity post-first release. Coordinated second action modelled
+//   as ~200mb over 8 weeks. Historical precedent: IEA released twice in 2022 Ukraine crisis.
+//   Triggers W7 (mid-April) if Strait remains closed and Brent >$100.
+//   Source: Goldman Sachs Mar 14 note; IEA reserves capacity ~1.2bn total.
+const IEA_SECOND_RELEASE = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.4, 0.5, 0.6, 0.6, 0.6, 0.6, 0.55, 0.65, 0.5, 0.4];
+// Component C: Russia OFAC waiver (~100mb sanctioned crude at sea).
+//   US Treasury issued 30-day waiver Mar 3 allowing Indian buyers to purchase
+//   ~30mb Russian crude already offshore India. Combined with other sanctioned volumes:
+//   ~0.8 mb/d effective for ~5 weeks W3-W7. Source: IEA OMR Mar 12; Reuters Mar 6.
+const IEA_RUSSIA_WAIVER  = [0.0, 0.0, 0.5, 0.5, 0.5, 0.3, 0.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+// Combined effective buffer (sum of three components):
+const IEA_BUFFER = IEA_FIRST_RELEASE.map((v, i) =>
+  Math.round((v + IEA_SECOND_RELEASE[i] + IEA_RUSSIA_WAIVER[i]) * 10) / 10
+);
+// Effective totals: [3.5, 3.8, 3.8, 3.5, 2.7, 1.8, 1.5, 1.3, 1.3, 1.1, 1.0, 0.9, 0.75, 0.75, 0.55, 0.4]
 
 // US shale response by week (additional mb/d supply)
 const SHALE_RAMP = [
-  [0, 0, 0, 0,   0,   0.1, 0.2, 0.3, 0.3, 0.3, 0.3, 0.3],
-  [0, 0, 0, 0,   0.1, 0.3, 0.5, 0.7, 0.7, 0.7, 0.7, 0.7],
-  [0, 0, 0, 0.2, 0.5, 0.9, 1.1, 1.2, 1.2, 1.2, 1.2, 1.2],
+  // Pessimistic: capital discipline, cautious shale response
+  [0, 0, 0, 0,   0,   0.1, 0.2, 0.3, 0.3, 0.3, 0.3, 0.3, 0.35, 0.4, 0.4, 0.4],
+  // Base: Trump +730kb/d announcement Mar 20; ~6 weeks to first incremental barrels
+  [0, 0, 0, 0,   0.1, 0.3, 0.5, 0.7, 0.7, 0.7, 0.7, 0.7, 0.73, 0.73, 0.73, 0.73],
+  // Optimistic: emergency measures, faster permitting, existing DUCs
+  [0, 0, 0, 0.2, 0.5, 0.9, 1.1, 1.2, 1.2, 1.2, 1.2, 1.2, 1.22, 1.25, 1.25, 1.25],
 ];
 
 // Panic premium trajectory: builds to peak W6-8, decays slowly
-const PANIC_CURVE = [0.55, 0.85, 0.75, 0.85, 0.92, 1.0, 1.0, 0.95, 0.88, 0.80, 0.72, 0.65];
+const PANIC_CURVE = [0.55, 0.85, 0.75, 0.85, 0.92, 1.0, 1.0, 0.95, 0.88, 0.80, 0.72, 0.65,
+                      0.58, 0.52, 0.46, 0.40]; // W13-W16: panic decays as disruption becomes structural 'new normal'
 
 // ── STRAIT REOPENING EFFECT BY WEEK ──
 // Given a ceasefire at week C (1-indexed), returns fraction of
@@ -1659,14 +1828,22 @@ function straitFlowFraction(weekIdx, ceasefire) {
   const firstTransitWk = ceasefire + MINE_CLEAR_WEEKS;
   if (wk < firstTransitWk) return 0;
   const wksOpen = wk - firstTransitWk;
-  // Ramp: each week of opening restores more, but at diminishing rate
-  // Insurance lag caps full recovery
-  // Flatter early weeks: storage must drain before production restarts;
-  // sequential restart of Iraq fields, Kuwait, Saudi offshore adds time.
-  // Source: IEA OMR Mar 2026 (weeks-months for production restart);
-  //   Iraq Rumaila/WQ/Maysan = 3 fields × 2-3 wks each + sequential constraint.
-  const rampCurve = [0.10, 0.17, 0.25, 0.34, 0.44, 0.53, 0.60, 0.67];
-  const frac = wksOpen < rampCurve.length ? rampCurve[wksOpen] : 0.75;
+  // Ramp: deliberately cautious in early weeks for three reasons:
+  // 1. Iran's vetting corridor (already operational at 0.5 mb/d pre-ceasefire) becomes
+  //    the seed of reopening — it expands rather than starting from zero. But insurers
+  //    still won't underwrite mainstream tankers until 2-3 weeks of clean transits.
+  // 2. Cold-restart production lag (see restartDebtPenalty) — even if ships can move,
+  //    there is little to load for the first several weeks. Fields need 2-6 weeks to
+  //    restart after cold shutdown. Storage must drain first.
+  // 3. Psychological: owners and charterers will be extremely cautious after the crisis.
+  //    "Slow and cautious" even after ceasefire — Red Sea 2024 precedent shows only
+  //    partial normalisation even months after hostilities ceased.
+  // Ramp is materially slower than pre-update: 75% cap within model window (not 100%).
+  // Full normalisation (>90%) realistically takes 6+ months — beyond W16.
+  // Source: IEA OMR Mar 2026; Red Sea 2024 precedent (Maersk/Hapag still avoiding
+  //   Bab el-Mandeb 8 months after peak; only ~40% traffic restored at 3 months).
+  const rampCurve = [0.08, 0.13, 0.19, 0.27, 0.36, 0.44, 0.52, 0.58, 0.63, 0.68];
+  const frac = wksOpen < rampCurve.length ? rampCurve[wksOpen] : 0.70;
   return frac;
 }
 
@@ -1679,14 +1856,14 @@ function straitFlowFraction(weekIdx, ceasefire) {
 // Spread compresses on reopening (US crude becomes relatively more attractive).
 // Actuals: W1 $81 (spread $6.0), W2 $96 (spread $6.0), W3 $96.21 (spread $3.8)
 // Sources: Capital.com Mar 5; CNBC Mar 12; CNBC Mar 17 2026; Kpler Mar 2026
-const // WTI-Brent spread recalibrated Mar 17 2026:
+// WTI-Brent spread recalibrated Mar 17 2026:
 // Live data (Reuters/CNN Mar 13) shows WTI has OUTPERFORMED Brent in early weeks
 // (+39% vs +36%), compressing the spread to ~$3.8 at W3 (confirmed).
 // WTI outperformance driven by: US export surge to Atlantic basin buyers;
 // Cushing draws as Gulf Coast refiners substitute domestic crude.
 // Peak spread therefore much narrower than initial estimate — $5-6 not $9.
 // Sources: Reuters Mar 13 2026; CNN Mar 13 2026; Goldman Sachs Mar 11 2026.
-WTI_SPREADS = [6.0, 6.0, 3.8, 4.5, 5.0, 5.5, 5.8, 5.5, 5.0, 4.5, 4.0, 3.8];
+WTI_SPREADS = [6.0, 6.0, 3.8, 4.5, 5.0, 5.5, 5.8, 5.5, 5.0, 4.5, 4.0, 3.8, 6.1, 6.1, 6.2, 6.2];
 //   W1-W2: $6 pre-crisis normal spread (confirmed actuals imply this)
 //   W3: $3.8 confirmed — WTI caught up on US export demand surge
 //   W4-W7: modest re-widening as Brent reflects global seaborne scarcity premium
@@ -1722,21 +1899,27 @@ function restartDebtPenalty(weekIdx, ceasefire) {
   const wk = weekIdx + 1;
   if (wk < firstTransitWk) return 0;
   const wksOpen = wk - firstTransitWk;
-  // Production restart lag reflects TWO constraints:
-  // 1. Storage must drain before wells can restart (takes 1-2 weeks per facility)
-  // 2. Sequential restart: Iraq has 3 main fields, Kuwait onshore+offshore, Saudi offshore.
-  //    Same engineering teams needed for each. Can't all restart in parallel.
-  //    Realistic: 50% of storage-forced capacity back in 4 weeks, 90% in 8 weeks.
-  // Clean-shutdown restart times: wells 1-2wks, offshore platforms 2-4wks,
-  //    refineries 2-3wks, LNG trains 3-5wks (handled separately by LNG_RESTART_LAG).
-  // Peak penalty 25%, decays over 7 weeks (was 12%/5wks — too optimistic).
-  if (wksOpen < 7) return 0.25 * (1 - wksOpen / 7);
+  // Production restart lag reflects THREE constraints:
+  // 1. Cold shutdown penalty: facilities shut >2 weeks require cold restart (not hot).
+  //    By W4 all Gulf fields have been shut 3+ weeks — all are cold restarts.
+  //    Cold restart: wells 2-4wks, offshore platforms 4-6wks, refineries 3-5wks.
+  // 2. Storage drainage: onshore tanks must drain before upstream wells can restart.
+  //    At 10 mb/d shut-in for 3-4 weeks → ~300-400 Mb in storage. Takes 2-3 wks to drain
+  //    assuming partial export begins. Iraq/Kuwait have no bypass — must wait for Strait.
+  // 3. Sequential restart: Iraq has 3 main fields (Rumaila, WQ, Majnoon), Kuwait
+  //    onshore+offshore. Same engineering teams. Can't restart in parallel.
+  //    IEA OMR Mar 2026: "weeks to months" for production recovery.
+  // Peak penalty 30% (cold-restart premium vs 25% for hot), decays over 10 weeks.
+  // At wksOpen=0: full 30% penalty (no production yet flowing through newly-open strait)
+  // At wksOpen=5: ~15% (half the facilities back online)
+  // At wksOpen=10: 0% (full restart achieved)
+  if (wksOpen < 10) return 0.30 * (1 - wksOpen / 10);
   return 0;
 }
 
 // ── OIL PRICE PERCENTAGE TRAJECTORY ──
 function calcOilPcts() {
-  return Array.from({length: 12}, (_, i) => {
+  return Array.from({length: NUM_WEEKS}, (_, i) => {
     if (i < 3) return [19, 40, 37][i];
 
     // ── DERIVED NET DEFICIT ──
@@ -1762,8 +1945,21 @@ function calcOilPcts() {
     // W4+: degrades to 2.6 mb/d as Omani ports become non-viable
     // Infra damage above base 15% degrades further (existing logic).
     const infraAboveBase = Math.max(0, ASMP.infra - 15) / 100;
-    const bypassBase     = i >= 3 ? 2.6 : BYPASS_CAPACITY; // Omani degradation W4+
-    // (bypassNow and recoveryCap may be overridden below by Kharg infra floor)
+    const bypassBase     = BYPASS_CAPACITY; // 5.0 mb/d flat — already at ceiling W3+
+    // ── HOUTHI BYPASS DEGRADATION ──
+    // Houthi activation threatens Yanbu exports through Bab el-Mandeb.
+    // Yanbu is ~4.0 mb/d of the 5.0 mb/d bypass — the Red Sea leg is its
+    // only route to Asian/European markets. Houthi attacks on that route:
+    //   (a) Force VLCCs onto Cape of Good Hope (adds 10-14 days, ~$2-4/bbl freight)
+    //   (b) Reduce effective Yanbu export rate as tanker availability tightens
+    //   (c) Add insurance premium on top of existing Gulf war-risk coverage
+    // Effect: bypass degrades from 5.0 → ~3.5 mb/d if Houthis fully active
+    // (Fujairah 1.0 mb/d unaffected; Yanbu loses ~1.5 mb/d effective capacity)
+    // Additional panic premium: +$8/bbl on top of existing (second chokepoint fear)
+    const houthiOn = ASMP.houthi > 0 && (i + 1) >= ASMP.houthi;
+    const houthiBypassDegradation = houthiOn ? 1.5 : 0; // mb/d loss from Yanbu route
+    const houthiPanicPP = houthiOn ? 8 : 0; // additional $/bbl second-chokepoint premium
+    const effectiveBypassBase = bypassBase - houthiBypassDegradation;
 
     // Recovery cap when Strait opens: destroyed infra can't flow back
     const baseRecoveryCap = Math.max(0.30, 1 - (ASMP.infra / 100) * 1.15);
@@ -1806,7 +2002,7 @@ function calcOilPcts() {
 
     // Recompute bypass and recoveryCap with effective (Kharg-floored) infra
     const effectiveInfraAboveBase = Math.max(0, effectiveInfra - 15) / 100;
-    const effectiveBypassNow      = bypassBase * Math.max(0.3, 1 - effectiveInfraAboveBase * 1.5);
+    const effectiveBypassNow      = effectiveBypassBase * Math.max(0.3, 1 - effectiveInfraAboveBase * 1.5);
     const effectiveRecoveryCap    = Math.max(0.30, 1 - (effectiveInfra / 100) * 1.15);
     // Recompute additionalStraitFlow with Kharg-constrained recoveryCap
     const effectiveStraitFlow = isOpen
@@ -1818,7 +2014,18 @@ function calcOilPcts() {
     );
 
     // Fundamental price from supply/demand elasticity
-    const fundamentalPct = (effectiveDef / 105) / 0.05 * 100; // -0.05 short-run elasticity (academic consensus for acute <3-month shocks; IEA range -0.02 to -0.15, Goldman-implied ~-0.05 for 120-day sustained closure)
+    // Short-run elasticity -0.05 applies W1-W11 (academic consensus for acute <3-month shocks).
+    // From W12+, medium-run demand response begins bleeding in: fuel switching, airline
+    // capacity cuts, EM rationing, industrial substitution. Full medium-run (-0.3 to -0.8)
+    // takes 6-18 months; W12-W16 captures only the leading edge.
+    // Elasticity ramps from -0.05 → -0.07 linearly over W12-W16 (conservative).
+    // Source: IEA demand elasticity review; Hamilton (2009); Kilian & Murphy (2014).
+    // NOTE: passage is NOT assumed to grow in no-ceasefire case — Iran has no incentive
+    // to expand the vetting corridor commercially without political concessions.
+    const baseElasticity = 0.05;
+    const medRunBleed = (i >= 11) ? (i - 10) * 0.004 : 0; // +0.004/wk from W12, capped
+    const effectiveElasticity = Math.min(0.08, baseElasticity + medRunBleed);
+    const fundamentalPct = (effectiveDef / 105) / effectiveElasticity * 100;
 
     // Panic premium — collapses on reopening announcement
     // ── FUTURES MARKET RESPONSE TO REOPENING ──
@@ -1850,34 +2057,64 @@ function calcOilPcts() {
     let resolutionDiscount = 0;
     if (ASMP.reopening > 0 && i >= ASMP.reopening - 1) {
       const wksSince = i - (ASMP.reopening - 1);
-      const panicFactors       = [0.10, 0.22, 0.28, 0.22, 0.16, 0.11, 0.07, 0.04];
+      // Panic factor on ceasefire: encodes dip-bounce-slow decay shape directly.
+      // +0: drops to 0.45 (~45% of pre-ceasefire panic remains = ~$16/bbl at $35 default)
+      //     "drops a lot but not eliminated" — 1991 Gulf War: -$10/bbl day 1 from $30
+      //     2025 Israel-Iran: -12% on ceasefire signal; Ukraine: -22% within 3 days
+      // +1: bounces to 0.60 — "will Iran honour this? mines still in water, no ships yet"
+      //     This is the doubt-bounce. Insurance still withdrawn. IRGC still armed.
+      // +2: slight further uptick 0.63 — uncertainty peak. Markets can't confirm ceasefire
+      //     is holding. Mine clearance hasn't started. No tankers have moved.
+      // +3 onward: slow steady decay as confidence builds week by week
+      // Never reaches zero within model window — residual structural risk + insurance lag
+      const panicFactors        = [0.45, 0.60, 0.63, 0.55, 0.45, 0.37, 0.28, 0.22];
+      // Resolution discount applies to the FUNDAMENTAL component (forward curve repricing).
+      // +0: 28% discount — markets price in future supply recovery on announcement
+      // +1/+2: discount eases (18%/15%) as doubt creeps in — "is this real?"
+      // +3 onward: discount increases as peace holds and production restart confirmed
       const resolutionDiscounts = [0.28, 0.18, 0.15, 0.22, 0.27, 0.31, 0.34, 0.36];
-      panicFactor       = wksSince < panicFactors.length       ? panicFactors[wksSince]       : 0.03;
+      panicFactor       = wksSince < panicFactors.length       ? panicFactors[wksSince]       : 0.18;
       resolutionDiscount = wksSince < resolutionDiscounts.length ? resolutionDiscounts[wksSince] : 0.38;
       // Kharg active: Strait opening is hollow.
       // Iran's main export terminal is destroyed; ~18% of pre-war Hormuz flow
       // (Iran ~3 mb/d) cannot return regardless of ceasefire.
-      // Panic stays elevated (structural permanent loss), resolution discount dampened.
+      // Panic stays more elevated (structural permanent loss), resolution discount dampened.
       if (khargActive) {
-        const khargPanicFactors = [0.35, 0.42, 0.38, 0.32, 0.26, 0.20, 0.15, 0.10];
-        panicFactor = wksSince < khargPanicFactors.length ? khargPanicFactors[wksSince] : 0.08;
+        const khargPanicFactors = [0.65, 0.75, 0.72, 0.65, 0.58, 0.50, 0.42, 0.35];
+        panicFactor = wksSince < khargPanicFactors.length ? khargPanicFactors[wksSince] : 0.28;
         resolutionDiscount *= 0.82; // 18% of supply never returns
       }
     }
     const effectivePanic = khargPanicOverride !== null ? khargPanicOverride : ASMP.panic;
-    const panicPct = (effectivePanic * panicFactor / 73) * 100;
+    const panicPct = (effectivePanic * panicFactor / 73) * 100
+                   + (houthiPanicPP / 73) * 100; // second-chokepoint premium when Houthi active
 
     // Apply forward-expectations discount to total elevation
     const rawUndiscounted = fundamentalPct + panicPct;
     const raw = Math.round(rawUndiscounted * (1 - resolutionDiscount));
 
-    // Insurance floor: even post-reopening, prices can't fall below ~+25% above pre-war.
-    // War-risk premiums stay elevated 12-18 months. Applied as a price floor, not an
-    // additive — avoids artificial bumps at first transit week.
-    const RECOVERY_FLOOR_PCT = 25; // ~$91 Brent — minimum plausible post-reopening price
-    // Kharg active: Iran cannot export post-ceasefire; structural floor ~$99 (+35pp)
-    const effectiveFloor = isOpen ? (khargActive ? 35 : RECOVERY_FLOOR_PCT) : 37;
-    const floored = Math.max(effectiveFloor, raw);
+    // Post-ceasefire price floor: prices cannot fall below this even as panic decays.
+    // Reasons supply normalisation is slow and floor stays elevated:
+    //   (1) Insurance: war-risk premiums stay elevated 12-18 months minimum —
+    //       underwriters require sustained clean-transit history before normalising.
+    //   (2) Cold-restart production lag: 10-week restart debt, sequential field restarts.
+    //       Iraq/Kuwait/Qatar physically cannot ramp output immediately post-ceasefire.
+    //   (3) 150+ tankers repositioning globally — weeks to reposition to loading ports.
+    //   (4) Ras Laffan: 17% of Qatar LNG offline 3-5 years regardless of ceasefire.
+    //       This permanently raises the energy cost floor for Europe/Asia.
+    //   (5) Infrastructure: 22% base damage caps production recovery ceiling.
+    //   (6) Shipper psychology: Red Sea precedent — mainstream owners cautious for months.
+    // Floor set at +40% above pre-war ($73 × 1.40 = ~$102) — "slightly more than $100".
+    // This is the minimum plausible Brent price within the model window post-ceasefire.
+    // Full normalisation to pre-war levels takes 6-18 months — well outside W16.
+    const RECOVERY_FLOOR_PCT = 40; // ~$102 Brent — minimum within model window
+    const wksSinceOpen = isOpen ? Math.max(0, i - (ASMP.reopening - 1)) : 0;
+    const floorActive = !isOpen || wksSinceOpen >= 3;
+    // Kharg active: Iran cannot export post-ceasefire; structural floor ~$110 (+50pp)
+    const effectiveFloor = floorActive
+      ? (isOpen ? (khargActive ? 50 : RECOVERY_FLOOR_PCT) : 37)
+      : 0;
+    const floored = floorActive ? Math.max(effectiveFloor, raw) : raw;
 
     // Seam-smoothing: W3 actual ($100, +37%) is IEA-suppressed ~$17 below
     // model projection. Blend toward model over W4-W6 to avoid cliff.
@@ -1897,7 +2134,7 @@ function calcOilPcts() {
 // ── LNG / JKM TRAJECTORY ──
 // Qatar LNG is Hormuz-dependent — even post-ceasefire needs LNG_RESTART_LAG.
 // Driven by physical Qatar outage, not oil price.
-const // Corrected from +321% peak to +214% peak (W8):
+// Corrected from +321% peak to +214% peak (W8):
 // Qatar = 30-33% global LNG (not 40%). Australia/US partially substitute.
 // Coal switching caps demand faster than oil. 2022 Russia crisis (+250% from lower base)
 // is the reference; Qatar loss smaller share. Source: IEA OMR Mar 2026; Oxford Economics
@@ -1918,10 +2155,24 @@ const // Corrected from +321% peak to +214% peak (W8):
 // Japan: 15 nuclear reactors online (33 GW) reduce gas burn, freeing headroom.
 // Restart friction cuts both ways: high friction = less switching = HIGHER ceiling.
 // Source: Reuters/Argus Mar 12 2026; IEA Coal Mid-Year 2025; EIA Japan nuclear Feb 2026.
-BASE_LNG_PCTS = [43, 100, 129, 158, 178, 196, 208, 233, 234, 235, 229, 222];
+// TTF base trajectory — calibrated directly from seasonal market structure.
+// Key insight: the standard 0.72× JKM ratio breaks down in spring/summer because
+// TTF has strong seasonality (April ~€28 pre-war vs winter €38-45) while JKM
+// does not fall as much (Asian A/C demand maintains year-round floor).
+// W4 actual €62 confirmed (Yahoo/OilPriceAPI Mar 20 2026).
+// W5-W7: injection season peak — EU must refill storage with ~18 bcm less supply.
+// W8-W12: injection pressure fades; seasonal demand falls; approaching summer trough.
+// W13-W16: summer lows — crisis premium ~€28-30 above pre-war seasonal (~€28/MWh).
+// Ras Laffan permanent 17% damage means winter 2026/27 spike (outside window).
+// Source: market actuals; Rystad Mar 2026; AGA Mar 19 2026; OilPriceAPI Mar 20.
+const BASE_TTF_PCTS = [58, 71, 89, 63, 89, 105, 116, 111, 97, 79, 71, 63, 58, 53, 50, 47];
+
+BASE_LNG_PCTS = [43, 100, 129, 158, 178, 196, 208, 233, 234, 235, 229, 222,
+                   218, 212, 210, 208]; // W13-W16: slight seasonal softening but Ras Laffan
+                   // permanent 17% loss floors JKM. Pre-summer A/C demand W15+ provides support.
 
 function calcLngPcts() {
-  return Array.from({length: 12}, (_, i) => {
+  return Array.from({length: NUM_WEEKS}, (_, i) => {
     const basePct = BASE_LNG_PCTS[i] + houthiLngPP(i);
     if (i < 3) return BASE_LNG_PCTS[i]; // actuals locked
 
@@ -1962,7 +2213,10 @@ function calcLngPcts() {
 // Peak W5-W8: €18/MWh. Tapers at shoulders.
 // Source: 2021-22 injection season precedent (€40-60 over winter); this crisis smaller
 // supply loss (5% not 20%) but compounded by storage deficit.
-const TTF_INJECTION_MWH = [0, 0, 0, 12, 18, 18, 18, 15, 8, 0, 0, 0]; // absolute €/MWh
+const TTF_INJECTION_MWH = [0, 0, 0, 12, 18, 18, 18, 15, 8, 0, 0, 0, 0, 0, 0, 0]; // absolute €/MWh
+// W4-W9: injection premium (EU must refill storage with ~18 bcm less Qatar LNG).
+// Fades to 0 by W10 as injection season winds down and spot demand dominates.
+// W13-W16 (Jun): injection season near end, TTF falls to seasonal lows.
 const TTF_BASELINE_EUR = 38; // baseline for pp conversion
 
 // ── HOUTHI RED SEA DISRUPTION ──
@@ -1982,19 +2236,52 @@ function houthiActive(weekIdx) {
 }
 function houthiLngPP(weekIdx) {
   if (!houthiActive(weekIdx)) return 0;
-  return 11; // +$1.5/MMBtu on $14 baseline = 11pp
+  return 11; // +$1.5/MMBtu on $14 baseline = 11pp (Atlantic LNG freight premium)
 }
 function houthiFreightPct(weekIdx) {
   if (!houthiActive(weekIdx)) return 0;
-  return 1.5; // pp uplift on freight-sensitive commodities
+  return 6; // pp uplift on freight-sensitive commodities (Cape routing adds ~$15-20/MT)
 }
 
 function calcTtfPcts() {
-  return calcLngPcts().map((p, i) => {
-    if (i < 3) return [58, 71, 89][i];
-    // Injection premium: absolute €/MWh converted to pp of baseline
-    const injPP = Math.round(TTF_INJECTION_MWH[i] / TTF_BASELINE_EUR * 100);
-    return Math.round(p * 0.72) + injPP + houthiLngPP(i);
+  // TTF uses a direct base trajectory (BASE_TTF_PCTS) rather than deriving from
+  // JKM × ratio + injection. The 0.72× ratio overcooks summer TTF because TTF
+  // has strong seasonality (Apr €28 pre-war) while JKM does not fall as much.
+  // Base trajectory calibrated to: W4 actual €62, seasonal shape, Ras Laffan impact.
+  // Panic and Kharg effects applied on top of base, same as JKM.
+  const lngPcts = calcLngPcts();
+  return Array.from({length: NUM_WEEKS}, (_, i) => {
+    // W1-W4: locked actuals (W4 = €62 confirmed Mar 20 2026)
+    if (i < 4) return [58, 71, 89, 63][i];
+
+    const basePct = BASE_TTF_PCTS[i];
+
+    // Panic transmission: 0.72× of LNG panic (same dampening as old ratio)
+    const lngPanicShare = Math.round(
+      (ASMP.panic * 0.30 * PANIC_CURVE[i] / 73 * 100) * 0.72
+    );
+
+    // Ceasefire: collapse TTF panic on reopening (same logic as LNG)
+    if (ASMP.reopening > 0 && i >= ASMP.reopening - 1) {
+      const effectiveLngRestartLag = ASMP.kharg > 0 ? KHARG_LNG_RESTART_LAG : LNG_RESTART_LAG;
+      const lngRestartWk = ASMP.reopening + effectiveLngRestartLag;
+      const wk = i + 1;
+      if (wk >= lngRestartWk) {
+        const wksAfter = wk - lngRestartWk;
+        const lngRamp = [0.08, 0.18, 0.30, 0.42, 0.52, 0.60];
+        const frac = wksAfter < lngRamp.length ? lngRamp[wksAfter] : 0.65;
+        return Math.round(basePct * (1 - frac));
+      }
+    }
+
+    // Kharg effects on TTF (0.72× of JKM Kharg impacts)
+    let khargPP = 0;
+    if (ASMP.kharg > 0) {
+      if (i === ASMP.kharg - 1) khargPP = Math.round(KHARG_LNG_SPIKE_PP * 0.72);
+      else if (i > ASMP.kharg - 1) khargPP = Math.round(KHARG_LNG_STRUCT_PP * 0.72);
+    }
+
+    return basePct + lngPanicShare + khargPP; // houthiLngPP already in basePct via calcLngPcts line 2176
   });
 }
 
@@ -2070,7 +2357,7 @@ function calcAllPcts() {
   // LNG/TTF: 0.30× of oil panic factor (modest — coal switching ceiling caps upside)
   // Helium:  0.20× of oil panic factor (small — physical restart lag dominates)
   // Panic collapses on reopening announcement same as oil (forward repricing).
-  const PANIC_CURVE = [0.55, 0.85, 0.75, 0.85, 0.92, 1.0, 1.0, 0.95, 0.88, 0.80, 0.72, 0.65];
+  // PANIC_CURVE is defined globally (16 elements — do not redeclare here)
   const lngPanicPP  = PANIC_CURVE.map((pf, i) => {
     if (i < 3) return 0; // actuals locked
     if (ASMP.reopening > 0 && i >= ASMP.reopening - 1) return 0; // collapses on ceasefire
@@ -2131,7 +2418,7 @@ function calcAllPcts() {
   // Recovery: +12 weeks from reopening PLUS 2-month logistics normalisation.
   //   Even after Ras Laffan restarts, container repositioning and supply chain
   //   reorientation takes months. Recovery capped at 50% within model window.
-  const helBase = [70, 90, 100, 125, 152, 168, 175, 178, 175, 172, 168, 164];
+  const helBase = [70, 90, 100, 125, 152, 168, 175, 178, 175, 172, 168, 164, 175, 172, 170, 168];
   const helium = helBase.map((p, i) => {
     if (i < 3) return p;
     let panicAdd = helPanicPP[i] || 0;
@@ -2172,7 +2459,7 @@ function calcAllPcts() {
   // (Julius Baer; The National Mar 10). From W5, alumina shortage forces production
   // cuts beyond what energy cost alone implies — adds +8pp to W5, +12pp to W6-W7,
   // then tapers as some overland rerouting establishes (Saudi via Jeddah/Sohar).
-  const ALUMINA_CLIFF = [0, 0, 0, 0, 8, 12, 12, 8, 4, 0, 0, 0]; // W1-W12
+  const ALUMINA_CLIFF = [0, 0, 0, 0, 8, 12, 12, 8, 4, 0, 0, 0, 0, 0, 0, 0]; // W1-W12
   const alum = scaleOil(oil, 0.50, [10, 19, 23], 10).map((p, i) =>
     i >= 3 ? Math.round(p + ALUMINA_CLIFF[i] + houthiFreightPct(i) * 0.8) : p
   );
@@ -2300,7 +2587,7 @@ function calcAllPcts() {
   // already embedded in sustained prices (no additional increment).
   // Using $0.15/gal midpoint → pct uplift = 0.15/3.18*100 = 4.7pp.
   // Ramps in over W4-W5 as switchover progresses regionally, peaks W6-W8.
-  const SUMMER_BLEND_PP = [0, 0, 0, 2.5, 4.0, 4.7, 4.7, 4.7, 4.7, 0, 0, 0];
+  const SUMMER_BLEND_PP = [0, 0, 0, 2.5, 4.0, 4.7, 4.7, 4.7, 4.7, 0, 0, 0, 4.7, 4.0, 3.5, 3.0];
 
   const pump = [6, 15, 19, ...oil.slice(3).map((p, i) => {
     const scale = (i >= 6) ? 0.55 : 0.574; // i=6,7,8 = W10,11,12
@@ -2314,7 +2601,7 @@ function calcAllPcts() {
   // Driven by: fertiliser cost (60-day lag), diesel transport, Black Sea constraints.
   // Post-ceasefire: resolves with oil but fertiliser backlog release is additive
   // deflationary — wheat falls at least as fast as oil on resolution.
-  const WHEAT_PCTS_BASE = [1, 4, 11, 17, 25, 33, 40, 44, 47, 47, 46, 44];
+  const WHEAT_PCTS_BASE = [1, 4, 11, 17, 25, 33, 40, 44, 47, 47, 46, 44, 44, 43, 42, 41];
   const wheat = WHEAT_PCTS_BASE.map((p, i) => {
     if (i < 3) return p;
     if (ASMP.reopening === 0) return p;
@@ -2334,7 +2621,7 @@ function calcAllPcts() {
   // oil — only 40% of oil resolution discount applies (vs 100% for energy commodities).
   // This reflects: (1) planted area already reduced, (2) ethanol margin uncertainty,
   // (3) record US stocks providing a ceiling but acreage gap providing a floor.
-  const CORN_PCTS_BASE = [1, 3, 5, 14, 24, 31, 37, 40, 43, 44, 43, 41];
+  const CORN_PCTS_BASE = [1, 3, 5, 14, 24, 31, 37, 40, 43, 44, 43, 41, 44, 43, 42, 42];
   const corn = CORN_PCTS_BASE.map((p, i) => {
     if (i < 3) return p;
     if (ASMP.reopening === 0) return p;
@@ -2355,7 +2642,7 @@ function calcAllPcts() {
   // (stranded basmati re-routing back to Gulf premium buyers) removes discount
   // supply from non-Gulf markets — slight uptick W+1 before gradual normalisation.
   // Export restrictions (if triggered) don't auto-lift on ceasefire.
-  const RICE_PCTS_BASE = [1, 3, 3, 7, 13, 20, 27, 32, 38, 38, 36, 33];
+  const RICE_PCTS_BASE = [1, 3, 3, 7, 13, 20, 27, 32, 38, 38, 36, 33, 36, 34, 33, 32];
   const rice = RICE_PCTS_BASE.map((p, i) => {
     if (i < 3) return p;
     if (ASMP.reopening === 0) return p;
@@ -2377,7 +2664,7 @@ function calcAllPcts() {
   // Indonesia B45 mandate provides a partial floor — government may maintain even
   // as crude falls (policy tool, not purely economic). Apply 120% of oil resolution
   // discount but floor at +8% above pre-war (structural biofuel mandate premium).
-  const PALMOIL_PCTS_BASE = [4, 8, 10, 16, 24, 33, 40, 43, 42, 38, 35, 32];
+  const PALMOIL_PCTS_BASE = [4, 8, 10, 16, 24, 33, 40, 43, 42, 38, 35, 32, 35, 32, 30, 28];
   const palmoil = PALMOIL_PCTS_BASE.map((p, i) => {
     if (i < 3) return p;
     if (ASMP.reopening === 0) return p;
@@ -2431,7 +2718,7 @@ function refreshPrices() {
       const catIdxR = CATEGORIES.indexOf(cat);
       const numId   = catIdxR + '-' + rowIdx;
       document.querySelectorAll(`[data-rowid="${numId}"]`).forEach((cell, i) => {
-        if (i < 2) return; // W1-W2 actuals always locked
+        if (i < 4) return; // W1-W4 actuals locked (W4 = $108 confirmed)
         const pct   = newPcts[i];
         const price = row.baseline * (1 + pct / 100);
         const s     = sevClasses(pct);
@@ -2460,11 +2747,12 @@ function updateCeasefireMarkers() {
   // Add subtle top-border markers to week header cells
   document.querySelectorAll('.col-h-week').forEach((cell, i) => {
     const wk = i + 1;
+    if (wk > DISPLAY_WEEKS) return;
     let label = null;
     let color = null;
     if (wk === cf)  { label = '⚑ Ceasefire';        color = '#2a7a2a'; }
     if (wk === ft)  { label = '⚓ First transit';    color = '#00549f'; }
-    if (wk === lng && lng <= 12) { label = '⛽ LNG restart'; color = '#7a2a7a'; }
+    if (wk === lng && lng <= NUM_WEEKS) { label = '⛽ LNG restart'; color = '#7a2a7a'; }
     if (label) {
       const m = document.createElement('div');
       m.className = 'cf-marker';
@@ -2524,7 +2812,7 @@ function updateSlider(key, val) {
       info.style.display = 'block';
       info.innerHTML =
         `⚓ First transits: <strong>W${ft}</strong> &nbsp;|&nbsp; ` +
-        `⛽ LNG restart: <strong>${lng <= 12 ? 'W'+lng : 'Outside window'}</strong>${ASMP.kharg > 0 ? ' <span style="color:#b05c00;font-size:9px;">(Kharg: +18wk lag)</span>' : ''} &nbsp;|&nbsp; ` +
+        `⛽ LNG restart: <strong>${lng <= 12 ? 'W'+lng : 'Outside 16-wk window'}</strong>${ASMP.kharg > 0 ? ' <span style="color:#b05c00;font-size:9px;">(Kharg: +18wk lag)</span>' : ''} &nbsp;|&nbsp; ` +
         `📋 Insurance elevated: <strong>12–18 months post-ceasefire</strong>`;
     }
   }
@@ -2612,10 +2900,10 @@ function resetAssumptions(e) {
 
   ASMP.offsetScenario = 'base';
   document.getElementById('val-offset').textContent    = 'Base case';
-  document.getElementById('val-passage').textContent   = '2.0 mb/d';
-  document.getElementById('val-panic').textContent     = '$25/bbl';
+  document.getElementById('val-passage').textContent   = '0.5 mb/d';
+  document.getElementById('val-panic').textContent     = '$35/bbl';
   document.getElementById('val-reopening').textContent = 'None in window';
-  document.getElementById('val-infra').textContent     = '12% damaged';
+  document.getElementById('val-infra').textContent     = '22% damaged';
   document.getElementById('sl-infra').value            = BASE_ASMP.infra;
   document.getElementById('val-china').textContent     = 'Blocked';
   document.getElementById('china-label').textContent   = 'China export curbs remain';
@@ -2692,19 +2980,47 @@ document.getElementById('storageGrid').innerHTML = STORAGE_DATA.map(s => `
     <div class="sc-note">${s.note}</div>
   </div>`).join('');
 
+/* ── WEEK DISPLAY CONTROL ── */
+
+function setDisplayWeeks(n) {
+  DISPLAY_WEEKS = n;
+  document.documentElement.style.setProperty('--display-weeks', n);
+  // Rebuild table
+  buildCategories();
+  // Update selector buttons
+  [8, 12, 16].forEach(w => {
+    const btn = document.getElementById('wk-btn-' + w);
+    if (btn) btn.className = 'wk-sel-btn' + (w === n ? ' active' : '');
+  });
+  // Reapply ceasefire markers
+  updateCeasefireMarkers();
+}
+
+function buildCategories() {
+  document.documentElement.style.setProperty('--display-weeks', DISPLAY_WEEKS);
+  const initPcts = calcAllPcts();
+  catsEl.innerHTML = buildCategoriesHTML(initPcts);
+}
+
 /* ── BUILD CATEGORY SECTIONS ── */
 
 const catsEl    = document.getElementById('categories');
 const initPcts  = calcAllPcts();
 
-catsEl.innerHTML = CATEGORIES.map((cat, catIdx) => {
+// Initialise CSS variable for grid columns
+document.documentElement.style.setProperty('--display-weeks', DISPLAY_WEEKS);
+
+catsEl.innerHTML = buildCategoriesHTML(initPcts);
+
+function buildCategoriesHTML(initPcts) { return CATEGORIES.map((cat, catIdx) => {
   const rowsHtml = cat.rows.map((row, rowIdx) => {
     const key      = getPctKey(cat.id, row.name);
     const pcts     = (key && initPcts[key]) ? initPcts[key] : Array(12).fill(0);
     const numRowId = catIdx + '-' + rowIdx;
 
-    const colHdrs = Array.from({length: 12}, (_, i) => {
-      const w = i+1, isR = w <= 2, isN = w === 3;
+    const colHdrs = Array.from({length: NUM_WEEKS}, (_, i) => {
+      if (i >= DISPLAY_WEEKS) return '';
+      const w = i+1, isR = w <= 4, isN = w === 4; // W1-W4 actuals confirmed
       return `<div class="col-h-week ${isR?'ch-actual':isN?'ch-current':''}">
         <span class="ch-wnum">W${w}</span>
         <span class="ch-date">${DATES[i]}</span>
@@ -2713,7 +3029,8 @@ catsEl.innerHTML = CATEGORIES.map((cat, catIdx) => {
       </div>`;
     }).join('');
 
-    const cells = Array.from({length: 12}, (_, i) => {
+    const cells = Array.from({length: NUM_WEEKS}, (_, i) => {
+      if (i >= DISPLAY_WEEKS) return '';
       const w    = i+1;
       const isR  = row.actuals[i] !== null;
       const isN  = w === 3;
@@ -2757,6 +3074,7 @@ catsEl.innerHTML = CATEGORIES.map((cat, catIdx) => {
     </div>
   </div>`;
 }).join('');
+} // end buildCategoriesHTML
 
 /* ── ACCORDION TOGGLES ── */
 
