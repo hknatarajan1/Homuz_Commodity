@@ -637,14 +637,14 @@ input[type=range].asmp-slider {
         <div class="asmp-label">Strait reopening week <span class="asmp-val" id="val-reopening">None in window</span></div>
         <input type="range" class="asmp-slider" id="sl-reopening" min="0" max="16" step="1" value="0"
                oninput="updateSlider('reopening',this.value)">
-        <div class="asmp-desc">Week of <strong>genuine bilateral ceasefire</strong> with Iranian agreement to clear mines and restore passage — triggers Ras Laffan restart attempt simultaneously. Auto-cascades: +9 wks mine clearance → first transits → LNG/helium flow +10 wks. Risk premium drops on announcement then partially bounces (+1/+2 wk doubt phase) before decaying. Insurance floor persists 12–18 months. <strong>Note — partial/nominal ceasefire not modelled:</strong> a US unilateral declaration while Iran retains Strait control does not trigger this slider — passage remains Iranian-controlled (~0.5 mb/d vetting system), no mine clearance, no mainstream shipping resumes. That scenario is captured by moving the Selective Passage slider upward instead.</div>
+        <div class="asmp-desc">Week of <strong>genuine bilateral ceasefire</strong> with Iranian agreement to clear mines and restore passage — triggers Ras Laffan restart attempt simultaneously. Auto-cascades: +9 wks mine clearance → first transits → LNG/helium flow +10 wks. Risk premium drops on announcement then partially bounces (+1/+2 wk doubt phase) before decaying. Insurance floor persists 12–18 months. <strong>Note — partial/nominal ceasefire not modelled:</strong> a US unilateral declaration while Iran retains Strait control does not trigger this slider — passage remains Iranian-controlled (~1.8 mb/d: Iran own exports + vetting), no mine clearance, no mainstream shipping resumes. That scenario is captured by moving the Selective Passage slider upward instead.</div>
       </div>
 
       <div class="asmp-item">
-        <div class="asmp-label">Selective passage while closed <span class="asmp-val" id="val-passage">0.5 mb/d</span></div>
-        <input type="range" class="asmp-slider" id="sl-passage" min="0.5" max="6" step="0.5" value="0.5"
+        <div class="asmp-label">Selective passage while closed <span class="asmp-val" id="val-passage">1.8 mb/d</span></div>
+        <input type="range" class="asmp-slider" id="sl-passage" min="0" max="6" step="0.1" value="1.8"
                oninput="updateSlider('passage',this.value)">
-        <div class="asmp-desc">What Iran permits through while nominally closed. <strong>Base 0.5 mb/d</strong> = confirmed ~1 tanker/day average (S&amp;P Global: 21 tankers in 21 days). Iran developing IRGC vetting/registration system (Lloyd's Mar 19); China, India, Pakistan, Iraq in direct talks. Grows to ~1.5 mb/d by W10 as system formalises. Falls if US pressures China or attacks increase. Max ~6 mb/d if Iran de-facto reopens for non-Western flags. <strong>Note:</strong> bypass pipeline capacity (5.0 mb/d) is separate from this figure.</div>
+        <div class="asmp-desc">Non-Iranian crude through the IRGC vetting corridor. <strong>Base 0.2 mb/d</strong> — ~4–5 non-Iranian crude tankers in first 19 days (Pakistan Aframax Mar 16 ~0.7Mb; Greece Shenlong/Smyrni ~2Mb Saudi crude; Iran corridor via Larak Island). Iran own exports (~1.5 mb/d) are separate — already in ALWAYS_FLOWING constant. <strong>Can be zero:</strong> Iran can close corridor entirely if leverage demands it (ING: "very limited if plan is to inflict pain"). Max ~6 mb/d if Iran de-facto reopens for non-Western flags. <strong>Note:</strong> pipeline bypass (Yanbu + Fujairah, 3.2 mb/d) is also separate from this figure.</div>
       </div>
 
       <div class="asmp-item">
@@ -666,10 +666,10 @@ input[type=range].asmp-slider {
       </div>
 
       <div class="asmp-item">
-        <div class="asmp-label">Oil futures risk premium <span class="asmp-val" id="val-panic">$35/bbl</span></div>
-        <input type="range" class="asmp-slider" id="sl-panic" min="0" max="50" step="5" value="35"
+        <div class="asmp-label">Oil futures risk premium <span class="asmp-val" id="val-panic">$18/bbl</span></div>
+        <input type="range" class="asmp-slider" id="sl-panic" min="0" max="50" step="5" value="18"
                oninput="updateSlider('panic',this.value)">
-        <div class="asmp-desc">Geopolitical risk premium embedded in oil futures above the supply/demand fundamental. When traders fear escalation — Abqaiq strike, Kharg Island hit, wider regional war — they buy forward contracts, pulling spot prices higher. Goldman estimated $18/bbl on Day 1; Mizuho notes $5–15/bbl insurance alone; $35/bbl default reflects W4 market-implied premium (~$108 spot vs ~$73 pre-war fundamental). Collapses immediately on credible reopening before a single tanker moves. <strong>Oil-specific:</strong> flows proportionally into all oil-derived commodities (jet, diesel, PE, LPG, aluminium, fertilisers). LNG, TTF and helium receive a separate smaller transmission (0.30×/0.20×) for restart-timing uncertainty. <strong>Food commodities (wheat, corn, rice, palm oil) respond to the reopening slider only</strong> — their trajectories are fixed calibrated paths embedding the $35/bbl base assumption; they do not change when this slider moves. See methodology for the full slider response matrix.</div>
+        <div class="asmp-desc">Geopolitical risk premium embedded in oil futures above the supply/demand fundamental. When traders fear escalation — Abqaiq strike, Kharg Island hit, wider regional war — they buy forward contracts, pulling spot prices higher. Goldman estimated $18/bbl on Day 1 (combined fundamental+panic); Morgan Stanley: $20–40 range. <strong>$18/bbl (Goldman primary source, Mar 1).</strong> Market-implied cross-check: W4 $108.84 − $73 base − $22 fundamental (1.6 mb/d deficit) = ~$14. Goldman's $18 sits above this, capturing forward uncertainty premium beyond current-week fundamental. Intraday $119 spike (W3) implies ~$46 — not a sustained price. Collapses immediately on credible reopening before a single tanker moves. <strong>Oil-specific:</strong> flows proportionally into all oil-derived commodities (jet, diesel, PE, LPG, aluminium, fertilisers). LNG, TTF and helium receive a separate smaller transmission (0.30×/0.20×) for restart-timing uncertainty. <strong>Food commodities (wheat, corn, rice, palm oil) respond to the reopening slider only</strong> — their trajectories are fixed calibrated paths embedding the $18/bbl base panic assumption; they do not change when this slider moves. See methodology for the full slider response matrix.</div>
       </div>
 
       <div class="asmp-item">
@@ -740,7 +740,7 @@ input[type=range].asmp-slider {
       <div class="sources-grid">
         <div class="src-block">
           <h4>Oil Price Model — First Principles</h4>
-          <p><strong>Gross disruption: ~9.7 mb/d</strong> (Iraq −3.0, Kuwait −2.6, Qatar −0.6, Bahrain −0.2, Saudi −2.5, UAE −0.8). <strong>Realistic offsets: ~5.0 mb/d</strong> — Yanbu net ~4.0 mb/d export (Petroline converted to 7 mb/d full capacity Mar 11; Rystad 2.5–3.0 mb/d sustained loadings; less ~2 mb/d Saudi Red Sea refinery consumption; net export ~4.0 mb/d per CNBC/Kpler Mar 12), Fujairah ~1.0 mb/d (ADCOP 1.8 mb/d capacity; impaired by drone strikes but not zeroed; Kpler 71% utilisation Mar 12), Russia ~1.5 mb/d (US 30-day waiver), non-OPEC ramp ~0.3 mb/d. <strong>Net structural deficit: ~4.7 mb/d</strong> = 4.5% of global demand (105 mb/d). Short-run price elasticity −0.05 (academic consensus for acute supply shocks under 3 months; IEA range −0.02 to −0.15, Goldman-implied ~−0.05 for sustained 120-day closure): gross ceiling 4.5% ÷ 0.05 = ~$137/bbl before IEA buffer, bypass and supply offsets. At base assumptions (passage 0.5 mb/d flat (no-ceasefire: Iran vetting corridor held constant — no incentive to expand); bypass 5.0 mb/d flat at ceiling; IEA first + second release peaking W3–4 at ~3.5 mb/d; non-Gulf offset ~2.6 mb/d by W16; elasticity bleeds from −0.05 → −0.07 from W12+), effective deficit ~2.0 mb/d W4–W16, yielding <strong>W6–W8 model peak ~$135–137/bbl base case</strong> (fundamental ~$39pp + panic $35/bbl ~$48pp). No-ceasefire W16: ~$107. Goldman Q4 risk ($93) reflects faster normalisation than base. Goldman Sachs base: >$100 March, $85 April; warned prices may stay above $100 through 2027 in risk scenarios. EIA STEO Mar 10: above $95 through May. Peak anchored by: (1) bypass at physical ceiling 5.0 mb/d; (2) IEA second release activating W7; (3) demand destruction ~1 mb/d. Floor W11–16 (~$90–$100): mechanically derived from residual deficit ~0.8 mb/d + decaying panic premium. Goldman Q4 risk scenario ($93/bbl) maps to W14. Extended to 16 weeks (through mid-June 2026).</p>
+          <p><strong>Crude-flow basis (Kpler 2025 conservative): 13.0 mb/d</strong> previously transiting Hormuz. Gross deficit = 13.0 mb/d. Offsets: passage 1.8 mb/d (Iran own 1.5 + IRGC corridor 0.3) + pipeline bypass 3.2 mb/d (Yanbu 2.5 Rystad-sustained + Fujairah 0.7 impaired) + transit buffer 3.5→0 mb/d W1–W8 (pre-war cargoes still delivering — primary reason W4 prices are not higher; Kpler: 50+ Mb floating storage confirms pipeline still flowing) + IEA sustained 3.5→1.2 mb/d W1–W16 (first release + second + bilateral SPR Japan/Korea/India) + non-Gulf offset 0.9→2.6 mb/d. <strong>Net deficit W4: ~1.6 mb/d</strong> rising to ~4.2 mb/d W8+ as transit buffer exhausts. Elasticity −0.050 W1–W5, bleeds to −0.058 W11 (4-day weeks, informal EM rationing), −0.080 W16 (medium-run leading edge). Panic base $18/bbl (Goldman Mar 1, primary source). <strong>W8–W9 model peak ~$140–145/bbl base case</strong>. No-ceasefire W16: ~$120. Goldman base: above $100 March, $85 April; warned above $100 through 2027 in risk scenarios. EIA STEO Mar 10: above $95 through May. Floor W11–16: post-ceasefire $102 minimum (insurance + cold-restart lag + Ras Laffan permanent damage). Goldman Q4 risk ($93) implies faster ceasefire than base. Extended to 16 weeks (through mid-June 2026).</p>
         </div>
         <div class="src-block">
           <h4>Insurance &amp; Shipping — A Structural Price Driver</h4>
@@ -758,7 +758,7 @@ input[type=range].asmp-slider {
               Gross Hormuz disruption: 20 mb/d — <em>EIA: 20.9 mb/d pre-war; IEA OMR Mar 2026; Goldman 4-day average 16.2 mb/d lost flows</em><br>
               Selective passage (Iran permits): <strong>2.0 mb/d</strong> — <em>Kpler: Iran own exports 1.5 mb/d to China confirmed; Indian gas carriers + Saudi tanker for India + Pakistan tanker Mar 16 confirmed (Wikipedia, CNBC Mar 11, Reuters)</em><br>
               Bypass pipelines: <strong>3.0 mb/d W1-W3 → 2.6 mb/d W4+</strong> (Omani alternative ports Duqm/Salalah attacked, Sohar in war-risk zone — Wikipedia Mar 10-11) — <em>Bloomberg: Saudi Yanbu 2.3 mb/d confirmed W3; UAE ADCOP rated 1.5–1.8 mb/d but reduced by Fujairah drone strikes Mar 14+16 (Al Jazeera, CNBC Mar 17)</em><br>
-              IEA emergency release: <strong>3.0 mb/d effective</strong> W1, → zero W6 — <em>IEA OMR Mar 2026: 400 Mb coordinated release; Goldman: 254 Mb actual release modelled; SPR max drawdown 4.4 mb/d but 13-day delivery lag (EIA)</em><br>
+              IEA emergency release: <strong>3.0 mb/d peak</strong> W1–4, sustained → 1.2 mb/d W16 (new releases replace first draw) — <em>IEA OMR Mar 2026: 400 Mb coordinated release; Goldman: 254 Mb actual release modelled; SPR max drawdown 4.4 mb/d but 13-day delivery lag (EIA)</em><br>
               Non-Gulf supply offset: <strong>Base schedule</strong> — <em>Vortexa Mar 2026: Russia/Iran +1 mb/d + non-Gulf record +2 mb/d; Wood Mac: US shale +600 kb/d by month 6 only; IEA: demand -1 mb/d Mar/Apr</em><br>
               Net structural deficit at W7 (base): <strong>~3.5 mb/d</strong>
             </div>
@@ -766,7 +766,7 @@ input[type=range].asmp-slider {
               <strong style="color:var(--navy); display:block; margin-bottom:4px;">PRICE MODEL</strong>
               Pre-war Brent baseline: <strong>$73/bbl</strong> — <em>Brent closing price Feb 27 2026 (EIA); pre-war forecast $69–74/bbl (EIA STEO Dec 2025)</em><br>
               Short-run price elasticity: <strong>−0.05 (W1–W11) → −0.07 (W16)</strong> — <em>−0.05 is academic short-run consensus for acute shocks (&lt;3 months); IEA range −0.02 to −0.15. From W12+ the leading edge of medium-run demand response bleeds in (fuel switching, airline capacity cuts, EM rationing) — elasticity ramps conservatively to −0.07 by W16. Full medium-run (−0.3 to −0.8) takes 6–18 months. No-ceasefire: passage held flat (Iran has no incentive to expand the vetting corridor commercially without political concessions). Source: Hamilton (2009); Kilian &amp; Murphy (2014); Goldman Mar 2026</em><br>
-              Oil futures risk premium: <strong>$35/bbl default</strong> — <em>Goldman Day-1 estimate $18/bbl; Mizuho: $5–15/bbl insurance alone; market-implied W4 premium ~$35 ($108 spot − $73 fundamental); analyst peak $40/bbl</em><br>
+              Oil futures risk premium: <strong>$18/bbl default</strong> — <em>Goldman Day-1 estimate $18/bbl; Mizuho: $5–15/bbl insurance alone; market-implied W4 premium ~$25 ($108.84 − $73 base − $11 fundamental = $24.7); analyst intraday peak $46/bbl</em><br>
               IEA seam correction: W4–W6 blended from W3 actual ($100) — <em>Brent W3 actual $100 confirmed (AAA, EIA); IEA buffer suppresses ~$17 below model fundamental; blend prevents artificial cliff at handoff</em><br>
               Infrastructure damage base: <strong>22%</strong> — <em>W4 confirmed: Ras Tanura 550 kb/d, Ruwais 817 kb/d (closed after fire), Bapco 267 kb/d, Safaniya ~500 kb/d partial, Shah gas, Ras Laffan trains 4+6 (QatarEnergy force majeure), South Pars + Asaluyeh refinery (Mar 18 Israeli strike, ~12% Iran gas), Kuwait refineries (drone strikes). Raised +10pp from W3 base of 12%</em><br>
               Insurance floor post-reopening: <strong>$16/bbl embedded</strong> — <em>Red Sea precedent: premiums elevated 12–18 months post-Houthi (House of Saud analysis); Jeff Currie (Goldman/Carlyle): "premiums elevated long after last missile fired"; Substack insurance analysis Mar 2026: $16–20/bbl estimated</em>
@@ -774,7 +774,7 @@ input[type=range].asmp-slider {
             <div>
               <strong style="color:var(--navy); display:block; margin-bottom:4px;">REOPENING CASCADE</strong>
               Mine clearance lag: <strong>+9 weeks</strong> (raised from 7 — Iran confirmed active mine-laying from W2, Mar 10) — <em>US decommissioned 4 purpose-built minesweepers Jan 2026 (The National Mar 15); 1991 Kuwait: 2+ months with 12+ allied MCM vessels in permissive conditions (House of Saud Mar 13); US Energy Sec Wright: "simply not ready" Mar 12</em><br>
-              First transit → ~58–68% volume recovery: <strong>+8–10 weeks</strong> — <em>Three compounding lags: (1) Cold-restart penalty: all Gulf fields now 3+ weeks cold-shutdown — cold restart takes 2–4× longer than hot (wells 2–4 wks, offshore platforms 4–6 wks, refineries 3–5 wks). (2) Sequential restart: Iraq 3 fields (Rumaila/WQ/Majnoon), Kuwait onshore+offshore — same engineering teams, cannot parallelise. Storage must drain before upstream can restart. (3) Shipper psychology: Red Sea 2024 precedent — mainstream owners "slow and cautious" for weeks after hostilities end; insurers require 2–3 weeks of clean transits before underwriting. Iran vetting corridor (already ~0.5 mb/d) seeds the ramp but does not accelerate it meaningfully. Full normalisation (>85%) realistically 4–6 months — beyond model window. IEA OMR Mar 2026; Red Sea 2024 shipping precedent</em><br>
+              First transit → ~58–68% volume recovery: <strong>+8–10 weeks</strong> — <em>Three compounding lags: (1) Cold-restart penalty: all Gulf fields now 3+ weeks cold-shutdown — cold restart takes 2–4× longer than hot (wells 2–4 wks, offshore platforms 4–6 wks, refineries 3–5 wks). (2) Sequential restart: Iraq 3 fields (Rumaila/WQ/Majnoon), Kuwait onshore+offshore — same engineering teams, cannot parallelise. Storage must drain before upstream can restart. (3) Shipper psychology: Red Sea 2024 precedent — mainstream owners "slow and cautious" for weeks after hostilities end; insurers require 2–3 weeks of clean transits before underwriting. Iran vetting corridor (Iran own ~1.5 mb/d + non-Iranian ~0.3 mb/d) seeds the ramp but does not accelerate it meaningfully. Full normalisation (>85%) realistically 4–6 months — beyond model window. IEA OMR Mar 2026; Red Sea 2024 shipping precedent</em><br>
               Maximum Strait recovery: <strong>75%</strong> of pre-war — <em>Lloyd's List: "10% realistic with naval escorts initially"; insurance premium and Iran's demonstrated willingness to attack vessels permanently cap full normalisation (Columbia CGEP Mar 2026)</em><br>
               Ras Laffan restart lag: <strong>+10 weeks</strong> — <em>QatarEnergy CEO Saad al-Kaabi: no restart "until conflict fully ends + 4–6 week technical restart" (QatarEnergy force majeure statement Mar 4); adds mine clearance + physical inspection to CEO's floor</em><br>
               Helium restart lag: <strong>+12 weeks</strong> — <em>Co-produced at Ras Laffan; additional 2-week lag vs LNG for helium-specific train restart (Kornbluth Associates helium market analysis)</em><br>
@@ -800,9 +800,9 @@ input[type=range].asmp-slider {
             <div>
               <strong style="color:var(--ink); display:block; margin-bottom:3px; border-bottom:1px solid var(--rule); padding-bottom:3px;">BRENT CRUDE — Energy, supply-constrained</strong>
               <em>Trajectory:</em> W1 +19% → W3 actual $100 → W7 peak ~$139 → W12 ~$106. W4–W6 blended from W3 actual to prevent artificial cliff at IEA buffer handoff. Peak driven by structural deficit once IEA buffer exhausts (W5). Base case reflects base assumptions — pessimistic offset scenario adds ~$20–30/bbl.<br>
-              <em>Key assumptions:</em> BASE_RESIDUAL = 10.0 mb/d net structural deficit before passage/bypass offsets. Short-run elasticity −0.05 (IEA/Goldman consensus). Risk premium $35/bbl default ($18/bbl Goldman Day-1; Mizuho $5–15 insurance alone; market-implied ~$35 at W4; $40/bbl analyst peak — $35 reflects W4 sustained closure). IEA 400 Mb release effective W1 at 3.0 mb/d, exhausted W6. Omani bypass degrades from 3.0 → 2.6 mb/d W4+ (Duqm/Salalah drone strikes).<br>
-              <em>Sliders:</em> Passage ↑ reduces deficit (each 1 mb/d ≈ −5pp Brent). Infra ↑ caps recovery ceiling post-reopening and degrades bypass pipelines. <strong>Oil futures risk premium ↑</strong> adds linearly to Brent AND flows proportionally into all oil-derived commodities (jet/diesel 1.38–1.42×, aluminium 0.50×, PE 0.52×, LPG 0.85×, fertilisers 0.52–0.70×). LNG, TTF and helium receive a separate smaller panic transmission (0.30× and 0.20× respectively) — restart-timing uncertainty, not oil positioning. <strong>Food commodities (wheat, corn, rice, palm oil) use fixed calibrated trajectories and do not respond dynamically to the panic slider</strong> — their trajectories embed the $35/bbl base assumption. Supply offset affects deficit directly from W4. Kharg strike: passage → 0 + infra floor from strike week — permanent.<br>
-              <em>Ceasefire panic dynamics:</em> Dip → bounce → slow decay. <strong>+0 (announcement):</strong> panic drops to ~45% of pre-ceasefire level (~$16/bbl at $35 default) — "drops a lot but not eliminated". Forward curve repriced -28%. <strong>+1:</strong> bounces to 60% (~$21/bbl) — "will Iran honour this? mines still in water, no tankers moving". <strong>+2:</strong> slight further uptick to 63% — uncertainty peak, ceasefire unconfirmed by physical events. <strong>+3 onward:</strong> slow steady decay as confidence builds week by week. Never reaches zero within window — residual structural risk + 12–18 month insurance lag. Calibrated to: 1991 Gulf War (−$10/bbl day 1); 2025 Israel-Iran (−12% then +5% bounce); Ukraine 2022 (−22% then partial recovery). Physical recovery adds separate lag: 9-week mine clearance → production cold-restart 10 weeks → insurance normalisation months.
+              <em>Key assumptions:</em> GROSS_CRUDE_HORMUZ = 13.0 mb/d (Kpler 2025 conservative); GROSS_DEFICIT_BASE = 13.0 mb/d (= GROSS_CRUDE_HORMUZ; Iran exports in passage slider; Oman not in Hormuz figure). Plus TRANSIT_BUFFER (pre-war oil in pipeline, 3.5→0 mb/d W1-W7) and IEA_BUFFER sustained W1-W16. Short-run elasticity −0.05 (IEA/Goldman consensus). Risk premium $18/bbl default ($18/bbl Goldman Day-1; Mizuho $5–15 insurance alone; market-implied ~$25 at W4; $40/bbl analyst peak — $25 reflects W4 market-derived premium). IEA 400 Mb sustained W1-W16 (3.5→1.2 mb/d; new releases replace first draw). Transit buffer 3.5→0 mb/d W1-W8 (pre-war cargoes). Oman excluded — never in Hormuz 13 mb/d figure.<br>
+              <em>Sliders:</em> Passage ↑ reduces deficit (each 1 mb/d ≈ −5pp Brent). Infra ↑ caps recovery ceiling post-reopening and degrades bypass pipelines. <strong>Oil futures risk premium ↑</strong> adds linearly to Brent AND flows proportionally into all oil-derived commodities (jet/diesel 1.38–1.42×, aluminium 0.50×, PE 0.52×, LPG 0.85×, fertilisers 0.52–0.70×). LNG, TTF and helium receive a separate smaller panic transmission (0.30× and 0.20× respectively) — restart-timing uncertainty, not oil positioning. <strong>Food commodities (wheat, corn, rice, palm oil) use fixed calibrated trajectories and do not respond dynamically to the panic slider</strong> — their trajectories embed the $18/bbl base assumption. Supply offset affects deficit directly from W4. Kharg strike: passage → 0 + infra floor from strike week — permanent.<br>
+              <em>Ceasefire panic dynamics:</em> Dip → bounce → slow decay. <strong>+0 (announcement):</strong> panic drops to ~45% of pre-ceasefire level (~$11/bbl at $25 default) — "drops a lot but not eliminated". Forward curve repriced -28%. <strong>+1:</strong> bounces to 60% (~$21/bbl) — "will Iran honour this? mines still in water, no tankers moving". <strong>+2:</strong> slight further uptick to 63% — uncertainty peak, ceasefire unconfirmed by physical events. <strong>+3 onward:</strong> slow steady decay as confidence builds week by week. Never reaches zero within window — residual structural risk + 12–18 month insurance lag. Calibrated to: 1991 Gulf War (−$10/bbl day 1); 2025 Israel-Iran (−12% then +5% bounce); Ukraine 2022 (−22% then partial recovery). Physical recovery adds separate lag: 9-week mine clearance → production cold-restart 10 weeks → insurance normalisation months.
             </div>
 
             <div>
@@ -995,7 +995,7 @@ input[type=range].asmp-slider {
                   <div>
                     <strong style="color:var(--ink);">4 sliders</strong> (reopening, panic, Houthi, infra/passage via oil): JKM, TTF<br>
                     <strong style="color:var(--ink);">2 sliders</strong> (reopening + panic only): Helium — supply-constrained; no oil link; no Houthi exposure<br>
-                    <strong style="color:var(--ink);">Reopening only — Wheat, Corn, Rice, Palm Oil:</strong> Food commodities use calibrated fixed trajectories that embed the $35/bbl base panic assumption. They do not respond to passage, infra, panic, supply offset, Houthi or Kharg. The reopening slider applies commodity-specific post-ceasefire profiles (corn retains 60% of elevation — locked acreage; rice briefly upticks on announcement; palm oil resolves fastest at 120% of oil discount rate).
+                    <strong style="color:var(--ink);">Reopening only — Wheat, Corn, Rice, Palm Oil:</strong> Food commodities use calibrated fixed trajectories that embed the $18/bbl base panic assumption. They do not respond to passage, infra, panic, supply offset, Houthi or Kharg. The reopening slider applies commodity-specific post-ceasefire profiles (corn retains 60% of elevation — locked acreage; rice briefly upticks on announcement; palm oil resolves fastest at 120% of oil discount rate).
                   </div>
                 </div>
               </div>
@@ -1031,7 +1031,7 @@ input[type=range].asmp-slider {
       <div class="sources-grid">
         <div class="src-block">
           <h4>Oil Price Model — First Principles</h4>
-          <p><strong>Gross disruption: ~9.7 mb/d</strong> (Iraq −3.0, Kuwait −2.6, Qatar −0.6, Bahrain −0.2, Saudi −2.5, UAE −0.8). <strong>Realistic offsets: ~5.0 mb/d</strong> — Yanbu net ~4.0 mb/d export (Petroline converted to 7 mb/d full capacity Mar 11; Rystad 2.5–3.0 mb/d sustained; less ~2 mb/d refinery consumption), Fujairah ~1.0 mb/d (impaired by drone strikes but operational), Russia ~1.5 mb/d (US waiver), non-OPEC ~0.3 mb/d. <strong>Net structural deficit: ~4.7 mb/d</strong> = 4.5% of global demand (105 mb/d). Short-run price elasticity −0.05: gross ceiling 4.5% ÷ 0.05 = ~$137/bbl before IEA buffer and offsets. At base assumptions (passage 0.5 mb/d; bypass 5.0 mb/d; IEA releases peaking ~3.5 mb/d W3–4), effective deficit narrows from ~2.4 mb/d (W4) to ~0.8 mb/d (W16), yielding <strong>W6 model peak ~$118/bbl base case</strong> (fundamental ~$83 + panic $35). Goldman warns prices may stay above $100 through 2027. IEA 400 Mb release suppresses prices W1–4. Recession demand destruction modelled −0.5 mb/d from W9.</p>
+          <p><strong>Crude-flow basis (Kpler 2025): 13.0 mb/d</strong> previously transiting Hormuz. Passage 1.8 mb/d (Iran own 1.5 + IRGC corridor 0.3) + pipeline bypass 3.2 mb/d (Yanbu 2.5 Rystad-sustained + Fujairah 0.7 impaired) + transit buffer 3.5→0 mb/d W1–W8 (pre-war cargoes in pipeline) + IEA sustained 3.5→1.2 mb/d W1–W16. <strong>Net deficit W4: ~1.6 mb/d</strong> rising to ~4.2 mb/d W8+ as transit buffer exhausts. Elasticity −0.050 (W1–W5) bleeding to −0.058 (W11) as Asian 4-day weeks and informal rationing emerge; −0.080 (W16) medium-run leading edge. Panic base $18/bbl (Goldman Mar 1 primary). Goldman warns prices may stay above $100 through 2027. Demand destruction −0.5 mb/d from W9.</p>
         </div>
         <div class="src-block">
           <h4>Insurance &amp; Shipping — A Structural Price Driver</h4>
@@ -1049,7 +1049,7 @@ input[type=range].asmp-slider {
               Gross Hormuz disruption: 20 mb/d — <em>EIA: 20.9 mb/d pre-war; IEA OMR Mar 2026; Goldman 4-day average 16.2 mb/d lost flows</em><br>
               Selective passage (Iran permits): <strong>2.0 mb/d</strong> — <em>Kpler: Iran own exports 1.5 mb/d to China confirmed; Indian gas carriers + Saudi tanker for India + Pakistan tanker Mar 16 confirmed (Wikipedia, CNBC Mar 11, Reuters)</em><br>
               Bypass pipelines: <strong>3.0 mb/d W1-W3 → 2.6 mb/d W4+</strong> (Omani alternative ports Duqm/Salalah attacked, Sohar in war-risk zone — Wikipedia Mar 10-11) — <em>Bloomberg: Saudi Yanbu 2.3 mb/d confirmed W3; UAE ADCOP rated 1.5–1.8 mb/d but reduced by Fujairah drone strikes Mar 14+16 (Al Jazeera, CNBC Mar 17)</em><br>
-              IEA emergency release: <strong>3.0 mb/d effective</strong> W1, → zero W6 — <em>IEA OMR Mar 2026: 400 Mb coordinated release; Goldman: 254 Mb actual release modelled; SPR max drawdown 4.4 mb/d but 13-day delivery lag (EIA)</em><br>
+              IEA emergency release: <strong>3.0 mb/d peak</strong> W1–4, sustained → 1.2 mb/d W16 (new releases replace first draw) — <em>IEA OMR Mar 2026: 400 Mb coordinated release; Goldman: 254 Mb actual release modelled; SPR max drawdown 4.4 mb/d but 13-day delivery lag (EIA)</em><br>
               Non-Gulf supply offset: <strong>Base schedule</strong> — <em>Vortexa Mar 2026: Russia/Iran +1 mb/d + non-Gulf record +2 mb/d; Wood Mac: US shale +600 kb/d by month 6 only; IEA: demand -1 mb/d Mar/Apr</em><br>
               Net structural deficit at W7 (base): <strong>~3.5 mb/d</strong>
             </div>
@@ -1057,7 +1057,7 @@ input[type=range].asmp-slider {
               <strong style="color:var(--navy); display:block; margin-bottom:4px;">PRICE MODEL</strong>
               Pre-war Brent baseline: <strong>$73/bbl</strong> — <em>Brent closing price Feb 27 2026 (EIA); pre-war forecast $69–74/bbl (EIA STEO Dec 2025)</em><br>
               Short-run price elasticity: <strong>−0.05 (W1–W11) → −0.07 (W16)</strong> — <em>−0.05 is academic short-run consensus for acute shocks (&lt;3 months); IEA range −0.02 to −0.15. From W12+ the leading edge of medium-run demand response bleeds in (fuel switching, airline capacity cuts, EM rationing) — elasticity ramps conservatively to −0.07 by W16. Full medium-run (−0.3 to −0.8) takes 6–18 months. No-ceasefire: passage held flat (Iran has no incentive to expand the vetting corridor commercially without political concessions). Source: Hamilton (2009); Kilian &amp; Murphy (2014); Goldman Mar 2026</em><br>
-              Oil futures risk premium: <strong>$35/bbl default</strong> — <em>Goldman Day-1 estimate $18/bbl; Mizuho: $5–15/bbl insurance alone; market-implied W4 premium ~$35 ($108 spot − $73 fundamental); analyst peak $40/bbl</em><br>
+              Oil futures risk premium: <strong>$18/bbl default</strong> — <em>Goldman Day-1 estimate $18/bbl; Mizuho: $5–15/bbl insurance alone; market-implied W4 premium ~$25 ($108.84 − $73 base − $11 fundamental = $24.7); analyst intraday peak $46/bbl</em><br>
               IEA seam correction: W4–W6 blended from W3 actual ($100) — <em>Brent W3 actual $100 confirmed (AAA, EIA); IEA buffer suppresses ~$17 below model fundamental; blend prevents artificial cliff at handoff</em><br>
               Infrastructure damage base: <strong>22%</strong> — <em>W4 confirmed: Ras Tanura 550 kb/d, Ruwais 817 kb/d (closed after fire), Bapco 267 kb/d, Safaniya ~500 kb/d partial, Shah gas, Ras Laffan trains 4+6 (QatarEnergy force majeure), South Pars + Asaluyeh refinery (Mar 18 Israeli strike, ~12% Iran gas), Kuwait refineries (drone strikes). Raised +10pp from W3 base of 12%</em><br>
               Insurance floor post-reopening: <strong>$16/bbl embedded</strong> — <em>Red Sea precedent: premiums elevated 12–18 months post-Houthi (House of Saud analysis); Jeff Currie (Goldman/Carlyle): "premiums elevated long after last missile fired"; Substack insurance analysis Mar 2026: $16–20/bbl estimated</em>
@@ -1065,7 +1065,7 @@ input[type=range].asmp-slider {
             <div>
               <strong style="color:var(--navy); display:block; margin-bottom:4px;">REOPENING CASCADE</strong>
               Mine clearance lag: <strong>+9 weeks</strong> (raised from 7 — Iran confirmed active mine-laying from W2, Mar 10) — <em>US decommissioned 4 purpose-built minesweepers Jan 2026 (The National Mar 15); 1991 Kuwait: 2+ months with 12+ allied MCM vessels in permissive conditions (House of Saud Mar 13); US Energy Sec Wright: "simply not ready" Mar 12</em><br>
-              First transit → ~58–68% volume recovery: <strong>+8–10 weeks</strong> — <em>Three compounding lags: (1) Cold-restart penalty: all Gulf fields now 3+ weeks cold-shutdown — cold restart takes 2–4× longer than hot (wells 2–4 wks, offshore platforms 4–6 wks, refineries 3–5 wks). (2) Sequential restart: Iraq 3 fields (Rumaila/WQ/Majnoon), Kuwait onshore+offshore — same engineering teams, cannot parallelise. Storage must drain before upstream can restart. (3) Shipper psychology: Red Sea 2024 precedent — mainstream owners "slow and cautious" for weeks after hostilities end; insurers require 2–3 weeks of clean transits before underwriting. Iran vetting corridor (already ~0.5 mb/d) seeds the ramp but does not accelerate it meaningfully. Full normalisation (>85%) realistically 4–6 months — beyond model window. IEA OMR Mar 2026; Red Sea 2024 shipping precedent</em><br>
+              First transit → ~58–68% volume recovery: <strong>+8–10 weeks</strong> — <em>Three compounding lags: (1) Cold-restart penalty: all Gulf fields now 3+ weeks cold-shutdown — cold restart takes 2–4× longer than hot (wells 2–4 wks, offshore platforms 4–6 wks, refineries 3–5 wks). (2) Sequential restart: Iraq 3 fields (Rumaila/WQ/Majnoon), Kuwait onshore+offshore — same engineering teams, cannot parallelise. Storage must drain before upstream can restart. (3) Shipper psychology: Red Sea 2024 precedent — mainstream owners "slow and cautious" for weeks after hostilities end; insurers require 2–3 weeks of clean transits before underwriting. Iran vetting corridor (Iran own ~1.5 mb/d + non-Iranian ~0.3 mb/d) seeds the ramp but does not accelerate it meaningfully. Full normalisation (>85%) realistically 4–6 months — beyond model window. IEA OMR Mar 2026; Red Sea 2024 shipping precedent</em><br>
               Maximum Strait recovery: <strong>75%</strong> of pre-war — <em>Lloyd's List: "10% realistic with naval escorts initially"; insurance premium and Iran's demonstrated willingness to attack vessels permanently cap full normalisation (Columbia CGEP Mar 2026)</em><br>
               Ras Laffan restart lag: <strong>+10 weeks</strong> — <em>QatarEnergy CEO Saad al-Kaabi: no restart "until conflict fully ends + 4–6 week technical restart" (QatarEnergy force majeure statement Mar 4); adds mine clearance + physical inspection to CEO's floor</em><br>
               Helium restart lag: <strong>+12 weeks</strong> — <em>Co-produced at Ras Laffan; additional 2-week lag vs LNG for helium-specific train restart (Kornbluth Associates helium market analysis)</em><br>
@@ -1721,18 +1721,26 @@ const OFFSET_SCHEDULES = {
 
 const BASE_ASMP = {
   offsetScenario: 'base', // 'pessimistic' | 'base' | 'optimistic'
-  passage:  0.5,   // mb/d Iran lets through while Strait nominally closed
-                   // Base: ~1.5 mb/d confirmed (Iran own exports ~1.5 mb/d to China
-                   // via selective passage; Indian/Turkish ships case-by-case).
-                   // Could rise with bilateral deals (India, China, Turkey, Pakistan).
-                   // Range 1–6 mb/d.
+  passage:  1.8,   // mb/d total Iran-permitted traffic through Hormuz corridor
+                   // = Iran own exports ~1.5 mb/d (Kharg shadow fleet, China-bound)
+                   //   + IRGC vetting corridor ~0.3 mb/d (non-Iranian: India, Pakistan, Turkey)
+                   // Iran's own exports reduce the deficit like any other flow — a barrel
+                   // reaching China is a barrel reaching the market.
+                   // Slider covers ALL Iran-permitted traffic. Min=0 (Iran blocks everything
+                   // incl. own exports — extreme scenario). Max=6 mb/d (near-full reopening
+                   // for non-Western flags). No-ceasefire: held flat (Iran has no incentive
+                   // to expand corridor without political concessions).
   reopening: 0,    // week of confirmed Strait reopening (0 = none in window)
   infra:    22,    // % of Gulf capacity with confirmed PHYSICAL DAMAGE requiring repair
                    // Base 12% = W3 confirmed: Ras Tanura, Ruwais, Bapco,
                    // Safaniya partial, Shah gas, Ras Laffan.
                    // Bypass pipeline degradation activates above 15% (infraAboveBase threshold).
                    // Range 12–60%. Abqaiq hit alone = +15 pp.
-  panic:    35,    // $/bbl geopolitical risk premium above fundamental price
+  panic:    18,    // $/bbl geopolitical risk premium — Goldman Sachs Mar 1: "$18/bbl real-time
+                   // risk premium" (primary named source, Capital.com citing Longbridge Mar 9).
+                   // Pre-war range (Reuters/OilPrice Feb 27): $4-10/bbl.
+                   // Reverse-engineered from W4 $108.84 actual: $108.84 - $73 - $22 fund = ~$14/bbl.
+                   // $18 is the best-sourced primary estimate and consistent with implied W4 market data.
                    // Goldman Day-1 estimate $18/bbl. Base: $25/bbl peak.
   houthi:   0,     // Week Houthis resume Red Sea disruption (0 = inactive)
                    // Base: 0 — no confirmed resumption as of W3 Mar 2026.
@@ -1747,19 +1755,79 @@ const BASE_ASMP = {
 let ASMP = { ...BASE_ASMP };
 
 // ── FIXED STRUCTURAL CONSTANTS (not sliders — based on hard data) ──
-const GROSS_DISRUPTION = 20;   // mb/d — total Hormuz normal flow
-const BYPASS_CAPACITY  = 5.0;  // mb/d — Yanbu ~4.0 mb/d operational (Petroline converted to 7 mb/d
-                                // full capacity Mar 11; ~2 mb/d absorbed by Saudi Red Sea refineries;
-                                // Rystad: 2.5–3.0 mb/d sustained + isolated 4.8 mb/d peak. Net export ~4.0)
-                                // + Fujairah ADCOP ~1.0 mb/d (capacity 1.8 mb/d; 71% utilisation per Kpler
-                                // Mar 12; storage ops suspended after drone strikes — impaired, not zeroed).
-                                // Source: CNBC Mar 12 (Kpler/Rystad), ENR Mar 13, MaritimeExec Mar 12.
-                                // Already AT ceiling by W3. Downside risk: Yanbu/Fujairah further strikes.
-                                const INSURANCE_FLOOR  = 29;   // $/bbl embedded war-risk premium post-reopening (~$102 floor = $73 + $29)
+// ── CRUDE-FLOW BASIS (redesigned W4 Mar 22 2026) ──
+//
+// Conservative source: Kpler 2025 actual tracking = ~13 mb/d crude+condensate
+// (IEA Feb 2026 Factsheet: ~15 mb/d; Kpler conservative tracking: ~13 mb/d)
+// Using 13 mb/d as the more conservative/defensible figure.
+const GROSS_CRUDE_HORMUZ = 13.0;  // mb/d — Kpler 2025 conservative crude-only
+const OMAN_OWN_EXPORTS   = 0.8;   // mb/d — Oman own production via Gulf of Oman (never in Hormuz figure)
+const IRAN_OWN_EXPORTS   = 1.5;   // mb/d — Iran shadow fleet; included in PASSAGE slider default
+const ALWAYS_FLOWING     = 0;     // no upfront deduction — Oman not in gross figure; Iran in passage
+const GROSS_DEFICIT_BASE = GROSS_CRUDE_HORMUZ; // 13.0 mb/d — full Kpler Hormuz crude figure
+// Iran's own exports (~1.5 mb/d) ARE included in the Passage slider default (1.8 mb/d total:
+// Iran 1.5 + IRGC vetting corridor 0.3). They reduce the deficit like any other flow.
+// Oman (0.8 mb/d) was never in the 13 mb/d Kpler Hormuz figure — it exports via Gulf of Oman
+// directly and does not transit the Strait. No deduction needed from GROSS_CRUDE_HORMUZ.
+
+const PIPELINE_BYPASS   = 3.2;   // mb/d — Yanbu ~2.5 mb/d (Rystad sustained, not Aramco CEO peak)
+                                  // + Fujairah ~0.7 mb/d (impaired by drone strikes Mar 15-16)
+                                  // Source: Rystad Mar 12, CNBC Mar 12, Kpler 71% utilisation
+                                  // Degraded further by infra slider above 15% base.
+                                  // Note: separate from passage — this is pipeline rerouting,
+                                  // not Hormuz transit. Does not reduce gross Hormuz deficit directly;
+                                  // it provides alternative supply routing for Saudi/UAE crude.
+
+// ── TRANSIT BUFFER ──
+// Pre-war crude already loaded and in transit when Strait closed Feb 28.
+// Sources: Iran pre-loaded 3× normal rate Feb 15-20 (~30-40 Mb extra at sea);
+//          Feb 28 vessel rush (813 vessels vs 328 normal — WWAIS AIS data Mar 4);
+//          Normal pipeline: ~15 mb/d × 15-20 avg day voyage = 225-300 Mb in transit
+// Delivery schedule by destination:
+//   India (7-10 days): arrives W1-W2
+//   China/Japan/Korea (18-25 days): arrives W3-W5 (peak W3-W4)
+//   Europe via Cape (35-40 days): arrives W6-W7
+// This is WHY W4 prices ($108) are not higher despite 10.7 mb/d gross deficit —
+// consuming nations are still receiving pre-war cargoes. The real crunch is W5-W8.
+// Vortexa confirmed: storage NOT at tank tops W4 — consistent with buffer still delivering.
+const TRANSIT_BUFFER = [
+  3.5,  // W1: India arrivals + last Feb 28 transits (17 tankers still moved)
+  4.0,  // W2: Peak India + early fast China VLCCs (18-day voyage from Ras Tanura)
+  3.5,  // W3: China/Japan/Korea pre-war surge arriving — apparent deceptive calm
+  2.5,  // W4: China peak; India pipeline exhausted — W4 NOW
+  1.5,  // W5: Pre-war surge running out across all routes
+  0.8,  // W6: Cape-route European pre-war deliveries (only route still arriving)
+  0.5,  // W7: Last European pre-war; everywhere else exhausted
+  0.2,  // W8: Essentially empty — residual slow Cape cargoes
+  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0  // W9-16: zero
+];
+// Total: ~116 Mb delivered via transit buffer — consistent with ~240 Mb in-transit Feb 28
+// (remainder is floating storage, Iranian own cargoes, non-crude products)
+
+// ── IEA BUFFER (sustained profile — not collapsing to zero) ──
+// First 400 Mb release fades W4-W8; replaced by second release + bilateral SPR deals.
+// Japan/Korea/India all have their own strategic reserves and will authorise draws.
+// IEA retains ~800 Mb capacity post-first-release for further coordinated action.
+// Goldman assumed 3 mb/d for 4 weeks then phase-out was conservative —
+// political pressure for sustained releases is high with Brent >$100.
+// Sustained base ~1.2-1.5 mb/d even W12-W16 from ongoing bilateral arrangements.
+const IEA_BUFFER = [
+  3.5, 3.8, 3.3, 3.0,  // W1-W4: first release peak (400 Mb, logistics-lagged)
+  2.5, 2.3, 2.2,        // W5-W7: first fading, second release activating W7
+  2.0, 2.0, 1.9,        // W8-W10: second release + Japan/Korea/India bilateral SPR
+  1.8, 1.6, 1.5, 1.4, 1.3, 1.2  // W11-W16: gradual fade, new authorisations keep floor
+];
+// Note: Russia OFAC waiver (old Component C, ~0.5 mb/d W3-W5) is now
+// embedded in IEA_BUFFER W3-W5 values rather than as a separate array.
+
+const GROSS_DISRUPTION = 20;   // mb/d — kept for display/reference only
+const BYPASS_CAPACITY  = PIPELINE_BYPASS; // alias — other code may reference this
+const INSURANCE_FLOOR  = 29;   // $/bbl embedded war-risk premium post-reopening (~$102 floor = $73 + $29)
                                 // Iran demonstrated active vessel attacks (not just Houthi rockets);
                                 // post-Hormuz normalisation will be slower than Red Sea precedent;
                                 // Jeff Currie (Goldman/Carlyle): premiums 'elevated long after last missile'
                                 // Persists 12-18 months (Red Sea precedent)
+
 const MINE_CLEAR_WEEKS = 9;    // weeks reopening → first transits
                                 // RAISED from 7: Iran confirmed mine-laying from W2 (Mar 10
                                 // US intel; US military destroyed 16 Iranian minelayers).
@@ -1775,31 +1843,6 @@ const PROD_RAMP_WEEKS  = 8;    // weeks first transit → ~67% volume recovery
 const LNG_RESTART_LAG  = 10;   // weeks ceasefire → any Ras Laffan flow
 const KHARG_LNG_RESTART_LAG = 18; // extended lag when Kharg active (Qatar requires full end of infrastructure war)
 
-// IEA emergency release: 400 Mb over 120 days = ~3.3 mb/d
-// But logistics constrain delivery — modelled as effective buffer:
-// IEA emergency buffer — three components summed.
-// Component A: First release (400mb agreed Mar 11, logistics-lagged to market).
-//   400mb / ~17 weeks = ~3.3 mb/d peak. SPR takes ~13 days to reach US refiners;
-//   European/Asian stocks faster. Ramps W1→W4, then tapers as barrels are delivered.
-//   Source: IEA OMR Mar 12, Al Jazeera Mar 11, CNBC Mar 11.
-const IEA_FIRST_RELEASE  = [3.5, 3.8, 3.3, 3.0, 2.2, 1.5, 1.0, 0.8, 0.7, 0.5, 0.4, 0.3, 0.2, 0.1, 0.05, 0.0];
-// Component B: Second release (conditional — near-certain if no ceasefire by W6).
-//   IEA retains ~800mb capacity post-first release. Coordinated second action modelled
-//   as ~200mb over 8 weeks. Historical precedent: IEA released twice in 2022 Ukraine crisis.
-//   Triggers W7 (mid-April) if Strait remains closed and Brent >$100.
-//   Source: Goldman Sachs Mar 14 note; IEA reserves capacity ~1.2bn total.
-const IEA_SECOND_RELEASE = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.4, 0.5, 0.6, 0.6, 0.6, 0.6, 0.55, 0.65, 0.5, 0.4];
-// Component C: Russia OFAC waiver (~100mb sanctioned crude at sea).
-//   US Treasury issued 30-day waiver Mar 3 allowing Indian buyers to purchase
-//   ~30mb Russian crude already offshore India. Combined with other sanctioned volumes:
-//   ~0.8 mb/d effective for ~5 weeks W3-W7. Source: IEA OMR Mar 12; Reuters Mar 6.
-const IEA_RUSSIA_WAIVER  = [0.0, 0.0, 0.5, 0.5, 0.5, 0.3, 0.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
-// Combined effective buffer (sum of three components):
-const IEA_BUFFER = IEA_FIRST_RELEASE.map((v, i) =>
-  Math.round((v + IEA_SECOND_RELEASE[i] + IEA_RUSSIA_WAIVER[i]) * 10) / 10
-);
-// Effective totals: [3.5, 3.8, 3.8, 3.5, 2.7, 1.8, 1.5, 1.3, 1.3, 1.1, 1.0, 0.9, 0.75, 0.75, 0.55, 0.4]
-
 // US shale response by week (additional mb/d supply)
 const SHALE_RAMP = [
   // Pessimistic: capital discipline, cautious shale response
@@ -1810,9 +1853,14 @@ const SHALE_RAMP = [
   [0, 0, 0, 0.2, 0.5, 0.9, 1.1, 1.2, 1.2, 1.2, 1.2, 1.2, 1.22, 1.25, 1.25, 1.25],
 ];
 
-// Panic premium trajectory: builds to peak W6-8, decays slowly
-const PANIC_CURVE = [0.55, 0.85, 0.75, 0.85, 0.92, 1.0, 1.0, 0.95, 0.88, 0.80, 0.72, 0.65,
-                      0.58, 0.52, 0.46, 0.40]; // W13-W16: panic decays as disruption becomes structural 'new normal'
+// Panic premium curve: fraction of panic_base applied each week.
+// PEAK = W3 (Mar 14-21): Ras Laffan struck, $119 intraday — maximum uncertainty.
+// W4 onwards: "known bad news" — acute shock partially priced, steady decay.
+// Calibration: Goldman "$18/bbl real-time premium" Mar 1 (primary named source).
+// W3 peak × 1.0 = $18/bbl panic (Goldman figure). W1 × 0.55 = $9.9/bbl (initial shock).
+// W4 decays to 0.90 as "known bad" replaces "unknown risk". W16: ~$4/bbl residual floor.
+const PANIC_CURVE = [0.55, 0.90, 1.00, 0.90, 0.82, 0.75, 0.68, 0.61, 0.55, 0.49, 0.44, 0.39,
+                     0.34, 0.30, 0.26, 0.22]; // W13-W16: decaying to structural uncertainty floor
 
 // ── STRAIT REOPENING EFFECT BY WEEK ──
 // Given a ceasefire at week C (1-indexed), returns fraction of
@@ -1945,7 +1993,7 @@ function calcOilPcts() {
     // W4+: degrades to 2.6 mb/d as Omani ports become non-viable
     // Infra damage above base 15% degrades further (existing logic).
     const infraAboveBase = Math.max(0, ASMP.infra - 15) / 100;
-    const bypassBase     = BYPASS_CAPACITY; // 5.0 mb/d flat — already at ceiling W3+
+    const bypassBase     = PIPELINE_BYPASS; // 3.2 mb/d (Rystad-calibrated: Yanbu 2.5 + Fujairah 0.7)
     // ── HOUTHI BYPASS DEGRADATION ──
     // Houthi activation threatens Yanbu exports through Bab el-Mandeb.
     // Yanbu is ~4.0 mb/d of the 5.0 mb/d bypass — the Red Sea leg is its
@@ -1965,22 +2013,19 @@ function calcOilPcts() {
     const baseRecoveryCap = Math.max(0.30, 1 - (ASMP.infra / 100) * 1.15);
 
     // ── NET DEFICIT ──
-    // BASE_RESIDUAL (10.0 mb/d) = the structural gap BEFORE passage + bypass offsets.
-    // At base assumptions (passage 1.5 + bypass 3.5) this yields 5.0 mb/d net deficit.
-    // Passage slider directly reduces deficit (more Iran-permitted flow = less gap).
-    // Bypass degrades with infra damage above base 15%.
-    // IEA buffer is time-limited.
-    const BASE_RESIDUAL = 10.0; // mb/d — derived from confirmed W3 structural deficit
-    // Supply calculation — key principle:
-    // Selective passage ALWAYS flows (Iran keeps permitting its own + deal traffic).
+    // GROSS_DEFICIT_BASE (10.7 mb/d) = GROSS_CRUDE_HORMUZ(13.0) - ALWAYS_FLOWING(2.3)
+    // = what bypass + passage + transit buffer + IEA + offsets must cover.
+    // Architecture: crude-flow basis (Kpler 2025 conservative 13 mb/d).
+    // TRANSIT_BUFFER: pre-war oil in transit pipeline, decaying W1-W7. This is
+    // the primary reason W4 prices ($108) are not higher — consuming nations are
+    // still receiving cargoes loaded before Feb 28. Real crunch hits W5-W8.
+    // Passage slider = non-Iranian, non-Omani corridor crude (IRGC vetting system).
     // When Strait opens, additional commercial flow ramps on top of passage.
-    // This prevents the spike where switching from "closed with passage" to
-    // "open with near-zero transit" drops effective supply.
+    const transitBuffer = TRANSIT_BUFFER[i] || 0;
     const additionalStraitFlow = isOpen
-      ? Math.max(0, straitFrac - restartDebt) * BASE_RESIDUAL * baseRecoveryCap
+      ? Math.max(0, straitFrac - restartDebt) * GROSS_DEFICIT_BASE * baseRecoveryCap
       : 0;
-    // Supply offset from non-Gulf sources (Russia/Iran sanctioned, non-Gulf record, US shale,
-    // demand destruction). Schedule is research-derived, week-specific.
+    // Supply offset from non-Gulf sources (US shale, non-Gulf record, demand destruction).
     const offsetSched = OFFSET_SCHEDULES[ASMP.offsetScenario] || OFFSET_SCHEDULES.base;
     const supplyOffset = offsetSched[i] || 0;
     // ── KHARG ISLAND STRIKE ──
@@ -2006,11 +2051,11 @@ function calcOilPcts() {
     const effectiveRecoveryCap    = Math.max(0.30, 1 - (effectiveInfra / 100) * 1.15);
     // Recompute additionalStraitFlow with Kharg-constrained recoveryCap
     const effectiveStraitFlow = isOpen
-      ? Math.max(0, straitFrac - restartDebt) * BASE_RESIDUAL * effectiveRecoveryCap
+      ? Math.max(0, straitFrac - restartDebt) * GROSS_DEFICIT_BASE * effectiveRecoveryCap
       : 0;
 
     const effectiveDef = Math.max(0,
-      BASE_RESIDUAL - effectivePassage - effectiveStraitFlow - effectiveBypassNow - IEA_BUFFER[i] - supplyOffset
+      GROSS_DEFICIT_BASE - effectivePassage - effectiveStraitFlow - effectiveBypassNow - IEA_BUFFER[i] - supplyOffset - transitBuffer
     );
 
     // Fundamental price from supply/demand elasticity
@@ -2022,9 +2067,20 @@ function calcOilPcts() {
     // Source: IEA demand elasticity review; Hamilton (2009); Kilian & Murphy (2014).
     // NOTE: passage is NOT assumed to grow in no-ceasefire case — Iran has no incentive
     // to expand the vetting corridor commercially without political concessions.
+    // Elasticity ramps slightly from W6+: 4-day working weeks in Asian industry,
+    // partial factory shutdowns, fuel switching in power generation, transport
+    // rationing in price-sensitive EM economies. Small but real — not the full
+    // medium-run elasticity, just the leading edge of informal demand restraint
+    // that appears after 4-5 weeks of sustained $100+ prices.
+    // W1-W5:  -0.050 (pure short-run, demand inelastic)
+    // W6-W11: -0.050 → -0.058 (gentle bleed, informal restraint)
+    // W12-W16: -0.058 → -0.080 (medium-run leading edge as in previous model)
+    // Source: IEA demand elasticity review; Hamilton (2009); Kilian & Murphy (2014).
+    // Asian 4-day week precedent: Korea/Japan 2022 energy crisis; Thailand/Vietnam rationing.
     const baseElasticity = 0.05;
-    const medRunBleed = (i >= 11) ? (i - 10) * 0.004 : 0; // +0.004/wk from W12, capped
-    const effectiveElasticity = Math.min(0.08, baseElasticity + medRunBleed);
+    const earlyBleed  = (i >= 5)  ? (i - 4) * 0.0013 : 0; // +0.0013/wk from W6 → +0.008 by W11
+    const medRunBleed = (i >= 11) ? (i - 10) * 0.004  : 0; // +0.004/wk from W12, capped
+    const effectiveElasticity = Math.min(0.08, baseElasticity + earlyBleed + medRunBleed);
     const fundamentalPct = (effectiveDef / 105) / effectiveElasticity * 100;
 
     // Panic premium — collapses on reopening announcement
@@ -2058,7 +2114,7 @@ function calcOilPcts() {
     if (ASMP.reopening > 0 && i >= ASMP.reopening - 1) {
       const wksSince = i - (ASMP.reopening - 1);
       // Panic factor on ceasefire: encodes dip-bounce-slow decay shape directly.
-      // +0: drops to 0.45 (~45% of pre-ceasefire panic remains = ~$16/bbl at $35 default)
+      // +0: drops to 0.45 (~45% of pre-ceasefire panic remains = ~$11/bbl at $25 default)
       //     "drops a lot but not eliminated" — 1991 Gulf War: -$10/bbl day 1 from $30
       //     2025 Israel-Iran: -12% on ceasefire signal; Ukraine: -22% within 3 days
       // +1: bounces to 0.60 — "will Iran honour this? mines still in water, no ships yet"
@@ -2900,8 +2956,8 @@ function resetAssumptions(e) {
 
   ASMP.offsetScenario = 'base';
   document.getElementById('val-offset').textContent    = 'Base case';
-  document.getElementById('val-passage').textContent   = '0.5 mb/d';
-  document.getElementById('val-panic').textContent     = '$35/bbl';
+  document.getElementById('val-passage').textContent   = '1.8 mb/d';
+  document.getElementById('val-panic').textContent     = '$18/bbl';
   document.getElementById('val-reopening').textContent = 'None in window';
   document.getElementById('val-infra').textContent     = '22% damaged';
   document.getElementById('sl-infra').value            = BASE_ASMP.infra;
